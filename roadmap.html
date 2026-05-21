@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>PixelPlay MVP 선택 기능</title><link rel="stylesheet" href="assets/styles.css"></head>
+<body>
+<header class="site-header">
+    <div class="header-inner">
+      <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
+      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="migration.html">현재 변경</a><a href="wireframes.html">디자인 프리뷰</a><a class="active" href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+    </div>
+  </header>
+<main class="doc-shell">
+<section class="hero"><div class="page-kicker">MVP Scope</div><h1>한 달 안에 보일 기능과 나중에 붙일 기능을 분리합니다.</h1><p>라이브 요구사항은 시청, 채팅 통합, 투표, 시청자 수, 방송자 화면, 권한 분리가 핵심입니다. 후원과 공개 채널은 라우터만 먼저 열어둘 수 있습니다.</p></section>
+<section class="route-summary-grid"><article class="route-card"><code>필수</code><h3>라이브 기본 흐름</h3><p>방송 입장, 방송자 화면, 시청자 화면, 채팅 통합, 시청자 수 표시를 우선합니다.</p></article><article class="route-card"><code>필수</code><h3>투표와 권한</h3><p>투표 생성과 참여, 결과 반영, 방송자와 시청자 권한 분리를 구현합니다.</p></article><article class="route-card"><code>선택</code><h3>후원과 채널 확장</h3><p>Toss Payments, 공개 채널, VOD, 매니저 기능은 발표 범위에 맞춰 후속으로 둡니다.</p></article></section>
+<section class="panel"><div class="section-title"><div><h2>MVP 필수 기능</h2><p>라이브 기능이라고 말하기 위해 반드시 보여야 하는 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>연결 라우터</th><th>접근</th><th>비고</th></tr></thead><tbody>
+<tr><td>라이브 목록</td><td><code>/live</code></td><td><span class="access-public">공개</span></td><td>Anon User도 현재 방송 중인 목록을 볼 수 있습니다.</td></tr>
+<tr><td>라이브 시청</td><td><code>/live/[creatorId]</code></td><td><span class="access-public">공개</span></td><td>채팅 읽기와 방송 시청은 공개, 입력과 참여는 로그인 필요로 둡니다.</td></tr>
+<tr><td>방송 운영</td><td><code>/channel/live</code></td><td><span class="access-owner">본인만</span></td><td>방송 준비, 시작, 종료, 현재 상태 표시를 처리합니다.</td></tr>
+<tr><td>방송 설정</td><td><code>/channel/broadcast</code></td><td><span class="access-owner">본인만</span></td><td>방송 제목, 공개 상태, 다시보기 저장 여부, 스트림 키 표시를 관리합니다.</td></tr>
+<tr><td>실시간 채팅 통합</td><td><code>/live/[creatorId]</code></td><td><span class="access-login">입력은 로그인 필요</span></td><td>기존 채팅 기능을 라이브 화면에 맞게 재사용합니다.</td></tr>
+<tr><td>투표</td><td><code>/live/[creatorId]</code>, <code>/channel/live</code></td><td><span class="access-login">참여는 로그인 필요</span></td><td>방송자는 생성, 시청자는 참여, 결과는 실시간 반영합니다.</td></tr>
+<tr><td>시청자 수</td><td><code>/live/[creatorId]</code>, <code>/channel/analytics</code></td><td><span class="access-public">시청 수 공개</span></td><td>라이브 화면과 통계 화면에서 같은 기준으로 보여줍니다.</td></tr>
+</tbody></table></section>
+<section class="panel"><div class="section-title"><div><h2>선택 기능</h2><p>MVP 이후 기능은 라우터 예약과 데이터 구조만 고려합니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>라우터 후보</th><th>접근</th><th>비고</th></tr></thead><tbody>
+<tr><td>후원금 충전</td><td><code>/user/donations/charge</code></td><td><span class="access-login">로그인 필요</span></td><td>Toss Payments를 붙일 때 활성화합니다.</td></tr>
+<tr><td>후원 내역</td><td><code>/user/donations/history</code></td><td><span class="access-login">로그인 필요</span></td><td>충전, 사용, 보낸 후원을 type query로 필터링합니다.</td></tr>
+<tr><td>공개 채널 홈</td><td><code>/channel/[creatorId]</code></td><td><span class="access-future">선택 기능</span></td><td>SOOP 방송국 같은 팬카페형 페이지로 확장할 때 사용합니다.</td></tr>
+<tr><td>공개 게시판</td><td><code>/channel/[creatorId]/board</code></td><td><span class="access-future">선택 기능</span></td><td>채널 기능 자체가 확정된 뒤 추가합니다.</td></tr>
+<tr><td>다시보기</td><td><code>/channel/[creatorId]/vod</code></td><td><span class="access-future">선택 기능</span></td><td>방송 종료 후 자동 저장 옵션과 연결합니다.</td></tr>
+<tr><td>매니저</td><td><code>/channel/managers</code> 후보</td><td><span class="access-future">선택 기능</span></td><td>MVP에서는 크리에이터 본인만 방송 운영합니다.</td></tr>
+<tr><td>블랙리스트</td><td><code>/channel/chat</code> 내부 탭 후보</td><td><span class="access-future">선택 기능</span></td><td>강퇴와 영구 차단은 분리해서 나중에 설계합니다.</td></tr>
+<tr><td>방송 분석 리포트</td><td><code>/channel/analytics</code></td><td><span class="access-future">선택 기능</span></td><td>실시간 통계 이후 종료 리포트로 확장합니다.</td></tr>
+</tbody></table></section>
+</main>
+</body>
+</html>

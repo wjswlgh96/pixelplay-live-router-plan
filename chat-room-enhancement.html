@@ -1,0 +1,87 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>PixelPlay 채팅방 고도화 메모</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
+      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="migration.html">현재 변경</a><a href="wireframes.html">디자인 프리뷰</a><a href="roadmap.html">MVP·선택 기능</a><a class="active" href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+    </div>
+  </header>
+
+  <main class="doc-shell">
+    <section class="hero">
+      <div class="page-kicker">Chat Room Enhancement Notes</div>
+      <h1>채팅방 고도화 후보는 간단한 백로그로 보존합니다.</h1>
+      <p>라이브 기능을 먼저 개발하고, 프로젝트 기간이 남았을 때 채팅방 도메인에 추가할 수 있는 후보를 큰 틀과 구현 방향만 간략히 정리합니다.</p>
+    </section>
+
+    <section class="hero-grid">
+      <article class="card"><div class="summary-card-head"><span class="summary-card-label">고도화 후보</span><strong>라이브 이후 참고할 채팅 백로그</strong></div><p>입력 보정, 메시지 탐색, 권한, 비밀방, 공지, 알림 후보를 한 문서에 모읍니다.</p><div class="badge-row"><span class="badge mint">백로그</span><span class="badge">라이브 이후</span></div></article>
+      <article class="card"><div class="summary-card-head"><span class="summary-card-label">설계 축</span><strong>탐색, 권한, 후속 연동으로 구분</strong></div><p>메시지 탐색, 권한과 운영, 후속 연동 후보로 나누어 이후 작업 범위를 파악합니다.</p><div class="badge-row"><span class="badge mint">탐색</span><span class="badge lock">권한</span><span class="badge live">연동</span></div></article>
+      <article class="card"><div class="summary-card-head"><span class="summary-card-label">현재 우선순위</span><strong>라이브 기능을 먼저 진행</strong></div><p>현재 개발 우선순위는 채팅방 고도화가 아니라 라이브 기능 feature입니다.</p><div class="badge-row"><span class="badge live">Live First</span></div></article>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><h2>입력과 메시지 조회</h2><p>입력 안정성과 과거 메시지 접근 방식을 다룹니다.</p></div></div>
+      <div class="route-summary-grid">
+        <article class="route-card"><h3>macOS 한글 입력 중복</h3><p>마지막 조합 글자가 한 번 더 입력되는 문제를 보정합니다. <code>composition</code> 이벤트, <code>isComposing</code>, <code>keyCode === 229</code>, 전송 snapshot을 함께 확인합니다.</p><div class="badge-row"><span class="badge mint">IME guard</span><span class="badge">submit snapshot</span></div></article>
+        <article class="route-card"><h3>메시지 백업과 조회 범위</h3><p>기본 조회 범위는 <code>last_joined_at</code> 이후로 제한하고, 과거 메시지는 백업 기능에서 날짜 범위를 선택해 불러오는 방향을 고려합니다.</p><div class="badge-row"><span class="badge mint">last_joined_at</span><span class="badge">date range</span></div></article>
+        <article class="route-card"><h3>날짜 선택 이동</h3><p>date picker 또는 날짜 system message를 통해 특정 날짜 주변 메시지로 이동합니다. 데이터는 날짜 기준 cursor pagination으로 불러오는 방향을 고려합니다.</p><div class="badge-row"><span class="badge mint">date picker</span><span class="badge">cursor pagination</span></div></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><h2>권한과 관리 기능</h2><p>메시지 관리와 방 운영 권한을 확장하는 후보입니다.</p></div></div>
+      <div class="route-summary-grid">
+        <article class="route-card"><h3>메시지 수정과 삭제</h3><p>본인 메시지 수정과 삭제, 방장 또는 매니저의 악성 메시지 삭제를 고려합니다. 수정 표시는 기존 <code>message.modified_at</code> 컬럼을 활용합니다.</p><div class="badge-row"><span class="badge mint">modified_at</span><span class="badge">hard delete 후보</span></div></article>
+        <article class="route-card"><h3>채팅 매니저 권한</h3><p><code>chat_room_member.role</code> 컬럼으로 <code>owner</code>, <code>manager</code>, <code>member</code>를 구분합니다. 실제 권한 검증은 RPC에서 처리합니다.</p><div class="badge-row"><span class="badge lock">owner</span><span class="badge lock">manager</span><span class="badge lock">member</span></div></article>
+        <article class="route-card"><h3>강퇴와 ban 정책</h3><p>현재처럼 강퇴된 유저는 해당 방에 다시 입장할 수 없는 정책을 유지합니다. 내부 구현은 기존 <code>is_banned</code> 흐름을 유지합니다.</p><div class="badge-row"><span class="badge lock">is_banned</span><span class="badge">재입장 불가</span></div></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><h2>방 운영 UX</h2><p>비밀방, 검색, 공지, 공유 흐름처럼 채팅방 사용성을 보강하는 후보입니다.</p></div></div>
+      <ul class="decision-list">
+        <li><strong>채팅방 비밀번호.</strong> 비밀번호는 hash로 저장하고, 참여 Dialog에서 비밀번호 입력 후 입장할 수 있게 합니다. 목록에는 비밀방 표시와 필터를 고려합니다.</li>
+        <li><strong>메시지 검색.</strong> Ctrl + F와 비슷하게 검색어 입력, 현재 결과 index, 전체 결과 수, 위아래 이동 버튼을 제공합니다. 검색 버튼은 나가기 popover 근처에 배치하는 방향이 자연스럽습니다.</li>
+        <li><strong>공지 메시지.</strong> <code>chat_room_notice</code> 테이블로 현재 활성 공지와 이전 공지 목록을 관리합니다. 상단에는 일부만 표시하고 전체 보기는 Dialog로 제공합니다.</li>
+        <li><strong>초대 링크와 public preview.</strong> preview 안에서 로그인 CTA 또는 로그인 컴포넌트를 보여주는 방향을 고려합니다. 비밀방은 실제 입장 시 비밀번호 검증을 거칩니다.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><h2>후속 연동 후보</h2><p>알림 체계가 준비되면 함께 검토할 수 있는 기능입니다.</p></div></div>
+      <div class="timeline">
+        <article class="timeline-item"><strong>메시지 신고</strong><p>신고 테이블, 신고 상태, 관리자 확인 UI를 추가하는 방향으로 고려합니다. 알림 시스템이 준비되면 함께 검토합니다.</p></article>
+        <article class="timeline-item"><strong>방별 알림 설정</strong><p><code>chat_room_member.notification_enabled</code> 컬럼을 후보로 둡니다. 브라우저 알림 또는 앱 푸시 기능과 함께 검토합니다.</p></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><h2>큰 설계 축</h2><p>나중에 구현할 때는 기능을 아래 세 묶음으로 나누어 보면 됩니다.</p></div></div>
+      <div class="hero-grid">
+        <article class="card"><h3>메시지 탐색</h3><p>입장 시 조회 범위, 메시지 백업, 날짜 이동, 메시지 검색을 하나의 탐색 정책으로 묶습니다.</p><div class="badge-row"><span class="badge mint">range</span><span class="badge mint">search</span><span class="badge mint">date</span></div></article>
+        <article class="card"><h3>권한과 운영</h3><p>메시지 수정과 삭제, 채팅 매니저, 강퇴 상태, 비밀방, 공지 기능을 방 운영 정책으로 묶습니다.</p><div class="badge-row"><span class="badge lock">role</span><span class="badge lock">notice</span><span class="badge lock">password</span></div></article>
+        <article class="card"><h3>후속 연동</h3><p>메시지 신고, 방별 알림, public preview 개선은 라이브 이후 필요에 따라 확장합니다.</p><div class="badge-row"><span class="badge live">report</span><span class="badge live">notification</span></div></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><h2>라이브 기획 연결 메모</h2><p>채팅방 고도화는 라이브 기능 개발 이후 남은 기간에 진행할 후보입니다.</p></div></div>
+      <ul class="decision-list">
+        <li><strong>라이브 우선.</strong> 현재 우선순위는 라이브 기능 feature입니다.</li>
+        <li><strong>채팅방 고도화는 백로그.</strong> 이 문서는 라이브 개발 이후 채팅방 기능을 보강할 때 참고합니다.</li>
+        <li><strong>도메인 분리 유지.</strong> 라이브 채팅은 일반 채팅방과 UX가 다르므로 별도 도메인으로 설계하는 방향을 유지합니다.</li>
+      </ul>
+    </section>
+
+    <p class="footer-note">이 문서는 채팅방 고도화 후보를 간략히 보존하기 위한 탭 문서입니다.</p>
+  </main>
+</body>
+</html>
+

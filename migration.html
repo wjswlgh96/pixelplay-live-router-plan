@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>PixelPlay 현재 변경</title><link rel="stylesheet" href="assets/styles.css"></head>
+<body>
+<header class="site-header">
+    <div class="header-inner">
+      <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
+      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a class="active" href="migration.html">현재 변경</a><a href="wireframes.html">디자인 프리뷰</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+    </div>
+  </header>
+<main class="doc-shell">
+<section class="hero"><div class="page-kicker">Migration Notes</div><h1>현재 라우터는 redirect 없이 삭제 기준으로 정리합니다.</h1><p>아직 외부 사용자가 없고 발표 링크도 새로 정리할 수 있다는 전제에서, 과거 라우터 호환보다 개발 단순성을 우선합니다.</p></section>
+<section class="panel"><div class="section-title"><div><h2>삭제와 대체 라우터</h2><p>배포 전 빠르게 정리할 수 있는 항목입니다.</p></div></div><table class="route-table"><thead><tr><th>기존 라우터</th><th>처리</th><th>대체 라우터</th><th>접근</th><th>비고</th></tr></thead><tbody>
+<tr><td><code>/</code></td><td>화면 역할 변경</td><td><code>/</code></td><td><span class="access-public">공개</span></td><td>기존 채팅과 라이브 탭 전환 홈을 공개 랜딩으로 전환합니다.</td></tr>
+<tr><td><code>/chat-room/[roomId]</code></td><td><span class="access-remove">삭제</span></td><td><code>/chat/room/[roomId]</code></td><td><span class="access-login">로그인 필요</span></td><td>room 세그먼트는 단수로 고정합니다.</td></tr>
+<tr><td><code>/search/chat</code></td><td><span class="access-remove">삭제</span></td><td><code>/chat/search</code></td><td><span class="access-login">로그인 필요</span></td><td>채팅 도메인 내부 검색으로 이동합니다.</td></tr>
+<tr><td><code>/profile</code></td><td><span class="access-remove">삭제</span></td><td><code>/user/profile</code></td><td><span class="access-login">로그인 필요</span></td><td>유저 사이드바 확장을 고려해 root를 user로 변경합니다.</td></tr>
+<tr><td><code>/user</code></td><td>신규 기본 이동</td><td><code>/user/profile</code></td><td><span class="access-login">로그인 필요</span></td><td>빈 root 페이지를 만들지 않습니다.</td></tr>
+</tbody></table></section>
+<section class="panel"><div class="section-title"><div><h2>구현 순서</h2><p>라우터 정리 후 라이브 기능을 붙이는 순서입니다.</p></div></div><div class="timeline">
+<article class="timeline-item"><strong>1단계</strong><p>인덱스 랜딩 전환과 Header CTA를 먼저 반영합니다. 방송하기는 로그인 시 <code>/channel/live</code>, 비로그인 시 <code>/auth/login?next=/channel/live</code>로 보냅니다.</p></article>
+<article class="timeline-item"><strong>2단계</strong><p>채팅 라우터를 <code>/chat</code>, <code>/chat/room/[roomId]</code>, <code>/chat/search</code>로 정리합니다. 기존 라우터는 redirect 없이 삭제합니다.</p></article>
+<article class="timeline-item"><strong>3단계</strong><p>프로필 라우터를 <code>/user/profile</code>로 이동하고, 후원 확장을 위해 <code>/user/donations</code> 구조를 예약합니다.</p></article>
+<article class="timeline-item"><strong>4단계</strong><p>라이브 공개 라우터 <code>/live</code>, <code>/live/[creatorId]</code>, <code>/live/search</code>를 만들고 시청자 화면을 먼저 완성합니다.</p></article>
+<article class="timeline-item"><strong>5단계</strong><p>크리에이터 방송 운영 라우터 <code>/channel/live</code>, <code>/channel/broadcast</code>, <code>/channel/chat</code>을 붙입니다.</p></article>
+</div></section>
+<section class="panel"><div class="section-title"><div><h2>권한 원칙</h2><p>프론트 라우터 이름보다 서버 권한과 RLS가 실제 보안 경계입니다.</p></div></div><ul class="decision-list">
+<li><strong>공개 시청은 허용합니다.</strong> 비로그인 사용자는 라이브 목록과 라이브 시청 페이지에 들어올 수 있습니다.</li>
+<li><strong>상호작용은 로그인 이후에 허용합니다.</strong> 채팅 입력, 투표 참여, 팔로우, 후원, 고화질 기능은 로그인 필요 상태로 처리합니다.</li>
+<li><strong>채널 관리 라우터는 userId를 받지 않습니다.</strong> <code>/channel/*</code> 서버 로직은 현재 로그인한 유저 기준으로만 데이터를 조회하고 수정합니다.</li>
+<li><strong>공개 식별자는 creatorId만 노출합니다.</strong> <code>/live/[creatorId]</code>와 후속 공개 채널 기능에서만 URL 식별자를 사용합니다.</li>
+</ul></section>
+</main>
+</body>
+</html>

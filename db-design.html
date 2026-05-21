@@ -1,0 +1,185 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>PixelPlay DB 설계</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
+      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="migration.html">현재 변경</a><a href="wireframes.html">디자인 프리뷰</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a class="active" href="db-design.html">DB 설계</a></nav>
+    </div>
+  </header>
+  <main class="doc-shell">
+    <section class="hero"><div class="page-kicker">Database Draft</div><h1>라이브와 후원 기능을 위한 Supabase 테이블 초안입니다.</h1><p>현재 대시보드의 public 스키마에는 user, chat_room, chat_room_member, message 4개 테이블만 있습니다. 라이브는 일반 채팅방과 접근 정책이 달라 별도 도메인 테이블로 분리합니다.</p></section>
+
+    <section class="hero-grid">
+      <article class="card"><div class="summary-card-head"><span class="summary-card-label">현재 DB</span><strong>채팅 도메인은 이미 분리됨</strong></div><p>모든 현재 테이블은 RLS가 켜져 있습니다. 채팅은 이미 별도 RPC와 Realtime publication을 사용합니다.</p><div class="badge-row"><span class="badge mint">user</span><span class="badge">chat_room</span><span class="badge">message</span></div></article>
+      <article class="card"><div class="summary-card-head"><span class="summary-card-label">라이브 MVP</span><strong>일반 채팅과 별도 설계</strong></div><p>채널, 방송 설정, 라이브 세션, 시청자 presence, 채팅, 투표, 통계 스냅샷을 최소 단위로 잡습니다.</p><div class="badge-row"><span class="badge live">live_session</span><span class="badge mint">creator_channel</span></div></article>
+      <article class="card"><div class="summary-card-head"><span class="summary-card-label">후원 선택 기능</span><strong>결제와 잔액 ledger 분리</strong></div><p>Toss Payments와 후원금 지갑은 선택 기능으로 두되 라우터와 UI 확장을 고려해 구조만 먼저 정리합니다.</p><div class="badge-row"><span class="badge live">donations</span><span class="badge">payments</span></div></article>
+    </section>
+
+    <section class="panel"><div class="section-title"><div><h2>현재 DB 스냅샷</h2><p>Supabase 대시보드 직접 조회 기준입니다.</p></div></div><table class="route-table"><thead><tr><th>테이블</th><th>rows</th><th>RLS</th><th>현재 역할</th><th>라이브 설계 영향</th></tr></thead><tbody>
+      <tr><td><code>public.user</code></td><td>14</td><td><span class="access-public">enabled</span></td><td>회원 프로필 테이블입니다.</td><td>크리에이터, 시청자, 후원자의 기준 테이블로 그대로 재사용합니다.</td></tr>
+      <tr><td><code>public.chat_room</code></td><td>256</td><td><span class="access-public">enabled</span></td><td>일반 채팅방 테이블입니다.</td><td>라이브 채팅과 정책이 달라 직접 재사용하지 않습니다.</td></tr>
+      <tr><td><code>public.chat_room_member</code></td><td>506</td><td><span class="access-public">enabled</span></td><td>채팅방 멤버십과 강퇴 상태입니다.</td><td>비로그인 시청자를 담기 어려워 라이브는 별도 presence를 둡니다.</td></tr>
+      <tr><td><code>public.message</code></td><td>3198</td><td><span class="access-public">enabled</span></td><td>일반 채팅 메시지입니다.</td><td>라이브 메시지는 공개 읽기와 로그인 쓰기가 필요해 별도 테이블을 둡니다.</td></tr>
+    </tbody></table></section>
+
+    <section class="panel"><div class="section-title"><div><h2>설계 원칙</h2><p>지금 DB와 새 라우터 논의를 같이 맞춘 기준입니다.</p></div></div><ul class="decision-list">
+      <li><strong><code>/live/[creatorId]</code>의 실제 값은 <code>public.user.id</code>를 재사용합니다.</strong> 별도 channel id가 없어도 1유저 1채널 MVP는 충분히 처리됩니다.</li>
+      <li><strong><code>creator_channel.creator_id</code>를 PK로 둡니다.</strong> 이렇게 하면 <code>auth.uid() = creator_id</code> 권한 검증이 단순해집니다.</li>
+      <li><strong>일반 채팅과 라이브 채팅은 분리합니다.</strong> 일반 채팅은 로그인 멤버 전용이고, 라이브는 비로그인 시청과 공개 읽기가 섞입니다.</li>
+      <li><strong>현재 시청자 수는 캐시와 presence를 같이 씁니다.</strong> 실시간 UI는 <code>live_session.current_viewer_count</code>, 정확한 판정은 <code>live_viewer_presence.last_seen_at</code>로 처리합니다.</li>
+      <li><strong>후원은 선택 기능으로 분리합니다.</strong> 지갑과 결제 ledger는 금액 정합성이 중요하므로 MVP 라이브보다 뒤에 붙이는 편이 안전합니다.</li>
+    </ul></section>
+
+    <section class="panel"><div class="section-title"><div><h2>추천 Enum</h2><p>문자열 분기보다 DB enum으로 상태를 제한하는 편이 안전합니다.</p></div></div><table class="route-table"><thead><tr><th>enum</th><th>값</th><th>필요한 이유</th></tr></thead><tbody>
+      <tr><td><code>live_status</code></td><td><code>ready</code>, <code>live</code>, <code>ended</code>, <code>cancelled</code></td><td>방송 준비, 송출 중, 종료, 취소 상태를 제한합니다.</td></tr>
+      <tr><td><code>live_visibility</code></td><td><code>public</code>, <code>unlisted</code>, <code>private</code></td><td>라이브 목록 노출과 직접 링크 접근을 분리합니다.</td></tr>
+      <tr><td><code>live_message_type</code></td><td><code>text</code>, <code>system</code>, <code>highlight</code></td><td>일반 채팅, 시스템 메시지, 중요 메시지를 구분합니다.</td></tr>
+      <tr><td><code>poll_status</code></td><td><code>active</code>, <code>closed</code></td><td>투표 참여 가능 여부를 DB에서 제한합니다.</td></tr>
+      <tr><td><code>payment_status</code></td><td><code>requested</code>, <code>approved</code>, <code>failed</code>, <code>cancelled</code></td><td>결제 승인 전후와 실패 복구를 추적합니다.</td></tr>
+      <tr><td><code>donation_transaction_type</code></td><td><code>charge</code>, <code>spend</code>, <code>refund</code></td><td>후원금 잔액 변동의 원인을 제한합니다.</td></tr>
+    </tbody></table></section>
+
+    <div id="schema-root">
+
+      <section class="panel">
+        <div class="section-title"><div><h2>creator_channel</h2><p>채널과 설정 · MVP 필수 · /channel, /live/[creatorId]</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>creator_id</code></td><td>uuid</td><td>PK, FK user.id</td><td>1유저 1크리에이터 채널의 기준값입니다. URL의 creatorId와 auth.uid 권한 검증에 같이 씁니다.</td></tr><tr><td><code>display_name</code></td><td>text</td><td>not null</td><td>유저 닉네임과 별도로 채널 표시명을 바꿀 수 있게 합니다.</td></tr><tr><td><code>description</code></td><td>text</td><td>nullable</td><td>공개 채널 소개와 라이브 시청 화면의 크리에이터 설명에 씁니다.</td></tr><tr><td><code>banner_url</code></td><td>text</td><td>nullable</td><td>채널 프로필이나 공개 채널 홈의 배너 이미지에 씁니다.</td></tr><tr><td><code>is_live_enabled</code></td><td>boolean</td><td>default true</td><td>방송하기 기능 활성화 여부를 서버에서 제어할 수 있게 합니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>채널 생성 시각을 남겨 정렬과 감사에 씁니다.</td></tr><tr><td><code>modified_at</code></td><td>timestamptz</td><td>default now()</td><td>채널 정보 변경 시각을 추적합니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>channel_broadcast_setting</h2><p>채널과 설정 · MVP 필수 · /channel/broadcast</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>creator_id</code></td><td>uuid</td><td>PK, FK creator_channel.creator_id</td><td>어떤 크리에이터의 방송 설정인지 고정합니다.</td></tr><tr><td><code>default_title</code></td><td>text</td><td>not null</td><td>방송 시작 화면에서 매번 제목을 비워두지 않기 위한 기본값입니다.</td></tr><tr><td><code>default_visibility</code></td><td>live_visibility</td><td>not null</td><td>기본 공개 범위를 DB enum으로 제한합니다.</td></tr><tr><td><code>auto_vod_enabled</code></td><td>boolean</td><td>default false</td><td>방송 종료 후 다시보기 자동 저장 여부를 설정합니다.</td></tr><tr><td><code>latency_mode</code></td><td>text</td><td>not null</td><td>일반, 저지연 같은 송출 지연 UI 옵션을 저장합니다.</td></tr><tr><td><code>stream_key_hash</code></td><td>text</td><td>nullable</td><td>스트림 키 원문 저장을 피하고 검증값만 저장합니다.</td></tr><tr><td><code>stream_key_rotated_at</code></td><td>timestamptz</td><td>nullable</td><td>스트림 키 재발급 시점을 표시하고 보안 이력을 남깁니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>설정 row 생성 시각입니다.</td></tr><tr><td><code>modified_at</code></td><td>timestamptz</td><td>default now()</td><td>방송 설정 변경 시각입니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>channel_chat_setting</h2><p>채널과 설정 · MVP 필수 · /channel/chat</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>creator_id</code></td><td>uuid</td><td>PK, FK creator_channel.creator_id</td><td>채팅 정책이 어느 크리에이터 채널에 속하는지 구분합니다.</td></tr><tr><td><code>slow_mode_seconds</code></td><td>integer</td><td>default 0</td><td>슬로우 모드 간격을 저장합니다. 0이면 비활성입니다.</td></tr><tr><td><code>banned_words</code></td><td>text[]</td><td>default '{}'</td><td>금칙어 목록을 저장해 라이브 채팅 입력 검증에 씁니다.</td></tr><tr><td><code>allow_links</code></td><td>boolean</td><td>default false</td><td>채팅 내 링크 허용 여부를 제어합니다.</td></tr><tr><td><code>allow_anonymous_read</code></td><td>boolean</td><td>default true</td><td>비로그인 사용자의 채팅 읽기 허용 정책을 명시합니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>채팅 설정 생성 시각입니다.</td></tr><tr><td><code>modified_at</code></td><td>timestamptz</td><td>default now()</td><td>채팅 정책 변경 시각입니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>live_session</h2><p>라이브 세션 · MVP 필수 · /live, /live/[creatorId], /channel/live</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>id</code></td><td>uuid</td><td>PK, default gen_random_uuid()</td><td>방송 1회를 식별합니다. 통계, 채팅, 투표, 후원 이벤트가 이 ID에 연결됩니다.</td></tr><tr><td><code>creator_id</code></td><td>uuid</td><td>FK creator_channel.creator_id</td><td>방송자를 나타냅니다. /live/[creatorId]에서 현재 세션을 찾는 기준입니다.</td></tr><tr><td><code>title</code></td><td>text</td><td>not null</td><td>라이브 목록과 시청 화면에 표시할 방송 제목입니다.</td></tr><tr><td><code>status</code></td><td>live_status</td><td>not null</td><td>준비, 라이브, 종료 상태를 제한합니다.</td></tr><tr><td><code>visibility</code></td><td>live_visibility</td><td>not null</td><td>라이브 목록 노출과 접근 가능 범위를 제어합니다.</td></tr><tr><td><code>started_at</code></td><td>timestamptz</td><td>nullable</td><td>방송 실제 시작 시각입니다.</td></tr><tr><td><code>ended_at</code></td><td>timestamptz</td><td>nullable</td><td>방송 종료 시각입니다.</td></tr><tr><td><code>current_viewer_count</code></td><td>integer</td><td>default 0</td><td>실시간 시청자 수 UI의 캐시값입니다.</td></tr><tr><td><code>peak_viewer_count</code></td><td>integer</td><td>default 0</td><td>방송 중 최고 시청자 수를 리포트에 씁니다.</td></tr><tr><td><code>save_vod_enabled</code></td><td>boolean</td><td>default false</td><td>해당 방송의 다시보기 저장 여부를 남깁니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>세션 생성 시각입니다.</td></tr><tr><td><code>modified_at</code></td><td>timestamptz</td><td>default now()</td><td>상태 변경 시각 추적에 씁니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>live_viewer_presence</h2><p>라이브 세션 · MVP 필수 · /live/[creatorId]</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>id</code></td><td>uuid</td><td>PK</td><td>presence row를 식별합니다.</td></tr><tr><td><code>live_session_id</code></td><td>uuid</td><td>FK live_session.id</td><td>어떤 방송을 보고 있는지 연결합니다.</td></tr><tr><td><code>user_id</code></td><td>uuid</td><td>nullable FK user.id</td><td>로그인 시청자를 식별합니다.</td></tr><tr><td><code>anon_id</code></td><td>text</td><td>nullable</td><td>비로그인 시청자를 쿠키나 세션 단위로 구분합니다.</td></tr><tr><td><code>entered_at</code></td><td>timestamptz</td><td>default now()</td><td>입장 시각을 기록합니다.</td></tr><tr><td><code>last_seen_at</code></td><td>timestamptz</td><td>not null</td><td>현재 시청자 판정과 stale cleanup 기준입니다.</td></tr><tr><td><code>left_at</code></td><td>timestamptz</td><td>nullable</td><td>명시적으로 나간 시각입니다.</td></tr><tr><td><code>check user_or_anon</code></td><td>constraint</td><td>required</td><td>user_id 또는 anon_id 중 하나는 반드시 존재해야 합니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>live_chat_message</h2><p>라이브 세션 · MVP 필수 · /live/[creatorId]</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>id</code></td><td>uuid</td><td>PK</td><td>라이브 채팅 메시지 ID입니다.</td></tr><tr><td><code>live_session_id</code></td><td>uuid</td><td>FK live_session.id</td><td>메시지가 속한 방송 세션입니다.</td></tr><tr><td><code>user_id</code></td><td>uuid</td><td>FK user.id</td><td>작성자를 나타냅니다. 비로그인은 쓰기 불가이므로 nullable로 두지 않습니다.</td></tr><tr><td><code>content</code></td><td>text</td><td>not null</td><td>채팅 본문입니다. 기존 message처럼 길이 제한 check가 필요합니다.</td></tr><tr><td><code>message_type</code></td><td>live_message_type</td><td>default text</td><td>일반, 시스템, 강조 메시지를 구분합니다.</td></tr><tr><td><code>is_pinned</code></td><td>boolean</td><td>default false</td><td>중요 메시지 고정이나 강조 UI에 씁니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>채팅 정렬과 실시간 구독 기준입니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>live_poll</h2><p>투표와 통계 · MVP 필수 · /channel/live, /live/[creatorId]</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>id</code></td><td>uuid</td><td>PK</td><td>투표 ID입니다.</td></tr><tr><td><code>live_session_id</code></td><td>uuid</td><td>FK live_session.id</td><td>투표가 속한 방송 세션입니다.</td></tr><tr><td><code>creator_id</code></td><td>uuid</td><td>FK user.id</td><td>투표 생성자가 방송자인지 검증하기 쉽도록 둡니다.</td></tr><tr><td><code>question</code></td><td>text</td><td>not null</td><td>시청자에게 보여줄 투표 질문입니다.</td></tr><tr><td><code>status</code></td><td>poll_status</td><td>default active</td><td>참여 가능 여부를 제한합니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>투표 생성 시각입니다.</td></tr><tr><td><code>closed_at</code></td><td>timestamptz</td><td>nullable</td><td>투표 종료 시각입니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>live_poll_option</h2><p>투표와 통계 · MVP 필수 · /live/[creatorId]</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>id</code></td><td>uuid</td><td>PK</td><td>투표 선택지 ID입니다.</td></tr><tr><td><code>poll_id</code></td><td>uuid</td><td>FK live_poll.id</td><td>어떤 투표의 선택지인지 연결합니다.</td></tr><tr><td><code>label</code></td><td>text</td><td>not null</td><td>선택지 문구입니다.</td></tr><tr><td><code>sort_order</code></td><td>smallint</td><td>not null</td><td>선택지 표시 순서를 안정적으로 유지합니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>선택지 생성 시각입니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>live_poll_vote</h2><p>투표와 통계 · MVP 필수 · /live/[creatorId]</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>poll_id</code></td><td>uuid</td><td>PK part, FK live_poll.id</td><td>참여한 투표입니다.</td></tr><tr><td><code>option_id</code></td><td>uuid</td><td>FK live_poll_option.id</td><td>선택한 항목입니다.</td></tr><tr><td><code>user_id</code></td><td>uuid</td><td>PK part, FK user.id</td><td>투표 참여자입니다. 비로그인은 참여 불가입니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>투표 참여 시각입니다.</td></tr><tr><td><code>unique poll_user</code></td><td>constraint</td><td>required</td><td>한 유저가 한 투표에 한 번만 참여하게 합니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>live_metric_snapshot</h2><p>투표와 통계 · MVP 권장 · /channel/analytics</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>id</code></td><td>uuid</td><td>PK</td><td>통계 스냅샷 ID입니다.</td></tr><tr><td><code>live_session_id</code></td><td>uuid</td><td>FK live_session.id</td><td>어떤 방송의 통계인지 연결합니다.</td></tr><tr><td><code>measured_at</code></td><td>timestamptz</td><td>not null</td><td>집계 시각입니다.</td></tr><tr><td><code>viewer_count</code></td><td>integer</td><td>not null</td><td>해당 시점의 시청자 수입니다.</td></tr><tr><td><code>chat_count</code></td><td>integer</td><td>default 0</td><td>해당 시점까지의 채팅 수입니다.</td></tr><tr><td><code>poll_vote_count</code></td><td>integer</td><td>default 0</td><td>해당 시점까지의 투표 참여 수입니다.</td></tr><tr><td><code>donation_amount</code></td><td>integer</td><td>default 0</td><td>후원 기능을 붙였을 때 금액 통계에 씁니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>donation_wallet</h2><p>후원 선택 기능 · 선택 · /user/donations</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>user_id</code></td><td>uuid</td><td>PK, FK user.id</td><td>지갑 소유자입니다.</td></tr><tr><td><code>balance</code></td><td>integer</td><td>default 0</td><td>현재 후원금 잔액입니다. 음수 방지 check가 필요합니다.</td></tr><tr><td><code>updated_at</code></td><td>timestamptz</td><td>default now()</td><td>잔액 변경 시각입니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>payment_order</h2><p>후원 선택 기능 · 선택 · /user/donations/charge</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>id</code></td><td>uuid</td><td>PK</td><td>내부 결제 주문 ID입니다.</td></tr><tr><td><code>user_id</code></td><td>uuid</td><td>FK user.id</td><td>충전 요청자입니다.</td></tr><tr><td><code>provider</code></td><td>text</td><td>not null</td><td>Toss Payments 같은 결제사를 구분합니다.</td></tr><tr><td><code>provider_order_id</code></td><td>text</td><td>unique</td><td>결제사 주문 ID와 중복 승인을 방지합니다.</td></tr><tr><td><code>amount</code></td><td>integer</td><td>not null</td><td>충전 요청 금액입니다.</td></tr><tr><td><code>status</code></td><td>payment_status</td><td>not null</td><td>결제 요청, 승인, 실패, 취소 상태입니다.</td></tr><tr><td><code>requested_at</code></td><td>timestamptz</td><td>default now()</td><td>결제 요청 시각입니다.</td></tr><tr><td><code>approved_at</code></td><td>timestamptz</td><td>nullable</td><td>결제 승인 시각입니다.</td></tr><tr><td><code>failed_at</code></td><td>timestamptz</td><td>nullable</td><td>결제 실패 시각입니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>donation_transaction</h2><p>후원 선택 기능 · 선택 · /user/donations/history</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>id</code></td><td>uuid</td><td>PK</td><td>잔액 변동 ledger row입니다.</td></tr><tr><td><code>user_id</code></td><td>uuid</td><td>FK user.id</td><td>잔액이 변한 유저입니다.</td></tr><tr><td><code>type</code></td><td>donation_transaction_type</td><td>not null</td><td>충전, 사용, 환불을 구분합니다.</td></tr><tr><td><code>amount</code></td><td>integer</td><td>not null</td><td>증감 금액입니다.</td></tr><tr><td><code>balance_after</code></td><td>integer</td><td>not null</td><td>변경 후 잔액입니다. 정산 검증에 필요합니다.</td></tr><tr><td><code>payment_order_id</code></td><td>uuid</td><td>nullable FK payment_order.id</td><td>충전 거래의 결제 주문 출처입니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>내역 정렬 기준입니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+      <section class="panel">
+        <div class="section-title"><div><h2>live_donation</h2><p>후원 선택 기능 · 선택 · /live/[creatorId], /channel/analytics</p></div></div>
+        <table class="route-table">
+          <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+          <tbody><tr><td><code>id</code></td><td>uuid</td><td>PK</td><td>라이브 후원 이벤트 ID입니다.</td></tr><tr><td><code>live_session_id</code></td><td>uuid</td><td>FK live_session.id</td><td>어느 방송에서 발생한 후원인지 연결합니다.</td></tr><tr><td><code>sender_id</code></td><td>uuid</td><td>FK user.id</td><td>후원한 유저입니다.</td></tr><tr><td><code>creator_id</code></td><td>uuid</td><td>FK user.id</td><td>후원을 받은 크리에이터입니다.</td></tr><tr><td><code>amount</code></td><td>integer</td><td>not null</td><td>후원 금액입니다.</td></tr><tr><td><code>message</code></td><td>text</td><td>nullable</td><td>후원 메시지입니다.</td></tr><tr><td><code>transaction_id</code></td><td>uuid</td><td>FK donation_transaction.id</td><td>지갑 차감 ledger와 연결합니다.</td></tr><tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>채팅 이벤트와 통계 정렬 기준입니다.</td></tr></tbody>
+        </table>
+      </section>
+    
+    </div>
+
+    <section class="panel"><div class="section-title"><div><h2>필수 인덱스와 제약</h2><p>라이브 화면에서 자주 조회하는 경로를 기준으로 잡습니다.</p></div></div><table class="route-table"><thead><tr><th>대상</th><th>인덱스 또는 제약</th><th>필요한 이유</th></tr></thead><tbody>
+      <tr><td>현재 라이브 조회</td><td><code>live_session(creator_id, status)</code></td><td><code>/live/[creatorId]</code>에서 현재 방송을 빠르게 찾습니다.</td></tr>
+      <tr><td>동시 라이브 제한</td><td><code>unique(creator_id) where status = 'live'</code></td><td>한 크리에이터가 동시에 여러 라이브를 켜는 상태를 막습니다.</td></tr>
+      <tr><td>라이브 목록</td><td><code>live_session(status, visibility, started_at desc)</code></td><td><code>/live</code>에서 공개 라이브를 최신순으로 조회합니다.</td></tr>
+      <tr><td>라이브 채팅</td><td><code>live_chat_message(live_session_id, created_at desc)</code></td><td>채팅 패널의 최근 메시지 조회와 pagination에 필요합니다.</td></tr>
+      <tr><td>시청자 presence</td><td><code>live_viewer_presence(live_session_id, last_seen_at desc)</code></td><td>현재 시청자 판정과 stale 세션 정리에 필요합니다.</td></tr>
+      <tr><td>투표 중복 방지</td><td><code>unique(poll_id, user_id)</code></td><td>한 유저가 한 투표에 한 번만 참여하게 합니다.</td></tr>
+      <tr><td>후원 내역</td><td><code>donation_transaction(user_id, created_at desc)</code></td><td><code>/user/donations/history</code> 조회에 필요합니다.</td></tr>
+    </tbody></table></section>
+
+    <section class="panel"><div class="section-title"><div><h2>RLS 초안</h2><p>실제 구현 시 정책 이름과 SQL은 migration에서 구체화합니다.</p></div></div><table class="route-table"><thead><tr><th>테이블</th><th>읽기</th><th>쓰기</th><th>핵심 기준</th></tr></thead><tbody>
+      <tr><td><code>creator_channel</code></td><td>공개 채널 정보는 <code>anon</code> 읽기 허용</td><td>본인만 insert/update</td><td><code>creator_id = auth.uid()</code></td></tr>
+      <tr><td><code>channel_*_setting</code></td><td>본인만 읽기</td><td>본인만 쓰기</td><td>스트림 키와 운영 정책 노출 방지</td></tr>
+      <tr><td><code>live_session</code></td><td>공개 방송은 <code>anon</code> 읽기 허용</td><td>크리에이터 본인만 생성과 종료</td><td><code>creator_id = auth.uid()</code></td></tr>
+      <tr><td><code>live_chat_message</code></td><td>공개 방송 메시지는 읽기 허용</td><td>로그인 유저만 자기 메시지 작성</td><td>비로그인 시청은 허용하지만 입력은 제한</td></tr>
+      <tr><td><code>live_poll_vote</code></td><td>결과 집계는 RPC로 공개</td><td>로그인 유저만 1회 참여</td><td><code>user_id = auth.uid()</code>와 unique 제약</td></tr>
+      <tr><td><code>donation_*</code></td><td>본인 지갑과 내역만 읽기</td><td>서버 RPC 또는 service role 경유</td><td>금액 변동은 클라이언트 직접 update 금지</td></tr>
+    </tbody></table></section>
+  </main>
+
+</body>
+</html>

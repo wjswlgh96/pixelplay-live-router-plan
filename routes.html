@@ -5,14 +5,14 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
-      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a class="active" href="routes.html">최종 라우터</a><a href="migration.html">현재 변경</a><a href="wireframes.html">디자인 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a class="active" href="routes.html">최종 라우터</a><a href="wireframes.html">디자인 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
     </div>
   </header>
   <main class="doc-shell">
     <section class="hero"><div class="page-kicker">MVP Router Scope</div><h1>지금 개발할 라우터는 라이브 MVP에 필요한 것만 남깁니다.</h1><p>최종 후보를 전부 만들지 않고, 발표와 실제 개발 흐름에 필요한 필수 라우터만 우선 생성합니다. 후원과 실시간 통계는 MVP에 포함하고, 알림, 리허설, 공개 채널, 매니저 기능은 후속 후보로 분리합니다.</p></section>
 
     <section class="route-summary-grid">
-      <article class="route-card"><code>Public</code><h3>시청자 진입</h3><p>랜딩, 라이브 목록, 라이브 시청, 채팅 팝아웃을 공개 라우터로 둡니다.</p></article>
+      <article class="route-card"><code>Public</code><h3>시청자 진입</h3><p>랜딩, 라이브 목록, 라이브 검색, 라이브 시청, 채팅 팝아웃을 공개 라우터로 둡니다.</p></article>
       <article class="route-card"><code>Creator</code><h3>채널 관리 분리</h3><p>방송 운영, 채팅 설정, 보안 설정, 실시간 통계를 각각 분리해 정보량을 낮춥니다.</p></article>
       <article class="route-card"><code>Donation</code><h3>후원 MVP</h3><p>후원 홈, 충전 Dialog, Toss 결제 승인·웹훅까지 MVP에 포함합니다.</p></article>
       <article class="route-card"><code>Existing</code><h3>채팅 유지</h3><p>이미 구현된 채팅 목록, 상세, 검색 라우터는 깨지지 않게 유지합니다.</p></article>
@@ -21,6 +21,7 @@
     <section class="panel"><div class="section-title"><div><h2>MVP 필수 라우터</h2><p>이번 단계에서 실제 라우터 파일과 네비게이션 연결 대상으로 보는 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>라우터</th><th>역할</th><th>접근</th><th>query</th><th>비고</th></tr></thead><tbody>
       <tr><td><code>/</code></td><td>공개 랜딩.</td><td><span class="access-public">공개</span></td><td>없음</td><td>로그인 CTA 기본 next는 <code>/live</code>입니다.</td></tr>
       <tr><td><code>/live</code></td><td>현재 송출 중인 라이브 목록.</td><td><span class="access-public">공개</span></td><td>없음</td><td><code>src/components/live/live-list.tsx</code>는 시청자 UI로 유지합니다.</td></tr>
+      <tr><td><code>/live/search</code></td><td>라이브 방송 검색.</td><td><span class="access-public">공개</span></td><td><code>?query=검색어</code></td><td>Header 검색 입력에서 진입합니다. 검색 UI는 라이브 목록과 같은 카드 그리드 흐름을 재사용합니다.</td></tr>
       <tr><td><code>/live/[creatorId]</code></td><td>특정 크리에이터의 현재 라이브 시청.</td><td><span class="access-public">공개</span></td><td>없음</td><td>시청과 채팅 읽기는 공개, 채팅 입력과 투표 참여는 로그인 이후 허용합니다.</td></tr>
       <tr><td><code>/live/[creatorId]/chat</code></td><td>라이브 채팅 팝아웃 전용 보조창.</td><td><span class="access-public">공개 읽기</span></td><td>없음</td><td>치지직의 <code>/live/{creatorId}/chat</code> 팝업 흐름을 따릅니다.</td></tr>
       <tr><td><code>/channel/live</code></td><td>방송 운영.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 준비, 시작, 종료, 송출 미리보기, 공지, 투표, 채팅 일시정지처럼 방송 중 바로 쓰는 기능만 둡니다.</td></tr>
@@ -40,7 +41,6 @@
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>MVP에서 제외한 후속 후보</h2><p>라우터 파일을 먼저 만들지 않고, 필요해지는 시점에 추가합니다.</p></div></div><table class="route-table"><thead><tr><th>후보</th><th>라우터 후보</th><th>판단</th><th>이유</th></tr></thead><tbody>
-      <tr><td>라이브 검색 전용 페이지</td><td><code>/live/search</code></td><td><span class="access-future">후속</span></td><td>MVP에서는 <code>/live</code> 안의 검색 UI로 충분합니다.</td></tr>
       <tr><td>채널 관리 홈</td><td><code>/channel</code></td><td><span class="access-future">후속</span></td><td>방송 운영과 설정이 먼저입니다. 홈 대시보드는 여유가 있을 때 붙입니다.</td></tr>
       <tr><td>알림</td><td><code>/channel/notifications</code></td><td><span class="access-future">후속</span></td><td>치지직 플로우 참고 대상이지만 MVP 기능 증명에는 필수는 아닙니다.</td></tr>
       <tr><td>리허설 방송</td><td><code>/channel/rehearsal</code></td><td><span class="access-future">후속</span></td><td>정식 송출 전 테스트 방송은 선택 기능입니다.</td></tr>

@@ -5,7 +5,7 @@
 <header class="site-header">
     <div class="header-inner">
       <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
-      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="migration.html">현재 변경</a><a href="wireframes.html">디자인 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a class="active" href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="wireframes.html">디자인 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a class="active" href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
     </div>
   </header>
 <main class="doc-shell">
@@ -13,6 +13,7 @@
 <section class="route-summary-grid"><article class="route-card"><code>필수</code><h3>라이브 기본 흐름</h3><p>방송 입장, 방송자 화면, 시청자 화면, 채팅 통합, 채팅창 분리를 우선합니다.</p></article><article class="route-card"><code>필수</code><h3>투표와 권한</h3><p>투표 생성과 참여, 결과 반영, 방송자와 시청자 권한 분리를 구현합니다.</p></article><article class="route-card"><code>필수</code><h3>후원</h3><p>Toss Payments 기반 충전, 후원 보내기, 후원 내역 확인까지 MVP에 포함합니다.</p></article><article class="route-card"><code>선택</code><h3>채널 확장</h3><p>공개 채널, VOD, 매니저 기능은 발표 범위에 맞춰 후속으로 둡니다.</p></article></section>
 <section class="panel"><div class="section-title"><div><h2>MVP 필수 기능</h2><p>라이브 기능이라고 말하기 위해 반드시 보여야 하는 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>연결 라우터</th><th>접근</th><th>비고</th></tr></thead><tbody>
 <tr><td>라이브 목록</td><td><code>/live</code></td><td><span class="access-public">공개</span></td><td>Anon User도 현재 방송 중인 목록을 볼 수 있습니다.</td></tr>
+<tr><td>라이브 검색</td><td><code>/live/search</code></td><td><span class="access-public">공개</span></td><td>Header 검색 입력에서 <code>?query=검색어</code>로 진입합니다.</td></tr>
 <tr><td>라이브 시청</td><td><code>/live/[creatorId]</code></td><td><span class="access-public">공개</span></td><td>채팅 읽기와 방송 시청은 공개, 입력과 참여는 로그인 필요로 둡니다.</td></tr><tr><td>채팅창 분리</td><td><code>/live/[creatorId]/chat</code></td><td><span class="access-public">공개 읽기</span></td><td>치지직 팝업 채팅처럼 헤더와 푸터 없이 채팅만 보여줍니다.</td></tr>
 <tr><td>방송 운영</td><td><code>/channel/live</code></td><td><span class="access-owner">본인만</span></td><td>방송 준비, 시작, 종료, 송출 미리보기, 공지, 투표, 채팅 일시정지를 처리합니다.</td></tr>
 <tr><td>채팅 설정</td><td><code>/channel/chat</code></td><td><span class="access-owner">본인만</span></td><td>채팅 속도, 링크 차단, 이모티콘 모드, 금칙어를 별도 페이지에서 관리합니다.</td></tr>

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head><meta charset="utf-8"><title>PixelPlay 현재 변경</title><link rel="stylesheet" href="assets/styles.css"></head>
 <body>
@@ -9,27 +9,39 @@
     </div>
   </header>
 <main class="doc-shell">
-<section class="hero"><div class="page-kicker">Migration Notes</div><h1>현재 라우터는 redirect 없이 삭제 기준으로 정리합니다.</h1><p>아직 외부 사용자가 없고 발표 링크도 새로 정리할 수 있다는 전제에서, 과거 라우터 호환보다 개발 단순성을 우선합니다.</p></section>
+<section class="hero"><div class="page-kicker">Migration Notes</div><h1>현재 라우터는 치지직형 웹 스튜디오 흐름으로 정리합니다.</h1><p>과거 초안의 임의 통합 설정 라우터는 제거하고, 정보량이 많은 채널 관리는 <code>/channel/live</code>, <code>/channel/chat</code>, <code>/channel/security</code>, <code>/channel/analytics</code>로 나눕니다. 채팅 팝아웃과 후원 Dialog는 별도 흐름으로 둡니다.</p></section>
 <section class="panel"><div class="section-title"><div><h2>삭제와 대체 라우터</h2><p>배포 전 빠르게 정리할 수 있는 항목입니다.</p></div></div><table class="route-table"><thead><tr><th>기존 라우터</th><th>처리</th><th>대체 라우터</th><th>접근</th><th>비고</th></tr></thead><tbody>
 <tr><td><code>/</code></td><td>화면 역할 변경</td><td><code>/</code></td><td><span class="access-public">공개</span></td><td>기존 채팅과 라이브 탭 전환 홈을 공개 랜딩으로 전환합니다.</td></tr>
 <tr><td><code>/chat-room/[roomId]</code></td><td><span class="access-remove">삭제</span></td><td><code>/chat/room/[roomId]</code></td><td><span class="access-login">로그인 필요</span></td><td>room 세그먼트는 단수로 고정합니다.</td></tr>
 <tr><td><code>/search/chat</code></td><td><span class="access-remove">삭제</span></td><td><code>/chat/search</code></td><td><span class="access-login">로그인 필요</span></td><td>채팅 도메인 내부 검색으로 이동합니다.</td></tr>
 <tr><td><code>/profile</code></td><td><span class="access-remove">삭제</span></td><td><code>/user/profile</code></td><td><span class="access-login">로그인 필요</span></td><td>유저 사이드바 확장을 고려해 root를 user로 변경합니다.</td></tr>
 <tr><td><code>/user</code></td><td>신규 기본 이동</td><td><code>/user/profile</code></td><td><span class="access-login">로그인 필요</span></td><td>빈 root 페이지를 만들지 않습니다.</td></tr>
+<tr><td><code>/user/donations/charge</code></td><td><span class="access-remove">라우터 제거</span></td><td><code>/user/donations</code> 내부 Dialog</td><td><span class="access-login">로그인 필요</span></td><td>후원금 충전은 Toss Dialog로 재사용합니다.</td></tr>
+<tr><td><code>/user/donations/history</code></td><td><span class="access-remove">라우터 제거</span></td><td><code>/user/donations</code> 내부 탭</td><td><span class="access-login">로그인 필요</span></td><td>충전, 사용, 보낸 후원 내역은 후원 홈에서 보여줍니다.</td></tr>
+<tr><td><code>/channel/settings</code></td><td><span class="access-remove">초안 폐기</span></td><td><code>/channel/chat</code>, <code>/channel/security</code></td><td><span class="access-owner">본인만</span></td><td>범용 설정 라우터 대신 채팅 설정과 보안 설정으로 의미를 나눕니다.</td></tr>
+<tr><td><code>/channel/chat</code></td><td>신규 유지</td><td><code>/channel/chat</code></td><td><span class="access-owner">본인만</span></td><td>금칙어와 채팅 정책은 치지직 흐름처럼 별도 페이지로 이동합니다.</td></tr>
+<tr><td><code>/channel/analytics</code></td><td>신규 MVP</td><td><code>/channel/analytics</code></td><td><span class="access-owner">본인만</span></td><td>실시간 통계는 MVP에 포함해 별도 페이지로 둡니다.</td></tr>
 </tbody></table></section>
 <section class="panel"><div class="section-title"><div><h2>구현 순서</h2><p>라우터 정리 후 라이브 기능을 붙이는 순서입니다.</p></div></div><div class="timeline">
 <article class="timeline-item"><strong>1단계</strong><p>인덱스 랜딩 전환과 Header CTA를 먼저 반영합니다. 방송하기는 로그인 시 <code>/channel/live</code>, 비로그인 시 <code>/auth/login?next=/channel/live</code>로 보냅니다.</p></article>
 <article class="timeline-item"><strong>2단계</strong><p>채팅 라우터를 <code>/chat</code>, <code>/chat/room/[roomId]</code>, <code>/chat/search</code>로 정리합니다. 기존 라우터는 redirect 없이 삭제합니다.</p></article>
-<article class="timeline-item"><strong>3단계</strong><p>프로필 라우터를 <code>/user/profile</code>로 이동하고, 후원 확장을 위해 <code>/user/donations</code> 구조를 예약합니다.</p></article>
-<article class="timeline-item"><strong>4단계</strong><p>라이브 공개 라우터 <code>/live</code>, <code>/live/[creatorId]</code>, <code>/live/search</code>를 만들고 시청자 화면을 먼저 완성합니다.</p></article>
-<article class="timeline-item"><strong>5단계</strong><p>크리에이터 방송 운영 라우터 <code>/channel/live</code>, <code>/channel/broadcast</code>, <code>/channel/chat</code>을 붙입니다.</p></article>
+<article class="timeline-item"><strong>3단계</strong><p>프로필 라우터를 <code>/user/profile</code>로 이동하고, 후원은 <code>/user/donations</code> 한 화면 안의 Dialog와 탭으로 정리합니다.</p></article>
+<article class="timeline-item"><strong>4단계</strong><p>라이브 공개 라우터 <code>/live</code>, <code>/live/[creatorId]</code>, <code>/live/[creatorId]/chat</code>를 만들고 시청자 화면과 채팅 팝아웃을 먼저 완성합니다.</p></article>
+<article class="timeline-item"><strong>5단계</strong><p>크리에이터 관리는 치지직 스튜디오처럼 <code>/channel/live</code>, <code>/channel/chat</code>, <code>/channel/security</code>, <code>/channel/analytics</code>를 사이드바로 이동하게 구성합니다.</p></article>
+</div></section>
+<section class="panel"><div class="section-title"><div><h2>라우터 작업 준비 체크리스트</h2><p>dev에 반영하기 전에 삭제, 생성, 연결 순서를 한 번에 확인합니다.</p></div></div><div class="timeline">
+<article class="timeline-item"><strong>삭제 대상</strong><p><code>/chat-room/[roomId]</code>, <code>/search/chat</code>, <code>/profile</code>, <code>/user/donations/charge</code>, <code>/user/donations/history</code>, <code>/channel/broadcast</code>, <code>/channel/prohibit-words</code>는 라우터로 남기지 않습니다.</p></article>
+<article class="timeline-item"><strong>생성 대상</strong><p><code>/live/[creatorId]</code>, <code>/live/[creatorId]/chat</code>, <code>/channel/live</code>, <code>/channel/chat</code>, <code>/channel/security</code>, <code>/channel/analytics</code>, <code>/user/donations</code>를 최종 라우터 기준으로 맞춥니다.</p></article>
+<article class="timeline-item"><strong>연결 대상</strong><p>Header 방송하기 버튼은 <code>/channel/live</code>, UserAccountMenu 후원은 <code>/user/donations</code>, 채널 사이드바는 방송 운영, 채팅 설정, 보안 설정, 실시간 통계 순서로 연결합니다.</p></article>
+<article class="timeline-item"><strong>권한 대상</strong><p><code>/live</code> 하위 공개 시청 라우터는 비로그인 접근을 허용하고, <code>/channel/*</code>와 <code>/user/*</code>는 현재 로그인한 사용자 기준으로만 접근시킵니다.</p></article>
 </div></section>
 <section class="panel"><div class="section-title"><div><h2>권한 원칙</h2><p>프론트 라우터 이름보다 서버 권한과 RLS가 실제 보안 경계입니다.</p></div></div><ul class="decision-list">
-<li><strong>공개 시청은 허용합니다.</strong> 비로그인 사용자는 라이브 목록과 라이브 시청 페이지에 들어올 수 있습니다.</li>
+<li><strong>공개 시청은 허용합니다.</strong> 비로그인 사용자는 라이브 목록, 라이브 시청 페이지, 채팅 팝아웃 읽기 화면에 들어올 수 있습니다.</li>
 <li><strong>상호작용은 로그인 이후에 허용합니다.</strong> 채팅 입력, 투표 참여, 팔로우, 후원, 고화질 기능은 로그인 필요 상태로 처리합니다.</li>
 <li><strong>채널 관리 라우터는 userId를 받지 않습니다.</strong> <code>/channel/*</code> 서버 로직은 현재 로그인한 유저 기준으로만 데이터를 조회하고 수정합니다.</li>
-<li><strong>공개 식별자는 creatorId만 노출합니다.</strong> <code>/live/[creatorId]</code>와 후속 공개 채널 기능에서만 URL 식별자를 사용합니다.</li>
+<li><strong>공개 식별자는 creatorId만 노출합니다.</strong> <code>/live/[creatorId]</code>와 <code>/live/[creatorId]/chat</code>에서만 URL 식별자를 사용합니다.</li>
 </ul></section>
 </main>
 </body>
 </html>
+

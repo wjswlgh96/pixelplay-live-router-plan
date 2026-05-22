@@ -1,10 +1,6 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <title>PixelPlay 최종 라우터</title>
-  <link rel="stylesheet" href="assets/styles.css">
-</head>
+<head><meta charset="utf-8"><title>PixelPlay MVP 라우터</title><link rel="stylesheet" href="assets/styles.css"></head>
 <body>
   <header class="site-header">
     <div class="header-inner">
@@ -13,47 +9,51 @@
     </div>
   </header>
   <main class="doc-shell">
-    <section class="hero"><div class="page-kicker">Route Map</div><h1>라우터는 역할, 접근, query, 비고 기준으로 고정합니다.</h1><p>Anon User에게 공개되는 라우터와 로그인 이후 가능한 라우터를 명확히 나눕니다. 공개 시청과 인증 기반 상호작용을 분리하는 것이 핵심입니다.</p></section>
+    <section class="hero"><div class="page-kicker">MVP Router Scope</div><h1>지금 개발할 라우터는 라이브 MVP에 필요한 것만 남깁니다.</h1><p>최종 후보를 전부 만들지 않고, 발표와 실제 개발 흐름에 필요한 필수 라우터만 우선 생성합니다. 후원과 실시간 통계는 MVP에 포함하고, 알림, 리허설, 공개 채널, 매니저 기능은 후속 후보로 분리합니다.</p></section>
 
-    <section class="panel"><div class="section-title"><div><h2>공개 라우터</h2><p>비로그인 사용자가 접근 가능한 화면입니다.</p></div></div><table class="route-table"><thead><tr><th>라우터</th><th>역할</th><th>접근</th><th>query</th><th>비고</th></tr></thead><tbody>
-      <tr><td><code>/</code></td><td>공개 랜딩. 채팅 시작하기, 라이브 둘러보기, 방송하기 CTA 제공.</td><td><span class="access-public">공개</span></td><td>없음</td><td>기존 탭형 인덱스를 대체합니다.</td></tr>
-      <tr><td><code>/live</code></td><td>현재 송출 중인 라이브 목록.</td><td><span class="access-public">공개</span></td><td><code>?sort=popular</code> 후보</td><td><code>src/components/live/live-list.tsx</code>는 이 화면의 시청자 UI로 사용합니다.</td></tr>
-      <tr><td><code>/live/[creatorId]</code></td><td>특정 크리에이터의 현재 라이브 시청.</td><td><span class="access-public">공개</span></td><td>없음</td><td>채팅 입력, 투표, 후원, 고화질 선택은 로그인 필요 상태로 제한합니다. 내부 식별자는 현재 public.user.id를 재사용할 수 있지만 라우터 param 이름은 creatorId로 표현합니다.</td></tr>
-      <tr><td><code>/live/search</code></td><td>라이브 방송 검색.</td><td><span class="access-public">공개</span></td><td><code>?query=검색어</code></td><td>라이브 목록과 검색 결과를 분리해 공유 링크를 명확히 합니다.</td></tr>
-    </tbody></table></section>
+    <section class="route-summary-grid">
+      <article class="route-card"><code>Public</code><h3>시청자 진입</h3><p>랜딩, 라이브 목록, 라이브 시청, 채팅 팝아웃을 공개 라우터로 둡니다.</p></article>
+      <article class="route-card"><code>Creator</code><h3>채널 관리 분리</h3><p>방송 운영, 채팅 설정, 보안 설정, 실시간 통계를 각각 분리해 정보량을 낮춥니다.</p></article>
+      <article class="route-card"><code>Donation</code><h3>후원 MVP</h3><p>후원 홈, 충전 Dialog, Toss 결제 승인·웹훅까지 MVP에 포함합니다.</p></article>
+      <article class="route-card"><code>Existing</code><h3>채팅 유지</h3><p>이미 구현된 채팅 목록, 상세, 검색 라우터는 깨지지 않게 유지합니다.</p></article>
+    </section>
 
-    <section class="panel"><div class="section-title"><div><h2>채팅 라우터</h2><p>채팅은 라이브와 별도 도메인으로 유지합니다.</p></div></div><table class="route-table"><thead><tr><th>라우터</th><th>역할</th><th>접근</th><th>query</th><th>비고</th></tr></thead><tbody>
-      <tr><td><code>/chat</code></td><td>채팅방 목록. 탭별 query result 기준으로 목록 표시.</td><td><span class="access-login">로그인 필요</span></td><td><code>?tab=recent</code> 후보</td><td>기존 인덱스 내부 탭에서 독립 라우터로 분리합니다.</td></tr>
-      <tr><td><code>/chat/room/[roomId]</code></td><td>채팅방 상세.</td><td><span class="access-login">로그인 필요</span></td><td>없음</td><td>기존 <code>/chat-room/[roomId]</code> 삭제 후 대체합니다. 라우터 세그먼트는 단수 <code>room</code>을 사용합니다.</td></tr>
-      <tr><td><code>/chat/search</code></td><td>채팅방 검색.</td><td><span class="access-login">로그인 필요</span></td><td><code>?query=검색어</code></td><td>기존 <code>/search/chat</code> 삭제 후 대체합니다.</td></tr>
-    </tbody></table></section>
-
-    <section class="panel"><div class="section-title"><div><h2>유저 라우터</h2><p>프로필, 팔로우, 후원금 충전과 사용 내역은 유저 영역에서 관리합니다.</p></div></div><table class="route-table"><thead><tr><th>라우터</th><th>역할</th><th>접근</th><th>query</th><th>비고</th></tr></thead><tbody>
-      <tr><td><code>/user</code></td><td>유저 영역 root.</td><td><span class="access-login">로그인 필요</span></td><td>없음</td><td>빈 화면으로 두지 않고 <code>/user/profile</code>로 기본 이동합니다.</td></tr>
-      <tr><td><code>/user/profile</code></td><td>내 프로필 설정.</td><td><span class="access-login">로그인 필요</span></td><td>없음</td><td>기존 <code>/profile</code> 삭제 후 대체합니다.</td></tr>
-      <tr><td><code>/user/follows</code></td><td>팔로우 중인 크리에이터와 채널 목록.</td><td><span class="access-login">로그인 필요</span></td><td><code>?tab=channels</code> 후보</td><td>선택 기능이지만 유저 사이드바 확장을 위해 라우터를 예약합니다.</td></tr>
-      <tr><td><code>/user/donations</code></td><td>후원 홈. 후원금 잔액, 충전 CTA, 최근 내역 요약.</td><td><span class="access-login">로그인 필요</span></td><td>없음</td><td><code>/user/wallet</code>은 사용하지 않고 donations로 통일합니다.</td></tr>
-      <tr><td><code>/user/donations/charge</code></td><td>후원금 충전.</td><td><span class="access-login">로그인 필요</span></td><td><code>?amount=금액</code> 후보</td><td>Toss Payments 연동 시 결제 시작 화면이 됩니다.</td></tr>
-      <tr><td><code>/user/donations/history</code></td><td>충전, 사용, 보낸 후원 내역.</td><td><span class="access-login">로그인 필요</span></td><td><code>?type=charge|use|sent</code></td><td>별도 <code>/user/donations/sent</code>를 만들지 않고 history 필터로 처리합니다.</td></tr>
-    </tbody></table></section>
-
-    <section class="panel"><div class="section-title"><div><h2>채널 관리 라우터</h2><p>크리에이터 본인의 방송 운영과 채널 설정 영역입니다.</p></div></div><table class="route-table"><thead><tr><th>라우터</th><th>역할</th><th>접근</th><th>query</th><th>비고</th></tr></thead><tbody>
-      <tr><td><code>/channel</code></td><td>내 채널 관리 홈.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>현재 로그인한 유저 기준으로 조회합니다. URL에 userId를 받지 않습니다.</td></tr>
-      <tr><td><code>/channel/live</code></td><td>방송 준비, 진행, 종료 관리.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 운영 페이지입니다. 시청자 페이지의 채팅 관리와 분리합니다.</td></tr>
-      <tr><td><code>/channel/analytics</code></td><td>실시간 통계 대시보드.</td><td><span class="access-owner">본인만</span></td><td><code>?range=today</code> 후보</td><td>시청자 수, 채팅량, 투표 참여, 후원 요약을 표시합니다.</td></tr>
-      <tr><td><code>/channel/broadcast</code></td><td>방송 기본 설정.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 제목 기본값, 다시보기 저장 여부, 지연 시간, 스트림 키를 관리합니다.</td></tr>
-      <tr><td><code>/channel/chat</code></td><td>채팅 설정과 금칙어.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>슬로우 모드, 금칙어, 메시지 강조 같은 운영 정책을 관리합니다.</td></tr>
-      <tr><td><code>/channel/profile</code></td><td>채널 프로필 설정.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>공개 채널 기능을 나중에 만들 때 소개, 배너, 링크의 기준 데이터가 됩니다.</td></tr>
-    </tbody></table></section>
-
-    <section class="panel"><div class="section-title"><div><h2>인증과 API 후보</h2><p>기존 인증 라우터는 유지하고 결제 API는 선택 기능 범위에 둡니다.</p></div></div><table class="route-table"><thead><tr><th>라우터</th><th>역할</th><th>접근</th><th>query</th><th>비고</th></tr></thead><tbody>
-      <tr><td><code>/auth/login</code></td><td>로그인.</td><td><span class="access-public">공개</span></td><td><code>?next=이동경로</code></td><td>채팅 시작하기와 방송하기 CTA에서 next를 전달합니다.</td></tr>
+    <section class="panel"><div class="section-title"><div><h2>MVP 필수 라우터</h2><p>이번 단계에서 실제 라우터 파일과 네비게이션 연결 대상으로 보는 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>라우터</th><th>역할</th><th>접근</th><th>query</th><th>비고</th></tr></thead><tbody>
+      <tr><td><code>/</code></td><td>공개 랜딩.</td><td><span class="access-public">공개</span></td><td>없음</td><td>로그인 CTA 기본 next는 <code>/live</code>입니다.</td></tr>
+      <tr><td><code>/live</code></td><td>현재 송출 중인 라이브 목록.</td><td><span class="access-public">공개</span></td><td>없음</td><td><code>src/components/live/live-list.tsx</code>는 시청자 UI로 유지합니다.</td></tr>
+      <tr><td><code>/live/[creatorId]</code></td><td>특정 크리에이터의 현재 라이브 시청.</td><td><span class="access-public">공개</span></td><td>없음</td><td>시청과 채팅 읽기는 공개, 채팅 입력과 투표 참여는 로그인 이후 허용합니다.</td></tr>
+      <tr><td><code>/live/[creatorId]/chat</code></td><td>라이브 채팅 팝아웃 전용 보조창.</td><td><span class="access-public">공개 읽기</span></td><td>없음</td><td>치지직의 <code>/live/{creatorId}/chat</code> 팝업 흐름을 따릅니다.</td></tr>
+      <tr><td><code>/channel/live</code></td><td>방송 운영.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 준비, 시작, 종료, 송출 미리보기, 공지, 투표, 채팅 일시정지처럼 방송 중 바로 쓰는 기능만 둡니다.</td></tr>
+      <tr><td><code>/channel/chat</code></td><td>채팅 설정과 금칙어.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>채팅 속도, 링크 차단, 이모티콘 모드, 금칙어를 관리합니다.</td></tr>
+      <tr><td><code>/channel/security</code></td><td>방송 보안 설정.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>스트림키와 OBS Studio 채팅창 URL을 관리합니다. 민감 정보 표시는 재확인 Dialog를 거칩니다.</td></tr>
+      <tr><td><code>/channel/analytics</code></td><td>실시간 통계.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 중 시청자 수, 채팅량, 후원, 투표 참여율을 확인합니다.</td></tr>
+      <tr><td><code>/chat</code></td><td>채팅방 목록.</td><td><span class="access-login">로그인 필요</span></td><td><code>?tab=...</code> 후보</td><td>이미 구현된 채팅 목록을 독립 라우터로 유지합니다.</td></tr>
+      <tr><td><code>/chat/room/[roomId]</code></td><td>채팅방 상세.</td><td><span class="access-login">로그인 필요</span></td><td>없음</td><td>기존 <code>/chat-room/[roomId]</code>를 대체합니다.</td></tr>
+      <tr><td><code>/chat/search</code></td><td>채팅방 검색.</td><td><span class="access-login">로그인 필요</span></td><td><code>?query=검색어</code></td><td>기존 <code>/search/chat</code>를 대체합니다.</td></tr>
+      <tr><td><code>/user/profile</code></td><td>내 프로필 설정.</td><td><span class="access-login">로그인 필요</span></td><td>없음</td><td>아바타 메뉴와 <code>/user</code> 기본 이동 대상입니다.</td></tr>
+      <tr><td><code>/user/donations</code></td><td>후원 홈.</td><td><span class="access-login">로그인 필요</span></td><td><code>?tab=...</code> 후보</td><td>잔액, 충전 Dialog, 충전·사용·보낸 후원 내역을 한 화면에서 처리합니다.</td></tr>
+      <tr><td><code>/api/payments/toss/confirm</code></td><td>Toss 결제 승인 API.</td><td><span class="access-owner">서버 처리</span></td><td>없음</td><td>후원금 충전 Dialog에서 결제 성공 후 호출합니다.</td></tr>
+      <tr><td><code>/api/payments/toss/webhook</code></td><td>Toss 결제 웹훅 API.</td><td><span class="access-owner">서버 처리</span></td><td>없음</td><td>결제 상태 보정과 실패·취소 이벤트 처리를 맡깁니다.</td></tr>
+      <tr><td><code>/auth/login</code></td><td>로그인.</td><td><span class="access-public">공개</span></td><td><code>?next=이동경로</code></td><td>next가 없거나 잘못되면 <code>/live</code>로 보냅니다.</td></tr>
       <tr><td><code>/auth/signup</code></td><td>회원가입.</td><td><span class="access-public">공개</span></td><td>없음</td><td>기존 인증 흐름을 유지합니다.</td></tr>
-      <tr><td><code>/auth/complete-profile</code></td><td>프로필 완성.</td><td><span class="access-login">로그인 필요</span></td><td>없음</td><td>신규 유저 온보딩 흐름입니다.</td></tr>
       <tr><td><code>/auth/callback</code></td><td>OAuth 콜백.</td><td><span class="access-public">공개</span></td><td>Provider 전달값</td><td>기존 인증 콜백을 유지합니다.</td></tr>
-      <tr><td><code>/api/payments/toss/confirm</code></td><td>Toss Payments 결제 승인.</td><td><span class="access-api">서버 API</span></td><td>없음</td><td>후원금 충전 선택 기능에서 사용합니다.</td></tr>
-      <tr><td><code>/api/payments/toss/webhook</code></td><td>Toss Payments 이벤트 수신.</td><td><span class="access-api">서버 API</span></td><td>없음</td><td>결제 상태 동기화와 실패 복구에 사용합니다.</td></tr>
     </tbody></table></section>
+
+    <section class="panel"><div class="section-title"><div><h2>MVP에서 제외한 후속 후보</h2><p>라우터 파일을 먼저 만들지 않고, 필요해지는 시점에 추가합니다.</p></div></div><table class="route-table"><thead><tr><th>후보</th><th>라우터 후보</th><th>판단</th><th>이유</th></tr></thead><tbody>
+      <tr><td>라이브 검색 전용 페이지</td><td><code>/live/search</code></td><td><span class="access-future">후속</span></td><td>MVP에서는 <code>/live</code> 안의 검색 UI로 충분합니다.</td></tr>
+      <tr><td>채널 관리 홈</td><td><code>/channel</code></td><td><span class="access-future">후속</span></td><td>방송 운영과 설정이 먼저입니다. 홈 대시보드는 여유가 있을 때 붙입니다.</td></tr>
+      <tr><td>알림</td><td><code>/channel/notifications</code></td><td><span class="access-future">후속</span></td><td>치지직 플로우 참고 대상이지만 MVP 기능 증명에는 필수는 아닙니다.</td></tr>
+      <tr><td>리허설 방송</td><td><code>/channel/rehearsal</code></td><td><span class="access-future">후속</span></td><td>정식 송출 전 테스트 방송은 선택 기능입니다.</td></tr>
+      <tr><td>시청자 관리</td><td><code>/channel/viewers</code></td><td><span class="access-future">후속</span></td><td>강퇴와 제한 관리는 라이브 채팅 UI에서 최소 처리 후 확장합니다.</td></tr>
+      <tr><td>콘텐츠 관리</td><td><code>/channel/content</code></td><td><span class="access-future">후속</span></td><td>VOD, 클립, 다시보기 관리는 방송 종료 후 기능으로 미룹니다.</td></tr>
+      <tr><td>수익 관리</td><td><code>/channel/revenue</code></td><td><span class="access-future">후속</span></td><td>후원은 MVP에 포함하고, 정산과 크리에이터 수익 리포트는 MVP 이후 결제 안정화 단계에서 진행합니다.</td></tr>
+      <tr><td>채널 프로필</td><td><code>/channel/profile</code></td><td><span class="access-future">후속</span></td><td>공개 채널 기능이 확정될 때 추가합니다.</td></tr>
+      <tr><td>권한 관리</td><td><code>/channel/permissions</code></td><td><span class="access-future">후속</span></td><td>MVP 방송 운영은 크리에이터 본인만 수행합니다.</td></tr>
+      <tr><td>팔로우</td><td><code>/user/follows</code></td><td><span class="access-future">후속</span></td><td>라이브 목록과 시청이 먼저입니다.</td></tr>
+    </tbody></table></section>
+
+    <p class="footer-note">이 문서는 MVP 착수용 라우터 기준입니다. 후속 후보는 삭제가 아니라 개발 순서에서 뒤로 미룬 항목입니다.</p>
   </main>
 </body>
 </html>
+

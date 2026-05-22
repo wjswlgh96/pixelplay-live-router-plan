@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -30,11 +30,11 @@
       <div class="section-title"><div><h2>핵심 결정</h2><p>라우터 이름과 접근 정책에서 흔들리면 구현 중 구조가 다시 갈라지므로 먼저 고정합니다.</p></div></div>
       <ul class="decision-list">
         <li><strong>인덱스는 랜딩으로 전환합니다.</strong> 기존 탭형 홈은 제거하고, 채팅 시작하기와 라이브 둘러보기, 방송하기 CTA를 명확히 분리합니다.</li>
-        <li><strong>후원 도메인은 donations로 통일합니다.</strong> <code>/user/wallet</code>은 사용하지 않고 <code>/user/donations</code>가 잔액, 충전, 후원 내역의 루트가 됩니다.</li>
-        <li><strong>채널 관리는 setting 세그먼트를 쓰지 않습니다.</strong> <code>/channel/broadcast</code>, <code>/channel/chat</code>, <code>/channel/profile</code>처럼 리소스 이름으로 바로 진입합니다.</li>
-        <li><strong>크리에이터 운영 화면은 <code>/channel/live</code>입니다.</strong> 시청자용 라이브 목록 컴포넌트와 방송 운영 페이지를 혼동하지 않도록 라우터를 분리합니다.</li>
+        <li><strong>후원 도메인은 donations로 통일합니다.</strong> <code>/user/wallet</code>은 사용하지 않고 <code>/user/donations</code> 한 화면에서 잔액, 충전 Dialog, 후원 내역을 처리합니다.</li>
+        <li><strong>채널 관리는 치지직형 웹 스튜디오 흐름을 따릅니다.</strong> MVP 사이드바에는 실제 구현할 방송 운영, 채팅 설정, 보안 설정, 실시간 통계만 두고 후속 후보는 라우터 문서로 분리합니다.</li>
+        <li><strong>크리에이터 운영 화면은 <code>/channel/live</code>입니다.</strong> 시청자용 라이브 목록 컴포넌트와 방송 운영 페이지를 혼동하지 않도록 라우터를 분리하고, 채팅창 분리는 <code>/live/[creatorId]/chat</code> 팝아웃 URL로 처리합니다.</li>
         <li><strong>비로그인 시청은 허용하고 상호작용은 제한합니다.</strong> 라이브 보기 자체는 공개하되 채팅 입력, 투표, 팔로우, 후원, 고화질 기능은 로그인 이후에 허용합니다.</li><li><strong>라이브 공개 URL은 creatorId로 둡니다.</strong> 내부 값은 현재 public.user.id를 재사용할 수 있지만 URL 의미는 유저 계정이 아니라 크리에이터 방송 진입점으로 표현합니다.</li>
-      </ul>
+      <li><strong>채널 관리는 MVP 라우터를 분리합니다.</strong> 방송 운영은 <code>/channel/live</code>, 채팅 설정은 <code>/channel/chat</code>, 스트림키와 OBS 채팅창 URL은 <code>/channel/security</code>, 실시간 통계는 <code>/channel/analytics</code>로 나눕니다.</li></ul>
     </section>
 
     <section class="panel">
@@ -44,7 +44,10 @@
         <article class="timeline-item"><strong>최종 라우터</strong><p>각 라우터의 역할, 접근 가능 여부, query, 비고를 표로 확인합니다.</p></article>
         <article class="timeline-item"><strong>현재 변경</strong><p>기존 프로젝트 라우터에서 삭제하거나 이동할 항목을 확인합니다.</p></article>
         <article class="timeline-item"><strong>디자인 프리뷰</strong><p>라우터별 라이트 모드와 다크 모드의 축소 화면을 확인합니다.</p></article>
+        <article class="timeline-item"><strong>랜딩 페이지</strong><p>현재 앱에 반영한 공개 랜딩의 정적 디자인 기준을 확인합니다.</p></article>
         <article class="timeline-item"><strong>MVP·선택 기능</strong><p>한 달 안에 넣을 필수 기능과 후속 기능을 구분합니다.</p></article>
+        <article class="timeline-item"><strong>채팅방 고도화</strong><p>이미 완성된 채팅방 흐름의 개선 메모를 확인합니다.</p></article>
+        <article class="timeline-item"><strong>DB 설계</strong><p>라이브, 채널, 후원에 필요한 테이블 후보와 컬럼 이유를 확인합니다.</p></article>
       </div>
     </section>
 
@@ -52,4 +55,5 @@
   </main>
 </body>
 </html>
+
 

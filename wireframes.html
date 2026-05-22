@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -10,7 +10,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
-      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="migration.html">현재 변경</a><a class="active" href="wireframes.html">디자인 프리뷰</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="migration.html">현재 변경</a><a class="active" href="wireframes.html">디자인 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
     </div>
   </header>
   <main class="doc-shell">
@@ -21,288 +21,16 @@
     </section>
     <div id="preview-root">
 
-      <!-- ============================ 공개 랜딩 ============================ -->
-      <section class="preview-section">
-        <h2><span class="section-num">1</span>공개 랜딩</h2>
-        <p class="section-summary">서비스의 첫인상을 결정하는 화면입니다. 처음 들어온 사용자가 “여기는 라이브를 보고 채팅으로 같이 노는 곳”이라고 바로 이해하도록, 라이브 미리보기와 채팅 분위기를 중심으로 구성했습니다.</p>
-        <div class="preview-meta detail-meta">
+      <!-- ============================ 공개 랜딩은 별도 문서로 분리 ============================ -->
+      <section class="preview-section landing-preview-link">
+        <h2><span class="section-num">1</span>공개 랜딩은 별도 문서에서 확인</h2>
+        <p class="section-summary">인덱스 페이지의 디자인 프리뷰는 현재 구현된 랜딩과 혼동되지 않도록 이 문서에서 제거했습니다. 공개 랜딩의 최신 구조, CTA, 애니메이션 방향은 별도 랜딩 페이지 문서에서 확인합니다.</p>
+        <div class="preview-meta detail-meta compact-meta">
           <div class="meta-box"><span>route</span><strong>/</strong></div>
-          <div class="meta-box"><span>role</span><p>비로그인 진입 화면. 서비스 소개, 핵심 가치, 진행 중인 라이브 미리보기, 진입 CTA를 한 화면에 모읍니다.</p></div>
-          <div class="meta-box"><span>access</span><p>공개. 로그인 상태인 사용자는 헤더에 본인 아바타가 노출되고 채팅·라이브 CTA가 활성화됩니다.</p></div>
-          <div class="meta-box"><span>buttons and controls</span><p>로그인, 회원가입, 라이브 둘러보기, 채팅 시작하기, 방송하기, 검색.</p></div>
-        </div>
-        <div class="preview-pair">
-
-          <div class="preview-frame light">
-            <div class="frame-label"><span>Light Mode</span><span>/</span></div>
-            <div class="design-screen landing-screen">
-              <div class="mini-top">
-                <div class="mini-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290" aria-label="PixelPlay"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="var(--background)" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="var(--background)" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg></div>
-                <nav class="mini-top-nav">
-                  <a>라이브</a><a>채팅</a>
-                </nav>
-                <div class="mini-top-actions header-actions">
-                  <span class="mini-button ghost">테마</span>
-                  <span class="mini-button ghost">로그인</span>
-                  <span class="mini-button primary">회원가입</span>
-                </div>
-              </div>
-              <div class="landing-shell">
-                <div class="landing-bg"></div>
-                <div class="landing-grid"></div>
-                <div class="landing-content">
-                  <div class="landing-hero">
-                    <span class="mini-kicker">LIVE · CHAT · PLAY</span>
-                    <h1>방송을 보고,<br><span class="accent">채팅으로 만나고</span>,<br><span class="accent-coral">같이 즐기는 곳.</span></h1>
-                    <p>PixelPlay는 라이브 방송과 채팅방을 오가며 사람들과 함께 보는 재미를 만드는 실시간 커뮤니티입니다. 보고 싶은 방송을 찾고, 마음 맞는 방에 들어가고, 나만의 방송도 바로 시작할 수 있습니다.</p>
-                    <div class="landing-cta-row">
-                      <span class="mini-button coral">라이브 둘러보기</span>
-                      <span class="mini-button primary">채팅 시작하기</span>
-                      <span class="mini-button ghost">방송하기</span>
-                    </div>
-                    <div class="landing-stats">
-                      <div class="landing-stat"><strong>248</strong><span>방송 중</span></div>
-                      <div class="landing-stat"><strong>12,481</strong><span>같이 보는 중</span></div>
-                      <div class="landing-stat"><strong>1,820</strong><span>열린 채팅방</span></div>
-                    </div>
-                    <div class="landing-story-strip">
-                      <article class="story-step active"><span>01</span><strong>라이브를 둘러보고</strong><p>공개 라이브는 로그인 없이 바로 입장합니다.</p></article>
-                      <article class="story-step"><span>02</span><strong>채팅방으로 이어지고</strong><p>관심사가 맞는 방에서 대화를 이어갑니다.</p></article>
-                      <article class="story-step"><span>03</span><strong>좋아하는 방송을 응원합니다</strong><p>팔로우와 반응으로 좋아하는 방송을 계속 만납니다.</p></article>
-                    </div>
-                  </div>
-                  <div class="landing-preview-panel">
-                    <article class="landing-floating-card featured">
-                      <div class="featured-thumb-mini">
-                        <span class="live-badge">LIVE</span>
-                        <div class="featured-meta-row"><em>1,240명 보는 중</em></div>
-                      </div>
-                      <h4>오늘 라우터 다 갈아엎는 방송</h4>
-                      <div class="creator-mini">
-                        <span class="avatar-dot"></span>
-                        <b>지호</b> · 개발 · 방송 시작 32분 전
-                      </div>
-                    </article>
-                    <article class="landing-floating-card chat-mini">
-                      <div class="chat-mini-head">
-                        <strong>프론트엔드 잡담방</strong>
-                        <span class="mini-pill mint">새 메시지 4</span>
-                      </div>
-                      <div class="chat-mini-message"><span class="avatar-dot"></span><p><b>하린</b>오늘 방송 다들 보러 가나요?</p></div>
-                      <div class="chat-mini-message"><span class="avatar-dot"></span><p><b>민수</b>저는 일하면서 켜둘게요 ㅋㅋ</p></div>
-                    </article>
-                  </div>
-                </div>
-                <div class="landing-scroll-scenes">
-                  <article class="landing-scene live-scene">
-                    <div class="scene-copy">
-                      <span class="scene-index">01</span>
-                      <h3>보고 싶은 라이브를 찾는 첫 흐름</h3>
-                      <p>비로그인 사용자도 방송 목록과 시청 화면까지 자연스럽게 들어가고, 로그인한 사용자는 채팅과 팔로우까지 바로 이어집니다.</p>
-                      <div class="scene-tags"><span>공개 시청</span><span>라이브 목록</span><span>시청 전환</span></div>
-                    </div>
-                    <div class="scene-visual">
-                      <div class="scene-player"><span class="live-badge">LIVE</span><strong>오늘 라우터 다 갈아엎는 방송</strong><em>1,240명 보는 중</em></div>
-                      <div class="scene-live-list"><span class="active"></span><span></span><span></span></div>
-                    </div>
-                  </article>
-                  <article class="landing-scene chat-scene">
-                    <div class="scene-copy">
-                      <span class="scene-index">02</span>
-                      <h3>관심사가 맞는 채팅으로 이어지는 구조</h3>
-                      <p>채팅방 목록은 탭, 검색, 정렬을 유지하고 라이브에서 생긴 대화 흐름이 별도 채팅방으로도 확장됩니다.</p>
-                      <div class="scene-tags"><span>참여중인 방</span><span>현재 탭 검색</span><span>새 메시지</span></div>
-                    </div>
-                    <div class="scene-visual chat-stack">
-                      <div class="scene-message"><b>하린</b><span>오늘 방송 끝나고 회고방 열까요?</span></div>
-                      <div class="scene-message own"><b>지호</b><span>좋습니다. 링크는 채팅방에 남겨둘게요.</span></div>
-                      <div class="scene-message"><b>민수</b><span>투표도 같이 붙이면 좋겠습니다.</span></div>
-                    </div>
-                  </article>
-                  <article class="landing-scene donation-scene">
-                    <div class="scene-copy">
-                      <span class="scene-index">03</span>
-                      <h3>좋아하는 크리에이터와 계속 이어지는 단계</h3>
-                      <p>팔로우와 알림을 중심으로 관계를 이어가고, 결제성 응원 기능은 로그인 이후 선택 기능으로 조용히 분리합니다.</p>
-                      <div class="scene-tags"><span>팔로우</span><span>알림</span><span>크리에이터 응원</span></div>
-                    </div>
-                    <div class="scene-visual donation-card-mini">
-                      <span>응원 포인트</span>
-                      <strong>32,000 P</strong>
-                      <div class="donation-quick-row"><i>1,000</i><i>5,000</i><i class="active">10,000</i></div>
-                      <button>응원 보내기</button>
-                    </div>
-                  </article>
-                </div>
-                <div class="landing-feature-grid">
-                  <article><span>Watch</span><strong>비로그인 시청 허용</strong><p>공개 라이브는 바로 열고, 채팅 입력과 고화질은 로그인 후 활성화합니다.</p></article>
-                  <article><span>Talk</span><strong>채팅방 중심 커뮤니티</strong><p>완성된 채팅 목록 구조를 유지하면서 라이브와 자연스럽게 연결합니다.</p></article>
-                  <article><span>Support</span><strong>응원 기능은 뒤에서 조용히</strong><p>결제성 기능은 첫 화면에서 밀어내고, 로그인한 사용자의 선택 기능으로 분리합니다.</p></article>
-                </div>
-                <div class="landing-final-cta">
-                  <div><span class="mini-kicker">PIXELPLAY NEXT</span><h3>라이브와 채팅으로 함께 즐기는 실시간 놀이터</h3></div>
-                  <div class="button-row"><span class="mini-button coral">라이브 둘러보기</span><span class="mini-button primary">회원가입</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="preview-frame dark">
-            <div class="frame-label"><span>Dark Mode</span><span>/</span></div>
-            <div class="design-screen landing-screen">
-              <div class="mini-top">
-                <div class="mini-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290" aria-label="PixelPlay"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="var(--background)" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="var(--background)" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg></div>
-                <nav class="mini-top-nav">
-                  <a>라이브</a><a>채팅</a>
-                </nav>
-                <div class="mini-top-actions header-actions">
-                  <span class="mini-button ghost">테마</span>
-                  <span class="mini-button ghost">로그인</span>
-                  <span class="mini-button primary">회원가입</span>
-                </div>
-              </div>
-              <div class="landing-shell">
-                <div class="landing-bg"></div>
-                <div class="landing-grid"></div>
-                <div class="landing-content">
-                  <div class="landing-hero">
-                    <span class="mini-kicker">LIVE · CHAT · PLAY</span>
-                    <h1>방송을 보고,<br><span class="accent">채팅으로 만나고</span>,<br><span class="accent-coral">같이 즐기는 곳.</span></h1>
-                    <p>PixelPlay는 라이브 방송과 채팅방을 오가며 사람들과 함께 보는 재미를 만드는 실시간 커뮤니티입니다. 보고 싶은 방송을 찾고, 마음 맞는 방에 들어가고, 나만의 방송도 바로 시작할 수 있습니다.</p>
-                    <div class="landing-cta-row">
-                      <span class="mini-button coral">라이브 둘러보기</span>
-                      <span class="mini-button primary">채팅 시작하기</span>
-                      <span class="mini-button ghost">방송하기</span>
-                    </div>
-                    <div class="landing-stats">
-                      <div class="landing-stat"><strong>248</strong><span>방송 중</span></div>
-                      <div class="landing-stat"><strong>12,481</strong><span>같이 보는 중</span></div>
-                      <div class="landing-stat"><strong>1,820</strong><span>열린 채팅방</span></div>
-                    </div>
-                    <div class="landing-story-strip">
-                      <article class="story-step active"><span>01</span><strong>라이브를 둘러보고</strong><p>공개 라이브는 로그인 없이 바로 입장합니다.</p></article>
-                      <article class="story-step"><span>02</span><strong>채팅방으로 이어지고</strong><p>관심사가 맞는 방에서 대화를 이어갑니다.</p></article>
-                      <article class="story-step"><span>03</span><strong>좋아하는 방송을 응원합니다</strong><p>팔로우와 반응으로 좋아하는 방송을 계속 만납니다.</p></article>
-                    </div>
-                  </div>
-                  <div class="landing-preview-panel">
-                    <article class="landing-floating-card featured">
-                      <div class="featured-thumb-mini">
-                        <span class="live-badge">LIVE</span>
-                        <div class="featured-meta-row"><em>1,240명 보는 중</em></div>
-                      </div>
-                      <h4>오늘 라우터 다 갈아엎는 방송</h4>
-                      <div class="creator-mini">
-                        <span class="avatar-dot"></span>
-                        <b>지호</b> · 개발 · 방송 시작 32분 전
-                      </div>
-                    </article>
-                    <article class="landing-floating-card chat-mini">
-                      <div class="chat-mini-head">
-                        <strong>프론트엔드 잡담방</strong>
-                        <span class="mini-pill mint">새 메시지 4</span>
-                      </div>
-                      <div class="chat-mini-message"><span class="avatar-dot"></span><p><b>하린</b>오늘 방송 다들 보러 가나요?</p></div>
-                      <div class="chat-mini-message"><span class="avatar-dot"></span><p><b>민수</b>저는 일하면서 켜둘게요 ㅋㅋ</p></div>
-                    </article>
-                  </div>
-                </div>
-                <div class="landing-scroll-scenes">
-                  <article class="landing-scene live-scene">
-                    <div class="scene-copy">
-                      <span class="scene-index">01</span>
-                      <h3>보고 싶은 라이브를 찾는 첫 흐름</h3>
-                      <p>비로그인 사용자도 방송 목록과 시청 화면까지 자연스럽게 들어가고, 로그인한 사용자는 채팅과 팔로우까지 바로 이어집니다.</p>
-                      <div class="scene-tags"><span>공개 시청</span><span>라이브 목록</span><span>시청 전환</span></div>
-                    </div>
-                    <div class="scene-visual">
-                      <div class="scene-player"><span class="live-badge">LIVE</span><strong>오늘 라우터 다 갈아엎는 방송</strong><em>1,240명 보는 중</em></div>
-                      <div class="scene-live-list"><span class="active"></span><span></span><span></span></div>
-                    </div>
-                  </article>
-                  <article class="landing-scene chat-scene">
-                    <div class="scene-copy">
-                      <span class="scene-index">02</span>
-                      <h3>관심사가 맞는 채팅으로 이어지는 구조</h3>
-                      <p>채팅방 목록은 탭, 검색, 정렬을 유지하고 라이브에서 생긴 대화 흐름이 별도 채팅방으로도 확장됩니다.</p>
-                      <div class="scene-tags"><span>참여중인 방</span><span>현재 탭 검색</span><span>새 메시지</span></div>
-                    </div>
-                    <div class="scene-visual chat-stack">
-                      <div class="scene-message"><b>하린</b><span>오늘 방송 끝나고 회고방 열까요?</span></div>
-                      <div class="scene-message own"><b>지호</b><span>좋습니다. 링크는 채팅방에 남겨둘게요.</span></div>
-                      <div class="scene-message"><b>민수</b><span>투표도 같이 붙이면 좋겠습니다.</span></div>
-                    </div>
-                  </article>
-                  <article class="landing-scene donation-scene">
-                    <div class="scene-copy">
-                      <span class="scene-index">03</span>
-                      <h3>좋아하는 크리에이터와 계속 이어지는 단계</h3>
-                      <p>팔로우와 알림을 중심으로 관계를 이어가고, 결제성 응원 기능은 로그인 이후 선택 기능으로 조용히 분리합니다.</p>
-                      <div class="scene-tags"><span>팔로우</span><span>알림</span><span>크리에이터 응원</span></div>
-                    </div>
-                    <div class="scene-visual donation-card-mini">
-                      <span>응원 포인트</span>
-                      <strong>32,000 P</strong>
-                      <div class="donation-quick-row"><i>1,000</i><i>5,000</i><i class="active">10,000</i></div>
-                      <button>응원 보내기</button>
-                    </div>
-                  </article>
-                </div>
-                <div class="landing-feature-grid">
-                  <article><span>Watch</span><strong>비로그인 시청 허용</strong><p>공개 라이브는 바로 열고, 채팅 입력과 고화질은 로그인 후 활성화합니다.</p></article>
-                  <article><span>Talk</span><strong>채팅방 중심 커뮤니티</strong><p>완성된 채팅 목록 구조를 유지하면서 라이브와 자연스럽게 연결합니다.</p></article>
-                  <article><span>Support</span><strong>응원 기능은 뒤에서 조용히</strong><p>결제성 기능은 첫 화면에서 밀어내고, 로그인한 사용자의 선택 기능으로 분리합니다.</p></article>
-                </div>
-                <div class="landing-final-cta">
-                  <div><span class="mini-kicker">PIXELPLAY NEXT</span><h3>라이브와 채팅으로 함께 즐기는 실시간 놀이터</h3></div>
-                  <div class="button-row"><span class="mini-button coral">라이브 둘러보기</span><span class="mini-button primary">회원가입</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="interaction-preview">
-          <div class="interaction-header"><strong>Button Interaction</strong><span>/</span></div>
-          <div class="interaction-pair">
-            <div class="interaction-card">
-              <div class="kicker-row"><span class="trigger-pill">방송하기 클릭</span></div>
-              <h3>로그인 안내 Dialog</h3>
-              <div class="dialog-modal">
-                <h4>방송 시작에는 로그인이 필요합니다</h4>
-                <p class="desc">시청과 둘러보기는 비로그인으로도 가능하지만, 방송 운영은 본인 채널에서만 진행할 수 있습니다.</p>
-                <div class="button-row">
-                  <span class="mini-button ghost">취소</span>
-                  <span class="mini-button primary">로그인하고 이어가기</span>
-                </div>
-              </div>
-              <p>로그인 화면 next 파라미터로 /channel/live가 전달되어, 로그인 즉시 방송 운영 화면으로 이동합니다.</p>
-            </div>
-            <div class="interaction-card">
-              <div class="kicker-row"><span class="trigger-pill">아바타 클릭</span></div>
-              <h3>아바타 Dropdown</h3>
-              <div class="avatar-popover">
-                <div class="pop-head"><span class="avatar-dot online"></span><div class="meta"><span class="pill">프로필 설정</span><span class="nickname">지호</span></div></div>
-                <div class="pop-divider"></div>
-                <div class="pop-item"><span class="ico">▶</span>채널 관리</div>
-                <div class="pop-item"><span class="ico">★</span>팔로우</div>
-                <div class="pop-item has-submenu"><span class="ico">♥</span><span>후원</span><span class="submenu-caret">></span></div>
-<div class="donation-submenu">
-  <div class="submenu-item active">후원 홈</div>
-  <div class="submenu-item">후원금 충전</div>
-  <div class="submenu-item">후원 내역</div>
-</div>
-                <div class="pop-divider"></div>
-                <div class="pop-item"><span class="ico">⌘</span>비밀번호 변경</div>
-                <div class="pop-item danger"><span class="ico">↳</span>로그아웃</div>
-              </div>
-              <p>대표 진입은 프로필 설정으로 두고, 채널 관리·팔로우는 단일 메뉴로 두고, 후원은 하위 메뉴로 후원 홈·충전·내역을 나눠 이동시킵니다.</p>
-            </div>
-          </div>
+          <div class="meta-box"><span>source</span><p>현재 앱의 랜딩 페이지 방향을 기준으로 별도 관리합니다.</p></div>
+          <div class="meta-box"><span>link</span><p><a class="inline-doc-link" href="landing-page.html">landing-page.html 열기</a></p></div>
         </div>
       </section>
-
       <!-- ============================ 채팅방 목록 (완성, 유지) ============================ -->
       <section class="preview-section">
         <h2><span class="section-num">2</span>채팅방 목록 <span style="font-size:13px;color:var(--mint-strong);font-weight:900;margin-left:6px;">완성됨</span></h2>
@@ -794,7 +522,6 @@
                 <aside class="live-chat-side">
                   <div class="live-chat-head">
                     <strong>라이브 채팅</strong>
-                    <div class="button-row" style="gap:4px"><span class="icon-button" style="width:30px;height:30px;font-size:12px">🔍</span><span class="icon-button" style="width:30px;height:30px;font-size:12px">⚙</span></div>
                   </div>
                   <div class="live-chat-feed">
                     <p class="live-msg system">32분 전에 방송 시작됨</p>
@@ -816,7 +543,6 @@
                     <div class="quick-actions">
                       <span class="quick-action coral">♥ 빠르게 후원하기</span>
                       <span class="quick-action">투표 참여</span>
-                      <span class="quick-action">고화질 보기 ★</span>
                     </div>
                   </div>
                 </aside>
@@ -897,7 +623,6 @@
                 <aside class="live-chat-side">
                   <div class="live-chat-head">
                     <strong>라이브 채팅</strong>
-                    <div class="button-row" style="gap:4px"><span class="icon-button" style="width:30px;height:30px;font-size:12px">🔍</span><span class="icon-button" style="width:30px;height:30px;font-size:12px">⚙</span></div>
                   </div>
                   <div class="live-chat-feed">
                     <p class="live-msg system">32분 전에 방송 시작됨</p>
@@ -919,7 +644,6 @@
                     <div class="quick-actions">
                       <span class="quick-action coral">♥ 빠르게 후원하기</span>
                       <span class="quick-action">투표 참여</span>
-                      <span class="quick-action">고화질 보기 ★</span>
                     </div>
                   </div>
                 </aside>

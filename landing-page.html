@@ -1,0 +1,1588 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PixelPlay 랜딩 페이지</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --mint: #46c6a9;
+      --mint-bright: #6de2c5;
+      --mint-deep: #159a80;
+      --coral: #ff6057;
+      --coral-bright: #ff8a82;
+      --coral-deep: #d94238;
+      --ink: #0a0e13;
+      --ink-2: #11161d;
+      --ink-3: #181f28;
+      --ink-4: #232b36;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.14);
+      --text: #f1f5f4;
+      --text-soft: #b8c2c0;
+      --text-muted: #6c7773;
+      --radius: 18px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --planning-height: 104px;
+      --landing-max: 1680px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--text);
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+      font-feature-settings: "ss02";
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      letter-spacing: -0.01em;
+      padding-top: var(--planning-height);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+
+    /* ============================ Planning Tabs ============================ */
+    .planning-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 80;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(10, 14, 19, 0.94);
+      backdrop-filter: saturate(160%) blur(16px);
+      padding: 14px 36px 16px;
+    }
+    .planning-inner {
+      width: min(var(--landing-max), calc(100vw - 72px));
+      margin: 0 auto;
+      display: grid;
+      gap: 12px;
+    }
+    .planning-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .planning-brand::before {
+      content: "";
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--mint), var(--coral));
+      box-shadow: 0 10px 24px rgba(70, 198, 169, 0.22);
+    }
+    .planning-tabs {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .planning-tabs a {
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 9px 8px;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.035);
+      font-size: 13px;
+      font-weight: 850;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .planning-tabs a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .planning-tabs a.active {
+      border-color: rgba(70, 198, 169, 0.42);
+      background: rgba(70, 198, 169, 0.14);
+      color: var(--text);
+      box-shadow: 0 10px 30px rgba(70, 198, 169, 0.12);
+    }
+    /* ============================ Header ============================ */
+    .site-header {
+      position: fixed;
+      top: var(--planning-height); left: 0; right: 0;
+      z-index: 50;
+      padding: 18px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease), border-color 0.4s var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(10, 14, 19, 0.78);
+      backdrop-filter: saturate(160%) blur(14px);
+      border-color: var(--line);
+      padding: 14px 36px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+    }
+    .brand svg { height: 24px; width: auto; }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .header-nav a {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-soft);
+      transition: color 0.2s, background 0.2s;
+    }
+    .header-nav a:hover { color: var(--text); background: var(--line); }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 40px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform 0.2s var(--ease), background 0.2s, box-shadow 0.3s var(--ease);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-ghost {
+      color: var(--text-soft);
+      border: 1px solid transparent;
+    }
+    .btn-ghost:hover { color: var(--text); background: var(--line); }
+    .btn-primary {
+      background: var(--mint);
+      color: #06211b;
+      box-shadow: 0 8px 22px rgba(70, 198, 169, 0.32);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 32px rgba(70, 198, 169, 0.45); background: var(--mint-bright); }
+    .btn-coral {
+      background: var(--coral);
+      color: #fff;
+      box-shadow: 0 8px 22px rgba(255, 96, 87, 0.34);
+    }
+    .btn-coral:hover { box-shadow: 0 14px 32px rgba(255, 96, 87, 0.5); background: var(--coral-bright); }
+    .btn-outline {
+      border: 1px solid var(--line-strong);
+      color: var(--text);
+    }
+    .btn-outline:hover { background: var(--line); border-color: rgba(255, 255, 255, 0.2); }
+    .btn-lg {
+      height: 56px;
+      padding: 0 32px;
+      font-size: 15px;
+      border-radius: 14px;
+    }
+
+    /* ============================ Hero ============================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 140px 0 96px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 60px;
+      align-items: center;
+      width: min(var(--landing-max), calc(100vw - 72px));
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .hero-bg .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.55;
+      animation: drift 18s ease-in-out infinite;
+    }
+    .hero-bg .blob.mint {
+      width: 620px; height: 620px;
+      top: -120px; left: -180px;
+      background: radial-gradient(circle, var(--mint) 0%, transparent 65%);
+    }
+    .hero-bg .blob.coral {
+      width: 580px; height: 580px;
+      top: 80px; right: -160px;
+      background: radial-gradient(circle, var(--coral) 0%, transparent 65%);
+      animation-delay: -7s;
+    }
+    .hero-bg .blob.purple {
+      width: 500px; height: 500px;
+      bottom: -180px; left: 30%;
+      background: radial-gradient(circle, #7c3aed 0%, transparent 65%);
+      opacity: 0.35;
+      animation-delay: -12s;
+    }
+    @keyframes drift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(40px, -30px) scale(1.05); }
+      66% { transform: translate(-30px, 40px) scale(0.95); }
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-copy { animation: heroIn 1s var(--ease) 0.1s both; }
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(70, 198, 169, 0.1);
+      border: 1px solid rgba(70, 198, 169, 0.3);
+      color: var(--mint-bright);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 24px;
+    }
+    .eyebrow .live-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 0 0 0 4px rgba(255, 96, 87, 0.24);
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    .hero h1 {
+      margin: 0 0 24px;
+      font-size: clamp(44px, 5.4vw, 76px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+    .hero h1 .accent { color: var(--mint-bright); }
+    .hero h1 .accent-coral {
+      background: linear-gradient(135deg, var(--coral-bright), var(--coral));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p.lead {
+      margin: 0 0 36px;
+      max-width: 520px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      height: 560px;
+    }
+    .float-card {
+      position: absolute;
+      border-radius: var(--radius);
+      background: var(--ink-2);
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+      will-change: transform;
+    }
+    .float-card.main {
+      inset: 5% 8% auto auto;
+      width: 78%;
+      animation: floatY 7s ease-in-out infinite;
+    }
+    .float-card.chat {
+      inset: auto auto 4% 0%;
+      width: 60%;
+      animation: floatY 8s ease-in-out infinite -2s;
+    }
+    .float-card.ready {
+      inset: 38% 0 auto auto;
+      width: 240px;
+      animation: floatY 6s ease-in-out infinite -3s;
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+    .float-card .thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 14px 14px 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.16), transparent 50%),
+        linear-gradient(135deg, #0e2722 0%, var(--mint-deep) 50%, var(--coral) 110%);
+    }
+    .float-card .thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.55));
+    }
+    .float-card .live-pill {
+      position: absolute;
+      top: 12px; left: 12px;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--coral);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+    .float-card .live-pill::before {
+      content: "";
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #fff;
+      animation: pulse 1.6s infinite;
+    }
+    .float-card .viewer {
+      position: absolute;
+      top: 12px; right: 12px;
+      z-index: 1;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .float-card .stream-info {
+      padding: 0 16px 16px;
+    }
+    .float-card .stream-info h4 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .float-card .stream-info .creator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .float-card .stream-info .creator .dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--mint), var(--coral));
+    }
+    .float-card .stream-info .creator b { color: var(--text); }
+
+    /* Chat float card */
+    .float-card.chat .chat-head {
+      padding: 12px 14px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .float-card.chat .chat-head strong { font-size: 12px; font-weight: 800; }
+    .float-card.chat .chat-body { padding: 12px 14px; }
+    .chat-msg {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: flex-start;
+    }
+    .chat-msg:last-child { margin-bottom: 0; }
+    .chat-msg .dot {
+      width: 18px; height: 18px;
+      flex: none;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--mint), var(--coral));
+    }
+    .chat-msg p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--text);
+    }
+    .chat-msg .name {
+      font-weight: 800;
+      margin-right: 5px;
+    }
+    .chat-msg .name.mint { color: var(--mint-bright); }
+    .chat-msg .name.coral { color: var(--coral-bright); }
+    .chat-msg .name.amber { color: #fbbf24; }
+    .chat-msg.donation p {
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255, 96, 87, 0.2), rgba(70, 198, 169, 0.16));
+      border: 1px solid rgba(255, 96, 87, 0.3);
+      font-weight: 700;
+    }
+
+    /* Ready card */
+    .float-card.ready {
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(255, 96, 87, 0.2), rgba(70, 198, 169, 0.1)), var(--ink-2);
+      border-color: rgba(255, 96, 87, 0.4);
+      box-shadow: 0 28px 70px rgba(255, 96, 87, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    }
+    .float-card.ready .ready-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--coral-bright);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+    }
+    .float-card.ready .ready-time {
+      margin-top: 8px;
+      font-size: 30px;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .float-card.ready .ready-time em {
+      margin-left: 4px;
+      font-style: normal;
+      font-size: 16px;
+      font-weight: 800;
+      opacity: 0.72;
+    }
+    .float-card.ready p {
+      margin: 7px 0 0;
+      color: var(--text-soft);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px 32px;
+      margin-top: 40px;
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hero-stat strong {
+      color: var(--text);
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -0.03em;
+    }
+    .hero-stat span {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 800;
+    }    .scene-section {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      align-items: center;
+      gap: 72px;
+      width: min(var(--landing-max), calc(100vw - 72px));
+      min-height: 760px;
+      margin: 0 auto;
+      padding: 120px 0;
+    }
+    .scene-section.reverse { grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr); }
+    .scene-copy { max-width: 560px; }
+    .scene-copy .kicker {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: rgba(70, 198, 169, 0.14);
+      color: var(--mint-bright);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.1em;
+    }
+    .scene-copy .kicker.live { background: rgba(255, 96, 87, 0.15); color: var(--coral-bright); }
+    .scene-copy .kicker.violet { background: rgba(124, 58, 237, 0.16); color: #c4b5fd; }
+    .scene-copy h2 {
+      margin: 18px 0 18px;
+      font-size: clamp(40px, 4.8vw, 72px);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
+    }
+    .scene-copy p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 18px;
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+    .scene-copy ul {
+      display: grid;
+      gap: 13px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .scene-copy li {
+      display: flex;
+      gap: 12px;
+      color: var(--text-soft);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.6;
+    }
+    .scene-copy li::before {
+      content: "✓";
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: rgba(70, 198, 169, 0.15);
+      color: var(--mint-bright);
+      font-size: 12px;
+      font-weight: 950;
+    }
+    .scene-copy b { color: var(--text); }
+    .scene-frame {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(17, 22, 29, 0.82);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.34);
+      backdrop-filter: blur(20px);
+    }
+    .creator-tutorial {
+      display: grid;
+      gap: 14px;
+      padding: 26px;
+      background: linear-gradient(135deg, rgba(255,96,87,0.13), rgba(17,22,29,0.96) 46%, rgba(70,198,169,0.14));
+    }
+    .tutorial-head { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; }
+    .tutorial-head span { color: var(--coral-bright); font-size: 11px; font-weight: 950; letter-spacing: 0.12em; }
+    .tutorial-head h3 { margin: 6px 0 0; font-size: 32px; line-height: 1.05; letter-spacing: -0.04em; }
+    .tutorial-badge { border-radius: 14px; padding: 10px 12px; background: var(--coral); color: #fff; font-size: 12px; font-weight: 950; }
+    .tutorial-step { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; border: 1px solid var(--line); border-radius: 18px; padding: 14px; background: rgba(255,255,255,0.045); }
+    .tutorial-step em { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 12px; background: rgba(70,198,169,0.15); color: var(--mint-bright); font-style: normal; font-weight: 950; }
+    .tutorial-step.active em { background: var(--mint); color: #06211b; }
+    .tutorial-step strong { display: block; font-size: 14px; }
+    .tutorial-step p { margin: 4px 0 0; color: var(--text-soft); font-size: 12px; line-height: 1.5; }
+    .ready-card { border: 1px solid var(--line); border-radius: 18px; padding: 18px; background: rgba(10,14,19,0.55); display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .ready-card strong { display: block; font-size: 15px; }
+    .ready-card p { margin: 5px 0 0; color: var(--text-soft); font-size: 12px; }
+    .ready-card span { border-radius: 14px; padding: 10px 12px; background: var(--coral); color: #fff; font-size: 12px; font-weight: 950; }
+    /* ============================ Stats ============================ */
+    .stats {
+      max-width: var(--landing-max);
+      margin: 0 auto;
+      padding: 80px 36px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .stat-item .num {
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(180deg, var(--text) 0%, var(--text-soft) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-item .label {
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .stat-item .delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      color: var(--mint-bright);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* ============================ Section base ============================ */
+    .section {
+      max-width: var(--landing-max);
+      margin: 0 auto;
+      padding: 140px 36px;
+    }
+    .section-head {
+      max-width: 720px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+    .section-head .kicker {
+      display: inline-flex;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(70, 198, 169, 0.1);
+      border: 1px solid rgba(70, 198, 169, 0.28);
+      color: var(--mint-bright);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 18px;
+    }
+    .section-head h2 {
+      margin: 0 0 16px;
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    /* Feature blocks */
+    .feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-bottom: 140px;
+    }
+    .feature:last-child { margin-bottom: 0; }
+    .feature.reverse > .feature-visual { order: -1; }
+    .feature-copy .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 96, 87, 0.12);
+      border: 1px solid rgba(255, 96, 87, 0.3);
+      color: var(--coral-bright);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+    .feature-copy .kicker.mint {
+      background: rgba(70, 198, 169, 0.1);
+      border-color: rgba(70, 198, 169, 0.28);
+      color: var(--mint-bright);
+    }
+    .feature-copy .kicker.violet {
+      background: rgba(124, 58, 237, 0.14);
+      border-color: rgba(124, 58, 237, 0.35);
+      color: #a78bfa;
+    }
+    .feature-copy h3 {
+      margin: 0 0 18px;
+      font-size: clamp(28px, 3.4vw, 44px);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+    .feature-copy p {
+      margin: 0 0 24px;
+      color: var(--text-soft);
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 460px;
+    }
+    .feature-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .feature-bullets li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .feature-bullets li::before {
+      content: "✓";
+      flex: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(70, 198, 169, 0.15);
+      color: var(--mint-bright);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 900;
+    }
+    .feature-bullets li b { color: var(--text); font-weight: 800; }
+
+    /* Visual frames */
+    .feature-visual {
+      position: relative;
+      perspective: 1400px;
+    }
+    .feature-frame {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--ink-2);
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+      transform-style: preserve-3d;
+      transition: transform 0.6s var(--ease);
+    }
+    .feature-visual:hover .feature-frame { transform: rotateX(2deg) rotateY(-3deg); }
+
+    /* ----- Player visual ----- */
+    .visual-player {
+      aspect-ratio: 16 / 10;
+      display: flex;
+      flex-direction: column;
+    }
+    .visual-player .player-area {
+      position: relative;
+      flex: 1;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(70, 198, 169, 0.22), transparent 55%),
+        linear-gradient(135deg, #04090d, #122a26);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .visual-player .player-area::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.55));
+    }
+    .visual-player .play-btn {
+      position: relative;
+      z-index: 1;
+      width: 76px; height: 76px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+    .visual-player .player-top {
+      position: absolute;
+      top: 18px; left: 18px; right: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1;
+    }
+    .visual-player .player-bottom {
+      position: absolute;
+      bottom: 18px; left: 18px; right: 18px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+    }
+    .visual-player .progress {
+      flex: 1;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      position: relative;
+    }
+    .visual-player .progress::after {
+      content: "";
+      position: absolute;
+      inset: 0 75% 0 0;
+      background: var(--coral);
+      border-radius: inherit;
+    }
+    .visual-player .time {
+      font-size: 11px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+    .visual-player .icon-btn {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(6px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .visual-player .meta {
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--ink-2);
+      border-top: 1px solid var(--line);
+    }
+    .visual-player .meta strong {
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .visual-player .meta .meta-sub {
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 3px;
+      font-weight: 600;
+    }
+    .visual-player .meta .actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* ----- Chat visual ----- */
+    .visual-chat {
+      padding: 24px;
+      height: 540px;
+      display: flex;
+      flex-direction: column;
+    }
+    .visual-chat .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+    .visual-chat .head strong {
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .visual-chat .head .count {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .visual-chat .feed {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+    }
+    .visual-chat .feed .chat-msg {
+      animation: slideUpFade 0.6s var(--ease) both;
+    }
+    .visual-chat .feed .chat-msg:nth-child(1) { animation-delay: 0.2s; }
+    .visual-chat .feed .chat-msg:nth-child(2) { animation-delay: 0.45s; }
+    .visual-chat .feed .chat-msg:nth-child(3) { animation-delay: 0.7s; }
+    .visual-chat .feed .chat-msg:nth-child(4) { animation-delay: 0.95s; }
+    .visual-chat .feed .chat-msg:nth-child(5) { animation-delay: 1.2s; }
+    .visual-chat .feed .chat-msg:nth-child(6) { animation-delay: 1.45s; }
+    .visual-chat .feed .chat-msg:nth-child(7) { animation-delay: 1.7s; }
+    .visual-chat .feed .chat-msg:nth-child(8) { animation-delay: 1.95s; }
+    .visual-chat .feed .chat-msg:nth-child(9) { animation-delay: 2.2s; }
+    .visible .visual-chat .feed .chat-msg { animation-play-state: running; }
+    @keyframes slideUpFade {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .visual-chat .input {
+      margin-top: 16px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--ink-3);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .visual-chat .input em {
+      flex: 1;
+      font-style: normal;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .visual-chat .input .emoji {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .visual-chat .input .send {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: var(--mint);
+      color: #06211b;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+
+    /* ----- Donation visual ----- */
+    .visual-donation {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(255, 96, 87, 0.22), transparent 60%),
+        linear-gradient(180deg, var(--ink-2), var(--ink-3));
+    }
+    .donation-alert {
+      padding: 20px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 96, 87, 0.18), rgba(70, 198, 169, 0.14));
+      border: 1px solid rgba(255, 96, 87, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .donation-alert .icon {
+      width: 50px; height: 50px;
+      border-radius: 14px;
+      background: var(--coral);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #fff;
+      flex: none;
+    }
+    .donation-alert .from { font-size: 13px; color: var(--text-soft); font-weight: 700; }
+    .donation-alert .amount { font-size: 22px; font-weight: 900; margin-top: 2px; letter-spacing: -0.02em; }
+    .donation-alert .amount em { font-style: normal; font-size: 14px; opacity: 0.7; margin-left: 2px; }
+    .donation-alert .msg { color: var(--text); font-size: 12px; margin-top: 6px; font-weight: 600; }
+
+    .vote-card {
+      padding: 20px;
+      border-radius: 16px;
+      background: var(--ink-3);
+      border: 1px solid var(--line);
+    }
+    .vote-card .vote-title {
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .vote-card .vote-title .live-tag {
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255, 96, 87, 0.16);
+      color: var(--coral-bright);
+    }
+    .vote-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--ink-2);
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      position: relative;
+      overflow: hidden;
+    }
+    .vote-row::before {
+      content: "";
+      position: absolute;
+      inset: 0 var(--w, 50%) 0 0;
+      background: rgba(70, 198, 169, 0.16);
+      border-radius: inherit;
+    }
+    .vote-row.lead::before { background: rgba(255, 96, 87, 0.22); }
+    .vote-row > * { position: relative; z-index: 1; }
+
+    /* ============================ Categories ============================ */
+    .categories-section {
+      padding: 140px 0 140px;
+      background:
+        radial-gradient(800px 400px at 20% 20%, rgba(70, 198, 169, 0.08), transparent 60%),
+        radial-gradient(800px 400px at 80% 80%, rgba(255, 96, 87, 0.08), transparent 60%);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .category-grid {
+      max-width: var(--landing-max);
+      margin: 0 auto;
+      padding: 0 36px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .live-card {
+      cursor: pointer;
+      transition: transform 0.4s var(--ease);
+    }
+    .live-card:hover { transform: translateY(-6px); }
+    .live-card .thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      background: var(--ink-3);
+    }
+    .live-card .thumb.t-mint { background: linear-gradient(135deg, #0a2a24, var(--mint)); }
+    .live-card .thumb.t-coral { background: linear-gradient(135deg, #2b1110, var(--coral)); }
+    .live-card .thumb.t-violet { background: linear-gradient(135deg, #1a1226, #7c3aed); }
+    .live-card .thumb.t-amber { background: linear-gradient(135deg, #2c1a06, #f59e0b); }
+    .live-card .thumb.t-ocean { background: linear-gradient(135deg, #06222d, #14b8c4); }
+    .live-card .thumb.t-rose { background: linear-gradient(135deg, #2a0b1d, #f43f5e); }
+    .live-card .thumb.t-night { background: linear-gradient(135deg, #0b1726, #344a6b); }
+    .live-card .thumb.t-pine { background: linear-gradient(135deg, #052017, #0f9c6d); }
+    .live-card .thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.18), transparent 55%),
+        linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.55));
+    }
+    .live-card .live-pill {
+      position: absolute;
+      top: 12px; left: 12px;
+      z-index: 1;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--coral);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .live-card .live-pill::before {
+      content: "";
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .live-card .viewer-pill {
+      position: absolute;
+      top: 12px; right: 12px;
+      z-index: 1;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .live-card h4 {
+      margin: 0 0 4px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .live-card .creator {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    /* ============================ Final CTA ============================ */
+    .final-cta {
+      position: relative;
+      padding: 160px 36px;
+      max-width: var(--landing-max);
+      margin: 0 auto;
+      text-align: center;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      inset: 40px 0;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(70, 198, 169, 0.18), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(255, 96, 87, 0.18), transparent 55%),
+        linear-gradient(135deg, var(--ink-2), var(--ink-3));
+      border: 1px solid var(--line-strong);
+      z-index: -1;
+    }
+    .final-cta h2 {
+      margin: 0 0 22px;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+    }
+    .final-cta h2 .accent { color: var(--mint-bright); }
+    .final-cta h2 .coral { color: var(--coral-bright); }
+    .final-cta p {
+      max-width: 540px;
+      margin: 0 auto 40px;
+      color: var(--text-soft);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+    .final-cta .cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ============================ Footer ============================ */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 48px 36px 32px;
+      max-width: var(--landing-max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    footer .brand svg { height: 18px; }
+    footer nav {
+      display: flex;
+      gap: 24px;
+    }
+    footer nav a:hover { color: var(--text); }
+
+    /* ============================ Reveal animations ============================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal.from-left { transform: translateX(-50px); }
+    .reveal.from-left.visible { transform: translateX(0); }
+    .reveal.from-right { transform: translateX(50px); }
+    .reveal.from-right.visible { transform: translateX(0); }
+    .reveal.scale-in { transform: scale(0.92); }
+    .reveal.scale-in.visible { transform: scale(1); }
+    .reveal.delay-1 { transition-delay: 0.1s; }
+    .reveal.delay-2 { transition-delay: 0.2s; }
+    .reveal.delay-3 { transition-delay: 0.3s; }
+    .reveal.delay-4 { transition-delay: 0.4s; }
+    .reveal.delay-5 { transition-delay: 0.5s; }
+
+    /* ============================ Responsive ============================ */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; padding: 120px 24px 60px; }
+      .hero-visual { height: 420px; margin-top: 40px; }
+      .scene-section { grid-template-columns: 1fr; width: calc(100vw - 40px); min-height: auto; padding: 84px 0; gap: 36px; }
+      .scene-section.reverse { grid-template-columns: 1fr; }
+      .feature { grid-template-columns: 1fr; gap: 40px; margin-bottom: 80px; }
+      .feature.reverse > .feature-visual { order: 0; }
+      .stats { grid-template-columns: repeat(2, 1fr); padding: 60px 24px; gap: 32px 16px; }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .section { padding: 80px 24px; }
+      .planning-header { padding: 12px 20px; }
+      .planning-inner { width: calc(100vw - 40px); }
+      .planning-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .site-header { padding: 14px 20px; }
+      .header-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ============================ Planning Navigation ============================ -->
+  <header class="planning-header" aria-label="PixelPlay planning 문서 탭">
+    <div class="planning-inner">
+      <a class="planning-brand" href="index.html">PixelPlay Live Router Plan</a>
+      <nav class="planning-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="migration.html">현재 변경</a><a href="wireframes.html">디자인 프리뷰</a><a class="active" href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+    </div>
+  </header>
+<!-- ============================ Header ============================ -->
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290" aria-label="PixelPlay"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="#0a0e13" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="#0a0e13" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg>
+    </a>
+    <nav class="header-nav">
+      <a href="#features">라이브</a>
+      <a href="#chat">채팅</a>
+      <a href="#cta">시작하기</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn btn-ghost">로그인</button>
+    </div>
+  </header>
+
+  <!-- ============================ Hero ============================ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="blob mint"></div>
+      <div class="blob coral"></div>
+      <div class="blob purple"></div>
+    </div>
+
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="live-dot"></span>지금 248개 방송이 켜져 있어요</div>
+      <h1>
+        라이브 방송,<br>
+        <span class="accent">실시간 채팅,</span><br>
+        <span class="accent">PixelPlay에서</span><br>
+        <span class="accent-coral">시작해보세요.</span>
+      </h1>
+      <p class="lead">
+        로그인 없이도 방송을 볼 수 있어요.
+        마음에 든다면, 채팅방에서 사람들과 함께 이야기 해봐요.
+      </p>
+      <div class="hero-cta">
+        <button class="btn btn-coral btn-lg">라이브 둘러보기</button>
+        <button class="btn btn-primary btn-lg">채팅 시작하기</button>
+        <button class="btn btn-outline btn-lg">로그인</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>248</strong><span>방송 중</span></div>
+        <div class="hero-stat"><strong>12,481</strong><span>같이 보는 중</span></div>
+        <div class="hero-stat"><strong>1,820</strong><span>실시간 채팅방</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" id="heroVisual">
+      <article class="float-card main">
+        <div class="thumb">
+          <span class="live-pill">LIVE</span>
+          <span class="viewer">1,240명 보는 중</span>
+        </div>
+        <div class="stream-info">
+          <h4>오늘은 뭐해볼까?</h4>
+          <div class="creator">
+            <span class="dot"></span>
+            <b>하린</b> · 토크 · 32분째 방송 중
+          </div>
+        </div>
+      </article>
+
+      <article class="float-card chat">
+        <div class="chat-head">
+          <strong>실시간 채팅</strong>
+        </div>
+        <div class="chat-body">
+          <div class="chat-msg"><span class="dot"></span><p><span class="name mint">하린</span>오 화면 잘 보여요</p></div>
+          <div class="chat-msg"><span class="dot"></span><p><span class="name amber">민수</span>저지연 빠르네요 ㄷㄷ</p></div>
+          <div class="chat-msg"><span class="dot"></span><p><span class="name coral">유나</span>오늘 방송 편하게 보기 좋네요</p></div>
+        </div>
+      </article>
+
+      <article class="float-card ready">
+        <div class="ready-label">LIVE READY</div>
+        <div class="ready-time">3분<em>만에 준비</em></div>
+        <p>제목과 채팅 규칙만 정하면<br>바로 시작할 수 있어요</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================ Live Scene ============================ -->
+  <section class="scene-section" id="features">
+    <div class="scene-copy">
+      <span class="kicker">LIVE STREAMING</span>
+      <h2>취향에 맞는 방송을 찾아,<br>입장해보세요.</h2>
+      <p>로그인은 요구하지 않아요.
+진행중인 방송을 먼저 보고,
+마음에 들면 팔로우하거나 채팅까지 이어갈수 있어요.</p>
+      <ul>
+        <li><b>라이브 목록</b>에서 지금 볼 수 있는 방송들을 한눈에 확인해요</li>
+        <li><b>비로그인 시청</b>으로 부담 없이 먼저 둘러봐요</li>
+        <li><b>팔로우</b>로 다시 보고 싶은 크리에이터를 저장해요</li>
+      </ul>
+    </div>
+    <div class="scene-frame">
+      <div class="visual-player">
+        <div class="player-area">
+          <div class="player-top"><span class="live-pill">LIVE</span><span class="viewer">1,240명 보는 중</span></div>
+          <div class="play-btn">▶</div>
+          <div class="player-bottom"><span class="icon-btn">▶</span><span class="icon-btn">🔊</span><div class="progress"></div><span class="time">LIVE · 32:18</span><span class="icon-btn">HD</span><span class="icon-btn">⛶</span></div>
+        </div>
+        <div class="meta"><div><strong>오늘은 뭐해볼까?</strong><div class="meta-sub">하린 · 토크 · 32분째 방송 중</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ Chat Scene ============================ -->
+  <section class="scene-section reverse" id="chat">
+    <div class="scene-frame">
+      <div class="visual-chat">
+        <div class="head"><strong>라이브 채팅</strong></div>
+        <div class="feed">
+          <div class="chat-msg system"><p>32분 전에 방송 시작됨</p></div>
+          <div class="chat-msg"><span class="dot"></span><p><span class="name mint">하린</span>오 화면 잘 보여요</p></div>
+          <div class="chat-msg"><span class="dot"></span><p><span class="name amber">민수</span>저지연 진짜 빠르네요 ㄷㄷ</p></div>
+          <div class="chat-msg"><span class="dot"></span><p><span class="name" style="color:#a78bfa">수연</span>투표 열렸다 ㄱㄱ</p></div>
+          <div class="chat-msg"><span class="dot"></span><p><span class="name coral">예린</span>이 장면 같이 보니까 더 재밌네요</p></div>
+          <div class="chat-msg"><span class="dot"></span><p><span class="name mint">지윤</span>ㅇㅈ</p></div>
+          <div class="chat-msg"><span class="dot"></span><p><span class="name amber">도윤</span>다음 주제는 뭐예요?</p></div>
+          <div class="chat-msg donation"><span class="dot"></span><p>♥ <span class="name coral">하린 · 5,000P</span>방송 화이팅!! 잘 보고 있어요</p></div>
+          <div class="chat-msg system"><p>금칙어 포함 메시지 1건이 자동으로 가려졌어요</p></div>
+        </div>
+        <div class="input"><em>메시지를 입력하세요 · 5초 슬로우 모드</em><span class="emoji">😊</span><span class="send">↑</span></div>
+        <div class="chat-actions"><span>♥ 빠르게 후원하기</span><span>투표 참여</span></div>
+      </div>
+    </div>
+    <div class="scene-copy">
+      <span class="kicker violet">REAL-TIME CHAT</span>
+      <h2>실시간 채팅으로<br>방송에 함께 참여해요.</h2>
+      <p>방송을 보고 있는 시청자들과 소통하고,
+크리에이터는 투표를 생성할 수 있어요.
+대화를 이어가며 방송을 더 재미있게 즐겨보세요!</p>
+      <ul>
+        <li><b>라이브 채팅방</b>에서 다른 시청자들과 실시간으로 소통해요</li>
+        <li><b>공지 기능</b>으로 놓치기 쉬운 대화를 정리해요</li>
+        <li><b>투표 참여와 후원</b>으로 좋아하는 크리에이터를 응원해요</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================ Creator Scene ============================ -->
+  <section class="scene-section">
+    <div class="scene-copy">
+      <span class="kicker live">START STREAMING</span>
+      <h2>방송 설정은,<br>간결하고 빠르게.</h2>
+      <p>자주 쓰는 제목, 채팅 규칙을 미리 정해둘 수 있어요.
+방송을 켤 때마다 같은 설정을 다시 입력하지 않아도 됩니다.</p>
+      <ul>
+        <li><b>송출 기본값</b>으로 제목과 공개 범위를 미리 설정해요</li>
+        <li><b>스트림 키</b>를 사용해서 외부 서비스와 연동해요</li>
+        <li><b>채팅 규칙</b>은 저장하면 다음 메시지부터 바로 적용돼요</li>
+      </ul>
+    </div>
+    <div class="scene-frame creator-tutorial">
+      <div class="tutorial-head"><div><span>Broadcast Tutorial</span><h3>방송 전,<br>이것만 확인하세요.</h3></div><b class="tutorial-badge">3단계</b></div>
+      <div class="tutorial-step active"><em>1</em><div><strong>제목과 공개 범위 확인</strong><p>시청자에게 보일 제목과 공개 상태를 먼저 정해요.</p></div></div>
+      <div class="tutorial-step"><em>2</em><div><strong>채팅 규칙 선택</strong><p>슬로우 모드와 링크 허용 여부를 정해요.</p></div></div>
+      <div class="tutorial-step"><em>3</em><div><strong>스트림 키 사용</strong><p>외부 프로그램과 연동할 수 있어요.</p></div></div>
+      <div class="ready-card"><div><strong>방송 준비 완료</strong><p>설정은 저장됐고, 바로 시작할 수 있어요.</p></div><span>방송 시작</span></div>
+    </div>
+  </section>
+  <!-- ============================ Explore Scene ============================ -->
+  <section class="categories-section" id="categories">
+    <div class="section-head reveal">
+      <span class="kicker">EXPLORE LIVE</span>
+      <h2>라이브 중인 방송들을,<br>가볍게 둘러보세요.</h2>
+      <p>당장에 보고 싶은 방송이 없어도 괜찮아요.<br>다양한 방송들을 둘러보다 보면 취향에 맞는 방송을 찾을 수 있을 거에요.</p>
+    </div>
+
+    <div class="category-grid">
+      <article class="live-card reveal scale-in delay-1">
+        <div class="thumb t-mint">
+          <span class="live-pill">LIVE</span>
+          <span class="viewer-pill">842</span>
+        </div>
+        <h4>오늘 저녁 뭐 할지 같이 골라요</h4>
+        <div class="creator">하린 · 토크</div>
+      </article>
+      <article class="live-card reveal scale-in delay-2">
+        <div class="thumb t-coral">
+          <span class="live-pill">LIVE</span>
+          <span class="viewer-pill">318</span>
+        </div>
+        <h4>요즘 신작 게임 ㄱㄱ</h4>
+        <div class="creator">민수 · 게임</div>
+      </article>
+      <article class="live-card reveal scale-in delay-3">
+        <div class="thumb t-violet">
+          <span class="live-pill">LIVE</span>
+          <span class="viewer-pill">2.1K</span>
+        </div>
+        <h4>랭크 올릴 때까지... 오늘은 간다</h4>
+        <div class="creator">서진 · 게임</div>
+      </article>
+      <article class="live-card reveal scale-in delay-4">
+        <div class="thumb t-amber">
+          <span class="live-pill">LIVE</span>
+          <span class="viewer-pill">512</span>
+        </div>
+        <h4>새벽 작업용 잔잔한 음악만 틀어드림</h4>
+        <div class="creator">지윤 · 음악</div>
+      </article>
+    </div>
+  </section>
+  <!-- ============================ Final CTA ============================ -->
+  <section class="final-cta" id="cta">
+    <div class="reveal scale-in">
+      <h2>
+        <span class="coral">라이브 방송,</span><br>
+        <span class="accent">실시간 채팅,</span><br>
+        PixelPlay에서 시작해보세요.
+      </h2>
+      <p>보고 싶은 방송을 찾아 둘러보고, 방송에 참여해 실시간 채팅으로 사람들과 소통해보세요.</p>
+      <div class="cta-row">
+        <button class="btn btn-coral btn-lg">라이브 둘러보기</button>
+        <button class="btn btn-primary btn-lg">채팅 시작하기</button>
+        <button class="btn btn-outline btn-lg">로그인</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ Footer ============================ -->
+  <footer>
+    <a class="brand" href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="#0a0e13" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="#0a0e13" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg>
+    </a>
+    <nav>
+      <a href="#">서비스 소개</a>
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+      <a href="#">고객센터</a>
+    </nav>
+    <span>© 2026 PixelPlay · 4팀 RGB</span>
+  </footer>
+
+  <script>
+    // ============================ Header scroll ============================
+    const header = document.getElementById('siteHeader');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y > 24) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+      lastScroll = y;
+    }, { passive: true });
+
+    // ============================ Reveal on scroll ============================
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // Counter animation
+          const numEl = entry.target.querySelector('.num[data-count]');
+          if (numEl && !numEl.dataset.done) {
+            animateCount(numEl);
+            numEl.dataset.done = 'true';
+          }
+
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    function animateCount(el) {
+      const target = parseInt(el.dataset.count, 10);
+      const duration = 1600;
+      const start = performance.now();
+      const startVal = 0;
+      function tick(now) {
+        const t = Math.min(1, (now - start) / duration);
+        // easeOutQuart
+        const eased = 1 - Math.pow(1 - t, 4);
+        const value = Math.floor(startVal + (target - startVal) * eased);
+        el.textContent = value.toLocaleString('ko-KR');
+        if (t < 1) requestAnimationFrame(tick);
+        else el.textContent = target.toLocaleString('ko-KR');
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // ============================ Hero parallax on mouse move ============================
+    const heroVisual = document.getElementById('heroVisual');
+    if (heroVisual) {
+      const cards = heroVisual.querySelectorAll('.float-card');
+      heroVisual.addEventListener('mousemove', (e) => {
+        const rect = heroVisual.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        cards.forEach((card, idx) => {
+          const depth = (idx + 1) * 8;
+          card.style.transform = `translate3d(${-x * depth}px, ${-y * depth}px, 0)`;
+        });
+      });
+      heroVisual.addEventListener('mouseleave', () => {
+        cards.forEach(card => card.style.transform = '');
+      });
+    }
+
+    // ============================ Scroll parallax for hero blobs ============================
+    const blobs = document.querySelectorAll('.hero-bg .blob');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      blobs.forEach((blob, i) => {
+        const speed = (i + 1) * 0.08;
+        blob.style.transform = `translateY(${y * speed}px)`;
+      });
+    }, { passive: true });
+  </script>
+</body>
+</html>

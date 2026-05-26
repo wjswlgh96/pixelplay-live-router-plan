@@ -460,7 +460,7 @@
 <!-- ============================ 라이브 시청 ============================ -->
       <section id="preview-live-watch" class="preview-section">
         <h2><span class="section-num">4</span>라이브 시청</h2>
-        <p class="section-summary">플레이어 중심 화면입니다. 16:9 비율 플레이어 + 우측 채팅 + 하단 방송 정보·최근 후원 구성으로, Twitch/치지직과 비슷한 시청 행동을 따라갑니다. MVP에서는 공개 시청, 채팅 읽기, 로그인 후 채팅 입력, 팔로우, 후원 보내기까지 포함합니다.</p>
+        <p class="section-summary">플레이어 중심 화면입니다. 16:9 비율 플레이어 + 우측 채팅 + 방송 제목·크리에이터 액션만 남기고, 후원은 채팅 피드 안의 특별 메시지로 표시합니다. MVP에서는 공개 시청, 채팅 읽기, 로그인 후 채팅 입력, 팔로우, 후원 보내기까지 포함합니다.</p>
         <div class="preview-meta detail-meta">
           <div class="meta-box"><span>route</span><strong>/live/[creatorId]</strong></div>
           <div class="meta-box"><span>role</span><p>크리에이터의 현재 방송을 시청합니다. 채팅과 후원이 한 화면에 모이고, 비로그인은 시청과 채팅 읽기만 가능합니다.</p></div>
@@ -520,20 +520,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="watch-body">
-                    <div class="watch-card">
-                      <div class="card-head"><strong>방송 안내</strong><span class="badge-coral">고정</span></div>
-                      <div class="live-note-row"><span>오늘 목표</span><strong>라이브 라우터 UX 정리</strong></div>
-                      <div class="live-note-row"><span>오늘 안내</span><strong>질문은 채팅으로 남겨주시면 순서대로 확인합니다.</strong></div>
-                      <div class="button-row" style="margin-top:10px"><span class="mini-button ghost">안내 닫기</span></div>
-                    </div>
-                    <div class="watch-card">
-                      <div class="card-head"><strong>최근 후원</strong><span class="badge-coral">실시간</span></div>
-                      <div class="donor-row"><span class="avatar-dot"></span><div><strong>하린</strong><div style="font-size:11px;color:var(--muted)">방송 화이팅이에요!!</div></div><em>+5,000P</em></div>
-                      <div class="donor-row"><span class="avatar-dot"></span><div><strong>민수</strong><div style="font-size:11px;color:var(--muted)">잘 보고 있어요 ㅎㅎ</div></div><em>+3,000P</em></div>
-                      <div class="donor-row"><span class="avatar-dot"></span><div><strong>수연</strong><div style="font-size:11px;color:var(--muted)">오늘 정리 좋아요</div></div><em>+1,000P</em></div>
-                    </div>
-                  </div>
                 </div>
 
                 <aside class="live-chat-side">
@@ -545,8 +531,8 @@
                     <div class="live-msg system live-system-pill"><span>32분 전에 방송이 시작됐어요.</span></div>
                     <p class="live-msg"><span class="author mint">하린</span>오 화면 잘 보여요</p>
                     <p class="live-msg"><span class="author amber">민수</span>저지연 진짜 빠르네요 ㄷㄷ</p>
-                    <p class="live-msg"><b>하린</b>방송 화이팅!! 잘 보고 있어요</p>
-                    <p class="live-msg"><span class="author violet">수연</span>후원 메시지 올라왔네요</p>
+                    <div class="live-msg donation donation-chat-message"><div><b>하린</b><span>5,000P</span></div><p>방송 화이팅!! 잘 보고 있어요</p></div>
+                    <p class="live-msg"><span class="author violet">수연</span>후원 메시지 예쁘게 뜨네요</p>
                     <p class="live-msg"><span class="author coral">예린</span>라우터 이름 정한 거 진짜 깔끔하네요</p>
                     <p class="live-msg"><span class="author mint">지윤</span>ㅇㅈ</p>
                     <p class="live-msg"><span class="author amber">도윤</span>다음 주제는 뭐예요?</p>
@@ -618,20 +604,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="watch-body">
-                    <div class="watch-card">
-                      <div class="card-head"><strong>방송 안내</strong><span class="badge-coral">고정</span></div>
-                      <div class="live-note-row"><span>오늘 목표</span><strong>라이브 라우터 UX 정리</strong></div>
-                      <div class="live-note-row"><span>오늘 안내</span><strong>질문은 채팅으로 남겨주시면 순서대로 확인합니다.</strong></div>
-                      <div class="button-row" style="margin-top:10px"><span class="mini-button ghost">안내 닫기</span></div>
-                    </div>
-                    <div class="watch-card">
-                      <div class="card-head"><strong>최근 후원</strong><span class="badge-coral">실시간</span></div>
-                      <div class="donor-row"><span class="avatar-dot"></span><div><strong>하린</strong><div style="font-size:11px;color:rgba(255,255,255,0.45)">화이팅이에요!</div></div><em>+5,000P</em></div>
-                      <div class="donor-row"><span class="avatar-dot"></span><div><strong>민수</strong><div style="font-size:11px;color:rgba(255,255,255,0.45)">방송 잘 보고 있습니다</div></div><em>+3,000P</em></div>
-                      <div class="donor-row"><span class="avatar-dot"></span><div><strong>수연</strong><div style="font-size:11px;color:rgba(255,255,255,0.45)">오늘 정리 좋아요</div></div><em>+1,000P</em></div>
-                    </div>
-                  </div>
                 </div>
 
                 <aside class="live-chat-side">
@@ -643,8 +615,8 @@
                     <div class="live-msg system live-system-pill"><span>32분 전에 방송이 시작됐어요.</span></div>
                     <p class="live-msg"><span class="author mint">하린</span>오 화면 잘 보여요</p>
                     <p class="live-msg"><span class="author amber">민수</span>저지연 진짜 빠르네요 ㄷㄷ</p>
-                    <p class="live-msg"><b>하린</b>방송 화이팅!! 잘 보고 있어요</p>
-                    <p class="live-msg"><span class="author violet">수연</span>후원 메시지 올라왔네요</p>
+                    <div class="live-msg donation donation-chat-message"><div><b>하린</b><span>5,000P</span></div><p>방송 화이팅!! 잘 보고 있어요</p></div>
+                    <p class="live-msg"><span class="author violet">수연</span>후원 메시지 예쁘게 뜨네요</p>
                     <p class="live-msg"><span class="author coral">예린</span>라우터 이름 정한 거 진짜 깔끔하네요</p>
                     <p class="live-msg"><span class="author mint">지윤</span>ㅇㅈ</p>
                     <p class="live-msg"><span class="author amber">도윤</span>다음 주제는 뭐예요?</p>
@@ -674,7 +646,7 @@
       <section id="preview-channel-live" class="preview-section">
         <h2><span class="section-num">5</span>방송 운영</h2>
         <p class="section-summary">방송 운영 화면은 방송 시작 설정 Form과 방송 중 운영 콘솔을 분리합니다. 송출 보안 정보는 보안 설정에서만 다루고, 이 화면에는 시청자에게 보이는 입력값과 비민감 송출 상태만 표시합니다.</p>
-        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/live</strong></div><div class="meta-box"><span>role</span><p>방송 시작 전 설정, 시작 확인, 방송 중 운영, 종료 확인을 처리하는 크리에이터 화면입니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>제목 입력, 안내문 입력, 공개 상태, 송출 상태 확인, 방송 시작·종료, 채팅 일시정지, 채팅창 팝업.</p></div></div>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/live</strong></div><div class="meta-box"><span>role</span><p>방송 시작 전 설정, 시작 확인, 방송 중 운영, 종료 확인을 처리하는 크리에이터 화면입니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>제목 입력, 태그 입력, 공개 상태, 송출 상태 확인, 방송 시작·종료, 채팅 일시정지, 채팅창 팝업.</p></div></div>
         <div class="state-section-title"><span>방송 준비</span><strong>시청자에게 보이는 값만 설정합니다.</strong></div>
         <div class="preview-pair channel-live-state-pair">
           <div class="preview-frame light">
@@ -691,7 +663,7 @@
                     <div class="broadcast-setup-form">
                       <div class="setup-form-head"><div><strong>방송 시작 설정</strong><span>방송 목록과 시청 화면에 바로 보이는 내용을 입력합니다.</span></div><span class="setup-dirty-chip">저장됨</span></div>
                       <label class="setup-field input-control form-control-preview"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em><small>최대 50자 · 목록 카드와 시청 화면에 표시</small></label>
-                      <label class="setup-field textarea input-control form-control-preview"><span>시작 전 안내</span><em>오늘은 랭크 게임 위주로 진행합니다. 질문은 채팅으로 남겨주세요.</em><small>방송 정보 영역에 표시되는 짧은 안내입니다.</small></label>
+                      <div class="setup-field tag-control-preview form-control-preview"><span>방송 태그</span><div class="tag-entry-control"><div class="banned-word-inline-input tag-inline-input"><em>태그를 입력해주세요.</em><span>0 / 12</span><button type="button">추가</button></div><div class="tag-input-box live-tag-preview"><span class="word-tag">#랭크 <b class="x">×</b></span><span class="word-tag">#소통 <b class="x">×</b></span><span class="word-tag">#저지연 <b class="x">×</b></span></div></div><small>최대 5개 · 검색과 태그 클릭 결과에 사용</small></div>
                       <div class="setup-control-grid">
                         <div class="setup-control-block"><span>공개 상태</span><div class="setup-segmented two"><em class="active">공개</em><em>비공개</em></div></div>
                         <div class="setup-control-block setup-readonly-card"><span>송출 상태</span><strong>대기 중</strong><em>방송 시작 후 연결 상태만 확인합니다.</em></div>
@@ -723,7 +695,7 @@
                     <div class="broadcast-setup-form">
                       <div class="setup-form-head"><div><strong>방송 시작 설정</strong><span>방송 목록과 시청 화면에 바로 보이는 내용을 입력합니다.</span></div><span class="setup-dirty-chip">저장됨</span></div>
                       <label class="setup-field input-control form-control-preview"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em><small>최대 50자 · 목록 카드와 시청 화면에 표시</small></label>
-                      <label class="setup-field textarea input-control form-control-preview"><span>시작 전 안내</span><em>오늘은 랭크 게임 위주로 진행합니다. 질문은 채팅으로 남겨주세요.</em><small>방송 정보 영역에 표시되는 짧은 안내입니다.</small></label>
+                      <div class="setup-field tag-control-preview form-control-preview"><span>방송 태그</span><div class="tag-entry-control"><div class="banned-word-inline-input tag-inline-input"><em>태그를 입력해주세요.</em><span>0 / 12</span><button type="button">추가</button></div><div class="tag-input-box live-tag-preview"><span class="word-tag">#랭크 <b class="x">×</b></span><span class="word-tag">#소통 <b class="x">×</b></span><span class="word-tag">#저지연 <b class="x">×</b></span></div></div><small>최대 5개 · 검색과 태그 클릭 결과에 사용</small></div>
                       <div class="setup-control-grid">
                         <div class="setup-control-block"><span>공개 상태</span><div class="setup-segmented two"><em class="active">공개</em><em>비공개</em></div></div>
                         <div class="setup-control-block setup-readonly-card"><span>송출 상태</span><strong>대기 중</strong><em>방송 시작 후 연결 상태만 확인합니다.</em></div>
@@ -842,8 +814,8 @@
 <!-- ============================ 보안 설정 ============================ -->
       <section id="preview-channel-security" class="preview-section">
         <h2><span class="section-num">7</span>보안 설정</h2>
-        <p class="section-summary">스트림키와 OBS Studio에 붙일 채팅창 URL은 민감 정보라 보안 설정 페이지로 분리합니다. 표시, 복사, 재발급은 재확인 Dialog를 거치게 설계합니다.</p>
-        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/security</strong></div><div class="meta-box"><span>role</span><p>송출 연결에 필요한 스트림키와 OBS 채팅창 URL을 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근하고, 민감 정보 표시는 재확인이 필요합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>스트림키 보기, 재발급, OBS 채팅 URL 복사, 미리보기, 토큰 재발급.</p></div></div>
+        <p class="section-summary">스트림키와 OBS Studio에 붙일 채팅창 URL은 민감 정보라 보안 설정 페이지로 분리합니다. 표시, 복사, 재발급은 재확인 Dialog를 거치게 설계하고, 후원 알림 오버레이 URL은 MVP 선택사항으로 남깁니다.</p>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/security</strong></div><div class="meta-box"><span>role</span><p>송출 연결에 필요한 스트림키와 OBS 채팅창 URL, 선택사항인 후원 알림 URL을 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근하고, 민감 정보 표시는 재확인이 필요합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>스트림키 보기, 재발급, OBS 채팅 URL 복사, 미리보기, 토큰 재발급, 후원 알림 URL 복사.</p></div></div>
         <div class="preview-pair">
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/channel/security</span></div>
@@ -856,6 +828,7 @@
                   <div class="settings-header-row"><div><h2>보안 설정</h2><p>OBS Studio 연결에 필요한 민감 정보를 관리합니다.</p></div><span class="status-chip safe">보안 상태 정상</span></div>
                   <section class="settings-form-card security-card"><h3>스트림키</h3><p class="card-desc">본인 확인 후 1분 동안만 표시하고, 확인 Dialog 안에서만 복사합니다.</p><div class="secure-field"><span>Stream Key</span><code>pp_live_••••••••••••</code><a href="#channel-dialog-stream-key-view">본인 확인 후 보기</a></div><div class="secure-actions"><a class="mini-button danger preview-action-link" href="#channel-alert-stream-key-reissue">재발급</a></div></section>
                   <section class="settings-form-card security-card"><h3>OBS 채팅창 URL</h3><p class="card-desc">OBS Browser Source에 붙여 넣는 채팅 오버레이 주소입니다.</p><div class="secure-field"><span>Chat URL</span><code>https://pixelplay.studio/live/jiho/chat?overlay=obs</code><a href="#channel-popover-obs-chat-url">복사</a></div><div class="secure-actions"><a class="mini-button ghost preview-action-link" href="#channel-popover-obs-chat-url">미리보기</a><a class="mini-button danger preview-action-link" href="#channel-alert-obs-chat-url-reissue">새 토큰 발급</a></div></section>
+                  <section class="settings-form-card security-card optional-card"><h3>OBS 후원 알림 URL <span class="optional-badge">선택사항</span></h3><p class="card-desc">후원이 들어오면 방송 화면 위에 알림 애니메이션을 띄우는 별도 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><span>복사 예정</span></div></section>
                   <aside class="settings-side"><div class="side-tip"><h4>보안 원칙</h4><p>스트림키와 OBS URL은 화면 진입만으로 노출하지 않습니다. 표시와 재발급은 반드시 재확인 Dialog를 거칩니다.</p></div></aside>
                 </main>
               </div>
@@ -872,6 +845,7 @@
                   <div class="settings-header-row"><div><h2>보안 설정</h2><p>OBS Studio 연결에 필요한 민감 정보를 관리합니다.</p></div><span class="status-chip safe">보안 상태 정상</span></div>
                   <section class="settings-form-card security-card"><h3>스트림키</h3><p class="card-desc">본인 확인 후 1분 동안만 표시하고, 확인 Dialog 안에서만 복사합니다.</p><div class="secure-field"><span>Stream Key</span><code>pp_live_••••••••••••</code><a href="#channel-dialog-stream-key-view">본인 확인 후 보기</a></div><div class="secure-actions"><a class="mini-button danger preview-action-link" href="#channel-alert-stream-key-reissue">재발급</a></div></section>
                   <section class="settings-form-card security-card"><h3>OBS 채팅창 URL</h3><p class="card-desc">OBS Browser Source에 붙여 넣는 채팅 오버레이 주소입니다.</p><div class="secure-field"><span>Chat URL</span><code>https://pixelplay.studio/live/jiho/chat?overlay=obs</code><a href="#channel-popover-obs-chat-url">복사</a></div><div class="secure-actions"><a class="mini-button ghost preview-action-link" href="#channel-popover-obs-chat-url">미리보기</a><a class="mini-button danger preview-action-link" href="#channel-alert-obs-chat-url-reissue">새 토큰 발급</a></div></section>
+                  <section class="settings-form-card security-card optional-card"><h3>OBS 후원 알림 URL <span class="optional-badge">선택사항</span></h3><p class="card-desc">후원이 들어오면 방송 화면 위에 알림 애니메이션을 띄우는 별도 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><span>복사 예정</span></div></section>
                   <aside class="settings-side"><div class="side-tip"><h4>보안 원칙</h4><p>스트림키와 OBS URL은 화면 진입만으로 노출하지 않습니다. 표시와 재발급은 반드시 재확인 Dialog를 거칩니다.</p></div></aside>
                 </main>
               </div>
@@ -1009,7 +983,7 @@
         <h2><span class="section-num">참고</span>치지직 기준 채널 사이드바 플로우</h2>
         <p class="section-summary">MVP 기준 채널 관리는 치지직 스튜디오의 방송 관리 흐름만 가져오되, 방송 운영은 <code>/channel/live</code>, 채팅 설정은 <code>/channel/chat</code>, 보안 설정은 <code>/channel/security</code>, 통계는 <code>/channel/analytics</code>로 분리합니다. 방송 채팅 분리는 <code>/live/[creatorId]/chat</code> 팝아웃으로 처리하고, 후원은 <code>/user/donations</code>에서 관리합니다.</p>
         <div class="route-flow-grid studio-route-grid">
-          <article class="flow-card live"><span>방송 운영</span><strong>/channel/live</strong><p>방송 준비, 시작, 종료, 시작 전 안내, 채팅 일시정지를 처리합니다.</p></article><article class="flow-card"><span>채팅 설정</span><strong>/channel/chat</strong><p>채팅 속도, 링크 차단, 금칙어를 관리합니다.</p></article><article class="flow-card"><span>보안 설정</span><strong>/channel/security</strong><p>스트림키와 OBS 채팅창 URL을 관리합니다.</p></article><article class="flow-card"><span>실시간 통계</span><strong>/channel/analytics</strong><p>방송 중 시청자, 채팅, 후원, 팔로우 지표를 확인합니다.</p></article>
+          <article class="flow-card live"><span>방송 운영</span><strong>/channel/live</strong><p>방송 준비, 시작, 종료, 방송 태그, 채팅 일시정지를 처리합니다.</p></article><article class="flow-card"><span>채팅 설정</span><strong>/channel/chat</strong><p>채팅 속도, 링크 차단, 금칙어를 관리합니다.</p></article><article class="flow-card"><span>보안 설정</span><strong>/channel/security</strong><p>스트림키, OBS 채팅창 URL, 선택사항인 후원 알림 URL을 관리합니다.</p></article><article class="flow-card"><span>실시간 통계</span><strong>/channel/analytics</strong><p>방송 중 시청자, 채팅, 후원, 팔로우 지표를 확인합니다.</p></article>
           <article class="flow-card"><span>채팅 팝아웃</span><strong>/live/[creatorId]/chat</strong><p>방송 채팅만 별도 창으로 띄우는 공개 보조 라우터입니다.</p></article>
           <article class="flow-card"><span>후원</span><strong>/user/donations</strong><p>잔액, 충전 Dialog, 후원 내역 탭을 한 화면에서 관리합니다.</p></article>
         </div>
@@ -1212,14 +1186,14 @@
               <div class="dialog-preview live broadcast-start-dialog">
                 <div class="dialog-preview-header">
                   <span class="dialog-icon">●</span>
-                  <div><h3>방송을 시작할까요?</h3><p>시청자에게 보이는 제목과 안내문을 마지막으로 확인합니다.</p></div>
+                  <div><h3>방송을 시작할까요?</h3><p>시청자에게 보이는 제목과 태그를 마지막으로 확인합니다.</p></div>
                 </div>
                 <div class="broadcast-start-panel">
                   <div><span>송출 상태</span><strong>대기 중</strong></div>
                   <div><span>공개 범위</span><strong>공개</strong></div>
                 </div>
                 <div class="dialog-field input-like"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em></div>
-                <div class="dialog-field textarea-like"><span>시작 전 안내</span><em>오늘은 랭크 게임 위주로 진행합니다. 질문은 채팅으로 남겨주세요.</em></div>
+                <div class="dialog-field tag-summary-field"><span>방송 태그</span><em>#랭크 · #소통 · #저지연</em></div>
                 <div class="dialog-summary-line"><span>채팅 규칙</span><strong>안내문 작성됨</strong></div>
                 <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">방송 시작</button></div>
               </div>
@@ -1233,7 +1207,7 @@
                   <div><span>공개 범위</span><strong>공개</strong></div>
                 </div>
                 <div class="dialog-field input-like"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em></div>
-                <div class="dialog-field textarea-like"><span>시작 전 안내</span><em>오늘은 랭크 게임 위주로 진행합니다. 질문은 채팅으로 남겨주세요.</em></div>
+                <div class="dialog-field tag-summary-field"><span>방송 태그</span><em>#랭크 · #소통 · #저지연</em></div>
                 <div class="dialog-summary-line"><span>채팅 규칙</span><strong>안내문 작성됨</strong></div>
                 <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">방송 시작</button></div>
               </div>

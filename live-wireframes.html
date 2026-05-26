@@ -508,8 +508,8 @@
                       </div>
                       <div class="action-row">
                         <a class="mini-button primary preview-action-link" href="#live-dialog-login-required">팔로우</a>
-                        <span class="mini-button ghost">공유</span>
-                        <span class="icon-button">⋯</span>
+                        <a class="mini-button ghost preview-action-link" href="#live-channel-menu">공유</a>
+                        <a class="icon-button preview-action-link" href="#live-channel-menu">⋯</a>
                       </div>
                     </div>
                     <div class="creator-block">
@@ -524,7 +524,7 @@
                     <div class="watch-card">
                       <div class="card-head"><strong>방송 안내</strong><span class="badge-coral">고정</span></div>
                       <div class="live-note-row"><span>오늘 목표</span><strong>라이브 라우터 UX 정리</strong></div>
-                      <div class="live-note-row"><span>운영 모드</span><strong>5초 슬로우 · 링크 차단</strong></div>
+                      <div class="live-note-row"><span>오늘 안내</span><strong>질문은 채팅으로 남겨주시면 순서대로 확인합니다.</strong></div>
                       <div class="button-row" style="margin-top:10px"><span class="mini-button ghost">안내 닫기</span></div>
                     </div>
                     <div class="watch-card">
@@ -553,7 +553,7 @@
                   </div>
                   <div class="live-chat-input">
                     <a class="input-wrap preview-action-link" href="#live-dialog-login-required">
-                      <em>메시지를 입력하세요 · 5초 슬로우 모드</em>
+                      <em>메시지를 입력하세요.</em>
                       <span class="icon-button" style="width:30px;height:30px;font-size:13px">😊</span>
                       <span class="send-btn">↑</span>
                     </a>
@@ -606,8 +606,8 @@
                       </div>
                       <div class="action-row">
                         <a class="mini-button primary preview-action-link" href="#live-dialog-login-required">팔로우</a>
-                        <span class="mini-button ghost">공유</span>
-                        <span class="icon-button">⋯</span>
+                        <a class="mini-button ghost preview-action-link" href="#live-channel-menu">공유</a>
+                        <a class="icon-button preview-action-link" href="#live-channel-menu">⋯</a>
                       </div>
                     </div>
                     <div class="creator-block">
@@ -622,7 +622,7 @@
                     <div class="watch-card">
                       <div class="card-head"><strong>방송 안내</strong><span class="badge-coral">고정</span></div>
                       <div class="live-note-row"><span>오늘 목표</span><strong>라이브 라우터 UX 정리</strong></div>
-                      <div class="live-note-row"><span>운영 모드</span><strong>5초 슬로우 · 링크 차단</strong></div>
+                      <div class="live-note-row"><span>오늘 안내</span><strong>질문은 채팅으로 남겨주시면 순서대로 확인합니다.</strong></div>
                       <div class="button-row" style="margin-top:10px"><span class="mini-button ghost">안내 닫기</span></div>
                     </div>
                     <div class="watch-card">
@@ -651,7 +651,7 @@
                   </div>
                   <div class="live-chat-input">
                     <a class="input-wrap preview-action-link" href="#live-dialog-login-required">
-                      <em>메시지를 입력하세요 · 5초 슬로우 모드</em>
+                      <em>메시지를 입력하세요.</em>
                       <span class="icon-button" style="width:30px;height:30px;font-size:13px">😊</span>
                       <span class="send-btn">↑</span>
                     </a>
@@ -673,86 +673,149 @@
 <!-- ============================ 방송 운영 ============================ -->
       <section id="preview-channel-live" class="preview-section">
         <h2><span class="section-num">5</span>방송 운영</h2>
-        <p class="section-summary">방송 운영 화면은 방송 시작 전 입력 Form과 방송 중 운영 콘솔로 나눕니다. 스트림키와 송출 보안 정보는 보안 설정에서만 관리하고, 이 화면에는 비민감 송출 상태만 표시합니다.</p>
-        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/live</strong></div><div class="meta-box"><span>role</span><p>방송 준비, 시작, 진행, 종료를 처리하는 크리에이터 운영 화면입니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>방송 제목, 시작 전 안내, 공개 상태, 채팅 속도, 링크 차단, 방송 시작·종료, 채팅 일시정지, 채팅창 팝업.</p></div></div>
-        <div class="preview-pair">
+        <p class="section-summary">방송 운영 화면은 방송 시작 설정 Form과 방송 중 운영 콘솔을 분리합니다. 송출 보안 정보는 보안 설정에서만 다루고, 이 화면에는 시청자에게 보이는 입력값과 비민감 송출 상태만 표시합니다.</p>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/live</strong></div><div class="meta-box"><span>role</span><p>방송 시작 전 설정, 시작 확인, 방송 중 운영, 종료 확인을 처리하는 크리에이터 화면입니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>제목 입력, 안내문 입력, 공개 상태, 송출 상태 확인, 방송 시작·종료, 채팅 일시정지, 채팅창 팝업.</p></div></div>
+        <div class="state-section-title"><span>방송 준비</span><strong>시청자에게 보이는 값만 설정합니다.</strong></div>
+        <div class="preview-pair channel-live-state-pair">
           <div class="preview-frame light">
-            <div class="frame-label"><span>Light Mode</span><span>/channel/live</span></div>
+            <div class="frame-label"><span>Light Mode</span><span>/channel/live · ready</span></div>
             <div class="design-screen channel-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="broadcast-shell">
-                
+
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="broadcast-main">
                   <div class="broadcast-stage broadcast-setup-stage">
-                    <div class="live-status-strip ready"><span class="live-pulse">방송 준비</span><span class="uptime">송출 연결됨</span><span class="quality-pill">저지연 · 공개 · 슬로우 5초</span></div>
-                    <div class="preview-stage ready-stage"><span class="viewer-chip">대기 중</span><div class="preview-corner">송출 미리보기</div></div>
+                    <div class="live-status-strip ready"><span class="live-pulse">방송 준비</span><span class="uptime">송출 대기</span><span class="quality-pill">공개 예정</span></div>
+                    <div class="preview-stage ready-stage"><span class="viewer-chip">시작 전</span><div class="preview-corner">시청 화면 미리보기</div></div>
                     <div class="broadcast-setup-form">
-                      <div class="setup-form-head"><div><strong>방송 기본 설정</strong><span>방송 시작 전에 시청자에게 보이는 값만 입력합니다.</span></div><span class="setup-dirty-chip">저장됨</span></div>
-                      <label class="setup-field input-control"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em><small>최대 50자 · 시청 화면과 목록 카드에 표시</small></label>
-                      <label class="setup-field textarea input-control"><span>시작 전 안내 문구</span><em>채팅은 5초 슬로우 모드로 운영하고, 외부 링크는 자동으로 가려집니다.</em><small>방송 정보 영역에 표시되는 짧은 안내입니다.</small></label>
+                      <div class="setup-form-head"><div><strong>방송 시작 설정</strong><span>방송 목록과 시청 화면에 바로 보이는 내용을 입력합니다.</span></div><span class="setup-dirty-chip">저장됨</span></div>
+                      <label class="setup-field input-control form-control-preview"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em><small>최대 50자 · 목록 카드와 시청 화면에 표시</small></label>
+                      <label class="setup-field textarea input-control form-control-preview"><span>시작 전 안내</span><em>오늘은 랭크 게임 위주로 진행합니다. 질문은 채팅으로 남겨주세요.</em><small>방송 정보 영역에 표시되는 짧은 안내입니다.</small></label>
                       <div class="setup-control-grid">
-                        <div class="setup-control-block"><span>슬로우 모드</span><div class="setup-segmented"><em>없음</em><em class="active">5초</em><em>10초</em></div></div>
-                        <div class="setup-control-block"><span>링크 정책</span><div class="setup-toggle on"><strong>링크 차단</strong><em>외부 URL 자동 가림</em></div></div>
                         <div class="setup-control-block"><span>공개 상태</span><div class="setup-segmented two"><em class="active">공개</em><em>비공개</em></div></div>
-                        <div class="setup-control-block"><span>송출 상태</span><div class="setup-toggle on"><strong>연결됨</strong><em>상태만 표시</em></div></div>
+                        <div class="setup-control-block setup-readonly-card"><span>송출 상태</span><strong>대기 중</strong><em>방송 시작 후 연결 상태만 확인합니다.</em></div>
+                        <div class="setup-control-block setup-readonly-card"><span>채팅 규칙</span><strong>안내문 작성됨</strong><em>/channel/chat 설정을 사용합니다.</em></div>
+                        <div class="setup-control-block setup-readonly-card"><span>금칙어</span><strong>3개 등록</strong><em>채팅 설정에서 바로 수정합니다.</em></div>
                       </div>
+                      <div class="setup-form-actions"><a class="mini-button ghost preview-action-link" href="#preview-channel-chat">채팅 설정 보기</a><a class="mini-button coral preview-action-link" href="#channel-dialog-broadcast-start">방송 시작</a></div>
                     </div>
                   </div>
                   <div class="broadcast-side">
-                    <div class="dash-card broadcast-ready-card"><h3>방송 준비</h3><p>제목, 안내 문구, 공개 상태, 채팅 정책을 확인한 뒤 방송 시작 Dialog로 넘어갑니다.</p><a class="mini-button coral preview-action-link" href="#channel-dialog-broadcast-start">방송 시작</a></div>
-                    <div class="dash-card"><h3>적용될 채팅 정책</h3><div class="metric-mini-row"><span class="label">채팅 속도</span><strong>5초</strong></div><div class="metric-mini-row"><span class="label">링크 정책</span><strong>차단</strong></div><div class="metric-mini-row"><span class="label">금칙어</span><strong>3개</strong></div><div class="metric-mini-row"><span class="label">공개 범위</span><strong>공개</strong></div></div>
-                    <div class="dash-card broadcast-chat-card"><h3>시작 전 안내</h3><div class="broadcast-chat-feed"><p class="live-msg system">입력한 안내 문구는 시청 화면의 방송 정보 영역에 표시됩니다.</p><p class="live-msg system">채팅 정책은 /channel/chat 설정을 사용합니다.</p><p class="live-msg system">송출 보안 정보는 보안 설정에서만 확인합니다.</p></div></div>
+                    <div class="dash-card broadcast-ready-card"><h3>방송 시작 전 확인</h3><p>입력값과 공개 상태를 확인한 뒤 최종 Dialog에서 방송을 시작합니다.</p><a class="mini-button coral preview-action-link" href="#channel-dialog-broadcast-start">방송 시작</a></div>
+                    <div class="dash-card setup-summary-card"><h3>시청자에게 보이는 정보</h3><div class="metric-mini-row"><span class="label">제목</span><strong>오늘은 랭크 위주로 갑니다.</strong></div><div class="metric-mini-row"><span class="label">안내</span><strong>질문은 채팅으로 남겨주세요.</strong></div><div class="metric-mini-row"><span class="label">공개 범위</span><strong>공개</strong></div></div>
+                    <div class="dash-card broadcast-chat-card"><h3>운영 메모</h3><div class="broadcast-chat-feed"><p class="live-msg system">송출 보안 정보는 보안 설정에서만 확인합니다.</p><p class="live-msg system">채팅 규칙과 금칙어는 채팅 설정에서 관리합니다.</p></div></div>
                   </div>
                 </main>
               </div>
             </div>
           </div>
           <div class="preview-frame dark">
-            <div class="frame-label"><span>Dark Mode</span><span>/channel/live</span></div>
+            <div class="frame-label"><span>Dark Mode</span><span>/channel/live · ready</span></div>
             <div class="design-screen channel-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="broadcast-shell">
-                
+
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="broadcast-main">
-                  <div class="broadcast-stage">
-                    <div class="live-status-strip"><span class="live-pulse">방송 중</span><span class="uptime">00:32:18</span><span class="quality-pill">1080p · 저지연 · 안정</span></div>
-                    <div class="preview-stage"><span class="live-on-overlay">LIVE</span><span class="viewer-chip">1,240명</span><div class="preview-corner">송출 미리보기</div></div>
-                    <div class="broadcast-controls">
-                      <div class="bc-button coral"><span class="icon-bullet coral">정지</span>채팅 잠시 멈춤<span class="sub">새 메시지만 막아요</span></div>
-                      <a class="bc-button preview-action-link" href="#channel-popup-live-chat"><span class="icon-bullet">팝업</span>채팅창 팝업<span class="sub">별도 창으로 분리</span></a>
-                      <a class="bc-button danger preview-action-link" href="#channel-alert-broadcast-end"><span class="icon-bullet">종료</span>방송 끝내기<span class="sub">확인 Dialog 후 종료</span></a>
+                  <div class="broadcast-stage broadcast-setup-stage">
+                    <div class="live-status-strip ready"><span class="live-pulse">방송 준비</span><span class="uptime">송출 대기</span><span class="quality-pill">공개 예정</span></div>
+                    <div class="preview-stage ready-stage"><span class="viewer-chip">시작 전</span><div class="preview-corner">시청 화면 미리보기</div></div>
+                    <div class="broadcast-setup-form">
+                      <div class="setup-form-head"><div><strong>방송 시작 설정</strong><span>방송 목록과 시청 화면에 바로 보이는 내용을 입력합니다.</span></div><span class="setup-dirty-chip">저장됨</span></div>
+                      <label class="setup-field input-control form-control-preview"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em><small>최대 50자 · 목록 카드와 시청 화면에 표시</small></label>
+                      <label class="setup-field textarea input-control form-control-preview"><span>시작 전 안내</span><em>오늘은 랭크 게임 위주로 진행합니다. 질문은 채팅으로 남겨주세요.</em><small>방송 정보 영역에 표시되는 짧은 안내입니다.</small></label>
+                      <div class="setup-control-grid">
+                        <div class="setup-control-block"><span>공개 상태</span><div class="setup-segmented two"><em class="active">공개</em><em>비공개</em></div></div>
+                        <div class="setup-control-block setup-readonly-card"><span>송출 상태</span><strong>대기 중</strong><em>방송 시작 후 연결 상태만 확인합니다.</em></div>
+                        <div class="setup-control-block setup-readonly-card"><span>채팅 규칙</span><strong>안내문 작성됨</strong><em>/channel/chat 설정을 사용합니다.</em></div>
+                        <div class="setup-control-block setup-readonly-card"><span>금칙어</span><strong>3개 등록</strong><em>채팅 설정에서 바로 수정합니다.</em></div>
+                      </div>
+                      <div class="setup-form-actions"><a class="mini-button ghost preview-action-link" href="#preview-channel-chat">채팅 설정 보기</a><a class="mini-button coral preview-action-link" href="#channel-dialog-broadcast-start">방송 시작</a></div>
                     </div>
                   </div>
                   <div class="broadcast-side">
-                    <div class="dash-card"><h3>방송 상태</h3><div class="metric-mini-row"><span class="label">현재 시청자</span><strong>1,240</strong></div><div class="metric-mini-row"><span class="label">최고 시청자</span><strong>1,486</strong></div><div class="metric-mini-row"><span class="label">분당 채팅</span><strong>142</strong></div><div class="metric-mini-row"><span class="label">후원 누적</span><strong>68,500P</strong></div></div>
-                    <div class="dash-card broadcast-chat-card"><div class="broadcast-card-head"><h3>운영용 채팅</h3><a class="mini-pill preview-action-link" href="#channel-popup-live-chat">채팅창 팝업</a></div><div class="studio-chat-toolbar"><span>슬로우 5초</span><span>금칙어 ON</span><span>링크 차단</span></div><div class="broadcast-chat-feed"><p class="live-msg"><span class="author mint">하린</span>오 화면 잘 보여요</p><p class="live-msg"><b>하린</b>방송 화이팅!! 잘 보고 있어요</p><p class="live-msg"><span class="author amber">민수</span>저지연 빠르네요</p><p class="live-msg"><span class="author violet">수연</span>채팅창만 따로 보니까 편하네요</p></div></div>
+                    <div class="dash-card broadcast-ready-card"><h3>방송 시작 전 확인</h3><p>입력값과 공개 상태를 확인한 뒤 최종 Dialog에서 방송을 시작합니다.</p><a class="mini-button coral preview-action-link" href="#channel-dialog-broadcast-start">방송 시작</a></div>
+                    <div class="dash-card setup-summary-card"><h3>시청자에게 보이는 정보</h3><div class="metric-mini-row"><span class="label">제목</span><strong>오늘은 랭크 위주로 갑니다.</strong></div><div class="metric-mini-row"><span class="label">안내</span><strong>질문은 채팅으로 남겨주세요.</strong></div><div class="metric-mini-row"><span class="label">공개 범위</span><strong>공개</strong></div></div>
+                    <div class="dash-card broadcast-chat-card"><h3>운영 메모</h3><div class="broadcast-chat-feed"><p class="live-msg system">송출 보안 정보는 보안 설정에서만 확인합니다.</p><p class="live-msg system">채팅 규칙과 금칙어는 채팅 설정에서 관리합니다.</p></div></div>
                   </div>
                 </main>
               </div>
             </div>
-          </div></div>
+          </div>
+        </div>
+        <div class="state-section-title"><span>방송 중</span><strong>운영에 필요한 액션과 지표만 남깁니다.</strong></div>
+        <div class="preview-pair channel-live-state-pair">
+          <div class="preview-frame light">
+            <div class="frame-label"><span>Light Mode</span><span>/channel/live · on air</span></div>
+            <div class="design-screen channel-screen">
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="broadcast-shell">
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <main class="broadcast-main">
+                  <div class="broadcast-stage">
+                    <div class="live-status-strip"><span class="live-pulse">방송 중</span><span class="uptime">00:32:18</span><span class="quality-pill">안정</span></div>
+                    <div class="preview-stage"><span class="live-on-overlay">LIVE</span><span class="viewer-chip">1,240명</span><div class="preview-corner">송출 미리보기</div></div>
+                    <div class="broadcast-controls">
+                      <div class="bc-button coral"><span class="icon-bullet coral">일시</span>채팅 일시정지<span class="sub">새 메시지만 잠시 막습니다.</span></div>
+                      <a class="bc-button preview-action-link" href="#channel-popup-live-chat"><span class="icon-bullet">팝업</span>채팅창 팝업<span class="sub">별도 창으로 분리</span></a>
+                      <a class="bc-button danger preview-action-link" href="#channel-alert-broadcast-end"><span class="icon-bullet">종료</span>방송 종료<span class="sub">확인 Dialog 후 종료</span></a>
+                    </div>
+                  </div>
+                  <div class="broadcast-side">
+                    <div class="dash-card"><h3>방송 상태</h3><div class="metric-mini-row"><span class="label">현재 시청자</span><strong>1,240</strong></div><div class="metric-mini-row"><span class="label">최고 시청자</span><strong>1,486</strong></div><div class="metric-mini-row"><span class="label">분당 채팅</span><strong>142</strong></div><div class="metric-mini-row"><span class="label">후원 누적</span><strong>68,500P</strong></div></div>
+                    <div class="dash-card broadcast-chat-card"><div class="broadcast-card-head"><h3>운영용 채팅</h3><a class="mini-pill preview-action-link" href="#channel-popup-live-chat">채팅창 팝업</a></div><div class="studio-chat-toolbar"><span>일시정지 가능</span><span>팝업 보기</span></div><div class="broadcast-chat-feed"><p class="live-msg"><span class="author mint">하린</span>오 화면 잘 보여요</p><p class="live-msg"><b>하린</b>방송 화이팅!! 잘 보고 있어요</p><p class="live-msg"><span class="author amber">민수</span>반응 빠르네요</p><p class="live-msg"><span class="author violet">수연</span>채팅창만 따로 보니까 편하네요</p></div></div>
+                  </div>
+                </main>
+              </div>
+            </div>
+          </div>
+          <div class="preview-frame dark">
+            <div class="frame-label"><span>Dark Mode</span><span>/channel/live · on air</span></div>
+            <div class="design-screen channel-screen">
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="broadcast-shell">
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <main class="broadcast-main">
+                  <div class="broadcast-stage">
+                    <div class="live-status-strip"><span class="live-pulse">방송 중</span><span class="uptime">00:32:18</span><span class="quality-pill">안정</span></div>
+                    <div class="preview-stage"><span class="live-on-overlay">LIVE</span><span class="viewer-chip">1,240명</span><div class="preview-corner">송출 미리보기</div></div>
+                    <div class="broadcast-controls">
+                      <div class="bc-button coral"><span class="icon-bullet coral">일시</span>채팅 일시정지<span class="sub">새 메시지만 잠시 막습니다.</span></div>
+                      <a class="bc-button preview-action-link" href="#channel-popup-live-chat"><span class="icon-bullet">팝업</span>채팅창 팝업<span class="sub">별도 창으로 분리</span></a>
+                      <a class="bc-button danger preview-action-link" href="#channel-alert-broadcast-end"><span class="icon-bullet">종료</span>방송 종료<span class="sub">확인 Dialog 후 종료</span></a>
+                    </div>
+                  </div>
+                  <div class="broadcast-side">
+                    <div class="dash-card"><h3>방송 상태</h3><div class="metric-mini-row"><span class="label">현재 시청자</span><strong>1,240</strong></div><div class="metric-mini-row"><span class="label">최고 시청자</span><strong>1,486</strong></div><div class="metric-mini-row"><span class="label">분당 채팅</span><strong>142</strong></div><div class="metric-mini-row"><span class="label">후원 누적</span><strong>68,500P</strong></div></div>
+                    <div class="dash-card broadcast-chat-card"><div class="broadcast-card-head"><h3>운영용 채팅</h3><a class="mini-pill preview-action-link" href="#channel-popup-live-chat">채팅창 팝업</a></div><div class="studio-chat-toolbar"><span>일시정지 가능</span><span>팝업 보기</span></div><div class="broadcast-chat-feed"><p class="live-msg"><span class="author mint">하린</span>오 화면 잘 보여요</p><p class="live-msg"><b>하린</b>방송 화이팅!! 잘 보고 있어요</p><p class="live-msg"><span class="author amber">민수</span>반응 빠르네요</p><p class="live-msg"><span class="author violet">수연</span>채팅창만 따로 보니까 편하네요</p></div></div>
+                  </div>
+                </main>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
 
 <!-- ============================ 채팅 설정 ============================ -->
       <section id="preview-channel-chat" class="preview-section">
         <h2><span class="section-num">6</span>채팅 설정</h2>
-        <p class="section-summary">치지직처럼 금칙어와 채팅 정책은 운영 화면에서 눌러 들어가는 별도 페이지로 둡니다. MVP에서는 채팅 속도, 링크 차단, 금칙어 입력 정도만 다룹니다.</p>
-        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/chat</strong></div><div class="meta-box"><span>role</span><p>방송 채팅의 기본 정책과 금칙어를 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>슬로우 모드, 링크 차단, 금칙어 추가·삭제, 저장.</p></div></div>
+        <p class="section-summary">채팅 설정은 방송 운영과 분리된 관리 화면으로 둡니다. MVP에서는 채팅 속도, 링크 차단, 시청자에게 보여줄 채팅 규칙 안내문, 금칙어 inline 입력만 다룹니다.</p>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/chat</strong></div><div class="meta-box"><span>role</span><p>방송 채팅의 기본 정책, 안내문, 금칙어를 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>채팅 속도, 링크 차단, 규칙 안내문, 금칙어 추가·삭제, 저장.</p></div></div>
         <div class="preview-pair">
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/channel/chat</span></div>
             <div class="design-screen channel-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>방송 운영</span><code>/channel/live</code></a><div class="nav-subitem active"><span>채팅 설정</span><code>/channel/chat</code></div><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>보안 설정</span><code>/channel/security</code></a><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>실시간 통계</span><code>/channel/analytics</code></a></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="settings-main channel-settings-main">
                   <div class="settings-header-row"><div><h2>채팅 설정</h2><p>방송 채팅의 기본 정책과 금칙어를 관리합니다.</p></div><span class="mini-button primary">저장</span></div>
                   <section class="settings-form-card"><h3>채팅 기본값</h3><p class="card-desc">방송 시작 시 적용할 채팅 참여 규칙입니다.</p><div class="field-row"><label>채팅 속도<span class="sub">도배 방지</span></label><div class="select-cluster"><span class="select-pill">제한 없음</span><span class="select-pill active">5초</span><span class="select-pill">10초</span></div></div><div class="field-row"><label>링크 허용<span class="sub">외부 URL</span></label><div class="toggle-switch off"><span class="toggle-text">링크 차단</span><span class="switch"></span></div></div></section>
-                  <section class="settings-form-card settings-chat-card"><h3>금칙어</h3><p class="card-desc">한 단어씩 입력하고 Enter 또는 추가 버튼으로 바로 등록합니다.</p><div class="tag-input-box"><span class="word-tag">스팸 <b class="x">×</b></span><span class="word-tag">광고 <b class="x">×</b></span><span class="word-tag">욕설 <b class="x">×</b></span><span class="banned-word-inline-input"><em>금칙어 입력</em><button type="button">추가</button></span></div><p class="inline-input-help">등록된 단어가 포함된 메시지는 방송 채팅에서 자동으로 가려집니다.</p></section>
+                  <section class="settings-form-card chat-rule-card"><h3>채팅 규칙 안내문</h3><p class="card-desc">시청자가 채팅 메뉴에서 여는 규칙 Dialog에 그대로 표시됩니다.</p><label class="rule-textarea-preview"><span>안내문</span><em>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</em><small>65 / 300</small></label></section>
+                  <section class="settings-form-card settings-chat-card"><h3>금칙어</h3><p class="card-desc">한 단어씩 입력하고 추가 버튼으로 바로 등록합니다.</p><div class="banned-word-control"><div class="banned-word-inline-input"><em>금칙어를 입력해주세요.</em><span>0 / 100</span><button type="button">추가</button></div><div class="tag-input-box"><span class="word-tag">스팸 <b class="x">×</b></span><span class="word-tag">홍보 <b class="x">×</b></span><span class="word-tag">욕설 <b class="x">×</b></span></div></div><p class="inline-input-help">등록된 단어가 포함된 메시지는 방송 채팅에서 자동으로 가려집니다.</p></section>
                   <aside class="settings-side"><div class="side-tip"><h4>저장 전 이동</h4><p>채팅 속도나 링크 정책을 바꾼 뒤 다른 설정 화면으로 이동하면 저장 확인 AlertDialog를 표시합니다.</p></div></aside>
                 </main>
               </div>
@@ -761,14 +824,15 @@
           <div class="preview-frame dark">
             <div class="frame-label"><span>Dark Mode</span><span>/channel/chat</span></div>
             <div class="design-screen channel-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>방송 운영</span><code>/channel/live</code></a><div class="nav-subitem active"><span>채팅 설정</span><code>/channel/chat</code></div><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>보안 설정</span><code>/channel/security</code></a><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>실시간 통계</span><code>/channel/analytics</code></a></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="settings-main channel-settings-main">
                   <div class="settings-header-row"><div><h2>채팅 설정</h2><p>방송 채팅의 기본 정책과 금칙어를 관리합니다.</p></div><span class="mini-button primary">저장</span></div>
                   <section class="settings-form-card"><h3>채팅 기본값</h3><p class="card-desc">방송 시작 시 적용할 채팅 참여 규칙입니다.</p><div class="field-row"><label>채팅 속도<span class="sub">도배 방지</span></label><div class="select-cluster"><span class="select-pill">제한 없음</span><span class="select-pill active">5초</span><span class="select-pill">10초</span></div></div><div class="field-row"><label>링크 허용<span class="sub">외부 URL</span></label><div class="toggle-switch off"><span class="toggle-text">링크 차단</span><span class="switch"></span></div></div></section>
-                  <section class="settings-form-card settings-chat-card"><h3>금칙어</h3><p class="card-desc">한 단어씩 입력하고 Enter 또는 추가 버튼으로 바로 등록합니다.</p><div class="tag-input-box"><span class="word-tag">스팸 <b class="x">×</b></span><span class="word-tag">광고 <b class="x">×</b></span><span class="word-tag">욕설 <b class="x">×</b></span><span class="banned-word-inline-input"><em>금칙어 입력</em><button type="button">추가</button></span></div><p class="inline-input-help">등록된 단어가 포함된 메시지는 방송 채팅에서 자동으로 가려집니다.</p></section>
+                  <section class="settings-form-card chat-rule-card"><h3>채팅 규칙 안내문</h3><p class="card-desc">시청자가 채팅 메뉴에서 여는 규칙 Dialog에 그대로 표시됩니다.</p><label class="rule-textarea-preview"><span>안내문</span><em>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</em><small>65 / 300</small></label></section>
+                  <section class="settings-form-card settings-chat-card"><h3>금칙어</h3><p class="card-desc">한 단어씩 입력하고 추가 버튼으로 바로 등록합니다.</p><div class="banned-word-control"><div class="banned-word-inline-input"><em>금칙어를 입력해주세요.</em><span>0 / 100</span><button type="button">추가</button></div><div class="tag-input-box"><span class="word-tag">스팸 <b class="x">×</b></span><span class="word-tag">홍보 <b class="x">×</b></span><span class="word-tag">욕설 <b class="x">×</b></span></div></div><p class="inline-input-help">등록된 단어가 포함된 메시지는 방송 채팅에서 자동으로 가려집니다.</p></section>
                   <aside class="settings-side"><div class="side-tip"><h4>저장 전 이동</h4><p>채팅 속도나 링크 정책을 바꾼 뒤 다른 설정 화면으로 이동하면 저장 확인 AlertDialog를 표시합니다.</p></div></aside>
                 </main>
               </div>
@@ -786,7 +850,7 @@
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/channel/security</span></div>
             <div class="design-screen channel-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem active"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
@@ -802,7 +866,7 @@
           <div class="preview-frame dark">
             <div class="frame-label"><span>Dark Mode</span><span>/channel/security</span></div>
             <div class="design-screen channel-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem active"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
@@ -827,7 +891,7 @@
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/channel/analytics</span></div>
             <div class="design-screen channel-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem active"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
@@ -835,7 +899,7 @@
                   <div class="settings-header-row"><div><h2>실시간 통계</h2><p>방송 중 의사결정에 필요한 지표만 빠르게 확인합니다.</p></div><span class="status-chip">최근 30분</span></div>
                   <div class="analytics-grid"><div class="analytics-card coral"><span>현재 시청자</span><strong>1,240</strong><p>최고 1,684명</p></div><div class="analytics-card"><span>분당 채팅</span><strong>142</strong><p>최근 10분 +18%</p></div><div class="analytics-card"><span>후원 누적</span><strong>68,500P</strong><p>오늘 14건</p></div><div class="analytics-card"><span>팔로우 증가</span><strong>+86</strong><p>최근 30분 기준</p></div></div>
                   <div class="analytics-panel"><div><h3>시청자 추이</h3><p>방송 시작 후 30분 기준</p></div><div class="mini-chart-bars"><span style="height:38%"></span><span style="height:52%"></span><span style="height:48%"></span><span style="height:72%"></span><span style="height:66%"></span><span style="height:88%"></span><span style="height:76%"></span></div></div>
-                  <div class="analytics-panel"><div><h3>상호작용 로그</h3><p>후원, 팔로우, 채팅 제한 이벤트를 시간순으로 확인합니다.</p></div><div class="analytics-log"><span>12:42 후원 5,000P</span><span>12:39 팔로우 +12</span><span>12:31 금칙어 차단 1건</span></div></div>
+                  <div class="analytics-panel"><div><h3>상호작용 로그</h3><p>후원, 팔로우, 채팅 제한 이벤트를 시간순으로 확인합니다.</p></div><div class="analytics-log"><span>12:42 후원 5,000P</span><span>12:39 팔로우 +12</span><span>12:31 채팅 제한 1건</span></div></div>
                 </main>
               </div>
             </div>
@@ -843,7 +907,7 @@
           <div class="preview-frame dark">
             <div class="frame-label"><span>Dark Mode</span><span>/channel/analytics</span></div>
             <div class="design-screen channel-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem active"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
@@ -851,7 +915,7 @@
                   <div class="settings-header-row"><div><h2>실시간 통계</h2><p>방송 중 의사결정에 필요한 지표만 빠르게 확인합니다.</p></div><span class="status-chip">최근 30분</span></div>
                   <div class="analytics-grid"><div class="analytics-card coral"><span>현재 시청자</span><strong>1,240</strong><p>최고 1,684명</p></div><div class="analytics-card"><span>분당 채팅</span><strong>142</strong><p>최근 10분 +18%</p></div><div class="analytics-card"><span>후원 누적</span><strong>68,500P</strong><p>오늘 14건</p></div><div class="analytics-card"><span>팔로우 증가</span><strong>+86</strong><p>최근 30분 기준</p></div></div>
                   <div class="analytics-panel"><div><h3>시청자 추이</h3><p>방송 시작 후 30분 기준</p></div><div class="mini-chart-bars"><span style="height:38%"></span><span style="height:52%"></span><span style="height:48%"></span><span style="height:72%"></span><span style="height:66%"></span><span style="height:88%"></span><span style="height:76%"></span></div></div>
-                  <div class="analytics-panel"><div><h3>상호작용 로그</h3><p>후원, 팔로우, 채팅 제한 이벤트를 시간순으로 확인합니다.</p></div><div class="analytics-log"><span>12:42 후원 5,000P</span><span>12:39 팔로우 +12</span><span>12:31 금칙어 차단 1건</span></div></div>
+                  <div class="analytics-panel"><div><h3>상호작용 로그</h3><p>후원, 팔로우, 채팅 제한 이벤트를 시간순으로 확인합니다.</p></div><div class="analytics-log"><span>12:42 후원 5,000P</span><span>12:39 팔로우 +12</span><span>12:31 채팅 제한 1건</span></div></div>
                 </main>
               </div>
             </div>
@@ -874,6 +938,7 @@
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/user/follows</span></div>
             <div class="design-screen follow-screen">
+              <a class="mini-button coral preview-action-link header-floating-broadcast" href="#preview-channel-live">방송하기</a>
               <div class="mini-top"><div class="mini-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290" aria-label="PixelPlay"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="var(--background)" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="var(--background)" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="donation-shell follow-shell">
                 <aside class="channel-sidebar user-sidebar-preview"><div class="channel-profile"><span class="avatar-dot online"></span><div><div class="channel-name">지호</div><span class="channel-status">내 계정</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem active"><span>팔로우</span><code>/user/follows</code></div><div class="nav-subitem"><span>후원</span><code>/user/donations</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>비밀번호 변경</span><code>Dialog</code></div><a class="nav-subitem danger preview-action-link" href="#user-alert-oauth-disconnect"><span>Google 연결 해제</span><code>Alert</code></a><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
@@ -884,6 +949,7 @@
           <div class="preview-frame dark">
             <div class="frame-label"><span>Dark Mode</span><span>/user/follows</span></div>
             <div class="design-screen follow-screen">
+              <a class="mini-button coral preview-action-link header-floating-broadcast" href="#preview-channel-live">방송하기</a>
               <div class="mini-top"><div class="mini-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290" aria-label="PixelPlay"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="var(--background)" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="var(--background)" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="donation-shell follow-shell"><aside class="channel-sidebar user-sidebar-preview"><div class="channel-profile"><span class="avatar-dot online"></span><div><div class="channel-name">지호</div><span class="channel-status">내 계정</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem active"><span>팔로우</span><code>/user/follows</code></div><div class="nav-subitem"><span>후원</span><code>/user/donations</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>비밀번호 변경</span><code>Dialog</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside><main class="follow-main"><div class="settings-header-row"><div><h2>팔로우</h2><p>다시 보고 싶은 크리에이터와 지금 방송 중인 크리에이터를 한곳에서 확인합니다.</p></div><span class="mini-button ghost">라이브 중만 보기</span></div><div class="follow-summary-grid"><div class="follow-stat-card"><span>전체 팔로우</span><strong>18명</strong><p>최근 7일 방송 12명</p></div><div class="follow-stat-card live"><span>라이브 중</span><strong>4명</strong><p>바로 시청 가능</p></div><div class="follow-stat-card"><span>최근 방송</span><strong>12명</strong><p>최근 7일 안에 방송</p></div></div><div class="follow-filter-tabs"><span class="active">전체</span><span>라이브 중</span><span>최근 방송</span></div><div class="follow-grid"><article class="follow-card live"><span class="follow-avatar"></span><div><strong>임나은</strong><p>LIVE · 674명 시청 중 · 12분 전 시작</p><div class="card-tag-row"><span class="card-tag">게임</span><span class="card-tag">저지연</span></div></div><div class="follow-actions"><a class="mini-button coral preview-action-link" href="#preview-live-watch">보러가기</a><span class="mini-button ghost">팔로잉</span></div></article><article class="follow-card"><span class="follow-avatar"></span><div><strong>LPL 공식</strong><p>오프라인 · 최근 방송 어제 · 팔로워 4.8천명</p><div class="card-tag-row"><span class="card-tag">e스포츠</span><span class="card-tag">최근 방송</span></div></div><div class="follow-actions"><span class="mini-button ghost">팔로잉</span></div></article><article class="follow-card live"><span class="follow-avatar"></span><div><strong>하린</strong><p>LIVE · 1,240명 시청 중 · 토크</p><div class="card-tag-row"><span class="card-tag">소통</span><span class="card-tag">저지연</span></div></div><div class="follow-actions"><a class="mini-button coral preview-action-link" href="#preview-live-watch">보러가기</a><span class="mini-button ghost">팔로잉</span></div></article></div><div class="follow-empty-state"><strong>아직 팔로우한 크리에이터가 없습니다</strong><p>마음에 드는 라이브에서 팔로우를 누르면 이곳에 모입니다.</p><a class="mini-button coral preview-action-link" href="#preview-live-list">라이브 둘러보기</a></div></main></div>
             </div>
@@ -963,7 +1029,7 @@
         <p class="section-summary">라이브 시청, 방송 운영, 채널 설정, 후원, 유저 계정에서 필요한 상호작용만 모았습니다. 버튼을 누르면 해당 프리뷰로 이동하고 선택된 카드에 테두리 강조가 들어갑니다.</p>
         <div class="preview-meta detail-meta">
           <div class="meta-box"><span>scope</span><strong>Live UI states</strong></div>
-          <div class="meta-box"><span>targets</span><p>비로그인 유도, 채팅 규칙, 후원, 방송 시작·종료, 채팅 팝아웃, 스트림키, OBS 채팅창 URL, 설정 저장, 계정 보안.</p></div>
+          <div class="meta-box"><span>targets</span><p>비로그인 유도, 라이브 더보기, 채팅 규칙, 후원, 방송 시작·종료, 채팅 팝아웃, 스트림키, OBS 채팅창 URL, 설정 저장, 계정 보안.</p></div>
           <div class="meta-box"><span>source</span><p>Base UI Dialog·AlertDialog·Dropdown·Popover 질감은 현재 앱 공통 컴포넌트와 동일하게 맞춥니다.</p></div>
           <div class="meta-box"><span>tone</span><p>라이브와 후원 주요 액션은 코랄, 일반 설정은 민트, 위험 액션은 danger 톤으로 구분합니다.</p></div>
         </div>
@@ -986,6 +1052,52 @@
             </div>
           </article>
 
+          <article id="live-channel-menu" class="interaction-target component-preview-card">
+            <div class="component-card-head"><span>DropdownMenu</span><strong>라이브 더보기</strong></div>
+            <div class="component-mode-pair">
+              <div class="popover-preview live live-channel-menu-preview">
+                <div class="popover-head"><strong>지호님의 라이브</strong><span>시청 화면 상단 더보기 메뉴입니다.</span></div>
+                <div class="menu-separator"></div>
+                <div class="menu-item active">공유하기<span class="check">⌁</span></div>
+                <a class="menu-item danger preview-action-link" href="#live-alert-report-live">신고하기<span class="check">›</span></a>
+              </div>
+              <div class="popover-preview live dark-preview live-channel-menu-preview">
+                <div class="popover-head"><strong>지호님의 라이브</strong><span>Dark Mode 메뉴 상태입니다.</span></div>
+                <div class="menu-separator"></div>
+                <div class="menu-item active">공유하기<span class="check">⌁</span></div>
+                <a class="menu-item danger preview-action-link" href="#live-alert-report-live">신고하기<span class="check">›</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article id="live-alert-report-live" class="interaction-target component-preview-card danger-target">
+            <div class="component-card-head"><span>AlertDialog</span><strong>라이브 신고</strong></div>
+            <div class="component-mode-pair">
+              <div class="alert-dialog-preview danger">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">!</span>
+                  <div><h3>라이브를 신고할까요?</h3><p>운영 정책을 위반한 방송이라고 판단될 때만 신고합니다.</p></div>
+                </div>
+                <div class="dialog-warning-list">
+                  <span>신고 내용은 운영 검토에만 사용됩니다.</span>
+                  <span>허위 신고는 서비스 이용에 제한이 생길 수 있습니다.</span>
+                </div>
+                <div class="dialog-actions"><button class="ghost">돌아가기</button><button class="danger">신고하기</button></div>
+              </div>
+              <div class="alert-dialog-preview danger dark-preview">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">!</span>
+                  <div><h3>라이브를 신고할까요?</h3><p>운영 정책을 위반한 방송이라고 판단될 때만 신고합니다.</p></div>
+                </div>
+                <div class="dialog-warning-list">
+                  <span>신고 내용은 운영 검토에만 사용됩니다.</span>
+                  <span>허위 신고는 서비스 이용에 제한이 생길 수 있습니다.</span>
+                </div>
+                <div class="dialog-actions"><button class="ghost">돌아가기</button><button class="danger">신고하기</button></div>
+              </div>
+            </div>
+          </article>
+
           <article id="live-chat-menu" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>DropdownMenu</span><strong>채팅 더보기</strong></div>
             <div class="popover-preview live live-chat-menu-preview">
@@ -1000,75 +1112,133 @@
 
           <article id="live-alert-chat-rules" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>AlertDialog</span><strong>채팅 규칙</strong></div>
-            <div class="alert-dialog-preview live-rule-alert">
-              <div class="dialog-preview-header">
-                <span class="dialog-icon">!</span>
-                <div><h3>지호님의 채팅 규칙 안내</h3><p>클린한 라이브 문화를 위해 매너 채팅을 부탁드립니다.</p></div>
+            <div class="component-mode-pair">
+              <div class="alert-dialog-preview live-rule-alert">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">!</span>
+                  <div><h3>지호님의 채팅 규칙 안내</h3><p>크리에이터가 채팅 설정에서 작성한 안내문을 보여줍니다.</p></div>
+                </div>
+                <div class="viewer-rule-body">
+                  <p>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</p>
+                </div>
+                <div class="dialog-actions"><button class="coral">확인</button></div>
               </div>
-              <div class="dialog-warning-list neutral">
-                <span>욕설, 비방, 스팸, 광고성 메시지는 제한될 수 있습니다.</span>
-                <span>현재 방송은 5초 슬로우 모드와 링크 차단을 사용합니다.</span>
-                <span>문제가 있는 메시지는 채팅 더보기 메뉴에서 신고할 수 있습니다.</span>
+              <div class="alert-dialog-preview live-rule-alert dark-preview">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">!</span>
+                  <div><h3>지호님의 채팅 규칙 안내</h3><p>크리에이터가 채팅 설정에서 작성한 안내문을 보여줍니다.</p></div>
+                </div>
+                <div class="viewer-rule-body">
+                  <p>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</p>
+                </div>
+                <div class="dialog-actions"><button class="coral">확인</button></div>
               </div>
-              <div class="dialog-actions"><button class="coral">확인</button></div>
             </div>
           </article>
 
           <article id="live-dialog-donation" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Dialog</span><strong>후원하기</strong></div>
-            <div class="dialog-preview donation">
-              <div class="dialog-preview-header">
-                <span class="dialog-icon">₩</span>
-                <div><h3>후원 메시지 보내기</h3><p>방송 화면에 표시될 메시지와 후원금을 확인합니다.</p></div>
+            <div class="component-mode-pair">
+              <div class="dialog-preview donation donation-form-preview">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">₩</span>
+                  <div><h3>후원 메시지 보내기</h3><p>방송에 표시될 메시지와 금액을 확인합니다.</p></div>
+                </div>
+                <div class="donation-option-row"><span>익명으로 후원</span><em>OFF</em></div>
+                <div class="dialog-summary-line"><span>받는 크리에이터</span><strong>지호</strong></div>
+                <label class="form-control-preview textarea-control-preview"><span>메시지</span><em>오늘 방송도 잘 보고 있어요.</em><small>16 / 100</small></label>
+                <div class="donation-dialog-balance"><span>보유 후원금</span><strong>42,500P</strong></div>
+                <div class="amount-choice"><span>1,000P</span><span class="active">5,000P</span><span>10,000P</span><span>전액</span></div>
+                <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>7,000P</em><small>최소 1,000P</small></label>
+                <div class="donation-preview-bubble"><b>지호</b><span>7,000P</span><p>오늘 방송도 잘 보고 있어요.</p></div>
+                <div class="dialog-summary-line"><span>후원 후 잔액</span><strong>35,500P</strong></div>
+                <div class="dialog-note-line">잔액이 부족한 금액을 입력하면 버튼이 충전하고 후원하기로 바뀝니다.</div>
+                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">후원하기</button></div>
               </div>
-              <div class="donation-dialog-balance">
-                <span>보유 후원금</span>
-                <strong>42,500P</strong>
+              <div class="dialog-preview donation donation-form-preview dark-preview">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">₩</span>
+                  <div><h3>후원 메시지 보내기</h3><p>잔액보다 큰 금액을 입력한 상태입니다.</p></div>
+                </div>
+                <div class="donation-option-row"><span>익명으로 후원</span><em>ON</em></div>
+                <div class="dialog-summary-line"><span>받는 크리에이터</span><strong>지호</strong></div>
+                <label class="form-control-preview textarea-control-preview"><span>메시지</span><em>오늘 방송 응원합니다.</em><small>11 / 100</small></label>
+                <div class="donation-dialog-balance"><span>보유 후원금</span><strong>42,500P</strong></div>
+                <div class="amount-choice"><span>10,000P</span><span>30,000P</span><span class="active">50,000P</span><span>전액</span></div>
+                <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>50,000P</em><small>부족 7,500P</small></label>
+                <div class="donation-preview-bubble"><b>익명</b><span>50,000P</span><p>오늘 방송 응원합니다.</p></div>
+                <div class="dialog-summary-line"><span>충전 필요 금액</span><strong>7,500P</strong></div>
+                <div class="dialog-note-line warning">부족한 후원금을 충전한 뒤 같은 메시지로 이어서 보냅니다.</div>
+                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">충전하고 후원하기</button></div>
               </div>
-              <div class="amount-choice"><span>1,000P</span><span>5,000P</span><span>10,000P</span><span>전액</span></div>
-              <div class="dialog-field input-like direct-amount-field active"><span>직접 입력</span><em>7,000P</em></div>
-              <div class="dialog-field textarea-like"><span>메시지</span><em>오늘 방송도 잘 보고 있어요.</em><small>0 / 100</small></div>
-              <div class="donation-preview-bubble"><b>지호</b><span>7,000P</span><p>오늘 방송도 잘 보고 있어요.</p></div>
-              <div class="dialog-summary-line"><span>후원 후 잔액</span><strong>35,500P</strong></div>
-              <div class="dialog-note-line">잔액이 부족하면 최종 버튼은 충전 후 후원하기로 바뀝니다.</div>
-              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">후원하기</button></div>
             </div>
           </article>
 
           <article id="user-dialog-donation-charge" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Dialog</span><strong>후원금 충전</strong></div>
-            <div class="dialog-preview donation">
-              <div class="dialog-preview-header">
-                <span class="dialog-icon">＋</span>
-                <div><h3>후원금 충전</h3><p>Toss Payments로 결제하고 승인 후 잔액에 반영합니다.</p></div>
+            <div class="component-mode-pair">
+              <div class="dialog-preview donation charge-form-preview">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">＋</span>
+                  <div><h3>후원금 충전</h3><p>충전할 금액과 결제수단을 확인합니다.</p></div>
+                </div>
+                <div class="dialog-summary-line"><span>현재 잔액</span><strong>42,500P</strong></div>
+                <div class="amount-choice"><span>10,000P</span><span class="active">30,000P</span><span>50,000P</span><span>100,000P</span></div>
+                <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>40,000원</em><small>1원 = 1P</small></label>
+                <div class="payment-method-preview"><span>결제수단</span><strong>Toss Payments · 카드</strong></div>
+                <div class="dialog-summary-line"><span>결제 예정 금액</span><strong>40,000원</strong></div>
+                <div class="dialog-summary-line"><span>충전 후 잔액</span><strong>82,500P</strong></div>
+                <div class="dialog-note-line">결제 승인 후 잔액에 반영하고, 실패하면 현재 Dialog에서 다시 시도합니다.</div>
+                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">충전하기</button></div>
               </div>
-              <div class="dialog-summary-line"><span>현재 잔액</span><strong>42,500P</strong></div>
-              <div class="amount-choice"><span>10,000P</span><span>30,000P</span><span>50,000P</span><span>100,000P</span></div>
-              <div class="dialog-field input-like direct-amount-field active"><span>직접 입력</span><em>40,000원</em></div>
-              <div class="payment-method-preview"><span>Toss Payments</span><strong>카드 · 간편결제</strong></div>
-              <div class="dialog-summary-line"><span>결제 예정 금액</span><strong>40,000원</strong></div>
-              <div class="dialog-summary-line"><span>충전 후 잔액</span><strong>82,500P</strong></div>
-              <div class="dialog-note-line">결제 승인 후 잔액에 반영하고, 실패하면 현재 Dialog에서 다시 시도합니다.</div>
-              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">충전하기</button></div>
+              <div class="dialog-preview donation charge-form-preview dark-preview">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">＋</span>
+                  <div><h3>후원금 충전</h3><p>Dark Mode에서 직접 입력을 선택한 상태입니다.</p></div>
+                </div>
+                <div class="dialog-summary-line"><span>현재 잔액</span><strong>42,500P</strong></div>
+                <div class="amount-choice"><span>10,000P</span><span>30,000P</span><span class="active">50,000P</span><span>100,000P</span></div>
+                <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>50,000원</em><small>충전 한도 내 입력</small></label>
+                <div class="payment-method-preview"><span>결제수단</span><strong>Toss Payments · 간편결제</strong></div>
+                <div class="dialog-summary-line"><span>결제 예정 금액</span><strong>50,000원</strong></div>
+                <div class="dialog-summary-line"><span>충전 후 잔액</span><strong>92,500P</strong></div>
+                <div class="dialog-note-line">충전이 끝나면 이전 후원 Dialog로 돌아갈 수 있습니다.</div>
+                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">충전하기</button></div>
+              </div>
             </div>
           </article>
 
           <article id="channel-dialog-broadcast-start" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Dialog</span><strong>방송 시작</strong></div>
-            <div class="dialog-preview live">
-              <div class="dialog-preview-header">
-                <span class="dialog-icon">●</span>
-                <div><h3>방송을 시작할까요?</h3><p>제목, 공개 상태, 채팅 규칙을 확인한 뒤 방송을 시작합니다.</p></div>
+            <div class="component-mode-pair">
+              <div class="dialog-preview live broadcast-start-dialog">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">●</span>
+                  <div><h3>방송을 시작할까요?</h3><p>시청자에게 보이는 제목과 안내문을 마지막으로 확인합니다.</p></div>
+                </div>
+                <div class="broadcast-start-panel">
+                  <div><span>송출 상태</span><strong>대기 중</strong></div>
+                  <div><span>공개 범위</span><strong>공개</strong></div>
+                </div>
+                <div class="dialog-field input-like"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em></div>
+                <div class="dialog-field textarea-like"><span>시작 전 안내</span><em>오늘은 랭크 게임 위주로 진행합니다. 질문은 채팅으로 남겨주세요.</em></div>
+                <div class="dialog-summary-line"><span>채팅 규칙</span><strong>안내문 작성됨</strong></div>
+                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">방송 시작</button></div>
               </div>
-              <div class="broadcast-start-panel">
-                <div><span>송출 상태</span><strong>송출 연결됨</strong></div>
-                <div><span>공개 범위</span><strong>공개</strong></div>
+              <div class="dialog-preview live broadcast-start-dialog dark-preview">
+                <div class="dialog-preview-header">
+                  <span class="dialog-icon">●</span>
+                  <div><h3>방송을 시작할까요?</h3><p>Dark Mode 최종 확인 상태입니다.</p></div>
+                </div>
+                <div class="broadcast-start-panel">
+                  <div><span>송출 상태</span><strong>대기 중</strong></div>
+                  <div><span>공개 범위</span><strong>공개</strong></div>
+                </div>
+                <div class="dialog-field input-like"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em></div>
+                <div class="dialog-field textarea-like"><span>시작 전 안내</span><em>오늘은 랭크 게임 위주로 진행합니다. 질문은 채팅으로 남겨주세요.</em></div>
+                <div class="dialog-summary-line"><span>채팅 규칙</span><strong>안내문 작성됨</strong></div>
+                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">방송 시작</button></div>
               </div>
-              <div class="dialog-field input-like"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em></div>
-              <div class="dialog-field textarea-like"><span>시작 전 안내 문구</span><em>외부 링크는 자동으로 가려지고 채팅은 5초마다 입력할 수 있습니다.</em></div>
-              <div class="dialog-summary-line"><span>운영 로그</span><strong>시작, 종료, 채팅 제한 기록</strong></div>
-              <div class="dialog-summary-line"><span>채팅 규칙</span><strong>슬로우 5초 · 링크 차단</strong></div>
-              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">방송 시작</button></div>
             </div>
           </article>
 
@@ -1121,17 +1291,29 @@
 
           <article id="channel-popup-live-chat" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Popup</span><strong>/live/[creatorId]/chat</strong></div>
-            <div class="chat-popup-window-preview">
-              <div class="popup-window-bar"><span></span><span></span><span></span><strong>PixelPlay Chat</strong></div>
-              <div class="popup-chat-status"><span>LIVE</span><strong>지호 채팅 · 1,248명</strong><em>슬로우 5초</em></div>
-              <div class="popup-chat-toolbar"><span>슬로우 5초</span><span>금칙어 ON</span><span>링크 차단</span></div>
-              <div class="popup-chat-feed">
-                <div class="popup-chat-system-message"><span>32분 전에 방송이 시작됐어요.</span></div>
-                <p><b>하린</b> 오 화면 잘 보여요</p>
-                <p><b>민수</b> 저지연 빠르네요</p>
-                <p><b>수연</b> 채팅창만 따로 보니까 편하네요</p>
+            <div class="component-mode-pair">
+              <div class="chat-popup-window-preview">
+                <div class="popup-window-bar"><span></span><span></span><span></span><strong>PixelPlay Chat</strong></div>
+                <div class="popup-chat-status"><span>LIVE</span><strong>지호 채팅 · 1,248명</strong><em>팝업</em></div>
+                <div class="popup-chat-feed">
+                  <div class="popup-chat-system-message"><span>32분 전에 방송이 시작됐어요.</span></div>
+                  <p><b>하린</b> 오 화면 잘 보여요</p>
+                  <p><b>민수</b> 반응 빠르네요</p>
+                  <p><b>수연</b> 채팅창만 따로 보니까 편하네요</p>
+                </div>
+                <div class="popup-chat-input"><em>메시지를 입력하세요.</em><button>전송</button></div>
               </div>
-              <div class="popup-chat-input"><em>메시지를 입력하세요 · 5초 슬로우 모드</em><button>전송</button></div>
+              <div class="chat-popup-window-preview dark-preview">
+                <div class="popup-window-bar"><span></span><span></span><span></span><strong>PixelPlay Chat</strong></div>
+                <div class="popup-chat-status"><span>LIVE</span><strong>지호 채팅 · 1,248명</strong><em>팝업</em></div>
+                <div class="popup-chat-feed">
+                  <div class="popup-chat-system-message"><span>32분 전에 방송이 시작됐어요.</span></div>
+                  <p><b>하린</b> 오 화면 잘 보여요</p>
+                  <p><b>민수</b> 반응 빠르네요</p>
+                  <p><b>수연</b> 채팅창만 따로 보니까 편하네요</p>
+                </div>
+                <div class="popup-chat-input"><em>메시지를 입력하세요.</em><button>전송</button></div>
+              </div>
             </div>
             <p>방송 운영 중 모니터에 띄워두거나 시청자가 별도 창으로 보는 채팅 전용 화면입니다. OBS Browser Source URL과 분리합니다.</p>
           </article>

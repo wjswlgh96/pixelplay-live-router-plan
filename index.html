@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -9,7 +9,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
-      <nav class="top-tabs" aria-label="문서 탭"><a class="active" href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="wireframes.html">디자인 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+      <nav class="top-tabs" aria-label="문서 탭"><a class="active" href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="live-wireframes.html">라이브 프리뷰</a><a href="chat-wireframes.html">채팅 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
     </div>
   </header>
 
@@ -34,7 +34,7 @@
         <li><strong>채널 관리는 치지직형 웹 스튜디오 흐름을 따릅니다.</strong> MVP 사이드바에는 실제 구현할 방송 운영, 채팅 설정, 보안 설정, 실시간 통계만 두고 후속 후보는 라우터 문서로 분리합니다.</li>
         <li><strong>크리에이터 운영 화면은 <code>/channel/live</code>입니다.</strong> 시청자용 라이브 목록 컴포넌트와 방송 운영 페이지를 혼동하지 않도록 라우터를 분리하고, 채팅창 분리는 <code>/live/[creatorId]/chat</code> 팝아웃 URL로 처리합니다.</li>
         <li><strong>비로그인 시청은 허용하고 상호작용은 제한합니다.</strong> 라이브 보기 자체는 공개하되 채팅 입력, 투표, 팔로우, 후원, 고화질 기능은 로그인 이후에 허용합니다.</li><li><strong>라이브 공개 URL은 creatorId로 둡니다.</strong> 내부 값은 현재 public.user.id를 재사용할 수 있지만 URL 의미는 유저 계정이 아니라 크리에이터 방송 진입점으로 표현합니다.</li>
-      <li><strong>채널 관리는 MVP 라우터를 분리합니다.</strong> 방송 운영은 <code>/channel/live</code>, 채팅 설정은 <code>/channel/chat</code>, 스트림키와 OBS 채팅창 URL은 <code>/channel/security</code>, 실시간 통계는 <code>/channel/analytics</code>로 나눕니다.</li></ul>
+      <li><strong>채널 관리는 MVP 라우터를 분리합니다.</strong> 방송 운영은 <code>/channel/live</code>, 채팅 설정은 <code>/channel/chat</code>, 스트림키와 OBS 채팅창 URL은 <code>/channel/security</code>, 실시간 통계는 <code>/channel/analytics</code>로 나눕니다.</li><li><strong>팔로우는 MVP에 포함합니다.</strong> 팔로우 대상은 공개 채널 게시판이 아니라 크리에이터이며, <code>/user/follows</code>에서 다시 볼 수 있게 합니다.</li></ul>
     </section>
 
     <section class="panel">
@@ -42,8 +42,8 @@
       <div class="timeline">
         <article class="timeline-item"><strong>요약</strong><p>전체 방향과 현재 결정된 네이밍 원칙을 확인합니다.</p></article>
         <article class="timeline-item"><strong>최종 라우터</strong><p>각 라우터의 역할, 접근 가능 여부, query, 비고를 표로 확인합니다.</p></article>
-        <article class="timeline-item"><strong>디자인 프리뷰</strong><p>라우터별 라이트 모드와 다크 모드의 축소 화면을 확인합니다.</p></article>
-        <article class="timeline-item"><strong>랜딩 페이지</strong><p>현재 앱에 반영한 공개 랜딩의 정적 디자인 기준을 확인합니다.</p></article>
+        <article class="timeline-item"><strong>라이브 프리뷰</strong><p>치지직 웹 스튜디오 흐름을 바탕으로 라이브 목록, 검색, 시청, 채널 관리 화면을 확인합니다.</p></article>
+        <article class="timeline-item"><strong>채팅 프리뷰</strong><p>기존 채팅방 목록, 검색, 상세, Dialog와 Popover 상태를 확인합니다.</p></article><article class="timeline-item"><strong>랜딩 페이지</strong><p>현재 앱에 반영한 공개 랜딩의 정적 디자인 기준을 확인합니다.</p></article>
         <article class="timeline-item"><strong>MVP·선택 기능</strong><p>한 달 안에 넣을 필수 기능과 후속 기능을 구분합니다.</p></article>
         <article class="timeline-item"><strong>채팅방 고도화</strong><p>이미 완성된 채팅방 흐름의 개선 메모를 확인합니다.</p></article>
         <article class="timeline-item"><strong>DB 설계</strong><p>라이브, 채널, 후원에 필요한 테이블 후보와 컬럼 이유를 확인합니다.</p></article>

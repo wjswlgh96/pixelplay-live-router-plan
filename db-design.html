@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -9,7 +9,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
-      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="wireframes.html">디자인 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a class="active" href="db-design.html">DB 설계</a></nav>
+      <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="live-wireframes.html">라이브 프리뷰</a><a href="chat-wireframes.html">채팅 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a class="active" href="db-design.html">DB 설계</a></nav>
     </div>
   </header>
   <main class="doc-shell">
@@ -161,6 +161,18 @@
     
     </div>
 
+    <section class="panel">
+      <div class="section-title"><div><h2>creator_follow</h2><p>팔로우 MVP · 필수 · /user/follows, /live/[creatorId], /live/search</p></div></div>
+      <table class="route-table">
+        <thead><tr><th>컬럼</th><th>타입</th><th>키와 필수 여부</th><th>왜 필요한지</th></tr></thead>
+        <tbody>
+          <tr><td><code>follower_id</code></td><td>uuid</td><td>PK part, FK user.id</td><td>팔로우를 누른 일반 유저입니다. 본인 팔로우 목록 조회 기준입니다.</td></tr>
+          <tr><td><code>creator_id</code></td><td>uuid</td><td>PK part, FK user.id 또는 creator_channel.creator_id</td><td>팔로우 대상 크리에이터입니다. 공개 채널 게시판이 아니라 방송 크리에이터 관계입니다.</td></tr>
+          <tr><td><code>created_at</code></td><td>timestamptz</td><td>default now()</td><td>팔로우한 순서와 최신 팔로우 정렬에 필요합니다.</td></tr>
+          <tr><td><code>unique follower_creator</code></td><td>constraint</td><td>required</td><td>같은 크리에이터를 중복 팔로우하지 못하게 합니다.</td></tr>
+        </tbody>
+      </table>
+    </section>
     <section class="panel"><div class="section-title"><div><h2>필수 인덱스와 제약</h2><p>라이브 화면에서 자주 조회하는 경로를 기준으로 잡습니다.</p></div></div><table class="route-table"><thead><tr><th>대상</th><th>인덱스 또는 제약</th><th>필요한 이유</th></tr></thead><tbody>
       <tr><td>현재 라이브 조회</td><td><code>live_session(creator_id, status)</code></td><td><code>/live/[creatorId]</code>에서 현재 방송을 빠르게 찾습니다.</td></tr>
       <tr><td>동시 라이브 제한</td><td><code>unique(creator_id) where status = 'live'</code></td><td>한 크리에이터가 동시에 여러 라이브를 켜는 상태를 막습니다.</td></tr>
@@ -168,7 +180,7 @@
       <tr><td>라이브 채팅</td><td><code>live_chat_message(live_session_id, created_at desc)</code></td><td>채팅 패널의 최근 메시지 조회와 pagination에 필요합니다.</td></tr>
       <tr><td>시청자 presence</td><td><code>live_viewer_presence(live_session_id, last_seen_at desc)</code></td><td>현재 시청자 판정과 stale 세션 정리에 필요합니다.</td></tr>
       <tr><td>투표 중복 방지</td><td><code>unique(poll_id, user_id)</code></td><td>한 유저가 한 투표에 한 번만 참여하게 합니다.</td></tr>
-      <tr><td>후원 내역</td><td><code>donation_transaction(user_id, created_at desc)</code></td><td><code>/user/donations</code> 내부 탭 조회에 필요합니다.</td></tr>
+      <tr><td>후원 내역</td><td><code>donation_transaction(user_id, created_at desc)</code></td><td><code>/user/donations</code> 내부 탭 조회에 필요합니다.</td></tr><tr><td>팔로우 목록</td><td><code>creator_follow(follower_id, created_at desc)</code></td><td><code>/user/follows</code>에서 내가 팔로우한 크리에이터를 정렬합니다.</td></tr><tr><td>크리에이터 팔로워 수</td><td><code>creator_follow(creator_id, created_at desc)</code></td><td><code>/live/search</code>와 <code>/live/[creatorId]</code>에서 팔로워 수와 팔로우 여부를 확인합니다.</td></tr>
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>RLS 초안</h2><p>실제 구현 시 정책 이름과 SQL은 migration에서 구체화합니다.</p></div></div><table class="route-table"><thead><tr><th>테이블</th><th>읽기</th><th>쓰기</th><th>핵심 기준</th></tr></thead><tbody>
@@ -177,7 +189,7 @@
       <tr><td><code>live_session</code></td><td>공개 방송은 <code>anon</code> 읽기 허용</td><td>크리에이터 본인만 생성과 종료</td><td><code>creator_id = auth.uid()</code></td></tr>
       <tr><td><code>live_chat_message</code></td><td>공개 방송 메시지는 읽기 허용</td><td>로그인 유저만 자기 메시지 작성</td><td>비로그인 시청은 허용하지만 입력은 제한</td></tr>
       <tr><td><code>live_poll_vote</code></td><td>결과 집계는 RPC로 공개</td><td>로그인 유저만 1회 참여</td><td><code>user_id = auth.uid()</code>와 unique 제약</td></tr>
-      <tr><td><code>donation_*</code></td><td>본인 지갑과 내역만 읽기</td><td>서버 RPC 또는 service role 경유</td><td>금액 변동은 클라이언트 직접 update 금지</td></tr>
+      <tr><td><code>donation_*</code></td><td>본인 지갑과 내역만 읽기</td><td>서버 RPC 또는 service role 경유</td><td>금액 변동은 클라이언트 직접 update 금지</td></tr><tr><td><code>creator_follow</code></td><td>팔로우 관계와 팔로워 수는 필요한 범위에서 읽기 허용</td><td>로그인 유저가 자기 follower row만 생성과 삭제</td><td><code>follower_id = auth.uid()</code></td></tr>
     </tbody></table></section>
   </main>
 

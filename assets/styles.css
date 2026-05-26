@@ -32,7 +32,7 @@ code { padding: 2px 6px; border-radius: 6px; background: rgba(70, 198, 169, 0.13
 .brand-title { display: flex; flex-direction: column; gap: 2px; }
 .brand-title strong { font-size: 15px; line-height: 1.1; }
 .brand-title span { color: var(--muted); font-size: 12px; }
-.top-tabs { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); align-items: center; gap: 8px; }
+.top-tabs { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: center; gap: 8px; }
 .top-tabs a { min-width: 0; border: 1px solid transparent; border-radius: 8px; padding: 10px 8px; color: var(--muted); font-size: 14px; font-weight: 800; text-align: center; white-space: nowrap; }
 .top-tabs a.active { border-color: rgba(70, 198, 169, 0.35); background: #fff; color: var(--ink); box-shadow: 0 8px 22px rgba(21, 32, 29, 0.08); }
 .hero { padding: 44px 0 28px; }

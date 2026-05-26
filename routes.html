@@ -5,7 +5,7 @@
 <header class="site-header">
   <div class="header-inner">
     <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
-    <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a class="active" href="routes.html">최종 라우터</a><a href="live-wireframes.html">라이브 프리뷰</a><a href="chat-wireframes.html">채팅 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+    <nav class="top-tabs" aria-label="문서 탭"><a class="active" href="routes.html">최종 라우터</a><a href="live-wireframes.html">라이브 프리뷰</a><a href="chat-wireframes.html">채팅 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
   </div>
 </header>
 <main class="doc-shell">
@@ -16,8 +16,8 @@
     <tr><td><code>/live</code></td><td>현재 송출 중인 라이브 목록.</td><td><span class="access-public">공개</span></td><td>없음</td><td>시청자 입장 UI입니다.</td></tr>
     <tr><td><code>/live/search</code></td><td>라이브 방송과 크리에이터 검색.</td><td><span class="access-public">공개</span></td><td><code>?query=검색어</code></td><td>치지직 검색처럼 라이브 결과와 크리에이터 결과를 분리합니다.</td></tr>
     <tr><td><code>/live/[creatorId]</code></td><td>특정 크리에이터의 현재 라이브 시청.</td><td><span class="access-public">공개 읽기</span></td><td>없음</td><td>채팅 입력, 팔로우, 후원은 로그인 필요입니다.</td></tr>
-    <tr><td><code>/live/[creatorId]/chat</code></td><td>라이브 채팅 팝아웃 보조창.</td><td><span class="access-public">공개 읽기</span></td><td>없음</td><td>OBS Studio 채팅창 URL로도 활용합니다.</td></tr>
-    <tr><td><code>/channel/live</code></td><td>방송 운영.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 제목, 카테고리, 태그, 썸네일, 다시보기, 빠른 설정을 관리합니다.</td></tr>
+    <tr><td><code>/live/[creatorId]/chat</code></td><td>라이브 채팅 팝아웃 보조창.</td><td><span class="access-public">공개 읽기</span></td><td>없음</td><td>방송 운영 화면의 채팅창 분리용입니다. OBS용 overlay URL은 <code>/channel/security</code>에서 토큰 포함 주소로 관리합니다.</td></tr>
+    <tr><td><code>/channel/live</code></td><td>방송 운영.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 상태, 제목, 썸네일, 빠른 설정을 관리합니다.</td></tr>
     <tr><td><code>/channel/chat</code></td><td>채팅 설정과 금칙어.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>채팅 참여 범위, 본인인증, 저속 모드, 금칙어를 관리합니다.</td></tr>
     <tr><td><code>/channel/security</code></td><td>방송 보안 설정.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>스트림키와 OBS 채팅창 URL을 관리합니다.</td></tr>
     <tr><td><code>/channel/analytics</code></td><td>실시간 통계.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>시청자 수, 채팅량, 후원, 투표 참여율을 확인합니다.</td></tr>

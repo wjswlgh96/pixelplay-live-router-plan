@@ -5,7 +5,7 @@
 <header class="site-header">
   <div class="header-inner">
     <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
-    <nav class="top-tabs" aria-label="문서 탭"><a href="index.html">요약</a><a href="routes.html">최종 라우터</a><a href="live-wireframes.html">라이브 프리뷰</a><a href="chat-wireframes.html">채팅 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a class="active" href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+    <nav class="top-tabs" aria-label="문서 탭"><a href="routes.html">최종 라우터</a><a href="live-wireframes.html">라이브 프리뷰</a><a href="chat-wireframes.html">채팅 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a class="active" href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
   </div>
 </header>
 <main class="doc-shell">
@@ -15,7 +15,7 @@
     <tr><td>라이브 목록</td><td><code>/live</code></td><td><span class="access-public">공개</span></td><td>Anon User도 현재 방송 중인 목록을 볼 수 있습니다.</td></tr>
     <tr><td>라이브 검색</td><td><code>/live/search</code></td><td><span class="access-public">공개</span></td><td>검색어 요약, 라이브 결과, 크리에이터 결과를 분리합니다.</td></tr>
     <tr><td>라이브 시청</td><td><code>/live/[creatorId]</code></td><td><span class="access-public">공개 읽기</span></td><td>채팅 읽기와 방송 시청은 공개, 입력과 참여는 로그인 필요입니다.</td></tr>
-    <tr><td>채팅창 분리</td><td><code>/live/[creatorId]/chat</code></td><td><span class="access-public">공개 읽기</span></td><td>OBS Studio 채팅창 URL로도 활용합니다.</td></tr>
+    <tr><td>채팅창 분리</td><td><code>/live/[creatorId]/chat</code></td><td><span class="access-public">공개 읽기</span></td><td>방송 운영 중 별도 창으로 띄우는 팝아웃입니다. OBS용 overlay URL은 보안 설정에서 별도로 관리합니다.</td></tr>
     <tr><td>라이브 전용 채팅</td><td><code>/live/[creatorId]</code></td><td><span class="access-login">입력은 로그인 필요</span></td><td>일반 채팅방과 별도 모델로 새로 설계합니다.</td></tr>
     <tr><td>방송 운영</td><td><code>/channel/live</code></td><td><span class="access-owner">본인만</span></td><td>방송 정보, 빠른 설정, 송출 상태, 공지, 투표를 처리합니다.</td></tr>
     <tr><td>채팅 설정</td><td><code>/channel/chat</code></td><td><span class="access-owner">본인만</span></td><td>채팅 권한, 본인인증, 모드, 금칙어를 관리합니다.</td></tr>

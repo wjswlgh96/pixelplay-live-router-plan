@@ -251,7 +251,7 @@
 }
 
 .ready-stage::after {
-  content: "OBS 연결을 기다리는 중";
+  content: "OBS 연결 확인됨";
   position: absolute;
   inset: auto 22px 22px;
   color: rgba(255, 255, 255, 0.92);
@@ -264,6 +264,32 @@
 }
 
 .preview-frame.light .broadcast-chat-feed .live-msg.system {
+  color: var(--muted);
+}
+
+.live-system-pill {
+  display: flex;
+  justify-content: center;
+  padding: 1px 0;
+}
+
+.live-system-pill span {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.preview-frame.light .live-system-pill span {
+  background: rgba(15, 23, 42, 0.06);
   color: var(--muted);
 }
 
@@ -415,6 +441,19 @@
   font-weight: 800;
 }
 
+.setup-field.input-control {
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(70, 198, 169, 0.08);
+}
+
+.setup-field small,
+.dialog-field small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .setup-control-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -534,10 +573,11 @@
 }
 
 .setup-status-card em {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
   font-style: normal;
+  line-height: 1.35;
 }
 
 .broadcast-card-head {
@@ -592,6 +632,28 @@
   font-size: 11px;
   font-weight: 800;
   line-height: 1.35;
+  text-align: center;
+}
+
+.obs-url-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0 0;
+}
+
+.obs-url-action-grid span {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  border: 1px solid rgba(70, 198, 169, 0.18);
+  border-radius: 10px;
+  background: rgba(70, 198, 169, 0.09);
+  color: #117865;
+  font-size: 11px;
+  font-weight: 950;
   text-align: center;
 }
 
@@ -764,11 +826,23 @@
 
 .preview-frame.dark .setup-form-head span,
 .preview-frame.dark .setup-field span,
+.preview-frame.dark .setup-field small,
 .preview-frame.dark .setup-control-block > span,
 .preview-frame.dark .setup-inline-note span,
 .preview-frame.dark .setup-status-card em,
 .preview-frame.dark .setup-toggle em {
   color: var(--dark-muted);
+}
+
+.preview-frame.dark .live-system-pill span {
+  background: rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.dark .obs-url-action-grid span {
+  border-color: rgba(70, 198, 169, 0.22);
+  background: rgba(70, 198, 169, 0.12);
+  color: var(--pixel-mint);
 }
 
 .preview-frame.dark .setup-segmented {
@@ -806,6 +880,10 @@
   }
 
   .library-recommend-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .obs-url-action-grid {
     grid-template-columns: 1fr;
   }
 }

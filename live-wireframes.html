@@ -408,371 +408,67 @@
       </section>
 
 
+
 <!-- ============================ 라이브 검색 ============================ -->
       <section id="preview-live-search" class="preview-section">
         <h2><span class="section-num">3</span>라이브 검색</h2>
-        <p class="section-summary">치지직 검색 결과처럼 검색어 기준 라이브 결과를 먼저 보여주고, 관련 크리에이터와 팔로우 액션은 보조 정보로 둡니다. DB가 확정되기 전까지는 데모 검색 결과 화면으로 관리합니다.</p>
+        <p class="section-summary">치지직 검색 결과 흐름처럼 검색어 요약, 라이브 방송 결과, 크리에이터 결과를 분리합니다. <code>/live</code> 목록 화면을 복제하지 않고 검색 전용 화면으로 관리합니다.</p>
         <div class="preview-meta detail-meta">
           <div class="meta-box"><span>route</span><strong>/live/search?query=검색어</strong></div>
-          <div class="meta-box"><span>role</span><p>검색어와 일치하는 라이브 방송을 빠르게 비교하고 시청 화면으로 이동하는 공개 검색 화면입니다.</p></div>
-          <div class="meta-box"><span>access</span><p>공개. 목록과 진입은 비로그인 가능, 팔로우·채팅 입력은 로그인 이후.</p></div>
-          <div class="meta-box"><span>buttons and controls</span><p>검색어 유지, 방송 결과, 크리에이터 결과, 관련 키워드, 더보기, 팔로우.</p></div>
+          <div class="meta-box"><span>role</span><p>검색어와 일치하는 라이브 방송과 크리에이터를 비교하고 시청 화면으로 이동하는 공개 검색 화면입니다.</p></div>
+          <div class="meta-box"><span>access</span><p>공개. 검색과 시청 진입은 비로그인 가능, 팔로우·채팅 입력은 로그인 이후.</p></div>
+          <div class="meta-box"><span>buttons and controls</span><p>전체·라이브·크리에이터 탭, 라이브 입장, 팔로우, 관련 키워드, 더보기.</p></div>
         </div>
         <div class="preview-pair">
-
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/live/search</span></div>
-            <div class="design-screen live-design-screen">
+            <div class="design-screen live-search-screen">
               <div class="mini-top">
                 <div class="mini-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290" aria-label="PixelPlay"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="var(--background)" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="var(--background)" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg></div>
                 <nav class="mini-top-nav"><a class="active">라이브</a><a>채팅</a></nav>
-                <div class="mini-top-actions header-actions">
-                  <div class="mini-search">리그오브레전드 검색</div>
-                  <span class="mini-button ghost">테마</span>
-                  <span class="mini-button coral">방송하기</span>
-                  <span class="avatar-chip"><span class="avatar-dot online"></span>지호</span>
+                <div class="mini-top-actions header-actions"><div class="mini-search">리그오브레전드</div><span class="mini-button ghost">테마</span><span class="mini-button coral">방송하기</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div>
+              </div>
+              <main class="live-search-shell">
+                <div class="search-page-head live-tone"><span class="mini-kicker">LIVE SEARCH</span><h3>리그오브레전드 검색 결과</h3><p>라이브 중인 방송과 크리에이터를 나눠서 보고, 지금 바로 볼 수 있는 방송부터 빠르게 들어갑니다.</p></div>
+                <div class="search-query-bar live-query"><span>리그오브레전드</span><em>검색 결과 24개</em><strong>다시 검색</strong></div>
+                <div class="search-tabs live-tabs"><span class="active">전체</span><span>라이브</span><span>크리에이터</span></div>
+                <div class="live-search-layout">
+                  <section class="live-result-panel">
+                    <div class="result-panel-head"><div><span>LIVE</span><strong>라이브 방송</strong></div><em>시청자 많은 순</em></div>
+                    <article class="live-result-card featured"><div class="result-thumb coral"><span class="live-badge">LIVE</span><b>3,284명</b></div><div class="result-info"><strong>리그 오브 레전드 같이 보면서 랭크 올려요</strong><p>하린 · 게임 · 42분째 방송 중</p><div class="card-tag-row"><span class="card-tag">#소통</span><span class="card-tag">#랭크</span><span class="card-tag">#저지연</span></div></div><div class="result-actions"><span class="mini-button coral">보러가기</span><span class="mini-button ghost">팔로우</span></div></article>
+                    <article class="live-result-card"><div class="result-thumb mint"><span class="live-badge">LIVE</span><b>812명</b></div><div class="result-info"><strong>오늘 패치 노트 같이 읽고 메타 정리</strong><p>민수 · 분석 · 18분째 방송 중</p><div class="card-tag-row"><span class="card-tag">#패치</span><span class="card-tag">#전략</span></div></div><div class="result-actions"><span class="mini-button coral">보러가기</span></div></article>
+                    <article class="live-result-card"><div class="result-thumb dark"><span class="live-badge">LIVE</span><b>296명</b></div><div class="result-info"><strong>시청자 참여 내전 모집합니다</strong><p>수연 · 참여형 · 9분째 방송 중</p><div class="card-tag-row"><span class="card-tag">#내전</span><span class="card-tag">#참여</span></div></div><div class="result-actions"><span class="mini-button coral">보러가기</span></div></article>
+                  </section>
+                  <aside class="live-search-side">
+                    <section class="creator-result-list"><div class="result-panel-head"><div><span>CREATOR</span><strong>크리에이터</strong></div><em>5명</em></div><div class="creator-result-card live"><span class="creator-mini-avatar"></span><div><strong>LPL 공식</strong><p>팔로워 4.8천명 · LIVE</p></div><span class="mini-button ghost">팔로우</span></div><div class="creator-result-card"><span class="creator-mini-avatar"></span><div><strong>LEC 공식</strong><p>팔로워 2.4천명 · 오프라인</p></div><span class="mini-button ghost">팔로우</span></div><div class="creator-result-card"><span class="creator-mini-avatar"></span><div><strong>리그오브레전드</strong><p>최근 방송 2일 전</p></div><span class="mini-button ghost">팔로우</span></div></section>
+                    <section class="related-keywords"><div class="result-panel-head"><div><span>KEYWORD</span><strong>관련 키워드</strong></div></div><div class="keyword-grid"><span>롤드컵</span><span>LPL</span><span>패치노트</span><span>내전</span><span>랭크</span><span>저지연</span></div></section>
+                  </aside>
                 </div>
-              </div>
-              <div class="live-shell">
-                <aside class="live-nav-sidebar">
-                  <div class="nav-group">
-                    <div class="nav-group-title">탐색</div>
-                    <div class="nav-item active"><span class="nav-icon">🔴</span>지금 라이브</div>
-                    <div class="nav-item"><span class="nav-icon">⭐</span>인기 방송</div>
-                    <div class="nav-item"><span class="nav-icon">🆕</span>방금 시작</div>
-                    <div class="nav-item"><span class="nav-icon">📺</span>다시보기</div>
-                  </div>
-                  <div class="nav-group followed-list">
-                    <div class="nav-group-title">팔로우 중</div>
-                    <div class="nav-item"><span class="creator-mini-avatar"></span>지호 <span class="live-dot"></span></div>
-                    <div class="nav-item"><span class="creator-mini-avatar"></span>하린</div>
-                    <div class="nav-item"><span class="creator-mini-avatar"></span>민수 <span class="live-dot"></span></div>
-                    <div class="nav-item"><span class="creator-mini-avatar"></span>수연</div>
-                  </div>
-                </aside>
-                <main class="live-main">
-                  <div class="live-hero">
-                    <div class="live-hero-thumb">
-                      <div class="live-hero-top">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-chip">1,240명 보는 중</span>
-                      </div>
-                      <div class="live-hero-bottom">
-                        <span class="category-tag">라이브 코딩</span>
-                        <h2>오늘 라우터 다 갈아엎는 방송</h2>
-                        <div class="hero-creator-row"><span class="avatar-dot"></span><b>지호</b> · 32분째 방송 중 · 저지연</div>
-                      </div>
-                    </div>
-                    <div class="live-hero-side">
-                      <div>
-                        <span class="label">검색어와 맞는 방송</span>
-                        <h3>채팅으로 질문하면 바로 답해드려요</h3>
-                        <p>방송 설정, 시청 화면, 채팅 연동까지 한 번에 정리하는 라이브입니다. 채팅창에 질문 던지면 바로 화면에서 코드 고쳐가면서 답변해드려요.</p>
-                        <div class="tag-row"><span>#Next.js</span><span>#Supabase</span><span>#라이브코딩</span></div>
-                      </div>
-                      <div class="cta-row">
-                        <span class="mini-button coral">바로 보러가기</span>
-                        <span class="mini-button ghost">팔로우</span>
-                        <span class="mini-button ghost">공유</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="category-strip">
-                    <span class="category-chip active">전체</span>
-                    <span class="category-chip"><span class="dot"></span>팔로우 중</span>
-                    <span class="category-chip">방금 시작</span>
-                    <span class="category-chip">인기 상승</span>
-                    <span class="category-chip">채팅 활발</span>
-                    <span class="category-chip">저지연</span>
-                  </div>
-                  <div class="live-section-title">
-                    <h3>검색된 라이브 · 24개</h3>
-                    <div class="sort-row">
-                      <span class="sort-button">인기순</span>
-                      <span class="mini-button ghost">팔로우 중만</span>
-                    </div>
-                  </div>
-                  <div class="live-grid-v2">
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-mint">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-pill">842</span>
-                        <span class="creator-mini-avatar"></span>
-                      </div>
-                      <div class="card-meta">
-                        <span class="avatar-dot online"></span>
-                        <div>
-                          <h4>오늘 출시한 PixelPlay 같이 써봐요</h4>
-                          <p class="card-creator">하린 · 라이브 코딩</p>
-                          <div class="card-tag-row"><span class="card-tag">QA</span><span class="card-tag">실시간 채팅</span></div>
-                        </div>
-                      </div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-coral">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-pill">318</span>
-                        <span class="creator-mini-avatar"></span>
-                      </div>
-                      <div class="card-meta">
-                        <span class="avatar-dot online"></span>
-                        <div>
-                          <h4>UI 피드백 받으면서 그 자리에서 고치는 방송</h4>
-                          <p class="card-creator">민수 · UI 피드백</p>
-                          <div class="card-tag-row"><span class="card-tag">UX</span><span class="card-tag">투표</span></div>
-                        </div>
-                      </div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-night">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-pill">96</span>
-                        <span class="creator-mini-avatar"></span>
-                      </div>
-                      <div class="card-meta">
-                        <span class="avatar-dot online"></span>
-                        <div>
-                          <h4>채팅 정책 어디까지 풀어줄까 같이 정해요</h4>
-                          <p class="card-creator">수연 · 시청자 참여</p>
-                          <div class="card-tag-row"><span class="card-tag">저지연</span></div>
-                        </div>
-                      </div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-amber">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-pill">512</span>
-                        <span class="creator-mini-avatar"></span>
-                      </div>
-                      <div class="card-meta">
-                        <span class="avatar-dot online"></span>
-                        <div>
-                          <h4>새벽 작업용 잔잔한 음악만 틀어드림</h4>
-                          <p class="card-creator">지윤 · 작업 방송</p>
-                          <div class="card-tag-row"><span class="card-tag">Lo-fi</span><span class="card-tag">잔잔</span></div>
-                        </div>
-                      </div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-violet">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-pill">2.1K</span>
-                        <span class="creator-mini-avatar"></span>
-                      </div>
-                      <div class="card-meta">
-                        <span class="avatar-dot online"></span>
-                        <div>
-                          <h4>롤 랭크 다이아 도전 13일차 ㄱㄱ</h4>
-                          <p class="card-creator">서진 · 랭크 도전</p>
-                          <div class="card-tag-row"><span class="card-tag">e스포츠</span><span class="card-tag">랭크</span></div>
-                        </div>
-                      </div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-ocean">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-pill">204</span>
-                        <span class="creator-mini-avatar"></span>
-                      </div>
-                      <div class="card-meta">
-                        <span class="avatar-dot online"></span>
-                        <div>
-                          <h4>한강 산책 같이 가실 분 ㅎㅎ</h4>
-                          <p class="card-creator">도윤 · 일상</p>
-                          <div class="card-tag-row"><span class="card-tag">야외</span></div>
-                        </div>
-                      </div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-rose">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-pill">1.4K</span>
-                        <span class="creator-mini-avatar"></span>
-                      </div>
-                      <div class="card-meta">
-                        <span class="avatar-dot online"></span>
-                        <div>
-                          <h4>아무거나 질문 받습니다 (취준 면접 후기)</h4>
-                          <p class="card-creator">예린 · 토크</p>
-                          <div class="card-tag-row"><span class="card-tag">Q&amp;A</span></div>
-                        </div>
-                      </div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-pine">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-pill">76</span>
-                        <span class="creator-mini-avatar"></span>
-                      </div>
-                      <div class="card-meta">
-                        <span class="avatar-dot online"></span>
-                        <div>
-                          <h4>사이드 프로젝트 모각코 — 조용함</h4>
-                          <p class="card-creator">유나 · 개발</p>
-                          <div class="card-tag-row"><span class="card-tag">스터디</span></div>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </main>
-              </div>
+              </main>
             </div>
           </div>
-
           <div class="preview-frame dark">
             <div class="frame-label"><span>Dark Mode</span><span>/live/search</span></div>
-            <div class="design-screen live-design-screen">
+            <div class="design-screen live-search-screen">
               <div class="mini-top">
                 <div class="mini-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290" aria-label="PixelPlay"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="var(--background)" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="var(--background)" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg></div>
                 <nav class="mini-top-nav"><a class="active">라이브</a><a>채팅</a></nav>
-                <div class="mini-top-actions header-actions">
-                  <div class="mini-search">리그오브레전드 검색</div>
-                  <span class="mini-button ghost">테마</span>
-                  <span class="mini-button coral">방송하기</span>
-                  <span class="avatar-chip"><span class="avatar-dot online"></span>지호</span>
+                <div class="mini-top-actions header-actions"><div class="mini-search">리그오브레전드</div><span class="mini-button ghost">테마</span><span class="mini-button coral">방송하기</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div>
+              </div>
+              <main class="live-search-shell">
+                <div class="search-page-head live-tone"><span class="mini-kicker">LIVE SEARCH</span><h3>리그오브레전드 검색 결과</h3><p>방송 결과와 크리에이터 결과를 분리해 보여주고, 라이브 중인 결과를 가장 먼저 배치합니다.</p></div>
+                <div class="search-query-bar live-query"><span>리그오브레전드</span><em>검색 결과 24개</em><strong>다시 검색</strong></div>
+                <div class="search-tabs live-tabs"><span class="active">전체</span><span>라이브</span><span>크리에이터</span></div>
+                <div class="live-search-layout">
+                  <section class="live-result-panel"><div class="result-panel-head"><div><span>LIVE</span><strong>라이브 방송</strong></div><em>시청자 많은 순</em></div><article class="live-result-card featured"><div class="result-thumb coral"><span class="live-badge">LIVE</span><b>3,284명</b></div><div class="result-info"><strong>리그 오브 레전드 같이 보면서 랭크 올려요</strong><p>하린 · 게임 · 42분째 방송 중</p><div class="card-tag-row"><span class="card-tag">#소통</span><span class="card-tag">#랭크</span><span class="card-tag">#저지연</span></div></div><div class="result-actions"><span class="mini-button coral">보러가기</span><span class="mini-button ghost">팔로우</span></div></article><article class="live-result-card"><div class="result-thumb mint"><span class="live-badge">LIVE</span><b>812명</b></div><div class="result-info"><strong>오늘 패치 노트 같이 읽고 메타 정리</strong><p>민수 · 분석 · 18분째 방송 중</p><div class="card-tag-row"><span class="card-tag">#패치</span><span class="card-tag">#전략</span></div></div><div class="result-actions"><span class="mini-button coral">보러가기</span></div></article><article class="live-result-card"><div class="result-thumb dark"><span class="live-badge">LIVE</span><b>296명</b></div><div class="result-info"><strong>시청자 참여 내전 모집합니다</strong><p>수연 · 참여형 · 9분째 방송 중</p><div class="card-tag-row"><span class="card-tag">#내전</span><span class="card-tag">#참여</span></div></div><div class="result-actions"><span class="mini-button coral">보러가기</span></div></article></section>
+                  <aside class="live-search-side"><section class="creator-result-list"><div class="result-panel-head"><div><span>CREATOR</span><strong>크리에이터</strong></div><em>5명</em></div><div class="creator-result-card live"><span class="creator-mini-avatar"></span><div><strong>LPL 공식</strong><p>팔로워 4.8천명 · LIVE</p></div><span class="mini-button ghost">팔로우</span></div><div class="creator-result-card"><span class="creator-mini-avatar"></span><div><strong>LEC 공식</strong><p>팔로워 2.4천명 · 오프라인</p></div><span class="mini-button ghost">팔로우</span></div><div class="creator-result-card"><span class="creator-mini-avatar"></span><div><strong>리그오브레전드</strong><p>최근 방송 2일 전</p></div><span class="mini-button ghost">팔로우</span></div></section><section class="related-keywords"><div class="result-panel-head"><div><span>KEYWORD</span><strong>관련 키워드</strong></div></div><div class="keyword-grid"><span>롤드컵</span><span>LPL</span><span>패치노트</span><span>내전</span><span>랭크</span><span>저지연</span></div></section></aside>
                 </div>
-              </div>
-              <div class="live-shell">
-                <aside class="live-nav-sidebar">
-                  <div class="nav-group">
-                    <div class="nav-group-title">탐색</div>
-                    <div class="nav-item active"><span class="nav-icon">🔴</span>지금 라이브</div>
-                    <div class="nav-item"><span class="nav-icon">⭐</span>인기 방송</div>
-                    <div class="nav-item"><span class="nav-icon">🆕</span>방금 시작</div>
-                    <div class="nav-item"><span class="nav-icon">📺</span>다시보기</div>
-                  </div>
-                  <div class="nav-group followed-list">
-                    <div class="nav-group-title">팔로우 중</div>
-                    <div class="nav-item"><span class="creator-mini-avatar"></span>지호 <span class="live-dot"></span></div>
-                    <div class="nav-item"><span class="creator-mini-avatar"></span>하린</div>
-                    <div class="nav-item"><span class="creator-mini-avatar"></span>민수 <span class="live-dot"></span></div>
-                    <div class="nav-item"><span class="creator-mini-avatar"></span>수연</div>
-                  </div>
-                </aside>
-                <main class="live-main">
-                  <div class="live-hero">
-                    <div class="live-hero-thumb">
-                      <div class="live-hero-top">
-                        <span class="live-badge">LIVE</span>
-                        <span class="viewer-chip">1,240명 보는 중</span>
-                      </div>
-                      <div class="live-hero-bottom">
-                        <span class="category-tag">라이브 코딩</span>
-                        <h2>오늘 라우터 다 갈아엎는 방송</h2>
-                        <div class="hero-creator-row"><span class="avatar-dot"></span><b>지호</b> · 32분째 방송 중 · 저지연</div>
-                      </div>
-                    </div>
-                    <div class="live-hero-side">
-                      <div>
-                        <span class="label">검색어와 맞는 방송</span>
-                        <h3>채팅으로 질문하면 바로 답해드려요</h3>
-                        <p>방송 설정, 시청 화면, 채팅 연동까지 한 번에 정리하는 라이브입니다. 채팅창에 질문 던지면 바로 화면에서 코드 고쳐가면서 답변해드려요.</p>
-                        <div class="tag-row"><span>#Next.js</span><span>#Supabase</span><span>#라이브코딩</span></div>
-                      </div>
-                      <div class="cta-row">
-                        <span class="mini-button coral">바로 보러가기</span>
-                        <span class="mini-button ghost">팔로우</span>
-                        <span class="mini-button ghost">공유</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="category-strip">
-                    <span class="category-chip active">전체</span>
-                    <span class="category-chip"><span class="dot"></span>팔로우 중</span>
-                    <span class="category-chip">방금 시작</span>
-                    <span class="category-chip">인기 상승</span>
-                    <span class="category-chip">채팅 활발</span>
-                    <span class="category-chip">저지연</span>
-                  </div>
-                  <div class="live-section-title">
-                    <h3>검색된 라이브 · 24개</h3>
-                    <div class="sort-row">
-                      <span class="sort-button">인기순</span>
-                      <span class="mini-button ghost">팔로우 중만</span>
-                    </div>
-                  </div>
-                  <div class="live-grid-v2">
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-mint"><span class="live-badge">LIVE</span><span class="viewer-pill">842</span><span class="creator-mini-avatar"></span></div>
-                      <div class="card-meta"><span class="avatar-dot online"></span><div><h4>오늘 출시한 PixelPlay 같이 써봐요</h4><p class="card-creator">하린 · 라이브 코딩</p><div class="card-tag-row"><span class="card-tag">QA</span><span class="card-tag">실시간 채팅</span></div></div></div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-coral"><span class="live-badge">LIVE</span><span class="viewer-pill">318</span><span class="creator-mini-avatar"></span></div>
-                      <div class="card-meta"><span class="avatar-dot online"></span><div><h4>UI 피드백 받으면서 그 자리에서 고치는 방송</h4><p class="card-creator">민수 · UI 피드백</p><div class="card-tag-row"><span class="card-tag">UX</span><span class="card-tag">투표</span></div></div></div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-night"><span class="live-badge">LIVE</span><span class="viewer-pill">96</span><span class="creator-mini-avatar"></span></div>
-                      <div class="card-meta"><span class="avatar-dot online"></span><div><h4>채팅 정책 어디까지 풀어줄까 같이 정해요</h4><p class="card-creator">수연 · 시청자 참여</p><div class="card-tag-row"><span class="card-tag">저지연</span></div></div></div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-amber"><span class="live-badge">LIVE</span><span class="viewer-pill">512</span><span class="creator-mini-avatar"></span></div>
-                      <div class="card-meta"><span class="avatar-dot online"></span><div><h4>새벽 작업용 잔잔한 음악만 틀어드림</h4><p class="card-creator">지윤 · 작업 방송</p><div class="card-tag-row"><span class="card-tag">Lo-fi</span><span class="card-tag">잔잔</span></div></div></div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-violet"><span class="live-badge">LIVE</span><span class="viewer-pill">2.1K</span><span class="creator-mini-avatar"></span></div>
-                      <div class="card-meta"><span class="avatar-dot online"></span><div><h4>롤 랭크 다이아 도전 13일차 ㄱㄱ</h4><p class="card-creator">서진 · 랭크 도전</p><div class="card-tag-row"><span class="card-tag">e스포츠</span><span class="card-tag">랭크</span></div></div></div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-ocean"><span class="live-badge">LIVE</span><span class="viewer-pill">204</span><span class="creator-mini-avatar"></span></div>
-                      <div class="card-meta"><span class="avatar-dot online"></span><div><h4>한강 산책 같이 가실 분 ㅎㅎ</h4><p class="card-creator">도윤 · 일상</p><div class="card-tag-row"><span class="card-tag">야외</span></div></div></div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-rose"><span class="live-badge">LIVE</span><span class="viewer-pill">1.4K</span><span class="creator-mini-avatar"></span></div>
-                      <div class="card-meta"><span class="avatar-dot online"></span><div><h4>아무거나 질문 받습니다 (취준 면접 후기)</h4><p class="card-creator">예린 · 토크</p><div class="card-tag-row"><span class="card-tag">Q&amp;A</span></div></div></div>
-                    </article>
-                    <article class="live-card-v2">
-                      <div class="thumb-frame t-pine"><span class="live-badge">LIVE</span><span class="viewer-pill">76</span><span class="creator-mini-avatar"></span></div>
-                      <div class="card-meta"><span class="avatar-dot online"></span><div><h4>사이드 프로젝트 모각코 — 조용함</h4><p class="card-creator">유나 · 개발</p><div class="card-tag-row"><span class="card-tag">스터디</span></div></div></div>
-                    </article>
-                  </div>
-                </main>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="interaction-preview">
-          <div class="interaction-header"><strong>Button Interaction</strong><span>/live</span></div>
-          <div class="interaction-pair">
-            <div class="interaction-card">
-              <div class="kicker-row"><span class="trigger-pill">정렬 클릭</span></div>
-              <h3>정렬 Dropdown</h3>
-              <div class="dropdown-menu">
-                <div class="menu-item active">인기순 (시청자 수)<span class="check">✓</span></div>
-                <div class="menu-item">최신 시작순</div>
-                <div class="menu-item">팔로우 중인 채널 먼저</div>
-                <div class="divider"></div>
-                <div class="menu-item">언어별 필터…</div>
-              </div>
-              <p>정렬 기준은 URL <code>?sort=</code>에 반영되어 공유 시에도 같은 정렬이 유지됩니다.</p>
-            </div>
-            <div class="interaction-card">
-              <div class="kicker-row"><span class="trigger-pill">팔로우 클릭 · 비로그인</span></div>
-              <h3>로그인 유도 Dialog</h3>
-              <div class="dialog-modal">
-                <h4>팔로우는 로그인 후 가능합니다</h4>
-                <p class="desc">팔로우한 채널은 라이브가 시작될 때 알림을 받고, 사이드바 상단에서 빠르게 진입할 수 있습니다.</p>
-                <div class="button-row" style="justify-content:flex-end">
-                  <span class="mini-button ghost">나중에</span>
-                  <span class="mini-button primary">로그인하고 팔로우</span>
-                </div>
-              </div>
-              <p>로그인 next에는 현재 라이브 카드의 <code>/live/[creatorId]</code>가 들어갑니다.</p>
+              </main>
             </div>
           </div>
         </div>
       </section>
 
-
-          <div class="interaction-preview">
-            <div class="interaction-header"><strong>Search States</strong><span>/live/search</span></div>
-            <div class="interaction-pair">
-              <div class="interaction-card"><div class="kicker-row"><span class="trigger-pill">빈 검색어</span></div><h3>검색어를 입력해주세요</h3><div class="dialog-modal"><p>찾고 싶은 방송 제목이나 크리에이터 이름을 입력하면 라이브 결과가 표시됩니다.</p></div><p>Header 검색 입력만 활성화하고 결과 그리드는 비워둡니다.</p></div>
-              <div class="interaction-card"><div class="kicker-row"><span class="trigger-pill">결과 없음</span></div><h3>일치하는 라이브가 없어요</h3><div class="dialog-modal"><p>다른 검색어를 입력하거나 전체 라이브 목록으로 돌아갈 수 있습니다.</p></div><p>추천 키워드와 전체 라이브 이동 버튼을 함께 제공합니다.</p></div>
-              <div class="interaction-card"><div class="kicker-row"><span class="trigger-pill">더보기 로딩</span></div><h3>다음 라이브를 불러오는 중</h3><div class="dialog-modal"><p>기존 결과는 유지하고 버튼 영역에 로딩 상태만 표시합니다.</p></div><p>카드 레이아웃이 흔들리지 않도록 하단 버튼만 상태를 바꿉니다.</p></div>
-            </div>
-          </div>
 <!-- ============================ 라이브 시청 ============================ -->
       <section id="preview-live-watch" class="preview-section">
         <h2><span class="section-num">3</span>라이브 시청</h2>
@@ -1305,6 +1001,7 @@
       </section>
 
 
+
 <!-- ============================ 팔로우 ============================ -->
       <section id="preview-user-follows" class="preview-section">
         <h2><span class="section-num">8</span>팔로우</h2>
@@ -1312,53 +1009,30 @@
         <div class="preview-meta detail-meta">
           <div class="meta-box"><span>route</span><strong>/user/follows</strong></div>
           <div class="meta-box"><span>role</span><p>팔로우한 크리에이터 목록과 라이브 상태를 확인하고, 방송 중인 크리에이터로 이동합니다.</p></div>
-          <div class="meta-box"><span>access</span><p>로그인 필요. 결제 승인과 웹훅은 서버 API에서 처리합니다.</p></div>
-          <div class="meta-box"><span>buttons and controls</span><p>팔로우 해제, 라이브 보러가기, 오프라인 크리에이터 확인, 최근 방송 여부 확인.</p></div>
+          <div class="meta-box"><span>access</span><p>로그인 필요. 팔로우 목록과 알림 상태는 본인만 확인합니다.</p></div>
+          <div class="meta-box"><span>buttons and controls</span><p>라이브 보러가기, 알림 상태 토글, 팔로우 해제 확인 Dialog, 빈 상태.</p></div>
         </div>
         <div class="preview-pair">
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/user/follows</span></div>
-            <div class="design-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
-              <div class="donation-shell">
-                <aside class="channel-sidebar">
-                  <div class="channel-profile"><span class="avatar-dot online"></span><div><div class="channel-name">지호</div><span class="channel-status">내 계정</span></div></div>
-                  <div class="nav-group studio-menu"><div class="nav-subitem"><span>프로필</span><code>/user/profile</code></div><div class="nav-subitem active"><span>팔로우</span><code>/user/follows</code></div><div class="nav-subitem"><span>후원</span><code>/user/donations</code></div></div>
-                </aside>
-                <main class="donation-main">
-                  <div class="donation-balance-v2"><div class="balance-label">Followed Creators</div><div class="balance-amount">42,500<em>P</em></div><div class="balance-meta"><span>라이브 중 <b>4명</b></span><span>최근 방송 <b>12명</b></span></div><div class="balance-actions"><span class="mini-button">라이브만 보기</span><span class="mini-button outline">전체 보기</span></div></div>
-                  <div class="donation-tabs-v2"><span class="active">전체 <b class="count">18</b></span><span>라이브 중</span><span>오프라인</span><span>최근 방송</span></div>
-                  <div class="donation-grid">
-                    <div class="history-card-v2"><h3>팔로우한 크리에이터 <span>LIVE 4</span></h3><div class="history-row charge"><span class="row-icon">+</span><div><div class="title">임나은</div><div class="sub">LIVE · 674명 시청 중</div></div><span class="amount">보러가기</span><span class="sub">12:22</span></div><div class="history-row"><span class="row-icon">♥</span><div><div class="title">LPL 공식</div><div class="sub">오프라인 · 팔로워 4.8천명</div></div><span class="amount">팔로잉</span><span class="sub">11:40</span></div></div>
-                    <div class="donation-side"><div class="stat-mini-card"><div class="stat-label">라이브 중</div><div class="stat-value">4명</div><div class="stat-sub">지금 바로 시청할 수 있습니다.</div></div><div class="stat-mini-card"><div class="stat-label">알림 상태</div><div class="stat-value">켜짐</div><div class="stat-sub">라이브 시작 알림을 받습니다.</div></div></div>
-                  </div>
-                </main>
+            <div class="design-screen follow-screen">
+              <div class="mini-top"><div class="mini-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290" aria-label="PixelPlay"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="var(--background)" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="var(--background)" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="donation-shell follow-shell">
+                <aside class="channel-sidebar user-sidebar-preview"><div class="channel-profile"><span class="avatar-dot online"></span><div><div class="channel-name">지호</div><span class="channel-status">내 계정</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem active"><span>팔로우</span><code>/user/follows</code></div><div class="nav-subitem"><span>후원</span><code>/user/donations</code></div></div></aside>
+                <main class="follow-main"><div class="settings-header-row"><div><h2>팔로우</h2><p>다시 보고 싶은 크리에이터와 지금 방송 중인 크리에이터를 한곳에서 확인합니다.</p></div><span class="mini-button ghost">라이브 중만 보기</span></div><div class="follow-summary-grid"><div class="follow-stat-card"><span>전체 팔로우</span><strong>18명</strong><p>최근 7일 방송 12명</p></div><div class="follow-stat-card live"><span>라이브 중</span><strong>4명</strong><p>바로 시청 가능</p></div><div class="follow-stat-card"><span>알림 켜짐</span><strong>11명</strong><p>라이브 시작 알림 수신</p></div></div><div class="follow-filter-tabs"><span class="active">전체</span><span>라이브 중</span><span>알림 켜짐</span><span>최근 방송</span></div><div class="follow-grid"><article class="follow-card live"><span class="follow-avatar"></span><div><strong>임나은</strong><p>LIVE · 674명 시청 중 · 12분 전 시작</p><div class="card-tag-row"><span class="card-tag">게임</span><span class="card-tag">저지연</span></div></div><div class="follow-actions"><span class="mini-button coral">보러가기</span><span class="mini-button ghost">알림 켜짐</span></div></article><article class="follow-card"><span class="follow-avatar"></span><div><strong>LPL 공식</strong><p>오프라인 · 최근 방송 어제 · 팔로워 4.8천명</p><div class="card-tag-row"><span class="card-tag">e스포츠</span><span class="card-tag">VOD 있음</span></div></div><div class="follow-actions"><span class="mini-button ghost">팔로잉</span></div></article><article class="follow-card"><span class="follow-avatar"></span><div><strong>하린</strong><p>LIVE · 1,240명 시청 중 · 토크</p><div class="card-tag-row"><span class="card-tag">소통</span><span class="card-tag">투표 진행</span></div></div><div class="follow-actions"><span class="mini-button coral">보러가기</span><span class="mini-button ghost">알림 꺼짐</span></div></article></div><div class="follow-empty-state"><strong>아직 팔로우한 크리에이터가 없습니다</strong><p>마음에 드는 라이브에서 팔로우를 누르면 이곳에 모입니다.</p><span class="mini-button coral">라이브 둘러보기</span></div></main>
               </div>
             </div>
           </div>
           <div class="preview-frame dark">
             <div class="frame-label"><span>Dark Mode</span><span>/user/follows</span></div>
-            <div class="design-screen">
-              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
-              <div class="donation-shell">
-                <aside class="channel-sidebar">
-                  <div class="channel-profile"><span class="avatar-dot online"></span><div><div class="channel-name">지호</div><span class="channel-status">내 계정</span></div></div>
-                  <div class="nav-group studio-menu"><div class="nav-subitem"><span>프로필</span><code>/user/profile</code></div><div class="nav-subitem active"><span>팔로우</span><code>/user/follows</code></div><div class="nav-subitem"><span>후원</span><code>/user/donations</code></div></div>
-                </aside>
-                <main class="donation-main">
-                  <div class="donation-balance-v2"><div class="balance-label">Followed Creators</div><div class="balance-amount">42,500<em>P</em></div><div class="balance-meta"><span>라이브 중 <b>4명</b></span><span>최근 방송 <b>12명</b></span></div><div class="balance-actions"><span class="mini-button">라이브만 보기</span><span class="mini-button outline">전체 보기</span></div></div>
-                  <div class="donation-tabs-v2"><span class="active">전체 <b class="count">18</b></span><span>라이브 중</span><span>오프라인</span><span>최근 방송</span></div>
-                  <div class="donation-grid">
-                    <div class="history-card-v2"><h3>팔로우한 크리에이터 <span>LIVE 4</span></h3><div class="history-row charge"><span class="row-icon">+</span><div><div class="title">임나은</div><div class="sub">LIVE · 674명 시청 중</div></div><span class="amount">보러가기</span><span class="sub">12:22</span></div><div class="history-row"><span class="row-icon">♥</span><div><div class="title">LPL 공식</div><div class="sub">오프라인 · 팔로워 4.8천명</div></div><span class="amount">팔로잉</span><span class="sub">11:40</span></div></div>
-                    <div class="donation-side"><div class="stat-mini-card"><div class="stat-label">라이브 중</div><div class="stat-value">4명</div><div class="stat-sub">지금 바로 시청할 수 있습니다.</div></div><div class="stat-mini-card"><div class="stat-label">알림 상태</div><div class="stat-value">켜짐</div><div class="stat-sub">라이브 시작 알림을 받습니다.</div></div></div>
-                  </div>
-                </main>
-              </div>
+            <div class="design-screen follow-screen">
+              <div class="mini-top"><div class="mini-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20 370 1005 290" aria-label="PixelPlay"><path fill="currentColor" d="M617.047 410.729q1.548-.072 3.098-.106c12.083-.205 49.55-1.2 60.118 2.157 4.354 1.383 8.119 4.022 11.366 7.186 7.804 7.605 16.32 20.749 16.426 31.984.069 7.336-6.318 37.122-9.465 43.856-1.957 4.188-5.006 7.773-8.218 11.054-9.988 10.205-25.833 21.707-39.845 25.191-6.371 1.584-13.674 1.099-20.218 1.222-14.665.276-29.342.111-44.011.204-3.316 13.946-10.99 47.38-14.972 59.735-.879 2.728-51.496 49.837-55.876 53.729 2.806-12.756 6.568-25.621 9.439-38.587l36.08-146.908c13.724-.689 28.628-.224 42.419.001-2.275 11.402-6.31 23.188-8.221 34.215 10.005.487 20.166.339 30.169.443 6.285-.177 12.227.553 18.467-.647 14.32-2.754 12.845-12.632 16.287-22.209 8.768-24.394-7.752-20.983-25.569-20.93q-16.582.148-33.161-.206c-11.527-13.156-23.257-27.722-34.461-41.244 16.482-.121 33.765.409 50.148-.14"/><path fill="#46c6a9" d="M58.978 410.961c23.553.663 47.254.502 70.821.446 11.644-.028 27.864-1.345 38.875.9 5.634 1.149 10.586 3.846 14.785 7.75 8.055 7.489 16.164 21.46 16.436 32.681.124 5.091-8.165 42.137-10.23 46.645-2.501 5.458-6.692 10.347-10.899 14.564-9.4 9.424-25.591 20.911-38.708 23.964-7.507 1.747-16.102 1.075-23.815 1.153q-17.937.218-35.877.257c-1.113 6.796-9.59 48.4-12.25 53.808-2.731 5.552-35.18 36.047-41.424 42.545-2.214 2.305-12.768 13.185-15.414 15.767l4.921-20.244c.564-2.671 1.275-5.454 1.952-8.11 6.965-27.3 12.67-54.935 19.448-82.269-8.648-.471-19.694-.065-28.395.147.793-7.525 5.562-27.77 7.521-35.381l32.663-.056C46.71 517.04 44.5 528.474 42.09 540.04l34.432.168c3.097-12.501 5.488-26.11 8.966-38.293l29.454-.087c35.164-.141 30.271-4.889 38.527-37.633 1.669-6.621-3.305-9.945-9.063-10.165-16.444-.628-33.325.1-49.748-.475-12.117-14.353-23.719-28.016-35.681-42.594"/><path fill="#46c6a9" d="M424.42 455.699c18.015-1.993 40.152 4.794 50.938 20.065 13.712 19.414 4.456 43.028.843 64.111l-85.576-.243c-.307 5.268-1.559 11.865-.489 16.988 2.379 11.398 14.467 12.811 23.831 9.898 9.18-2.856 12.964-7.693 17.118-15.735l39.389-.224c-1.182 3.529-1.94 5.143-3.614 8.495-2.058 3.608-4.095 6.955-6.637 10.345-20.962 27.952-66.16 39.3-95.171 17.367-8.711-6.585-14.769-17.928-15.487-28.938-3.012-46.17 25.347-97.077 74.855-102.129"/><path fill="var(--background)" d="M422.093 487.081c19.43-1.726 24.966 4.695 21.328 23.546q-10.375-.085-20.751-.045-12.038.02-24.075-.083c4.659-11.63 10.514-20.459 23.498-23.418"/><path fill="currentColor" d="M825.68 455.707c13.43-.356 26.729 1.422 37.364 10.182 18.748 15.443 13.739 36.175 8.51 56.02a2063 2063 0 0 0-9.659 37.703c-3.487 14.152-5.713 20.242-4.078 34.816q-19.19-.06-38.378.121c-.004-4.326.336-8.709.608-13.032-5.808 7.33-10.255 10.445-19.391 13.256-12.631 3.887-30.951 3.118-42.714-3.19-8.759-4.697-11.748-9.933-14.481-19.053a53 53 0 0 1-.608-3.526c-1.539-11.811.674-22.496 8.113-31.94a46.1 46.1 0 0 1 15.892-12.734c14.766-7.236 49.954-12.109 66.742-14.119 1.098-4.378 2.41-8.189 1.058-12.661a11.48 11.48 0 0 0-5.718-6.905c-11.062-5.777-23.502 2.5-28.501 12.728-13.161-.416-26.795-.125-39.997-.017 11.824-28.026 34.664-45.518 65.238-47.649"/><path fill="var(--background)" d="M827.267 533.639c2.304.036-.684 7.697-1.14 9.627l-1.024 4.246-.485 2.001c-2.598 11.416-6.499 14.32-18.619 16.971-5.1 1.115-11.897.633-16.707-1.534l-.743-.316c-2.051-1.499-4.255-3.364-4.488-6.132-1.478-17.561 30.383-22.672 43.206-24.863"/><path fill="currentColor" d="M970.752 458.509c14.952.422 30.888.275 45.888.284-10.83 17.402-21.22 36.164-31.609 53.926l-46.178 78.409-19.918 34.134c-2.175 3.688-8.042 14-10.533 16.742l-57.02.401c-8.724.016-18.747.232-27.379-.288 5.882-6.096 22.794-18.512 29.826-23.625 4.869-3.653 14.738-11.259 20.385-12 8.821-1.158 10.516.233 19.255-3.58.332-14.282-1.935-39.771-2.895-54.864l-5.686-89.045q20.29-.072 40.58.137c1.431 30.884 1.585 61.626 2.781 92.515a6318 6318 0 0 1 42.503-93.146"/><path fill="#46c6a9" d="M336.904 459.519c14.046-.303 29.028-.051 43.149-.063-6.393 8.766-14.595 17.454-21.727 25.74l-36.214 42.145c7.659 20.707 17.992 40.375 26.63 60.656.709 1.663 1.352 4.173.803 5.941-2.217.528-12.6.309-15.595.312q-15.045-.033-30.087.207l-10.822-38.436c-5.863 7.945-11.589 14.867-17.932 22.391-4.417 5.24-8.374 10.628-13.043 15.753-1.609.379-10.264.272-12.452.26l-32.76-.457c18.26-21.968 42.129-47.043 61.65-68.38-9.062-20.939-17.987-44.154-26.322-65.471l47.628-.064c1.828 12.129 4.927 26.007 7.431 38.117 3.498-3.625 8.727-11.191 11.998-15.63a572 572 0 0 1 17.665-23.021"/><path fill="#46c6a9" d="M569.045 379.921c-4.385 18.498-9.648 37.16-14.173 55.726a13114 13114 0 0 1-36.819 148.849l-9.322-.066c-4.346.412-10.127-.123-13.807.428l-.132-.293.712-.431c2.047-7.489 3.867-14.052 5.181-21.73l-17.449-.056c.51-4.769 2.504-11.777 3.696-16.608l6.702-27.337c7.01-29.242 14.623-58.78 22.037-88.02.812-3.203 22.482-20.605 25.74-24.444 8.97-8.307 18.366-18.352 27.634-26.018"/><path fill="currentColor" d="M775.442 386.44c-.042 1.61-2.443 11.232-2.982 13.535l-7.71 32.894c-11.568 50.656-24.362 100.803-34.872 151.672l-22.585-.061 3.456-13.652 1.622-8.289-17.752.047c3.147-10.837 5.913-24.765 8.62-36.107l15.072-61.547c2.318-9.503 5.344-24.653 8.353-33.489 5.664-4.754 11.352-10.309 16.84-15.361a3839 3839 0 0 0 31.938-29.642"/><path fill="#46c6a9" d="M205.786 460.584c11.855.797 28.339.44 40.56.486-3.856 19.93-9.969 41.874-14.648 61.717l-11.739 48.892c-.808 3.261-4.446 18.953-5.654 20.382-8.352 9.882-22.059 22.405-31.368 31.405-7.139 6.804-14.427 13.391-21.6 20.272A5544 5544 0 0 1 192.511 516c4.337-17.238 8.238-38.722 13.275-55.416"/><path fill="#46c6a9" d="M60.61 465.471c11.008.257 22.564.025 33.648.085-.698 4.564-2.046 9.874-3.109 14.451l-1.004 4.265-.49 2.004-.497 2.006c-.178.719-.38 1.506-.55 2.227l-.75 3.226c-.22.925-.438 1.852-.681 2.771l-.517 2.001a71 71 0 0 1-.876 3.139l-33.87-.079c2.29-8.673 4.498-17.57 6.465-26.324l.522-2.25.46-1.999c.414-1.842.797-3.69 1.25-5.523"/><path fill="#46c6a9" d="m261.797 395.329.546.582c-.348 3.439-3.006 13.195-3.973 17.061a1730 1730 0 0 1-8.706 34.01 1375 1375 0 0 0-40.204-.414l-.702-.375c.677-2.038 47.717-46.053 53.039-50.864"/><path fill="currentColor" d="M673.184 562.995c6.724-.113 13.465-.037 20.196-.081-1.947 6.363-4.101 12.965-4.926 19.587-.105.838-.193 1.184-.438 2.004-6.44.058-13.11-.009-19.573-.02q.92-3.845 1.652-7.729c.881-4.587 2.274-9.151 3.089-13.761"/><path fill="currentColor" d="M688.016 584.505q9.68-.008 19.361.09c-.658 3.481-1.417 6.469-2.261 9.914l-.77 3.21c-.558 2.278-1.119 4.579-1.853 6.807l-19.067.045c1.037-5.19 2.977-15.14 4.59-20.066"/><path fill="#46c6a9" d="m494.792 584.565.132.293c-1.641 6.445-3.084 13.089-4.567 19.577a853 853 0 0 0-19.265.068c.589-2.943 1.198-5.604 1.816-8.51l.99-4.501a68 68 0 0 1 1.881-6.925c6.401.191 12.621.075 19.013-.002"/></svg></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="donation-shell follow-shell"><aside class="channel-sidebar user-sidebar-preview"><div class="channel-profile"><span class="avatar-dot online"></span><div><div class="channel-name">지호</div><span class="channel-status">내 계정</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem active"><span>팔로우</span><code>/user/follows</code></div><div class="nav-subitem"><span>후원</span><code>/user/donations</code></div></div></aside><main class="follow-main"><div class="settings-header-row"><div><h2>팔로우</h2><p>다시 보고 싶은 크리에이터와 지금 방송 중인 크리에이터를 한곳에서 확인합니다.</p></div><span class="mini-button ghost">라이브 중만 보기</span></div><div class="follow-summary-grid"><div class="follow-stat-card"><span>전체 팔로우</span><strong>18명</strong><p>최근 7일 방송 12명</p></div><div class="follow-stat-card live"><span>라이브 중</span><strong>4명</strong><p>바로 시청 가능</p></div><div class="follow-stat-card"><span>알림 켜짐</span><strong>11명</strong><p>라이브 시작 알림 수신</p></div></div><div class="follow-filter-tabs"><span class="active">전체</span><span>라이브 중</span><span>알림 켜짐</span><span>최근 방송</span></div><div class="follow-grid"><article class="follow-card live"><span class="follow-avatar"></span><div><strong>임나은</strong><p>LIVE · 674명 시청 중 · 12분 전 시작</p><div class="card-tag-row"><span class="card-tag">게임</span><span class="card-tag">저지연</span></div></div><div class="follow-actions"><span class="mini-button coral">보러가기</span><span class="mini-button ghost">알림 켜짐</span></div></article><article class="follow-card"><span class="follow-avatar"></span><div><strong>LPL 공식</strong><p>오프라인 · 최근 방송 어제 · 팔로워 4.8천명</p><div class="card-tag-row"><span class="card-tag">e스포츠</span><span class="card-tag">VOD 있음</span></div></div><div class="follow-actions"><span class="mini-button ghost">팔로잉</span></div></article><article class="follow-card"><span class="follow-avatar"></span><div><strong>하린</strong><p>LIVE · 1,240명 시청 중 · 토크</p><div class="card-tag-row"><span class="card-tag">소통</span><span class="card-tag">투표 진행</span></div></div><div class="follow-actions"><span class="mini-button coral">보러가기</span><span class="mini-button ghost">알림 꺼짐</span></div></article></div><div class="follow-empty-state"><strong>아직 팔로우한 크리에이터가 없습니다</strong><p>마음에 드는 라이브에서 팔로우를 누르면 이곳에 모입니다.</p><span class="mini-button coral">라이브 둘러보기</span></div></main></div>
             </div>
           </div>
         </div>
+        <div class="interaction-preview"><div class="interaction-header"><strong>Button Interaction</strong><span>/user/follows</span></div><div class="interaction-pair"><div class="interaction-card"><div class="kicker-row"><span class="trigger-pill">팔로잉 클릭</span></div><h3>팔로우 해제 확인 Dialog</h3><div class="dialog-modal"><h4>LPL 공식 팔로우를 해제할까요?</h4><p class="desc">해제하면 라이브 시작 알림을 받을 수 없고, 팔로우 목록에서도 사라집니다.</p><div class="button-row" style="justify-content:flex-end"><span class="mini-button ghost">취소</span><span class="mini-button danger">팔로우 해제</span></div></div></div><div class="interaction-card"><div class="kicker-row"><span class="trigger-pill">알림 클릭</span></div><h3>알림 상태 Popover</h3><div class="dropdown-menu"><div class="menu-item active">라이브 시작 알림 받기 <span class="check">✓</span></div><div class="menu-item">알림 끄기</div></div><p>알림 설정은 팔로우 유지 상태에서만 변경합니다.</p></div></div></div>
       </section>
-
 
 <!-- ============================ 후원 홈 ============================ -->
       <section id="preview-user-donations" class="preview-section">
@@ -1479,15 +1153,15 @@
             <p>랜딩 CTA와 로고 기본 이동은 라이브 기준입니다. 채팅 화면에서는 채팅 탭만 민트 active로 바뀝니다.</p>
           </article>
           <article class="state-card">
-            <div class="state-card-head"><span>/chat</span><strong>채팅방 목록 Select Tab</strong></div>
-            <div class="state-tabs segmented-tabs">
-              <span>참여중인 채팅방 <b>6</b></span>
-              <span class="active">참여 가능한 채팅방 <b>18</b></span>
-              <span>내가 만든 채팅방 <b>2</b></span>
+            <div class="state-card-head"><span>/live/search</span><strong>라이브 검색 결과 탭</strong></div>
+            <div class="state-tabs service-tabs live-search-state-tabs">
+              <span class="active">전체</span>
+              <span>라이브</span>
+              <span>크리에이터</span>
             </div>
-            <div class="tab-surface">
-              <strong>참여 가능한 채팅방</strong>
-              <p>검색 입력과 정렬 버튼은 그대로 유지하고, 카드 결과만 현재 탭 기준으로 갱신합니다.</p>
+            <div class="tab-surface live">
+              <strong>리그오브레전드 검색 결과</strong>
+              <p>검색 결과 화면에서는 전체, 라이브, 크리에이터 탭만 사용하고 채팅방 목록 필터는 노출하지 않습니다.</p>
             </div>
           </article>
           <article class="state-card">

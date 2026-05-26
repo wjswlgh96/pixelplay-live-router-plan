@@ -17,10 +17,10 @@
     <tr><td><code>/live/search</code></td><td>라이브 방송과 크리에이터 검색.</td><td><span class="access-public">공개</span></td><td><code>?query=검색어</code></td><td>치지직 검색처럼 라이브 결과와 크리에이터 결과를 분리합니다.</td></tr>
     <tr><td><code>/live/[creatorId]</code></td><td>특정 크리에이터의 현재 라이브 시청.</td><td><span class="access-public">공개 읽기</span></td><td>없음</td><td>채팅 입력, 팔로우, 후원은 로그인 필요입니다.</td></tr>
     <tr><td><code>/live/[creatorId]/chat</code></td><td>라이브 채팅 팝아웃 보조창.</td><td><span class="access-public">공개 읽기</span></td><td>없음</td><td>방송 운영 화면의 채팅창 분리용입니다. OBS용 overlay URL은 <code>/channel/security</code>에서 토큰 포함 주소로 관리합니다.</td></tr>
-    <tr><td><code>/channel/live</code></td><td>방송 운영.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 상태, 제목, 썸네일, 빠른 설정을 관리합니다.</td></tr>
+    <tr><td><code>/channel/live</code></td><td>방송 운영.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 제목, 태그, 공개 상태, 송출 상태를 관리합니다.</td></tr>
     <tr><td><code>/channel/chat</code></td><td>채팅 설정과 금칙어.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>채팅 참여 범위, 본인인증, 저속 모드, 금칙어를 관리합니다.</td></tr>
-    <tr><td><code>/channel/security</code></td><td>방송 보안 설정.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>스트림키와 OBS 채팅창 URL을 관리합니다.</td></tr>
-    <tr><td><code>/channel/analytics</code></td><td>실시간 통계.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>시청자 수, 채팅량, 후원, 투표 참여율을 확인합니다.</td></tr>
+    <tr><td><code>/channel/security</code></td><td>방송 보안 설정.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>스트림키, OBS 채팅창 URL, 선택사항인 후원 Alert URL 후보를 관리합니다.</td></tr>
+    <tr><td><code>/channel/analytics</code></td><td>실시간 통계.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>시청자 수, 채팅량, 후원, 팔로우 증가를 확인합니다.</td></tr>
     <tr><td><code>/chat</code></td><td>채팅방 목록.</td><td><span class="access-login">로그인 필요</span></td><td>필터 후보</td><td>일반 채팅 도메인입니다.</td></tr>
     <tr><td><code>/chat/search</code></td><td>채팅방 검색.</td><td><span class="access-login">로그인 필요</span></td><td><code>?query=검색어</code></td><td>제목 결과와 닉네임 결과를 분리합니다.</td></tr>
     <tr><td><code>/chat/room/[roomId]</code></td><td>채팅방 상세.</td><td><span class="access-login">로그인 필요</span></td><td>없음</td><td>기존 채팅방 상세의 새 경로입니다.</td></tr>
@@ -35,6 +35,7 @@
     <tr><td>리허설 방송</td><td><code>/channel/rehearsal</code></td><td><span class="access-future">후속</span></td><td>정식 송출 전 테스트 방송은 선택 기능입니다.</td></tr>
     <tr><td>공개 채널 홈</td><td><code>/channel/[creatorId]</code></td><td><span class="access-future">후속</span></td><td>SOOP 방송국 같은 팬카페형 페이지는 MVP 이후 검토합니다.</td></tr>
     <tr><td>콘텐츠 관리</td><td><code>/channel/content</code></td><td><span class="access-future">후속</span></td><td>VOD, 클립, 다시보기 관리는 방송 종료 후 기능입니다.</td></tr>
+    <tr><td>OBS 후원 Alert</td><td><code>/live/[creatorId]/alerts/donation</code></td><td><span class="access-future">후속</span></td><td>후원 수신 시 OBS Browser Source에 알림 오버레이를 띄우는 선택 기능입니다.</td></tr>
     <tr><td>권한 관리</td><td><code>/channel/permissions</code></td><td><span class="access-future">후속</span></td><td>MVP 방송 운영은 크리에이터 본인만 수행합니다.</td></tr>
   </tbody></table></section>
 </main>

@@ -539,7 +539,7 @@
                     <p class="live-msg"><span class="author mint">지윤</span>ㅇㅈ</p>
                     <p class="live-msg"><span class="author amber">도윤</span>다음 주제는 뭐예요?</p>
                   </div>
-                  <div class="chat-participation-notice"><strong>팔로우하고 채팅에 참여하세요</strong><span>이 방송은 팔로우 후 1주일이 지나야 채팅할 수 있습니다.</span></div>
+                  <div class="chat-gate-popover"><strong>팔로우하고 채팅에 참여하세요</strong><span>이 방송은 팔로우 후 1주일이 지나야 채팅할 수 있습니다.</span><button type="button">팔로우</button></div>
                   <div class="live-chat-input">
                     <a class="input-wrap preview-action-link" href="#live-dialog-login-required">
                       <em>메시지를 입력하세요.</em>
@@ -626,7 +626,7 @@
                     <p class="live-msg"><span class="author mint">지윤</span>ㅇㅈ</p>
                     <p class="live-msg"><span class="author amber">도윤</span>다음 주제는 뭐예요?</p>
                   </div>
-                  <div class="chat-participation-notice"><strong>팔로우하고 채팅에 참여하세요</strong><span>이 방송은 팔로우 후 1주일이 지나야 채팅할 수 있습니다.</span></div>
+                  <div class="chat-gate-popover"><strong>팔로우하고 채팅에 참여하세요</strong><span>이 방송은 팔로우 후 1주일이 지나야 채팅할 수 있습니다.</span><button type="button">팔로우</button></div>
                   <div class="live-chat-input">
                     <a class="input-wrap preview-action-link" href="#live-dialog-login-required">
                       <em>메시지를 입력하세요.</em>
@@ -652,8 +652,8 @@
 <!-- ============================ 방송 운영 ============================ -->
       <section id="preview-channel-live" class="preview-section">
         <h2><span class="section-num">5</span>방송 운영</h2>
-        <p class="section-summary">방송 운영 화면은 방송 시작 설정 Form과 방송 중 운영 콘솔을 분리합니다. 송출 보안 정보는 보안 설정에서만 다루고, 이 화면에는 시청자에게 보이는 입력값과 비민감 송출 상태만 표시합니다.</p>
-        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/live</strong></div><div class="meta-box"><span>role</span><p>방송 시작 전 설정, 시작 확인, 방송 중 운영, 종료 확인을 처리하는 크리에이터 화면입니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>제목 입력, 태그 입력, 공개 상태, 송출 상태 확인, 방송 시작·종료, 채팅 일시정지, 채팅창 팝업, 투표 생성·종료.</p></div></div>
+        <p class="section-summary">방송 운영 화면은 방송 시작 설정 Form과 방송 중 운영 콘솔을 분리합니다. 송출 보안 정보는 보안 설정에서만 다루고, 방송 공개/비공개 설정은 MVP에서 제외합니다. 이 화면에는 방송 제목·태그와 방송 중 바로 조작할 빠른 설정만 남깁니다.</p>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/live</strong></div><div class="meta-box"><span>role</span><p>방송 시작 전 설정, 시작 확인, 방송 중 운영, 종료 확인을 처리하는 크리에이터 화면입니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>제목 입력, 태그 입력, 방송 시작·종료, 채팅 일시정지, 채팅창 팝업, 빠른 설정, 투표 생성·종료.</p></div></div>
         <div class="state-section-title"><span>방송 준비</span><strong>시청자에게 보이는 값만 설정합니다.</strong></div>
         <div class="preview-pair channel-live-state-pair">
           <div class="preview-frame light">
@@ -662,26 +662,21 @@
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="broadcast-shell">
 
-                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="broadcast-main">
                   <div class="broadcast-stage broadcast-setup-stage">
-                    <div class="live-status-strip ready"><span class="live-pulse">방송 준비</span><span class="uptime">송출 대기</span><span class="quality-pill">공개 예정</span></div>
+                    <div class="live-status-strip ready"><span class="live-pulse">방송 준비</span><span class="uptime">송출 대기</span><span class="quality-pill">준비 완료</span></div>
                     <div class="preview-stage ready-stage"><span class="viewer-chip">시작 전</span><div class="preview-corner">시청 화면 미리보기</div></div>
                     <div class="broadcast-setup-form">
                       <div class="setup-form-head"><div><strong>방송 시작 설정</strong><span>방송 목록과 시청 화면에 바로 보이는 내용을 입력합니다.</span></div><span class="setup-dirty-chip">저장됨</span></div>
                       <label class="setup-field input-control form-control-preview"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em><small>최대 50자 · 목록 카드와 시청 화면에 표시</small></label>
                       <div class="setup-field tag-control-preview form-control-preview"><span>방송 태그</span><div class="tag-entry-control"><div class="banned-word-inline-input tag-inline-input"><em>태그를 입력해주세요.</em><span>0 / 12</span><button type="button">추가</button></div><div class="tag-input-box live-tag-preview"><span class="word-tag">#랭크 <b class="x">×</b></span><span class="word-tag">#소통 <b class="x">×</b></span><span class="word-tag">#저지연 <b class="x">×</b></span></div></div><small>최대 5개 · 검색과 태그 클릭 결과에 사용</small></div>
-                      <div class="setup-control-grid">
-                        <div class="setup-control-block"><span>공개 상태</span><div class="setup-segmented two"><em class="active">공개</em><em>비공개</em></div></div>
-                        <div class="setup-control-block setup-readonly-card"><span>송출 상태</span><strong>대기 중</strong><em>방송 시작 후 연결 상태만 확인합니다.</em></div>
-                        <div class="setup-control-block setup-readonly-card"><span>채팅 규칙</span><strong>안내문 작성됨</strong><em>/channel/chat 설정을 사용합니다.</em></div>
-                        <div class="setup-control-block setup-readonly-card"><span>금칙어</span><strong>3개 등록</strong><em>채팅 설정에서 바로 수정합니다.</em></div>
-                      </div>
-                      <div class="setup-form-actions"><a class="mini-button ghost preview-action-link" href="#preview-channel-chat">채팅 설정 보기</a><a class="mini-button coral preview-action-link" href="#channel-dialog-broadcast-start">방송 시작</a></div>
+                      <div class="setup-form-actions"><a class="mini-button ghost preview-action-link" href="#preview-channel-security">OBS 연결 확인</a><a class="mini-button coral preview-action-link" href="#channel-dialog-broadcast-start">방송 시작</a></div>
                     </div>
                   </div>
                   <div class="broadcast-side">
                     <div class="dash-card broadcast-chat-card prelive-chat-card"><div class="broadcast-card-head"><h3>운영용 채팅</h3><span class="mini-pill">대기 중</span></div><div class="broadcast-chat-feed"><p class="live-msg system">방송을 시작하면 시청자 채팅이 이 영역에 표시됩니다.</p><p class="live-msg system">채팅 일시정지와 팝업은 방송 중에 사용할 수 있습니다.</p><p class="live-msg"><span class="author mint">하린</span>시작하면 여기로 채팅이 들어옵니다.</p></div></div>
+                    <div class="dash-card quick-settings-card"><div class="broadcast-card-head"><h3>빠른 설정</h3><span class="mini-pill">방송 전 확인</span></div><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>채팅 이용 권한</span><strong>팔로워만</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>금칙어</span><strong>스팸 · 홍보 · 욕설</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>링크 차단</span><strong>ON</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-donation"><span>채팅 후원</span><strong>ON</strong></a></div>
                   </div>
                 </main>
               </div>
@@ -693,26 +688,21 @@
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="broadcast-shell">
 
-                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="broadcast-main">
                   <div class="broadcast-stage broadcast-setup-stage">
-                    <div class="live-status-strip ready"><span class="live-pulse">방송 준비</span><span class="uptime">송출 대기</span><span class="quality-pill">공개 예정</span></div>
+                    <div class="live-status-strip ready"><span class="live-pulse">방송 준비</span><span class="uptime">송출 대기</span><span class="quality-pill">준비 완료</span></div>
                     <div class="preview-stage ready-stage"><span class="viewer-chip">시작 전</span><div class="preview-corner">시청 화면 미리보기</div></div>
                     <div class="broadcast-setup-form">
                       <div class="setup-form-head"><div><strong>방송 시작 설정</strong><span>방송 목록과 시청 화면에 바로 보이는 내용을 입력합니다.</span></div><span class="setup-dirty-chip">저장됨</span></div>
                       <label class="setup-field input-control form-control-preview"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em><small>최대 50자 · 목록 카드와 시청 화면에 표시</small></label>
                       <div class="setup-field tag-control-preview form-control-preview"><span>방송 태그</span><div class="tag-entry-control"><div class="banned-word-inline-input tag-inline-input"><em>태그를 입력해주세요.</em><span>0 / 12</span><button type="button">추가</button></div><div class="tag-input-box live-tag-preview"><span class="word-tag">#랭크 <b class="x">×</b></span><span class="word-tag">#소통 <b class="x">×</b></span><span class="word-tag">#저지연 <b class="x">×</b></span></div></div><small>최대 5개 · 검색과 태그 클릭 결과에 사용</small></div>
-                      <div class="setup-control-grid">
-                        <div class="setup-control-block"><span>공개 상태</span><div class="setup-segmented two"><em class="active">공개</em><em>비공개</em></div></div>
-                        <div class="setup-control-block setup-readonly-card"><span>송출 상태</span><strong>대기 중</strong><em>방송 시작 후 연결 상태만 확인합니다.</em></div>
-                        <div class="setup-control-block setup-readonly-card"><span>채팅 규칙</span><strong>안내문 작성됨</strong><em>/channel/chat 설정을 사용합니다.</em></div>
-                        <div class="setup-control-block setup-readonly-card"><span>금칙어</span><strong>3개 등록</strong><em>채팅 설정에서 바로 수정합니다.</em></div>
-                      </div>
-                      <div class="setup-form-actions"><a class="mini-button ghost preview-action-link" href="#preview-channel-chat">채팅 설정 보기</a><a class="mini-button coral preview-action-link" href="#channel-dialog-broadcast-start">방송 시작</a></div>
+                      <div class="setup-form-actions"><a class="mini-button ghost preview-action-link" href="#preview-channel-security">OBS 연결 확인</a><a class="mini-button coral preview-action-link" href="#channel-dialog-broadcast-start">방송 시작</a></div>
                     </div>
                   </div>
                   <div class="broadcast-side">
                     <div class="dash-card broadcast-chat-card prelive-chat-card"><div class="broadcast-card-head"><h3>운영용 채팅</h3><span class="mini-pill">대기 중</span></div><div class="broadcast-chat-feed"><p class="live-msg system">방송을 시작하면 시청자 채팅이 이 영역에 표시됩니다.</p><p class="live-msg system">채팅 일시정지와 팝업은 방송 중에 사용할 수 있습니다.</p><p class="live-msg"><span class="author mint">하린</span>시작하면 여기로 채팅이 들어옵니다.</p></div></div>
+                    <div class="dash-card quick-settings-card"><div class="broadcast-card-head"><h3>빠른 설정</h3><span class="mini-pill">방송 전 확인</span></div><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>채팅 이용 권한</span><strong>팔로워만</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>금칙어</span><strong>스팸 · 홍보 · 욕설</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>링크 차단</span><strong>ON</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-donation"><span>채팅 후원</span><strong>ON</strong></a></div>
                   </div>
                 </main>
               </div>
@@ -726,7 +716,7 @@
             <div class="design-screen channel-screen">
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="broadcast-shell">
-                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="broadcast-main">
                   <div class="broadcast-stage">
                     <div class="live-status-strip"><span class="live-pulse">방송 중</span><span class="uptime">00:32:18</span><span class="quality-pill">안정</span></div>
@@ -744,6 +734,7 @@
                   </div>
                   <div class="broadcast-side chat-only">
                     <div class="dash-card broadcast-chat-card"><div class="broadcast-card-head"><h3>운영용 채팅</h3><a class="mini-pill preview-action-link" href="#channel-popup-live-chat">채팅창 팝업</a></div><div class="studio-chat-toolbar"><span>일시정지 가능</span><span>팝업 보기</span></div><div class="broadcast-chat-feed"><p class="live-msg"><span class="author mint">하린</span>오 화면 잘 보여요</p><p class="live-msg"><b>하린</b>방송 화이팅!! 잘 보고 있어요</p><p class="live-msg"><span class="author amber">민수</span>반응 빠르네요</p><p class="live-msg"><span class="author violet">수연</span>채팅창만 따로 보니까 편하네요</p></div></div>
+                    <div class="dash-card quick-settings-card onair-quick-settings-card"><div class="broadcast-card-head"><h3>빠른 설정</h3><span class="mini-pill">방송 중</span></div><a class="quick-setting-row preview-action-link" href="#preview-channel-donation"><span>채팅 후원</span><strong>ON</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>채팅 이용 권한</span><strong>팔로워만</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>저속 모드</span><strong>5초</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>링크 차단</span><strong>ON</strong></a></div>
                   </div>
                 </main>
               </div>
@@ -754,7 +745,7 @@
             <div class="design-screen channel-screen">
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="broadcast-shell">
-                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="broadcast-main">
                   <div class="broadcast-stage">
                     <div class="live-status-strip"><span class="live-pulse">방송 중</span><span class="uptime">00:32:18</span><span class="quality-pill">안정</span></div>
@@ -772,6 +763,7 @@
                   </div>
                   <div class="broadcast-side chat-only">
                     <div class="dash-card broadcast-chat-card"><div class="broadcast-card-head"><h3>운영용 채팅</h3><a class="mini-pill preview-action-link" href="#channel-popup-live-chat">채팅창 팝업</a></div><div class="studio-chat-toolbar"><span>일시정지 가능</span><span>팝업 보기</span></div><div class="broadcast-chat-feed"><p class="live-msg"><span class="author mint">하린</span>오 화면 잘 보여요</p><p class="live-msg"><b>하린</b>방송 화이팅!! 잘 보고 있어요</p><p class="live-msg"><span class="author amber">민수</span>반응 빠르네요</p><p class="live-msg"><span class="author violet">수연</span>채팅창만 따로 보니까 편하네요</p></div></div>
+                    <div class="dash-card quick-settings-card onair-quick-settings-card"><div class="broadcast-card-head"><h3>빠른 설정</h3><span class="mini-pill">방송 중</span></div><a class="quick-setting-row preview-action-link" href="#preview-channel-donation"><span>채팅 후원</span><strong>ON</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>채팅 이용 권한</span><strong>팔로워만</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>저속 모드</span><strong>5초</strong></a><a class="quick-setting-row preview-action-link" href="#preview-channel-chat"><span>링크 차단</span><strong>ON</strong></a></div>
                   </div>
                 </main>
               </div>
@@ -1069,10 +1061,12 @@
         <div class="component-preview-grid">
           <article id="live-dialog-login-required" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Dialog</span><strong>비로그인 라이브 액션</strong></div>
-            <div class="dialog-preview live compact-login-dialog">
-              <h3>PixelPlay</h3>
-              <p>로그인이 필요한 서비스입니다.<br>로그인 하시겠습니까?</p>
-              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">확인</button></div>
+            <div class="dialog-preview live">
+              <div class="dialog-preview-header">
+                <span class="dialog-icon">▶</span>
+                <div><h3>로그인이 필요합니다</h3><p>로그인 후 채팅, 팔로우, 후원을 사용할 수 있습니다.</p></div>
+              </div>
+              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">로그인하기</button></div>
             </div>
           </article>
 
@@ -1114,9 +1108,9 @@
           </article>
 
           <article id="live-alert-chat-rules" class="interaction-target component-preview-card">
-            <div class="component-card-head"><span>Input Gate</span><strong>첫 채팅 규칙 동의</strong></div>
-            <div class="alert-dialog-preview live-rule-alert">
-              <div class="rule-gate-head"><span class="avatar-dot online"></span><div><h3>지호님의 채팅 규칙 안내</h3><p>처음 채팅하려는 개인에게만 입력창 위에 표시됩니다.</p></div></div>
+            <div class="component-card-head"><span>Popover</span><strong>첫 채팅 규칙 동의</strong></div>
+            <div class="chat-rule-popover-preview">
+              <div class="rule-gate-head"><span class="avatar-dot online"></span><div><h3>지호님의 채팅 규칙 안내</h3><p>채팅 입력창을 처음 누른 로그인 유저에게만 표시합니다.</p></div></div>
               <div class="viewer-rule-body">
                 <p>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</p>
               </div>
@@ -1207,12 +1201,10 @@
                 <div><h3>방송을 시작할까요?</h3><p>시청자에게 보이는 제목과 태그를 마지막으로 확인합니다.</p></div>
               </div>
               <div class="broadcast-start-panel">
-                <div><span>송출 상태</span><strong>대기 중</strong></div>
-                <div><span>공개 범위</span><strong>공개</strong></div>
+                <div><span>OBS 연결</span><strong>정상</strong></div>
               </div>
               <div class="dialog-field input-like"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em></div>
               <div class="dialog-field tag-summary-field"><span>방송 태그</span><em>#랭크 · #소통 · #저지연</em></div>
-              <div class="dialog-summary-line"><span>채팅 규칙</span><strong>안내문 작성됨</strong></div>
               <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">방송 시작</button></div>
             </div>
           </article>

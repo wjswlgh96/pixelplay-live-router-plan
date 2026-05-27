@@ -409,7 +409,7 @@
 }
 
 .dialog-actions button.coral {
-  background: var(--pixel-coral);
+  background: var(--live-coral, #ff6057);
   color: #fff;
 }
 
@@ -563,7 +563,7 @@
 }
 
 .tag-inline-input button {
-  background: var(--pixel-coral);
+  background: var(--live-coral, #ff6057);
 }
 
 .setup-field small,
@@ -1067,7 +1067,7 @@
 .vote-popover-card button.coral,
 .vote-popover-foot button.coral {
   border-color: rgba(255, 96, 87, 0.28);
-  background: var(--pixel-coral);
+  background: var(--live-coral, #ff6057);
   color: #fff;
   box-shadow: 0 8px 18px rgba(255, 96, 87, 0.18);
 }
@@ -1452,7 +1452,7 @@
 .vote-popover-card button.coral:disabled,
 .vote-popover-foot button.coral:disabled {
   border-color: rgba(255, 96, 87, 0.3);
-  background: var(--pixel-coral);
+  background: var(--live-coral, #ff6057);
   color: #fff;
 }
 

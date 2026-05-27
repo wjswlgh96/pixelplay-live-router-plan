@@ -465,7 +465,7 @@
           <div class="meta-box"><span>route</span><strong>/live/[creatorId]</strong></div>
           <div class="meta-box"><span>role</span><p>크리에이터의 현재 방송을 시청합니다. 채팅과 후원이 한 화면에 모이고, 비로그인은 시청과 채팅 읽기만 가능합니다.</p></div>
           <div class="meta-box"><span>access</span><p>공개 시청. 채팅 입력, 팔로우, 후원은 로그인 필요.</p></div>
-          <div class="meta-box"><span>buttons and controls</span><p>재생·일시정지, 음량, 화질, 전체화면, 팔로우, 공유, 채팅 전송, 채팅 하단의 단일 후원 CTA.</p></div>
+          <div class="meta-box"><span>buttons and controls</span><p>재생·일시정지, 음량, 화질, 전체화면, 팔로우, 공유, 채팅 전송, 채팅 하단의 후원·투표 CTA.</p></div>
         </div>
         <div class="preview-pair">
 
@@ -545,6 +545,7 @@
                     </a>
                     <div class="quick-actions">
                       <a class="quick-action coral preview-action-link" href="#live-dialog-donation">후원하기</a>
+                      <a class="quick-action vote preview-action-link" href="#live-popover-vote">투표 참여</a>
                       <a class="quick-action preview-action-link" href="#live-chat-menu">채팅 메뉴</a>
                     </div>
                   </div>
@@ -629,6 +630,7 @@
                     </a>
                     <div class="quick-actions">
                       <a class="quick-action coral preview-action-link" href="#live-dialog-donation">후원하기</a>
+                      <a class="quick-action vote preview-action-link" href="#live-popover-vote">투표 참여</a>
                       <a class="quick-action preview-action-link" href="#live-chat-menu">채팅 메뉴</a>
                     </div>
                   </div>
@@ -646,7 +648,7 @@
       <section id="preview-channel-live" class="preview-section">
         <h2><span class="section-num">5</span>방송 운영</h2>
         <p class="section-summary">방송 운영 화면은 방송 시작 설정 Form과 방송 중 운영 콘솔을 분리합니다. 송출 보안 정보는 보안 설정에서만 다루고, 이 화면에는 시청자에게 보이는 입력값과 비민감 송출 상태만 표시합니다.</p>
-        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/live</strong></div><div class="meta-box"><span>role</span><p>방송 시작 전 설정, 시작 확인, 방송 중 운영, 종료 확인을 처리하는 크리에이터 화면입니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>제목 입력, 태그 입력, 공개 상태, 송출 상태 확인, 방송 시작·종료, 채팅 일시정지, 채팅창 팝업.</p></div></div>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/live</strong></div><div class="meta-box"><span>role</span><p>방송 시작 전 설정, 시작 확인, 방송 중 운영, 종료 확인을 처리하는 크리에이터 화면입니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>제목 입력, 태그 입력, 공개 상태, 송출 상태 확인, 방송 시작·종료, 채팅 일시정지, 채팅창 팝업, 투표 생성·종료.</p></div></div>
         <div class="state-section-title"><span>방송 준비</span><strong>시청자에게 보이는 값만 설정합니다.</strong></div>
         <div class="preview-pair channel-live-state-pair">
           <div class="preview-frame light">
@@ -728,12 +730,14 @@
                     <div class="preview-stage"><span class="live-on-overlay">LIVE</span><span class="viewer-chip">1,240명</span><div class="preview-corner">송출 미리보기</div></div>
                     <div class="broadcast-controls">
                       <div class="bc-button coral"><span class="icon-bullet coral">일시</span>채팅 일시정지<span class="sub">새 메시지만 잠시 막습니다.</span></div>
+                      <a class="bc-button mint preview-action-link" href="#channel-dialog-poll-create"><span class="icon-bullet">투표</span>투표 만들기<span class="sub">진행 중이면 새 투표 불가</span></a>
                       <a class="bc-button preview-action-link" href="#channel-popup-live-chat"><span class="icon-bullet">팝업</span>채팅창 팝업<span class="sub">별도 창으로 분리</span></a>
                       <a class="bc-button danger preview-action-link" href="#channel-alert-broadcast-end"><span class="icon-bullet">종료</span>방송 종료<span class="sub">확인 Dialog 후 종료</span></a>
                     </div>
                   </div>
                   <div class="broadcast-side">
                     <div class="dash-card"><h3>방송 상태</h3><div class="metric-mini-row"><span class="label">현재 시청자</span><strong>1,240</strong></div><div class="metric-mini-row"><span class="label">최고 시청자</span><strong>1,486</strong></div><div class="metric-mini-row"><span class="label">분당 채팅</span><strong>142</strong></div><div class="metric-mini-row"><span class="label">후원 누적</span><strong>68,500P</strong></div></div>
+                    <div class="dash-card poll-active-card"><div class="poll-card-head"><div><span>진행 중 투표</span><strong>다음 게임은 어떤 챔피언으로 갈까요?</strong></div><a class="mini-pill danger preview-action-link" href="#channel-alert-poll-end">투표 종료</a></div><div class="poll-meta-row"><span>참여 184명</span><span>직접 종료 대기</span></div><div class="poll-choice-result"><div><strong>아리</strong><span>108표 · 58%</span></div><em style="--value:58%"></em></div><div class="poll-choice-result"><div><strong>요네</strong><span>76표 · 42%</span></div><em style="--value:42%"></em></div><p class="poll-card-help">진행 중에는 새 투표를 만들 수 없습니다.</p></div>
                     <div class="dash-card broadcast-chat-card"><div class="broadcast-card-head"><h3>운영용 채팅</h3><a class="mini-pill preview-action-link" href="#channel-popup-live-chat">채팅창 팝업</a></div><div class="studio-chat-toolbar"><span>일시정지 가능</span><span>팝업 보기</span></div><div class="broadcast-chat-feed"><p class="live-msg"><span class="author mint">하린</span>오 화면 잘 보여요</p><p class="live-msg"><b>하린</b>방송 화이팅!! 잘 보고 있어요</p><p class="live-msg"><span class="author amber">민수</span>반응 빠르네요</p><p class="live-msg"><span class="author violet">수연</span>채팅창만 따로 보니까 편하네요</p></div></div>
                   </div>
                 </main>
@@ -752,12 +756,14 @@
                     <div class="preview-stage"><span class="live-on-overlay">LIVE</span><span class="viewer-chip">1,240명</span><div class="preview-corner">송출 미리보기</div></div>
                     <div class="broadcast-controls">
                       <div class="bc-button coral"><span class="icon-bullet coral">일시</span>채팅 일시정지<span class="sub">새 메시지만 잠시 막습니다.</span></div>
+                      <a class="bc-button mint preview-action-link" href="#channel-dialog-poll-create"><span class="icon-bullet">투표</span>투표 만들기<span class="sub">진행 중이면 새 투표 불가</span></a>
                       <a class="bc-button preview-action-link" href="#channel-popup-live-chat"><span class="icon-bullet">팝업</span>채팅창 팝업<span class="sub">별도 창으로 분리</span></a>
                       <a class="bc-button danger preview-action-link" href="#channel-alert-broadcast-end"><span class="icon-bullet">종료</span>방송 종료<span class="sub">확인 Dialog 후 종료</span></a>
                     </div>
                   </div>
                   <div class="broadcast-side">
                     <div class="dash-card"><h3>방송 상태</h3><div class="metric-mini-row"><span class="label">현재 시청자</span><strong>1,240</strong></div><div class="metric-mini-row"><span class="label">최고 시청자</span><strong>1,486</strong></div><div class="metric-mini-row"><span class="label">분당 채팅</span><strong>142</strong></div><div class="metric-mini-row"><span class="label">후원 누적</span><strong>68,500P</strong></div></div>
+                    <div class="dash-card poll-active-card"><div class="poll-card-head"><div><span>진행 중 투표</span><strong>다음 게임은 어떤 챔피언으로 갈까요?</strong></div><a class="mini-pill danger preview-action-link" href="#channel-alert-poll-end">투표 종료</a></div><div class="poll-meta-row"><span>참여 184명</span><span>직접 종료 대기</span></div><div class="poll-choice-result"><div><strong>아리</strong><span>108표 · 58%</span></div><em style="--value:58%"></em></div><div class="poll-choice-result"><div><strong>요네</strong><span>76표 · 42%</span></div><em style="--value:42%"></em></div><p class="poll-card-help">진행 중에는 새 투표를 만들 수 없습니다.</p></div>
                     <div class="dash-card broadcast-chat-card"><div class="broadcast-card-head"><h3>운영용 채팅</h3><a class="mini-pill preview-action-link" href="#channel-popup-live-chat">채팅창 팝업</a></div><div class="studio-chat-toolbar"><span>일시정지 가능</span><span>팝업 보기</span></div><div class="broadcast-chat-feed"><p class="live-msg"><span class="author mint">하린</span>오 화면 잘 보여요</p><p class="live-msg"><b>하린</b>방송 화이팅!! 잘 보고 있어요</p><p class="live-msg"><span class="author amber">민수</span>반응 빠르네요</p><p class="live-msg"><span class="author violet">수연</span>채팅창만 따로 보니까 편하네요</p></div></div>
                   </div>
                 </main>
@@ -983,7 +989,10 @@
         <h2><span class="section-num">참고</span>치지직 기준 채널 사이드바 플로우</h2>
         <p class="section-summary">MVP 기준 채널 관리는 치지직 스튜디오의 방송 관리 흐름만 가져오되, 방송 운영은 <code>/channel/live</code>, 채팅 설정은 <code>/channel/chat</code>, 보안 설정은 <code>/channel/security</code>, 통계는 <code>/channel/analytics</code>로 분리합니다. 방송 채팅 분리는 <code>/live/[creatorId]/chat</code> 팝아웃으로 처리하고, 후원은 <code>/user/donations</code>에서 관리합니다.</p>
         <div class="route-flow-grid studio-route-grid">
-          <article class="flow-card live"><span>방송 운영</span><strong>/channel/live</strong><p>방송 준비, 시작, 종료, 방송 태그, 채팅 일시정지를 처리합니다.</p></article><article class="flow-card"><span>채팅 설정</span><strong>/channel/chat</strong><p>채팅 속도, 링크 차단, 금칙어를 관리합니다.</p></article><article class="flow-card"><span>보안 설정</span><strong>/channel/security</strong><p>스트림키, OBS 채팅창 URL, 선택사항인 OBS 후원 Alert URL을 관리합니다.</p></article><article class="flow-card"><span>실시간 통계</span><strong>/channel/analytics</strong><p>방송 중 시청자, 채팅, 후원, 팔로우 지표를 확인합니다.</p></article>
+          <article class="flow-card live"><span>방송 운영</span><strong>/channel/live</strong><p>방송 준비, 시작, 종료, 방송 태그, 투표 생성·종료, 채팅 일시정지를 처리합니다.</p></article>
+          <article class="flow-card"><span>채팅 설정</span><strong>/channel/chat</strong><p>채팅 속도, 링크 차단, 금칙어를 관리합니다.</p></article>
+          <article class="flow-card"><span>보안 설정</span><strong>/channel/security</strong><p>스트림키, OBS 채팅창 URL, 선택사항인 OBS 후원 Alert URL을 관리합니다.</p></article>
+          <article class="flow-card"><span>실시간 통계</span><strong>/channel/analytics</strong><p>방송 중 시청자, 채팅, 후원, 팔로우 지표를 확인합니다.</p></article>
           <article class="flow-card"><span>채팅 팝아웃</span><strong>/live/[creatorId]/chat</strong><p>방송 채팅만 별도 창으로 띄우는 공개 보조 라우터입니다.</p></article>
           <article class="flow-card"><span>후원</span><strong>/user/donations</strong><p>잔액, 충전 Dialog, 후원 내역 탭을 한 화면에서 관리합니다.</p></article>
         </div>
@@ -1001,7 +1010,8 @@
         <p class="section-summary">라이브 시청, 방송 운영, 채널 설정, 후원, 유저 계정에서 필요한 상호작용만 모았습니다. 버튼을 누르면 해당 프리뷰로 이동하고 선택된 카드에 테두리 강조가 들어갑니다.</p>
         <div class="preview-meta detail-meta">
           <div class="meta-box"><span>scope</span><strong>Live UI states</strong></div>
-          <div class="meta-box"><span>targets</span><p>비로그인 유도, 라이브 더보기, 채팅 규칙, 후원, 방송 시작·종료, 채팅 팝아웃, 스트림키, OBS 채팅창 URL, 설정 저장, 계정 보안.</p></div>
+          <div class="meta-box"><span>targets</span><p>비로그인 유도, 라이브 더보기, 채팅 규칙, 후원, 투표 참여, 방송 시작·종료, 투표 생성·종료, 채팅 팝아웃, 설정 저장, 계정 보안.
+            스트림키, OBS 채팅창 URL.</p></div>
           <div class="meta-box"><span>source</span><p>Base UI Dialog·AlertDialog·Dropdown·Popover 질감은 현재 앱 공통 컴포넌트와 동일하게 맞춥니다.</p></div>
           <div class="meta-box"><span>tone</span><p>라이브와 후원 주요 액션은 코랄, 일반 설정은 민트, 위험 액션은 danger 톤으로 구분합니다.</p></div>
         </div>
@@ -1075,6 +1085,43 @@
             </div>
           </article>
 
+          <article id="live-popover-vote" class="interaction-target component-preview-card wide-target">
+            <div class="component-card-head"><span>Popover</span><strong>시청자 투표</strong></div>
+            <div class="vote-popover-row">
+              <div class="vote-popover-card empty">
+                <div class="vote-popover-head"><span>상시 버튼</span><strong>진행 중인 투표가 없어요</strong></div>
+                <p>투표 버튼은 항상 열 수 있고, 투표가 시작되면 이 영역이 실시간으로 참여 화면으로 바뀝니다.</p>
+                <button class="ghost" disabled>대기 중</button>
+              </div>
+              <div class="vote-popover-card active">
+                <div class="vote-popover-head"><span>진행 중</span><strong>다음 게임은 어떤 챔피언으로 갈까요?</strong></div>
+                <div class="vote-choice-list">
+                  <button class="selected"><span>1</span>아리</button>
+                  <button><span>2</span>요네</button>
+                  <button><span>3</span>럭스</button>
+                </div>
+                <div class="vote-popover-foot"><small>남은 시간 02:10</small><button class="coral">투표 확정</button></div>
+              </div>
+              <div class="vote-popover-card voted">
+                <div class="vote-popover-head"><span>참여 완료</span><strong>다음 게임은 어떤 챔피언으로 갈까요?</strong></div>
+                <div class="vote-choice-list locked">
+                  <button class="selected"><span>1</span>아리에 투표했어요</button>
+                  <button><span>2</span>요네</button>
+                </div>
+                <p class="vote-wait-text">크리에이터가 투표를 종료할 때까지 기다려주세요.</p>
+                <button class="coral" disabled>참여 완료</button>
+              </div>
+              <div class="vote-popover-card result">
+                <div class="vote-popover-head"><span>종료됨</span><strong>투표 결과</strong></div>
+                <div class="poll-choice-result compact"><div><strong>아리</strong><span>108표 · 58%</span></div><em style="--value:58%"></em></div>
+                <div class="poll-choice-result compact"><div><strong>요네</strong><span>76표 · 42%</span></div><em style="--value:42%"></em></div>
+                <div class="dialog-summary-line"><span>총 참여</span><strong>184명</strong></div>
+                <button class="ghost">닫기</button>
+              </div>
+            </div>
+            <p>Popover가 열린 상태에서도 Supabase Realtime으로 현재 진행 중인 투표 상태만 갱신합니다.</p>
+          </article>
+
           <article id="live-dialog-donation" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Dialog</span><strong>후원하기</strong></div>
             <div class="dialog-preview donation donation-form-preview">
@@ -1131,6 +1178,29 @@
             </div>
           </article>
 
+          <article id="channel-dialog-poll-create" class="interaction-target component-preview-card">
+            <div class="component-card-head"><span>Dialog</span><strong>투표 만들기</strong></div>
+            <div class="dialog-preview live poll-create-dialog">
+              <div class="dialog-preview-header">
+                <span class="dialog-icon">✓</span>
+                <div><h3>투표를 시작할까요?</h3><p>방송 중 하나의 투표만 진행할 수 있습니다.</p></div>
+              </div>
+              <label class="form-control-preview"><span>주제</span><em>다음 게임은 어떤 챔피언으로 갈까요?</em><small>시청자 Popover와 운영 콘솔에 표시</small></label>
+              <div class="poll-option-editor">
+                <label class="form-control-preview"><span>선택지 1</span><em>아리</em><small>0 / 20</small></label>
+                <label class="form-control-preview"><span>선택지 2</span><em>요네</em><small>0 / 20</small></label>
+                <label class="form-control-preview"><span>선택지 3</span><em>럭스</em><small>선택지는 최대 5개까지 추가</small></label>
+                <button type="button">+ 선택지 추가</button>
+              </div>
+              <div class="poll-timer-row">
+                <label class="form-control-preview"><span>분</span><em>0</em></label>
+                <label class="form-control-preview"><span>초</span><em>0</em></label>
+              </div>
+              <div class="dialog-note-line">0분 0초로 설정하면 크리에이터가 직접 종료할 때까지 투표가 진행됩니다.</div>
+              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">투표 시작</button></div>
+            </div>
+          </article>
+
           <article id="channel-alert-broadcast-end" class="interaction-target component-preview-card danger-target">
             <div class="component-card-head"><span>AlertDialog</span><strong>방송 종료</strong></div>
             <div class="alert-dialog-preview danger">
@@ -1145,6 +1215,23 @@
                 <span>종료 후에는 시청자에게 방송 종료 상태가 표시됩니다.</span>
               </div>
               <div class="dialog-actions"><button class="ghost">계속 방송</button><button class="danger">종료하기</button></div>
+            </div>
+          </article>
+
+          <article id="channel-alert-poll-end" class="interaction-target component-preview-card danger-target">
+            <div class="component-card-head"><span>AlertDialog</span><strong>투표 종료</strong></div>
+            <div class="alert-dialog-preview danger">
+              <div class="dialog-preview-header">
+                <span class="dialog-icon">!</span>
+                <div><h3>투표를 종료할까요?</h3><p>종료하면 더 이상 투표할 수 없고, 시청자 Popover에서 결과를 확인할 수 있습니다.</p></div>
+              </div>
+              <div class="dialog-summary-line"><span>주제</span><strong>다음 게임은 어떤 챔피언으로 갈까요?</strong></div>
+              <div class="dialog-summary-line"><span>참여자</span><strong>184명</strong></div>
+              <div class="dialog-warning-list">
+                <span>진행 중인 투표가 종료되기 전까지 새 투표를 만들 수 없습니다.</span>
+                <span>종료 후 결과는 시청자 투표 Popover에서만 표시합니다.</span>
+              </div>
+              <div class="dialog-actions"><button class="ghost">계속 진행</button><button class="danger">종료하기</button></div>
             </div>
           </article>
 

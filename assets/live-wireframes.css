@@ -189,6 +189,18 @@
   color: #c6322b;
 }
 
+.quick-action.vote {
+  border-color: rgba(70, 198, 169, 0.32);
+  background: rgba(70, 198, 169, 0.14);
+  color: #117865;
+}
+
+.preview-frame.dark .quick-action.vote {
+  border-color: rgba(70, 198, 169, 0.28);
+  background: rgba(70, 198, 169, 0.18);
+  color: var(--pixel-mint);
+}
+
 .live-card-v2[href],
 .live-result-card[href],
 .creator-result-card[href],
@@ -672,6 +684,123 @@
   margin: 0;
 }
 
+.bc-button.mint {
+  border-color: rgba(70, 198, 169, 0.3);
+  background: rgba(70, 198, 169, 0.1);
+}
+
+.bc-button.mint .icon-bullet {
+  background: rgba(70, 198, 169, 0.18);
+  color: #117865;
+}
+
+.mini-pill.danger {
+  background: rgba(255, 96, 87, 0.12);
+  color: #b8322b;
+}
+
+.poll-active-card {
+  display: grid;
+  gap: 12px;
+  border-color: rgba(70, 198, 169, 0.24);
+  background: linear-gradient(180deg, rgba(70, 198, 169, 0.12), rgba(255, 255, 255, 0.92));
+}
+
+.poll-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.poll-card-head span,
+.poll-meta-row span,
+.poll-card-help {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.poll-card-head strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 950;
+  line-height: 1.35;
+}
+
+.poll-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.poll-meta-row span {
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(70, 198, 169, 0.12);
+  color: #117865;
+}
+
+.poll-choice-result {
+  display: grid;
+  gap: 7px;
+}
+
+.poll-choice-result div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.poll-choice-result strong {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.poll-choice-result span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.poll-choice-result em {
+  position: relative;
+  display: block;
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.18);
+}
+
+.poll-choice-result em::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--value, 0%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--pixel-mint), #7dd3fc);
+}
+
+.poll-choice-result.compact {
+  padding: 9px 10px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.poll-card-help {
+  margin: 0;
+  line-height: 1.4;
+}
+
 .studio-chat-toolbar {
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -781,6 +910,175 @@
   color: #fff;
   font-size: 11px;
   font-weight: 950;
+}
+
+.poll-create-dialog,
+.vote-popover-card {
+  color: var(--text);
+}
+
+.poll-option-editor {
+  display: grid;
+  gap: 8px;
+}
+
+.poll-option-editor button {
+  min-height: 38px;
+  border: 1px dashed rgba(70, 198, 169, 0.42);
+  border-radius: 12px;
+  background: rgba(70, 198, 169, 0.1);
+  color: #117865;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.poll-timer-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.wide-target {
+  grid-column: 1 / -1;
+}
+
+.vote-popover-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.vote-popover-card {
+  min-width: 220px;
+  display: grid;
+  align-content: start;
+  gap: 11px;
+  padding: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.vote-popover-card.active {
+  border-color: rgba(70, 198, 169, 0.36);
+  box-shadow: inset 0 0 0 1px rgba(70, 198, 169, 0.08);
+}
+
+.vote-popover-card.voted {
+  border-color: rgba(255, 96, 87, 0.28);
+  background: rgba(255, 96, 87, 0.08);
+}
+
+.vote-popover-head {
+  display: grid;
+  gap: 5px;
+}
+
+.vote-popover-head span {
+  color: #117865;
+  font-size: 10px;
+  font-weight: 950;
+}
+
+.vote-popover-head strong {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 950;
+  line-height: 1.35;
+}
+
+.vote-popover-card p,
+.vote-wait-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.vote-choice-list {
+  display: grid;
+  gap: 8px;
+}
+
+.vote-choice-list button,
+.vote-popover-card > button,
+.vote-popover-foot button {
+  min-height: 34px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.vote-choice-list button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+  padding: 0 10px;
+  text-align: left;
+}
+
+.vote-choice-list button span {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(70, 198, 169, 0.12);
+  color: #117865;
+  font-size: 10px;
+  font-weight: 950;
+}
+
+.vote-choice-list button.selected {
+  border-color: rgba(70, 198, 169, 0.44);
+  background: rgba(70, 198, 169, 0.12);
+}
+
+.vote-choice-list.locked button {
+  opacity: 0.64;
+}
+
+.vote-choice-list.locked button.selected {
+  opacity: 1;
+}
+
+.vote-popover-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.vote-popover-foot small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.vote-popover-card button.coral,
+.vote-popover-foot button.coral {
+  border-color: rgba(255, 96, 87, 0.28);
+  background: var(--pixel-coral);
+  color: #fff;
+}
+
+.vote-popover-card button.ghost {
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--muted);
+}
+
+.vote-popover-card button:disabled,
+.vote-popover-foot button:disabled {
+  cursor: default;
+  opacity: 0.62;
 }
 
 .studio-chat-toolbar span,
@@ -1072,6 +1370,81 @@
   color: var(--pixel-mint);
 }
 
+.preview-frame.dark .bc-button.mint,
+.preview-frame.dark .poll-active-card {
+  border-color: rgba(70, 198, 169, 0.24);
+  background: rgba(70, 198, 169, 0.1);
+}
+
+.preview-frame.dark .bc-button.mint .icon-bullet {
+  background: rgba(70, 198, 169, 0.18);
+  color: var(--pixel-mint);
+}
+
+.preview-frame.dark .mini-pill.danger {
+  background: rgba(255, 96, 87, 0.18);
+  color: #ff9a94;
+}
+
+.preview-frame.dark .poll-card-head strong,
+.preview-frame.dark .poll-choice-result strong,
+.preview-frame.dark .vote-popover-head strong {
+  color: var(--dark-text);
+}
+
+.preview-frame.dark .poll-card-head span,
+.preview-frame.dark .poll-choice-result span,
+.preview-frame.dark .poll-card-help,
+.preview-frame.dark .vote-popover-card p,
+.preview-frame.dark .vote-wait-text,
+.preview-frame.dark .vote-popover-foot small {
+  color: var(--dark-muted);
+}
+
+.preview-frame.dark .poll-meta-row span {
+  background: rgba(70, 198, 169, 0.16);
+  color: var(--pixel-mint);
+}
+
+.preview-frame.dark .poll-choice-result em {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.preview-frame.dark .poll-choice-result.compact,
+.preview-frame.dark .vote-popover-card,
+.preview-frame.dark .vote-choice-list button,
+.preview-frame.dark .vote-popover-card > button,
+.preview-frame.dark .vote-popover-foot button {
+  border-color: rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.74);
+  color: var(--dark-text);
+}
+
+.preview-frame.dark .vote-popover-card.active {
+  border-color: rgba(70, 198, 169, 0.3);
+  background: rgba(70, 198, 169, 0.08);
+}
+
+.preview-frame.dark .vote-popover-card.voted {
+  border-color: rgba(255, 96, 87, 0.24);
+  background: rgba(255, 96, 87, 0.1);
+}
+
+.preview-frame.dark .vote-choice-list button span {
+  background: rgba(70, 198, 169, 0.16);
+  color: var(--pixel-mint);
+}
+
+.preview-frame.dark .vote-choice-list button.selected {
+  border-color: rgba(70, 198, 169, 0.38);
+  background: rgba(70, 198, 169, 0.14);
+}
+
+.preview-frame.dark .vote-popover-card button.ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--dark-muted);
+}
+
 .preview-frame.dark .state-section-title strong {
   color: var(--dark-text);
 }
@@ -1126,5 +1499,9 @@
 
   .obs-url-action-grid {
     grid-template-columns: 1fr;
+  }
+
+  .vote-popover-row {
+    grid-template-columns: repeat(4, minmax(220px, 260px));
   }
 }

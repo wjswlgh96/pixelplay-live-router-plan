@@ -683,6 +683,32 @@
   aspect-ratio: 16 / 7.4;
 }
 
+.live-control-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 300px) minmax(220px, 250px);
+  gap: 14px;
+}
+
+.live-control-layout .broadcast-stage,
+.live-control-layout .broadcast-side {
+  min-width: 0;
+}
+
+.broadcast-chat-column .broadcast-chat-card {
+  min-height: 100%;
+}
+
+.broadcast-chat-column .broadcast-chat-feed {
+  min-height: 300px;
+}
+
+.quick-settings-column {
+  min-height: 100%;
+}
+
+.quick-settings-column .quick-settings-card {
+  min-height: 100%;
+}
+
 .broadcast-setup-form {
   display: grid;
   gap: 10px;
@@ -904,11 +930,16 @@
   padding-bottom: 8px;
 }
 
+.quick-settings-column .broadcast-card-head {
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
 .quick-setting-row {
-  min-height: 48px;
-  display: flex;
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
   padding: 0 4px;
   border-top: 1px solid rgba(148, 163, 184, 0.14);
@@ -916,14 +947,17 @@
   text-decoration: none;
 }
 
-.quick-setting-row span {
+.quick-setting-row > span:first-child {
+  min-width: 0;
+  overflow: hidden;
   color: var(--muted);
   font-size: 11px;
   font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .quick-setting-row strong {
-  max-width: 58%;
   color: var(--text);
   font-size: 12px;
   font-weight: 950;
@@ -933,6 +967,64 @@
 
 .quick-setting-row[href]:hover {
   color: inherit;
+}
+
+.quick-select-group {
+  max-width: 132px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  justify-self: end;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.quick-select-group b,
+.quick-setting-row > b {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 9px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.quick-select-group b::after {
+  content: "⌄";
+  margin-left: 7px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.quick-toggle {
+  width: 38px;
+  flex: 0 0 38px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.42);
+}
+
+.quick-toggle i {
+  width: 18px;
+  height: 18px;
+  display: block;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.18);
+}
+
+.quick-toggle.on {
+  justify-content: flex-end;
+  background: #5c49e8;
 }
 
 .broadcast-card-head {
@@ -957,14 +1049,6 @@
 .broadcast-dashboard-row .dash-card h3 {
   margin-bottom: 12px;
   font-size: 13px;
-}
-
-.broadcast-side.chat-only .broadcast-chat-card {
-  min-height: 100%;
-}
-
-.broadcast-side.chat-only .broadcast-chat-feed {
-  min-height: 320px;
 }
 
 .bc-button.mint {
@@ -1121,6 +1205,154 @@
   color: var(--muted);
   font-size: 10px;
   font-weight: 800;
+}
+
+.settings-form-card {
+  display: grid;
+  gap: 14px;
+  padding: 18px 22px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+}
+
+.settings-form-card h3,
+.settings-side h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 950;
+}
+
+.card-desc,
+.settings-side p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.field-row {
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: minmax(116px, 0.52fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+  border-bottom: 0;
+}
+
+.field-row:first-of-type {
+  border-top: 0;
+}
+
+.field-row > label {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 950;
+  line-height: 1.35;
+}
+
+.field-row .sub {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.select-cluster {
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.select-pill {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.select-pill.active {
+  border-color: rgba(70, 198, 169, 0.42);
+  background: rgba(70, 198, 169, 0.13);
+  color: #117865;
+}
+
+.toggle-switch {
+  min-width: 98px;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  justify-self: end;
+  gap: 10px;
+  min-height: 34px;
+  padding: 0 6px 0 12px;
+  border: 1px solid rgba(70, 198, 169, 0.24);
+  border-radius: 999px;
+  background: rgba(70, 198, 169, 0.12);
+  color: #117865;
+  font-size: 11px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.toggle-switch.off {
+  border-color: rgba(148, 163, 184, 0.24);
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--muted);
+}
+
+.toggle-switch .toggle-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toggle-switch .switch {
+  position: relative;
+  width: 28px;
+  height: 18px;
+  flex: 0 0 28px;
+  border-radius: 999px;
+  background: #5c49e8;
+}
+
+.toggle-switch .switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fff;
+  transform: translateX(10px);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
+}
+
+.toggle-switch.off .switch {
+  background: rgba(148, 163, 184, 0.72);
+}
+
+.toggle-switch.off .switch::after {
+  transform: translateX(0);
 }
 
 .textarea-control-preview em {
@@ -1546,8 +1778,21 @@
 
 .field-row.compact {
   min-height: 40px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
   padding: 0;
   border: 0;
+}
+
+.field-row.compact > label {
+  min-width: 0;
+  padding-top: 0;
+}
+
+.field-row.compact .toggle-switch {
+  min-width: 86px;
+  padding-left: 10px;
 }
 
 .slider-preview {
@@ -1985,6 +2230,7 @@
 
 .preview-frame.dark .rule-textarea-preview,
 .preview-frame.dark .form-control-preview,
+.preview-frame.dark .settings-form-card,
 .preview-frame.dark .donation-option-row,
 .preview-frame.dark .banned-word-inline-input,
 .preview-frame.dark .quick-setting-row {
@@ -1995,14 +2241,52 @@
 .preview-frame.dark .rule-textarea-preview em,
 .preview-frame.dark .form-control-preview em,
 .preview-frame.dark .banned-word-inline-input button,
-.preview-frame.dark .quick-setting-row strong {
+.preview-frame.dark .settings-form-card h3,
+.preview-frame.dark .settings-side h4,
+.preview-frame.dark .field-row > label,
+.preview-frame.dark .select-pill,
+.preview-frame.dark .quick-setting-row strong,
+.preview-frame.dark .quick-select-group b,
+.preview-frame.dark .quick-setting-row > b {
   color: var(--dark-text);
+}
+
+.preview-frame.dark .select-pill {
+  border-color: rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.74);
+}
+
+.preview-frame.dark .select-pill.active {
+  border-color: rgba(70, 198, 169, 0.42);
+  background: rgba(70, 198, 169, 0.16);
+  color: #70e0ca;
+}
+
+.preview-frame.dark .toggle-switch {
+  border-color: rgba(70, 198, 169, 0.26);
+  background: rgba(70, 198, 169, 0.16);
+  color: #70e0ca;
+}
+
+.preview-frame.dark .toggle-switch.off {
+  border-color: rgba(148, 163, 184, 0.2);
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--dark-muted);
+}
+
+.preview-frame.dark .quick-select-group b,
+.preview-frame.dark .quick-setting-row > b {
+  border-color: rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.74);
 }
 
 .preview-frame.dark .rule-textarea-preview span,
 .preview-frame.dark .rule-textarea-preview small,
 .preview-frame.dark .form-control-preview span,
 .preview-frame.dark .form-control-preview small,
+.preview-frame.dark .card-desc,
+.preview-frame.dark .settings-side p,
+.preview-frame.dark .field-row .sub,
 .preview-frame.dark .banned-word-inline-input em,
 .preview-frame.dark .banned-word-inline-input span,
 .preview-frame.dark .quick-setting-row span,
@@ -2037,7 +2321,8 @@
 
   .creator-donation-summary,
   .alert-setting-grid,
-  .donation-revenue-grid {
+  .donation-revenue-grid,
+  .live-control-layout {
     grid-template-columns: 1fr;
   }
 

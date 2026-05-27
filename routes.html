@@ -18,7 +18,7 @@
     <tr><td><code>/live/[creatorId]</code></td><td>특정 크리에이터의 현재 라이브 시청.</td><td><span class="access-public">공개 읽기</span></td><td>없음</td><td>채팅 입력, 팔로우, 후원, 투표 참여는 로그인 필요입니다. 입장 안내, 팔로워 제한, 첫 채팅 규칙 동의는 채팅 로그가 아니라 현재 사용자용 UI 컴포넌트로 표시합니다.</td></tr>
     <tr><td><code>/live/[creatorId]/chat</code></td><td>라이브 채팅 팝아웃 보조창.</td><td><span class="access-public">공개 읽기</span></td><td>없음</td><td>방송 운영 화면의 채팅창 분리용입니다. OBS용 overlay URL은 <code>/channel/security</code>에서 토큰 포함 주소로 관리합니다.</td></tr>
     <tr><td><code>/channel/live</code></td><td>방송 운영.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>방송 제목, 태그, 방송 시작·종료, 방송 중 빠른 설정, 투표 생성과 종료를 관리합니다. 공개/비공개 설정은 MVP에서 제외합니다.</td></tr>
-    <tr><td><code>/channel/chat</code></td><td>채팅 설정과 금칙어.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>채팅 참여 범위, 첫 채팅 전 규칙 동의, 저속 모드, 링크 차단, 금칙어를 관리합니다.</td></tr>
+    <tr><td><code>/channel/chat</code></td><td>채팅 설정과 금칙어.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>채팅 입력은 로그인 유저만 가능하며, 참여 범위는 모든 로그인 유저 또는 팔로워로 제한합니다. 첫 채팅 전 규칙 동의, 저속 모드, 링크 차단, 금칙어를 관리합니다.</td></tr>
     <tr><td><code>/channel/security</code></td><td>방송 보안 설정.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>스트림키, OBS 채팅창 URL, OBS 후원 Alert URL을 관리합니다.</td></tr>
     <tr><td><code>/channel/donation</code></td><td>크리에이터 후원 설정.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>채팅 후원 수신 조건, 후원 수익 요약, 데모용 정산 정보 저장, Alert·TTS 동작을 관리합니다.</td></tr>
     <tr><td><code>/channel/analytics</code></td><td>실시간 통계.</td><td><span class="access-owner">본인만</span></td><td>없음</td><td>시청자 수, 채팅량, 후원, 팔로우 증가를 확인합니다.</td></tr>

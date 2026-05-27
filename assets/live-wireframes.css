@@ -363,47 +363,8 @@
   gap: 10px;
 }
 
-.component-mode-pair {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.dark-preview {
-  border-color: rgba(148, 163, 184, 0.18) !important;
-  background: rgba(15, 23, 42, 0.94) !important;
-  color: var(--dark-text);
-  box-shadow: none !important;
-}
-
-.dark-preview .popover-head strong,
-.dark-preview .dialog-preview-header h3,
-.dark-preview .dialog-summary-line strong,
-.dark-preview .dialog-field em,
-.dark-preview .form-control-preview em,
-.dark-preview .payment-method-preview strong,
-.dark-preview .donation-dialog-balance strong,
-.dark-preview .viewer-rule-body p {
-  color: var(--dark-text);
-}
-
-.dark-preview .popover-head span,
-.dark-preview .dialog-preview-header p,
-.dark-preview .dialog-summary-line span,
-.dark-preview .dialog-field span,
-.dark-preview .form-control-preview span,
-.dark-preview .form-control-preview small,
-.dark-preview .payment-method-preview span,
-.dark-preview .donation-option-row span {
-  color: var(--dark-muted);
-}
-
 .live-channel-menu-preview .menu-item.danger {
   color: #dc2626;
-}
-
-.dark-preview.live-channel-menu-preview .menu-item.danger {
-  color: #fca5a5;
 }
 
 .live-rule-alert {
@@ -1149,44 +1110,7 @@
   color: #ff9a94;
 }
 
-.dark-preview .form-control-preview,
-.dark-preview .payment-method-preview,
-.dark-preview .donation-option-row,
-.dark-preview .dialog-field,
-.dark-preview .dialog-summary-line,
-.dark-preview .donation-dialog-balance,
-.dark-preview .viewer-rule-body {
-  border-color: rgba(148, 163, 184, 0.18);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.dark-preview .amount-choice span {
-  border-color: rgba(148, 163, 184, 0.18);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--dark-muted);
-}
-
-.dark-preview .amount-choice span.active {
-  border-color: rgba(255, 96, 87, 0.36);
-  background: rgba(255, 96, 87, 0.18);
-  color: #ff9a94;
-}
-
-.dark-preview .dialog-note-line {
-  background: rgba(70, 198, 169, 0.12);
-  color: var(--pixel-mint);
-}
-
-.dark-preview .dialog-note-line.warning {
-  background: rgba(255, 96, 87, 0.14);
-  color: #ff9a94;
-}
-
 @media (max-width: 980px) {
-  .component-mode-pair {
-    grid-template-columns: 1fr;
-  }
-
   .live-search-card-grid,
   .live-creator-grid {
     grid-template-columns: 1fr;

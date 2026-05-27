@@ -814,8 +814,8 @@
 <!-- ============================ 보안 설정 ============================ -->
       <section id="preview-channel-security" class="preview-section">
         <h2><span class="section-num">7</span>보안 설정</h2>
-        <p class="section-summary">스트림키와 OBS Studio에 붙일 채팅창 URL은 민감 정보라 보안 설정 페이지로 분리합니다. 표시, 복사, 재발급은 재확인 Dialog를 거치게 설계하고, 후원 알림 오버레이 URL은 MVP 선택사항으로 남깁니다.</p>
-        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/security</strong></div><div class="meta-box"><span>role</span><p>송출 연결에 필요한 스트림키와 OBS 채팅창 URL, 선택사항인 후원 알림 URL을 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근하고, 민감 정보 표시는 재확인이 필요합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>스트림키 보기, 재발급, OBS 채팅 URL 복사, 미리보기, 토큰 재발급, 후원 알림 URL 복사.</p></div></div>
+        <p class="section-summary">스트림키와 OBS Studio에 붙일 채팅창 URL은 민감 정보라 보안 설정 페이지로 분리합니다. 표시, 복사, 재발급은 재확인 Dialog를 거치게 설계하고, OBS 후원 Alert URL은 MVP 선택사항으로 남깁니다.</p>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/security</strong></div><div class="meta-box"><span>role</span><p>송출 연결에 필요한 스트림키와 OBS 채팅창 URL, 선택사항인 OBS 후원 Alert URL을 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근하고, 민감 정보 표시는 재확인이 필요합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>스트림키 보기, 재발급, OBS 채팅 URL 복사, 미리보기, 토큰 재발급, OBS 후원 Alert URL 복사.</p></div></div>
         <div class="preview-pair">
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/channel/security</span></div>
@@ -828,7 +828,7 @@
                   <div class="settings-header-row"><div><h2>보안 설정</h2><p>OBS Studio 연결에 필요한 민감 정보를 관리합니다.</p></div><span class="status-chip safe">보안 상태 정상</span></div>
                   <section class="settings-form-card security-card"><h3>스트림키</h3><p class="card-desc">본인 확인 후 1분 동안만 표시하고, 확인 Dialog 안에서만 복사합니다.</p><div class="secure-field"><span>Stream Key</span><code>pp_live_••••••••••••</code><a href="#channel-dialog-stream-key-view">본인 확인 후 보기</a></div><div class="secure-actions"><a class="mini-button danger preview-action-link" href="#channel-alert-stream-key-reissue">재발급</a></div></section>
                   <section class="settings-form-card security-card"><h3>OBS 채팅창 URL</h3><p class="card-desc">OBS Browser Source에 붙여 넣는 채팅 오버레이 주소입니다.</p><div class="secure-field"><span>Chat URL</span><code>https://pixelplay.studio/live/jiho/chat?overlay=obs</code><a href="#channel-popover-obs-chat-url">복사</a></div><div class="secure-actions"><a class="mini-button ghost preview-action-link" href="#channel-popover-obs-chat-url">미리보기</a><a class="mini-button danger preview-action-link" href="#channel-alert-obs-chat-url-reissue">새 토큰 발급</a></div></section>
-                  <section class="settings-form-card security-card optional-card"><h3>OBS 후원 알림 URL <span class="optional-badge">선택사항</span></h3><p class="card-desc">후원이 들어오면 방송 화면 위에 알림 애니메이션을 띄우는 별도 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><span>복사 예정</span></div></section>
+                  <section class="settings-form-card security-card optional-card"><h3>OBS 후원 Alert URL <span class="optional-badge">선택사항</span></h3><p class="card-desc">후원이 들어오면 방송 화면 위에 오버레이를 띄우는 별도 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><span>복사 예정</span></div></section>
                   <aside class="settings-side"><div class="side-tip"><h4>보안 원칙</h4><p>스트림키와 OBS URL은 화면 진입만으로 노출하지 않습니다. 표시와 재발급은 반드시 재확인 Dialog를 거칩니다.</p></div></aside>
                 </main>
               </div>
@@ -845,7 +845,7 @@
                   <div class="settings-header-row"><div><h2>보안 설정</h2><p>OBS Studio 연결에 필요한 민감 정보를 관리합니다.</p></div><span class="status-chip safe">보안 상태 정상</span></div>
                   <section class="settings-form-card security-card"><h3>스트림키</h3><p class="card-desc">본인 확인 후 1분 동안만 표시하고, 확인 Dialog 안에서만 복사합니다.</p><div class="secure-field"><span>Stream Key</span><code>pp_live_••••••••••••</code><a href="#channel-dialog-stream-key-view">본인 확인 후 보기</a></div><div class="secure-actions"><a class="mini-button danger preview-action-link" href="#channel-alert-stream-key-reissue">재발급</a></div></section>
                   <section class="settings-form-card security-card"><h3>OBS 채팅창 URL</h3><p class="card-desc">OBS Browser Source에 붙여 넣는 채팅 오버레이 주소입니다.</p><div class="secure-field"><span>Chat URL</span><code>https://pixelplay.studio/live/jiho/chat?overlay=obs</code><a href="#channel-popover-obs-chat-url">복사</a></div><div class="secure-actions"><a class="mini-button ghost preview-action-link" href="#channel-popover-obs-chat-url">미리보기</a><a class="mini-button danger preview-action-link" href="#channel-alert-obs-chat-url-reissue">새 토큰 발급</a></div></section>
-                  <section class="settings-form-card security-card optional-card"><h3>OBS 후원 알림 URL <span class="optional-badge">선택사항</span></h3><p class="card-desc">후원이 들어오면 방송 화면 위에 알림 애니메이션을 띄우는 별도 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><span>복사 예정</span></div></section>
+                  <section class="settings-form-card security-card optional-card"><h3>OBS 후원 Alert URL <span class="optional-badge">선택사항</span></h3><p class="card-desc">후원이 들어오면 방송 화면 위에 오버레이를 띄우는 별도 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><span>복사 예정</span></div></section>
                   <aside class="settings-side"><div class="side-tip"><h4>보안 원칙</h4><p>스트림키와 OBS URL은 화면 진입만으로 노출하지 않습니다. 표시와 재발급은 반드시 재확인 Dialog를 거칩니다.</p></div></aside>
                 </main>
               </div>
@@ -899,7 +899,7 @@
 <!-- ============================ 팔로우 ============================ -->
       <section id="preview-user-follows" class="preview-section">
         <h2><span class="section-num">9</span>팔로우</h2>
-        <p class="section-summary">팔로우는 MVP에 포함합니다. 팔로우 대상은 공개 채널 게시판이 아니라 크리에이터이며, 라이브 중인 크리에이터를 빠르게 다시 찾는 용도로 둡니다.</p>
+        <p class="section-summary">팔로우는 MVP에 포함합니다. 팔로우 대상은 크리에이터이며, 라이브 중인 크리에이터를 빠르게 다시 찾는 용도로 둡니다.</p>
         <div class="preview-meta detail-meta">
           <div class="meta-box"><span>route</span><strong>/user/follows</strong></div>
           <div class="meta-box"><span>role</span><p>팔로우한 크리에이터 목록과 라이브 상태를 확인하고, 방송 중인 크리에이터로 이동합니다.</p></div>
@@ -983,7 +983,7 @@
         <h2><span class="section-num">참고</span>치지직 기준 채널 사이드바 플로우</h2>
         <p class="section-summary">MVP 기준 채널 관리는 치지직 스튜디오의 방송 관리 흐름만 가져오되, 방송 운영은 <code>/channel/live</code>, 채팅 설정은 <code>/channel/chat</code>, 보안 설정은 <code>/channel/security</code>, 통계는 <code>/channel/analytics</code>로 분리합니다. 방송 채팅 분리는 <code>/live/[creatorId]/chat</code> 팝아웃으로 처리하고, 후원은 <code>/user/donations</code>에서 관리합니다.</p>
         <div class="route-flow-grid studio-route-grid">
-          <article class="flow-card live"><span>방송 운영</span><strong>/channel/live</strong><p>방송 준비, 시작, 종료, 방송 태그, 채팅 일시정지를 처리합니다.</p></article><article class="flow-card"><span>채팅 설정</span><strong>/channel/chat</strong><p>채팅 속도, 링크 차단, 금칙어를 관리합니다.</p></article><article class="flow-card"><span>보안 설정</span><strong>/channel/security</strong><p>스트림키, OBS 채팅창 URL, 선택사항인 후원 알림 URL을 관리합니다.</p></article><article class="flow-card"><span>실시간 통계</span><strong>/channel/analytics</strong><p>방송 중 시청자, 채팅, 후원, 팔로우 지표를 확인합니다.</p></article>
+          <article class="flow-card live"><span>방송 운영</span><strong>/channel/live</strong><p>방송 준비, 시작, 종료, 방송 태그, 채팅 일시정지를 처리합니다.</p></article><article class="flow-card"><span>채팅 설정</span><strong>/channel/chat</strong><p>채팅 속도, 링크 차단, 금칙어를 관리합니다.</p></article><article class="flow-card"><span>보안 설정</span><strong>/channel/security</strong><p>스트림키, OBS 채팅창 URL, 선택사항인 OBS 후원 Alert URL을 관리합니다.</p></article><article class="flow-card"><span>실시간 통계</span><strong>/channel/analytics</strong><p>방송 중 시청자, 채팅, 후원, 팔로우 지표를 확인합니다.</p></article>
           <article class="flow-card"><span>채팅 팝아웃</span><strong>/live/[creatorId]/chat</strong><p>방송 채팅만 별도 창으로 띄우는 공개 보조 라우터입니다.</p></article>
           <article class="flow-card"><span>후원</span><strong>/user/donations</strong><p>잔액, 충전 Dialog, 후원 내역 탭을 한 화면에서 관리합니다.</p></article>
         </div>
@@ -1026,47 +1026,26 @@
 
           <article id="live-channel-menu" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>DropdownMenu</span><strong>라이브 더보기</strong></div>
-            <div class="component-mode-pair">
-              <div class="popover-preview live live-channel-menu-preview">
-                <div class="popover-head"><strong>지호님의 라이브</strong><span>시청 화면 상단 더보기 메뉴입니다.</span></div>
-                <div class="menu-separator"></div>
-                <div class="menu-item active">공유하기<span class="check">⌁</span></div>
-                <a class="menu-item danger preview-action-link" href="#live-alert-report-live">신고하기<span class="check">›</span></a>
-              </div>
-              <div class="popover-preview live dark-preview live-channel-menu-preview">
-                <div class="popover-head"><strong>지호님의 라이브</strong><span>Dark Mode 메뉴 상태입니다.</span></div>
-                <div class="menu-separator"></div>
-                <div class="menu-item active">공유하기<span class="check">⌁</span></div>
-                <a class="menu-item danger preview-action-link" href="#live-alert-report-live">신고하기<span class="check">›</span></a>
-              </div>
+            <div class="popover-preview live live-channel-menu-preview">
+              <div class="popover-head"><strong>지호님의 라이브</strong><span>시청 화면 상단 더보기 메뉴입니다.</span></div>
+              <div class="menu-separator"></div>
+              <div class="menu-item active">공유하기<span class="check">⌁</span></div>
+              <a class="menu-item danger preview-action-link" href="#live-alert-report-live">신고하기<span class="check">›</span></a>
             </div>
           </article>
 
           <article id="live-alert-report-live" class="interaction-target component-preview-card danger-target">
             <div class="component-card-head"><span>AlertDialog</span><strong>라이브 신고</strong></div>
-            <div class="component-mode-pair">
-              <div class="alert-dialog-preview danger">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">!</span>
-                  <div><h3>라이브를 신고할까요?</h3><p>운영 정책을 위반한 방송이라고 판단될 때만 신고합니다.</p></div>
-                </div>
-                <div class="dialog-warning-list">
-                  <span>신고 내용은 운영 검토에만 사용됩니다.</span>
-                  <span>허위 신고는 서비스 이용에 제한이 생길 수 있습니다.</span>
-                </div>
-                <div class="dialog-actions"><button class="ghost">돌아가기</button><button class="danger">신고하기</button></div>
+            <div class="alert-dialog-preview danger">
+              <div class="dialog-preview-header">
+                <span class="dialog-icon">!</span>
+                <div><h3>라이브를 신고할까요?</h3><p>운영 정책을 위반한 방송이라고 판단될 때만 신고합니다.</p></div>
               </div>
-              <div class="alert-dialog-preview danger dark-preview">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">!</span>
-                  <div><h3>라이브를 신고할까요?</h3><p>운영 정책을 위반한 방송이라고 판단될 때만 신고합니다.</p></div>
-                </div>
-                <div class="dialog-warning-list">
-                  <span>신고 내용은 운영 검토에만 사용됩니다.</span>
-                  <span>허위 신고는 서비스 이용에 제한이 생길 수 있습니다.</span>
-                </div>
-                <div class="dialog-actions"><button class="ghost">돌아가기</button><button class="danger">신고하기</button></div>
+              <div class="dialog-warning-list">
+                <span>신고 내용은 운영 검토에만 사용됩니다.</span>
+                <span>허위 신고는 서비스 이용에 제한이 생길 수 있습니다.</span>
               </div>
+              <div class="dialog-actions"><button class="ghost">돌아가기</button><button class="danger">신고하기</button></div>
             </div>
           </article>
 
@@ -1084,133 +1063,71 @@
 
           <article id="live-alert-chat-rules" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>AlertDialog</span><strong>채팅 규칙</strong></div>
-            <div class="component-mode-pair">
-              <div class="alert-dialog-preview live-rule-alert">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">!</span>
-                  <div><h3>지호님의 채팅 규칙 안내</h3><p>크리에이터가 채팅 설정에서 작성한 안내문을 보여줍니다.</p></div>
-                </div>
-                <div class="viewer-rule-body">
-                  <p>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</p>
-                </div>
-                <div class="dialog-actions"><button class="coral">확인</button></div>
+            <div class="alert-dialog-preview live-rule-alert">
+              <div class="dialog-preview-header">
+                <span class="dialog-icon">!</span>
+                <div><h3>지호님의 채팅 규칙 안내</h3><p>크리에이터가 채팅 설정에서 작성한 안내문을 보여줍니다.</p></div>
               </div>
-              <div class="alert-dialog-preview live-rule-alert dark-preview">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">!</span>
-                  <div><h3>지호님의 채팅 규칙 안내</h3><p>크리에이터가 채팅 설정에서 작성한 안내문을 보여줍니다.</p></div>
-                </div>
-                <div class="viewer-rule-body">
-                  <p>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</p>
-                </div>
-                <div class="dialog-actions"><button class="coral">확인</button></div>
+              <div class="viewer-rule-body">
+                <p>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</p>
               </div>
+              <div class="dialog-actions"><button class="coral">확인</button></div>
             </div>
           </article>
 
           <article id="live-dialog-donation" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Dialog</span><strong>후원하기</strong></div>
-            <div class="component-mode-pair">
-              <div class="dialog-preview donation donation-form-preview">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">₩</span>
-                  <div><h3>후원 메시지 보내기</h3><p>방송에 표시될 메시지와 금액을 확인합니다.</p></div>
-                </div>
-                <div class="donation-option-row"><span>익명으로 후원</span><em>OFF</em></div>
-                <div class="dialog-summary-line"><span>받는 크리에이터</span><strong>지호</strong></div>
-                <label class="form-control-preview textarea-control-preview"><span>메시지</span><em>오늘 방송도 잘 보고 있어요.</em><small>16 / 100</small></label>
-                <div class="donation-dialog-balance"><span>보유 후원금</span><strong>42,500P</strong></div>
-                <div class="amount-choice"><span>1,000P</span><span class="active">5,000P</span><span>10,000P</span><span>전액</span></div>
-                <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>7,000P</em><small>최소 1,000P</small></label>
-                <div class="donation-preview-bubble"><b>지호</b><span>7,000P</span><p>오늘 방송도 잘 보고 있어요.</p></div>
-                <div class="dialog-summary-line"><span>후원 후 잔액</span><strong>35,500P</strong></div>
-                <div class="dialog-note-line">잔액이 부족한 금액을 입력하면 버튼이 충전하고 후원하기로 바뀝니다.</div>
-                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">후원하기</button></div>
+            <div class="dialog-preview donation donation-form-preview">
+              <div class="dialog-preview-header">
+                <span class="dialog-icon">₩</span>
+                <div><h3>후원 메시지 보내기</h3><p>방송에 표시될 메시지와 금액을 확인합니다.</p></div>
               </div>
-              <div class="dialog-preview donation donation-form-preview dark-preview">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">₩</span>
-                  <div><h3>후원 메시지 보내기</h3><p>잔액보다 큰 금액을 입력한 상태입니다.</p></div>
-                </div>
-                <div class="donation-option-row"><span>익명으로 후원</span><em>ON</em></div>
-                <div class="dialog-summary-line"><span>받는 크리에이터</span><strong>지호</strong></div>
-                <label class="form-control-preview textarea-control-preview"><span>메시지</span><em>오늘 방송 응원합니다.</em><small>11 / 100</small></label>
-                <div class="donation-dialog-balance"><span>보유 후원금</span><strong>42,500P</strong></div>
-                <div class="amount-choice"><span>10,000P</span><span>30,000P</span><span class="active">50,000P</span><span>전액</span></div>
-                <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>50,000P</em><small>부족 7,500P</small></label>
-                <div class="donation-preview-bubble"><b>익명</b><span>50,000P</span><p>오늘 방송 응원합니다.</p></div>
-                <div class="dialog-summary-line"><span>충전 필요 금액</span><strong>7,500P</strong></div>
-                <div class="dialog-note-line warning">부족한 후원금을 충전한 뒤 같은 메시지로 이어서 보냅니다.</div>
-                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">충전하고 후원하기</button></div>
-              </div>
+              <div class="donation-option-row"><span>익명으로 후원</span><em>OFF</em></div>
+              <div class="dialog-summary-line"><span>받는 크리에이터</span><strong>지호</strong></div>
+              <label class="form-control-preview textarea-control-preview"><span>메시지</span><em>오늘 방송도 잘 보고 있어요.</em><small>16 / 100</small></label>
+              <div class="donation-dialog-balance"><span>보유 후원금</span><strong>42,500P</strong></div>
+              <div class="amount-choice"><span>1,000P</span><span class="active">5,000P</span><span>10,000P</span><span>전액</span></div>
+              <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>7,000P</em><small>최소 1,000P</small></label>
+              <div class="donation-preview-bubble"><b>지호</b><span>7,000P</span><p>오늘 방송도 잘 보고 있어요.</p></div>
+              <div class="dialog-summary-line"><span>후원 후 잔액</span><strong>35,500P</strong></div>
+              <div class="dialog-note-line">잔액이 부족한 금액을 입력하면 버튼이 충전하고 후원하기로 바뀝니다.</div>
+              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">후원하기</button></div>
             </div>
           </article>
 
           <article id="user-dialog-donation-charge" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Dialog</span><strong>후원금 충전</strong></div>
-            <div class="component-mode-pair">
-              <div class="dialog-preview donation charge-form-preview">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">＋</span>
-                  <div><h3>후원금 충전</h3><p>충전할 금액과 결제수단을 확인합니다.</p></div>
-                </div>
-                <div class="dialog-summary-line"><span>현재 잔액</span><strong>42,500P</strong></div>
-                <div class="amount-choice"><span>10,000P</span><span class="active">30,000P</span><span>50,000P</span><span>100,000P</span></div>
-                <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>40,000원</em><small>1원 = 1P</small></label>
-                <div class="payment-method-preview"><span>결제수단</span><strong>Toss Payments · 카드</strong></div>
-                <div class="dialog-summary-line"><span>결제 예정 금액</span><strong>40,000원</strong></div>
-                <div class="dialog-summary-line"><span>충전 후 잔액</span><strong>82,500P</strong></div>
-                <div class="dialog-note-line">결제 승인 후 잔액에 반영하고, 실패하면 현재 Dialog에서 다시 시도합니다.</div>
-                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">충전하기</button></div>
+            <div class="dialog-preview donation charge-form-preview">
+              <div class="dialog-preview-header">
+                <span class="dialog-icon">＋</span>
+                <div><h3>후원금 충전</h3><p>충전할 금액과 결제수단을 확인합니다.</p></div>
               </div>
-              <div class="dialog-preview donation charge-form-preview dark-preview">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">＋</span>
-                  <div><h3>후원금 충전</h3><p>Dark Mode에서 직접 입력을 선택한 상태입니다.</p></div>
-                </div>
-                <div class="dialog-summary-line"><span>현재 잔액</span><strong>42,500P</strong></div>
-                <div class="amount-choice"><span>10,000P</span><span>30,000P</span><span class="active">50,000P</span><span>100,000P</span></div>
-                <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>50,000원</em><small>충전 한도 내 입력</small></label>
-                <div class="payment-method-preview"><span>결제수단</span><strong>Toss Payments · 간편결제</strong></div>
-                <div class="dialog-summary-line"><span>결제 예정 금액</span><strong>50,000원</strong></div>
-                <div class="dialog-summary-line"><span>충전 후 잔액</span><strong>92,500P</strong></div>
-                <div class="dialog-note-line">충전이 끝나면 이전 후원 Dialog로 돌아갈 수 있습니다.</div>
-                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">충전하기</button></div>
-              </div>
+              <div class="dialog-summary-line"><span>현재 잔액</span><strong>42,500P</strong></div>
+              <div class="amount-choice"><span>10,000P</span><span class="active">30,000P</span><span>50,000P</span><span>100,000P</span></div>
+              <label class="form-control-preview amount-input-preview"><span>직접 입력</span><em>40,000원</em><small>1원 = 1P</small></label>
+              <div class="payment-method-preview"><span>결제수단</span><strong>Toss Payments · 카드</strong></div>
+              <div class="dialog-summary-line"><span>결제 예정 금액</span><strong>40,000원</strong></div>
+              <div class="dialog-summary-line"><span>충전 후 잔액</span><strong>82,500P</strong></div>
+              <div class="dialog-note-line">결제 승인 후 잔액에 반영하고, 실패하면 현재 Dialog에서 다시 시도합니다.</div>
+              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">충전하기</button></div>
             </div>
           </article>
 
           <article id="channel-dialog-broadcast-start" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Dialog</span><strong>방송 시작</strong></div>
-            <div class="component-mode-pair">
-              <div class="dialog-preview live broadcast-start-dialog">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">●</span>
-                  <div><h3>방송을 시작할까요?</h3><p>시청자에게 보이는 제목과 태그를 마지막으로 확인합니다.</p></div>
-                </div>
-                <div class="broadcast-start-panel">
-                  <div><span>송출 상태</span><strong>대기 중</strong></div>
-                  <div><span>공개 범위</span><strong>공개</strong></div>
-                </div>
-                <div class="dialog-field input-like"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em></div>
-                <div class="dialog-field tag-summary-field"><span>방송 태그</span><em>#랭크 · #소통 · #저지연</em></div>
-                <div class="dialog-summary-line"><span>채팅 규칙</span><strong>안내문 작성됨</strong></div>
-                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">방송 시작</button></div>
+            <div class="dialog-preview live broadcast-start-dialog">
+              <div class="dialog-preview-header">
+                <span class="dialog-icon">●</span>
+                <div><h3>방송을 시작할까요?</h3><p>시청자에게 보이는 제목과 태그를 마지막으로 확인합니다.</p></div>
               </div>
-              <div class="dialog-preview live broadcast-start-dialog dark-preview">
-                <div class="dialog-preview-header">
-                  <span class="dialog-icon">●</span>
-                  <div><h3>방송을 시작할까요?</h3><p>Dark Mode 최종 확인 상태입니다.</p></div>
-                </div>
-                <div class="broadcast-start-panel">
-                  <div><span>송출 상태</span><strong>대기 중</strong></div>
-                  <div><span>공개 범위</span><strong>공개</strong></div>
-                </div>
-                <div class="dialog-field input-like"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em></div>
-                <div class="dialog-field tag-summary-field"><span>방송 태그</span><em>#랭크 · #소통 · #저지연</em></div>
-                <div class="dialog-summary-line"><span>채팅 규칙</span><strong>안내문 작성됨</strong></div>
-                <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">방송 시작</button></div>
+              <div class="broadcast-start-panel">
+                <div><span>송출 상태</span><strong>대기 중</strong></div>
+                <div><span>공개 범위</span><strong>공개</strong></div>
               </div>
+              <div class="dialog-field input-like"><span>방송 제목</span><em>오늘은 랭크 위주로 갑니다.</em></div>
+              <div class="dialog-field tag-summary-field"><span>방송 태그</span><em>#랭크 · #소통 · #저지연</em></div>
+              <div class="dialog-summary-line"><span>채팅 규칙</span><strong>안내문 작성됨</strong></div>
+              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">방송 시작</button></div>
             </div>
           </article>
 
@@ -1263,29 +1180,16 @@
 
           <article id="channel-popup-live-chat" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Popup</span><strong>/live/[creatorId]/chat</strong></div>
-            <div class="component-mode-pair">
-              <div class="chat-popup-window-preview">
-                <div class="popup-window-bar"><span></span><span></span><span></span><strong>PixelPlay Chat</strong></div>
-                <div class="popup-chat-status"><span>LIVE</span><strong>지호 채팅 · 1,248명</strong><em>팝업</em></div>
-                <div class="popup-chat-feed">
-                  <div class="popup-chat-system-message"><span>32분 전에 방송이 시작됐어요.</span></div>
-                  <p><b>하린</b> 오 화면 잘 보여요</p>
-                  <p><b>민수</b> 반응 빠르네요</p>
-                  <p><b>수연</b> 채팅창만 따로 보니까 편하네요</p>
-                </div>
-                <div class="popup-chat-input"><em>메시지를 입력하세요.</em><button>전송</button></div>
+            <div class="chat-popup-window-preview">
+              <div class="popup-window-bar"><span></span><span></span><span></span><strong>PixelPlay Chat</strong></div>
+              <div class="popup-chat-status"><span>LIVE</span><strong>지호 채팅 · 1,248명</strong><em>팝업</em></div>
+              <div class="popup-chat-feed">
+                <div class="popup-chat-system-message"><span>32분 전에 방송이 시작됐어요.</span></div>
+                <p><b>하린</b> 오 화면 잘 보여요</p>
+                <p><b>민수</b> 반응 빠르네요</p>
+                <p><b>수연</b> 채팅창만 따로 보니까 편하네요</p>
               </div>
-              <div class="chat-popup-window-preview dark-preview">
-                <div class="popup-window-bar"><span></span><span></span><span></span><strong>PixelPlay Chat</strong></div>
-                <div class="popup-chat-status"><span>LIVE</span><strong>지호 채팅 · 1,248명</strong><em>팝업</em></div>
-                <div class="popup-chat-feed">
-                  <div class="popup-chat-system-message"><span>32분 전에 방송이 시작됐어요.</span></div>
-                  <p><b>하린</b> 오 화면 잘 보여요</p>
-                  <p><b>민수</b> 반응 빠르네요</p>
-                  <p><b>수연</b> 채팅창만 따로 보니까 편하네요</p>
-                </div>
-                <div class="popup-chat-input"><em>메시지를 입력하세요.</em><button>전송</button></div>
-              </div>
+              <div class="popup-chat-input"><em>메시지를 입력하세요.</em><button>전송</button></div>
             </div>
             <p>방송 운영 중 모니터에 띄워두거나 시청자가 별도 창으로 보는 채팅 전용 화면입니다. OBS Browser Source URL과 분리합니다.</p>
           </article>

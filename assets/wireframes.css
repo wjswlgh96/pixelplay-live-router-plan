@@ -2141,11 +2141,13 @@
   justify-content: center;
 }
 .broadcast-controls {
+  min-width: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
 }
 .bc-button {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

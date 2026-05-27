@@ -179,6 +179,32 @@ type WalletTransactionRow = {
   modified_at: string;
 };
 
+type TossChargePreparePayload = {
+  amount: number;
+  orderId: string;
+  orderName: string;
+  idempotencyKey: string;
+  successUrl: string;
+  failUrl: string;
+};
+
+type TossPaymentConfirmPayload = {
+  paymentKey: string;
+  orderId: string;
+  amount: number;
+};
+
+type TossPaymentWebhookPayload = {
+  eventType: string;
+  data: {
+    paymentKey: string;
+    orderId: string;
+    status: "DONE" | "CANCELED" | "PARTIAL_CANCELED" | "ABORTED" | string;
+    totalAmount: number;
+    approvedAt?: string;
+  };
+};
+
 type DonationRow = {
   id: string;
   broadcast_id: string;
@@ -417,7 +443,7 @@ type CreatorDonationDashboard = {
       <tr><td><code>created_at</code></td><td><code>string</code></td><td>row 생성 시각입니다.</td><td>감사와 정렬</td></tr>
       <tr><td><code>modified_at</code></td><td><code>string</code></td><td>방송 상태 변경 시각입니다.</td><td>운영 상태 확인</td></tr>
 
-      <tr><td rowspan="8"><code>live_message</code></td><td><code>id</code></td><td><code>string</code></td><td>라이브 메시지 ID입니다.</td><td>실시간 구독과 pagination</td></tr>
+      <tr><td rowspan="8"><code>live_message</code></td><td><code>id</code></td><td><code>string</code></td><td>라이브 메시지 ID입니다.</td><td>실시간 수신과 pagination</td></tr>
       <tr><td><code>broadcast_id</code></td><td><code>string</code></td><td>메시지가 속한 방송 회차입니다.</td><td>방송별 채팅 로그</td></tr>
       <tr><td><code>sender_id</code></td><td><code>string | null</code></td><td>작성자입니다. 일반 채팅은 필수이고 익명 후원 이벤트는 null입니다.</td><td>채팅 작성자 표시</td></tr>
       <tr><td><code>message_type</code></td><td><code>LiveMessageType</code></td><td>일반 채팅, 클린봇 결과, 후원 이벤트입니다.</td><td>채팅 리스트 렌더링 분기</td></tr>
@@ -478,8 +504,8 @@ type CreatorDonationDashboard = {
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>RPC 설계</h2><p>클라이언트 직접 table write를 줄이고 Server Action에서 service role RPC를 호출하는 구조입니다.</p></div></div><table class="route-table"><thead><tr><th>RPC</th><th>권한</th><th>사용 라우터</th><th>담당 작업</th></tr></thead><tbody>
-      <tr><td><code>get_landing_snapshot()</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td>랜딩</td><td>활성 라이브 수, 전체 시청자 수, 일반 채팅방 수, 대표 라이브, 최근 후원을 반환합니다.</td></tr>
-      <tr><td><code>get_live_list(p_query, p_limit, p_offset)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live</code>, <code>/live/search</code></td><td>현재 진행 중인 방송을 제목, 닉네임, 태그로 검색합니다.</td></tr>
+      <tr><td><code>get_landing_snapshot()</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td>랜딩</td><td>활성 라이브 수, 전체 시청자 수, 일반 채팅방 수, 대표 라이브, 최근 후원을 반환합니다. 대표 라이브는 현재 방송 중인 row를 시청자 수 내림차순, 시작 시각 내림차순으로 선택합니다.</td></tr>
+      <tr><td><code>get_live_list(p_query, p_limit, p_offset)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live</code>, <code>/live/search</code></td><td>현재 진행 중인 방송을 제목, 닉네임, 태그로 검색하고 시청자 수 내림차순, 시작 시각 내림차순으로 정렬합니다. <code>/live</code> Hero는 이 결과의 첫 row를 사용합니다.</td></tr>
       <tr><td><code>get_live_watch(p_creator_id, p_viewer_id)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>크리에이터, 현재 방송, 채팅 정책, 후원 가능 여부, 시청자 관계, 채팅 가능 상태와 남은 대기 시간을 반환합니다.</td></tr>
       <tr><td><code>get_creator_studio_snapshot(p_actor_user_id)</code></td><td><code>service_role</code></td><td><code>/channel/*</code></td><td>크리에이터 설정, 현재 방송, 이번 달 후원 요약, 최근 후원을 반환합니다.</td></tr>
       <tr><td><code>get_creator_donation_dashboard(...)</code></td><td><code>service_role</code></td><td><code>/channel/donation</code></td><td>후원 요약내역, 월별 요약, 상세내역, 정산 Demo 데이터를 반환합니다.</td></tr>
@@ -494,9 +520,15 @@ type CreatorDonationDashboard = {
       <tr><td><code>create_live_poll(...)</code></td><td><code>service_role</code></td><td><code>/channel/live</code></td><td>방송자만 현재 방송에 투표를 생성합니다.</td></tr>
       <tr><td><code>vote_live_poll(p_actor_user_id, p_poll_id, p_option_id)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>로그인 시청자의 1회 투표를 저장합니다.</td></tr>
       <tr><td><code>end_live_poll(p_actor_user_id, p_poll_id)</code></td><td><code>service_role</code></td><td><code>/channel/live</code></td><td>방송자만 투표를 종료합니다.</td></tr>
-      <tr><td><code>confirm_wallet_charge(...)</code></td><td><code>service_role</code></td><td><code>/user/donations</code></td><td>후원금 충전 완료를 원장에 반영하고 잔액을 증가시킵니다.</td></tr>
-      <tr><td><code>send_live_donation(...)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>잔액 차감, 후원 이벤트 생성, 방송 후원 통계 증가를 하나의 트랜잭션으로 처리합니다.</td></tr>
+      <tr><td><code>confirm_wallet_charge(...)</code></td><td><code>service_role</code></td><td><code>/api/payments/toss/confirm</code>, <code>/user/donations</code></td><td>Toss 승인 결과의 <code>paymentKey</code>, <code>orderId</code>, <code>amount</code> 검증 후 후원금 충전을 원장에 반영하고 잔액을 증가시킵니다.</td></tr>
+      <tr><td><code>send_live_donation(...)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>잔액 차감, 후원 이벤트 생성, 후원 메시지 생성을 하나의 트랜잭션으로 처리합니다. 방송 후원 통계는 <code>donation</code> insert trigger가 증가시킵니다.</td></tr>
       <tr><td><code>get_user_donation_snapshot(p_actor_user_id)</code></td><td><code>service_role</code></td><td><code>/user/donations</code></td><td>내 후원금 잔액, 보낸 후원, 지갑 거래 내역을 반환합니다.</td></tr>
+    </tbody></table></section>
+
+    <section class="panel"><div class="section-title"><div><h2>Toss 결제 API 설계</h2><p>Toss Payments는 MVP 결제사로 확정하고, 클라이언트 결제창과 서버 원장 반영을 분리합니다.</p></div></div><table class="route-table"><thead><tr><th>라우터</th><th>입력</th><th>서버 책임</th><th>DB 반영</th></tr></thead><tbody>
+      <tr><td><code>/api/payments/toss/prepare</code></td><td>충전 금액</td><td>로그인, 금액 옵션, <code>orderId</code> 형식, <code>idempotencyKey</code>를 생성하고 Toss 결제창에 넘길 payload를 반환합니다.</td><td>필요 시 <code>wallet_transaction</code>에 <code>pending</code> 충전 row를 먼저 남깁니다.</td></tr>
+      <tr><td><code>/api/payments/toss/confirm</code></td><td><code>paymentKey</code>, <code>orderId</code>, <code>amount</code></td><td>요청 금액과 주문 주체를 검증한 뒤 Toss <code>/v1/payments/confirm</code>을 호출합니다. 승인 상태가 <code>DONE</code>일 때만 지갑 반영 RPC를 호출합니다.</td><td><code>confirm_wallet_charge</code>로 <code>payment_key</code>, <code>order_id</code>, <code>idempotency_key</code>, <code>balance_after</code>를 저장합니다.</td></tr>
+      <tr><td><code>/api/payments/toss/webhook</code></td><td>Toss 이벤트 payload</td><td>서명 검증 후 결제 실패, 취소, 승인 지연을 idempotency 기준으로 보정합니다.</td><td>이미 성공 처리된 충전은 중복 반영하지 않고, 실패·취소는 <code>wallet_transaction_status</code>만 보정합니다.</td></tr>
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>RLS와 권한</h2><p>금액과 운영 설정은 클라이언트 직접 변경을 막고, 공개 읽기만 좁은 RPC로 열어둡니다.</p></div></div><table class="route-table"><thead><tr><th>대상</th><th>RLS</th><th>읽기</th><th>쓰기</th></tr></thead><tbody>
@@ -510,7 +542,7 @@ type CreatorDonationDashboard = {
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>인덱스와 제약</h2><p>라이브 목록, 채팅, 후원 내역, 팔로우 목록의 실제 조회 경로 기준입니다.</p></div></div><table class="route-table"><thead><tr><th>대상</th><th>인덱스 또는 제약</th><th>사용 이유</th></tr></thead><tbody>
-      <tr><td>현재 라이브 목록</td><td><code>live_broadcast(started_at desc) where ended_at is null</code></td><td>랜딩과 <code>/live</code>에서 현재 방송을 최신순으로 가져옵니다.</td></tr>
+      <tr><td>현재 라이브 목록</td><td><code>live_broadcast(current_viewer_count desc, started_at desc) where ended_at is null</code></td><td>랜딩 대표 라이브와 <code>/live</code> Hero/list를 시청자 수 우선으로 가져옵니다.</td></tr>
       <tr><td>크리에이터 방송 기록</td><td><code>live_broadcast(creator_id, started_at desc)</code></td><td><code>/live/[creatorId]</code> 현재 방송 조회와 방송별 리포트에 사용합니다.</td></tr>
       <tr><td>동시 방송 제한</td><td><code>unique(creator_id) where ended_at is null</code></td><td>한 크리에이터가 동시에 두 개의 방송을 켜는 상태를 막습니다.</td></tr>
       <tr><td>태그 검색</td><td><code>gin(live_broadcast.tags)</code></td><td>태그 기반 검색 보조에 사용합니다.</td></tr>
@@ -529,7 +561,7 @@ type CreatorDonationDashboard = {
       <tr><td><code>creator_channel</code></td><td>제외</td><td>1유저 1라이브 채널이면 <code>user.id</code>로 충분합니다. 공개 채널 홈과 게시판은 MVP 밖입니다.</td></tr>
       <tr><td><code>live_viewer_presence</code></td><td>보류</td><td>실시간 접속자 정확도는 구현 단계에서 Realtime presence 또는 캐시로 판단합니다. 현재 DB 초안은 방송 회차 카운터만 둡니다.</td></tr>
       <tr><td><code>live_metric_snapshot</code></td><td>보류</td><td>MVP 통계는 <code>live_broadcast</code> 누적 카운터와 후원 집계로 먼저 처리합니다. 시계열 리포트가 필요해지면 추가합니다.</td></tr>
-      <tr><td><code>payment_order</code></td><td>보류</td><td>충전 결제사는 후속 연동으로 두고, MVP 초안은 <code>wallet_transaction</code>에 외부 식별자와 metadata를 보관합니다.</td></tr>
+      <tr><td><code>payment_order</code></td><td>별도 테이블 보류</td><td>Toss Payments 자체는 MVP에 포함하지만, 결제 주문 row는 우선 <code>wallet_transaction</code>의 <code>pending</code>/<code>succeeded</code> 상태와 <code>payment_key</code>, <code>order_id</code>, <code>idempotency_key</code>로 추적합니다. 결제 수단이 늘어나면 별도 테이블로 분리합니다.</td></tr>
       <tr><td>Alert 커스텀 템플릿</td><td>제외</td><td>고정 템플릿이 MVP 기준입니다. 이미지 업로드, 효과음 업로드, 애니메이션 선택, 금액별 커스텀은 넣지 않습니다.</td></tr>
       <tr><td>실제 정산 인증</td><td>보류</td><td>실명조회, 계좌 인증, 세무 정보 입력은 구현하지 않고 Demo 데이터로 프리뷰만 구성합니다.</td></tr>
     </tbody></table></section>
@@ -541,6 +573,8 @@ type CreatorDonationDashboard = {
       <tr><td>4</td><td><code>add_live_mvp_interaction_rpcs</code></td><td>팔로우, 규칙 동의, 채팅 전송, 투표 생성·참여·종료 RPC</td><td>팔로워 전용 시간, 저속 모드, 금칙어, 규칙 동의 검증</td></tr>
       <tr><td>5</td><td><code>add_live_mvp_wallet_donation_rpcs</code></td><td>후원금 충전 확정, 라이브 후원 전송, 내 후원 스냅샷 RPC</td><td>금액 row lock, idempotency key, 방송 중 후원만 허용하는지 확인</td></tr>
       <tr><td>6</td><td><code>add_live_mvp_access_policies</code></td><td>테이블 grant, RLS select policy, Realtime publication</td><td>공개 라이브 read 범위, 지갑과 후원 원장의 직접 노출 차단, 후원 피드 metadata 분리</td></tr>
+      <tr><td>7</td><td><code>merge_live_mvp_select_policies</code></td><td>기존 select policy를 역할 단위로 병합</td><td>Supabase advisor 경고와 중복 policy 비용 확인</td></tr>
+      <tr><td>8</td><td><code>add_live_broadcast_active_viewer_index</code></td><td>현재 방송 목록의 시청자 수 우선 정렬 인덱스</td><td><code>/live</code> Hero와 랜딩 대표 라이브 정렬 기준 확인</td></tr>
     </tbody></table></section>
   </main>
 

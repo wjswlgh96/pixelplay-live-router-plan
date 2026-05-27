@@ -1355,6 +1355,55 @@
   transform: translateX(0);
 }
 
+.security-main {
+  grid-template-columns: minmax(0, 1fr) 260px;
+}
+
+.security-main .settings-header-row {
+  grid-column: 1 / -1;
+}
+
+.security-main .security-card {
+  grid-column: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 4px;
+  padding: 18px 20px;
+}
+
+.security-main .security-card h3 {
+  grid-column: 1;
+  margin: 0;
+}
+
+.security-main .security-card .card-desc {
+  grid-column: 1;
+  margin: 0;
+}
+
+.security-main .secure-field {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.security-main .secure-actions {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0;
+}
+
+.security-main .settings-side {
+  grid-column: 2;
+  grid-row: 2 / span 3;
+}
+
 .textarea-control-preview em {
   min-height: 54px;
 }
@@ -2322,8 +2371,25 @@
   .creator-donation-summary,
   .alert-setting-grid,
   .donation-revenue-grid,
+  .security-main,
   .live-control-layout {
     grid-template-columns: 1fr;
+  }
+
+  .security-main .security-card,
+  .security-main .settings-side {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .security-main .security-card {
+    grid-template-columns: 1fr;
+  }
+
+  .security-main .secure-field,
+  .security-main .secure-actions {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .obs-url-action-grid {

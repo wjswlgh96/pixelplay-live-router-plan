@@ -505,7 +505,8 @@ type CreatorDonationDashboard = {
 
     <section class="panel"><div class="section-title"><div><h2>RPC 설계</h2><p>클라이언트 직접 table write를 줄이고 Server Action에서 service role RPC를 호출하는 구조입니다.</p></div></div><table class="route-table"><thead><tr><th>RPC</th><th>권한</th><th>사용 라우터</th><th>담당 작업</th></tr></thead><tbody>
       <tr><td><code>get_landing_snapshot()</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td>랜딩</td><td>활성 라이브 수, 전체 시청자 수, 일반 채팅방 수, 대표 라이브, 최근 후원을 반환합니다. 대표 라이브는 현재 방송 중인 row를 시청자 수 내림차순, 시작 시각 내림차순으로 선택합니다.</td></tr>
-      <tr><td><code>get_live_list(p_query, p_limit, p_offset)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live</code>, <code>/live/search</code></td><td>현재 진행 중인 방송을 제목, 닉네임, 태그로 검색하고 시청자 수 내림차순, 시작 시각 내림차순으로 정렬합니다. <code>/live</code> Hero는 이 결과의 첫 row를 사용합니다.</td></tr>
+      <tr><td><code>get_live_hero()</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live</code></td><td>현재 진행 중인 방송 중 시청자 수가 가장 많고, 동률이면 더 최근에 시작한 방송 1건을 Hero용 JSON으로 반환합니다.</td></tr>
+      <tr><td><code>get_live_list(p_query, p_limit, p_offset)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live</code>, <code>/live/search</code></td><td>현재 진행 중인 방송을 제목, 닉네임, 태그로 검색하고 시청자 수 내림차순, 시작 시각 내림차순으로 정렬합니다.</td></tr>
       <tr><td><code>get_live_watch(p_creator_id, p_viewer_id)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>크리에이터, 현재 방송, 채팅 정책, 후원 가능 여부, 시청자 관계, 채팅 가능 상태와 남은 대기 시간을 반환합니다.</td></tr>
       <tr><td><code>get_creator_studio_snapshot(p_actor_user_id)</code></td><td><code>service_role</code></td><td><code>/channel/*</code></td><td>크리에이터 설정, 현재 방송, 이번 달 후원 요약, 최근 후원을 반환합니다.</td></tr>
       <tr><td><code>get_creator_donation_dashboard(...)</code></td><td><code>service_role</code></td><td><code>/channel/donation</code></td><td>후원 요약내역, 월별 요약, 상세내역, 정산 Demo 데이터를 반환합니다.</td></tr>
@@ -533,7 +534,7 @@ type CreatorDonationDashboard = {
 
     <section class="panel"><div class="section-title"><div><h2>RLS와 권한</h2><p>금액과 운영 설정은 클라이언트 직접 변경을 막고, 공개 읽기만 좁은 RPC로 열어둡니다.</p></div></div><table class="route-table"><thead><tr><th>대상</th><th>RLS</th><th>읽기</th><th>쓰기</th></tr></thead><tbody>
       <tr><td><code>creator_studio_setting</code></td><td>enabled</td><td>본인 스튜디오 화면은 service role RPC로 조회합니다. 시청 화면에는 필요한 일부 설정만 <code>get_live_watch</code>로 노출합니다.</td><td><code>upsert_creator_studio_setting</code>과 토큰 버전 회전 RPC만 사용합니다.</td></tr>
-      <tr><td><code>live_broadcast</code></td><td>enabled</td><td>현재 진행 중인 방송은 <code>get_live_list</code>, <code>get_live_watch</code>, <code>get_landing_snapshot</code>으로 공개 조회합니다.</td><td>방송 시작과 종료 RPC만 사용합니다.</td></tr>
+      <tr><td><code>live_broadcast</code></td><td>enabled</td><td>현재 진행 중인 방송은 <code>get_live_hero</code>, <code>get_live_list</code>, <code>get_live_watch</code>, <code>get_landing_snapshot</code>으로 공개 조회합니다.</td><td>방송 시작과 종료 RPC만 사용합니다.</td></tr>
       <tr><td><code>live_message</code></td><td>enabled</td><td>진행 중인 방송의 메시지는 <code>anon</code>과 <code>authenticated</code>가 읽을 수 있습니다. 비로그인 시청 렌더링은 <code>metadata</code>의 표시 스냅샷을 사용합니다.</td><td><code>send_live_message</code>와 <code>send_live_donation</code>만 insert합니다.</td></tr>
       <tr><td><code>viewer_creator_relation</code></td><td>enabled</td><td>본인 관계 상태는 RPC 응답으로만 노출합니다.</td><td>팔로우, 언팔로우, 규칙 동의 RPC만 사용합니다.</td></tr>
       <tr><td><code>wallet_account</code>, <code>wallet_transaction</code></td><td>enabled</td><td>본인 지갑 화면은 <code>get_user_donation_snapshot</code>으로만 조회합니다.</td><td>충전 확정과 후원 전송 RPC만 사용합니다.</td></tr>
@@ -575,6 +576,7 @@ type CreatorDonationDashboard = {
       <tr><td>6</td><td><code>add_live_mvp_access_policies</code></td><td>테이블 grant, RLS select policy, Realtime publication</td><td>공개 라이브 read 범위, 지갑과 후원 원장의 직접 노출 차단, 후원 피드 metadata 분리</td></tr>
       <tr><td>7</td><td><code>merge_live_mvp_select_policies</code></td><td>기존 select policy를 역할 단위로 병합</td><td>Supabase advisor 경고와 중복 policy 비용 확인</td></tr>
       <tr><td>8</td><td><code>add_live_broadcast_active_viewer_index</code></td><td>현재 방송 목록의 시청자 수 우선 정렬 인덱스</td><td><code>/live</code> Hero와 랜딩 대표 라이브 정렬 기준 확인</td></tr>
+      <tr><td>9</td><td><code>add_live_hero_rpc</code></td><td><code>get_live_hero()</code> 추가</td><td>Hero가 목록 RPC 첫 row에 암묵적으로 의존하지 않도록 분리</td></tr>
     </tbody></table></section>
   </main>
 

@@ -62,7 +62,7 @@
           <div class="meta-box"><span>route</span><strong>/live</strong></div>
           <div class="meta-box"><span>role</span><p>현재 송출 중인 라이브를 둘러보는 공개 탐색 화면입니다. Hero는 시청자 수가 가장 많은 방송, 동률이면 더 최근에 시작한 방송을 사용합니다.</p></div>
           <div class="meta-box"><span>access</span><p>공개. 목록과 진입은 비로그인 가능, 팔로우·채팅 입력은 로그인 이후.</p></div>
-          <div class="meta-box"><span>buttons and controls</span><p>라이브 필터, 인기순/최신순/팔로우 정렬, 카드 클릭으로 시청, Header 검색 진입. 데이터 기준은 <code>get_live_list</code>의 현재 방송 정렬과 같습니다.</p></div>
+          <div class="meta-box"><span>buttons and controls</span><p>라이브 필터, 인기순/최신순/팔로우 정렬, 카드 클릭으로 시청, Header 검색 진입. Hero는 <code>get_live_hero()</code>, 목록은 <code>get_live_list</code>를 사용하되 정렬 기준은 같습니다.</p></div>
         </div>
         <div class="preview-pair">
 

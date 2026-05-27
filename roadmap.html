@@ -9,14 +9,15 @@
   </div>
 </header>
 <main class="doc-shell">
-  <section class="hero"><div class="page-kicker">MVP Scope</div><h1>한 달 안에 보일 기능과 나중에 붙일 기능을 분리합니다.</h1><p>라이브 요구사항은 시청, 검색, 방송 운영, 라이브 전용 채팅, 채팅창 분리, 시청자 수, 후원, 팔로우, 실시간 통계가 핵심입니다.</p></section>
-  <section class="route-summary-grid"><article class="route-card"><code>필수</code><h3>라이브 기본 흐름</h3><p>방송 입장, 검색, 시청자 화면, 라이브 전용 채팅, 채팅창 분리를 우선합니다.</p></article><article class="route-card"><code>필수</code><h3>크리에이터 운영</h3><p>방송 운영, 채팅 설정, 보안 설정, 실시간 통계를 분리합니다.</p></article><article class="route-card"><code>필수</code><h3>팔로우와 후원</h3><p>크리에이터 팔로우, Toss Payments 기반 충전, 후원 보내기, 내역 확인을 MVP에 포함합니다.</p></article><article class="route-card"><code>선택</code><h3>채널 확장</h3><p>공개 채널, VOD, 매니저 기능은 발표 범위에 맞춰 후속으로 둡니다.</p></article></section>
+  <section class="hero"><div class="page-kicker">MVP Scope</div><h1>한 달 안에 보일 기능과 나중에 붙일 기능을 분리합니다.</h1><p>라이브 요구사항은 시청, 검색, 방송 운영, 라이브 전용 채팅, 투표, 채팅창 분리, 시청자 수, 후원, 팔로우, 실시간 통계가 핵심입니다.</p></section>
+  <section class="route-summary-grid"><article class="route-card"><code>필수</code><h3>라이브 기본 흐름</h3><p>방송 입장, 검색, 시청자 화면, 라이브 전용 채팅, 채팅창 분리를 우선합니다.</p></article><article class="route-card"><code>필수</code><h3>크리에이터 운영</h3><p>방송 운영, 투표 생성, 채팅 설정, 보안 설정, 실시간 통계를 분리합니다.</p></article><article class="route-card"><code>필수</code><h3>팔로우와 후원</h3><p>크리에이터 팔로우, Toss Payments 기반 충전, 후원 보내기, 내역 확인을 MVP에 포함합니다.</p></article><article class="route-card"><code>선택</code><h3>채널 확장</h3><p>공개 채널, VOD, 매니저 기능은 발표 범위에 맞춰 후속으로 둡니다.</p></article></section>
   <section class="panel"><div class="section-title"><div><h2>MVP 필수 기능</h2><p>라이브 기능이라고 말하기 위해 반드시 보여야 하는 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>연결 라우터</th><th>접근</th><th>비고</th></tr></thead><tbody>
     <tr><td>라이브 목록</td><td><code>/live</code></td><td><span class="access-public">공개</span></td><td>Anon User도 현재 방송 중인 목록을 볼 수 있습니다.</td></tr>
     <tr><td>라이브 검색</td><td><code>/live/search</code></td><td><span class="access-public">공개</span></td><td>검색어 요약, 라이브 결과, 크리에이터 결과를 분리합니다.</td></tr>
     <tr><td>라이브 시청</td><td><code>/live/[creatorId]</code></td><td><span class="access-public">공개 읽기</span></td><td>채팅 읽기와 방송 시청은 공개, 입력과 참여는 로그인 필요입니다.</td></tr>
     <tr><td>채팅창 분리</td><td><code>/live/[creatorId]/chat</code></td><td><span class="access-public">공개 읽기</span></td><td>방송 운영 중 별도 창으로 띄우는 팝아웃입니다. OBS용 overlay URL은 보안 설정에서 별도로 관리합니다.</td></tr>
     <tr><td>라이브 전용 채팅</td><td><code>/live/[creatorId]</code></td><td><span class="access-login">입력은 로그인 필요</span></td><td>일반 채팅방과 별도 모델로 새로 설계합니다.</td></tr>
+    <tr><td>라이브 투표</td><td><code>/channel/live</code>, <code>/live/[creatorId]</code></td><td><span class="access-login">참여는 로그인 필요</span></td><td>크리에이터는 방송 중 투표를 생성·종료하고, 시청자는 라이브 화면에서 참여하며 결과를 실시간으로 확인합니다.</td></tr>
     <tr><td>방송 운영</td><td><code>/channel/live</code></td><td><span class="access-owner">본인만</span></td><td>방송 제목, 태그, 공개 상태, 송출 상태, 시작과 종료를 처리합니다.</td></tr>
     <tr><td>채팅 설정</td><td><code>/channel/chat</code></td><td><span class="access-owner">본인만</span></td><td>채팅 권한, 본인인증, 모드, 금칙어를 관리합니다.</td></tr>
     <tr><td>방송 보안</td><td><code>/channel/security</code></td><td><span class="access-owner">본인만</span></td><td>스트림키와 OBS 채팅창 URL을 재확인 Dialog 기반으로 관리합니다.</td></tr>

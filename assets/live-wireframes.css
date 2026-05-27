@@ -195,8 +195,7 @@
   gap: 5px;
 }
 
-.donor-chat-badge,
-.cleanbot-mark {
+.donor-chat-badge {
   width: 17px;
   height: 17px;
   flex: 0 0 auto;
@@ -218,16 +217,7 @@
 .cleanbot-filtered {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 9px;
-  border: 1px solid rgba(255, 96, 87, 0.12);
-  border-radius: 10px;
-  background: rgba(255, 96, 87, 0.08);
-}
-
-.cleanbot-mark {
-  background: rgba(255, 96, 87, 0.18);
-  color: #c6322b;
+  gap: 4px;
 }
 
 .cleanbot-filtered em {
@@ -237,10 +227,6 @@
   font-style: normal;
   font-weight: 850;
   line-height: 1.35;
-}
-
-.light-watch .cleanbot-filtered {
-  background: rgba(255, 96, 87, 0.06);
 }
 
 .light-watch .cleanbot-filtered em {

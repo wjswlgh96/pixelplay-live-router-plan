@@ -30,6 +30,7 @@
         <a href="#preview-channel-live">/channel/live</a>
         <a href="#preview-channel-chat">/channel/chat</a>
         <a href="#preview-channel-security">/channel/security</a>
+        <a href="#preview-channel-donation">/channel/donation</a>
         <a href="#preview-channel-analytics">/channel/analytics</a>
         <a href="#preview-user-follows">/user/follows</a>
         <a href="#preview-user-donations">/user/donations</a>
@@ -824,8 +825,8 @@
 <!-- ============================ 보안 설정 ============================ -->
       <section id="preview-channel-security" class="preview-section">
         <h2><span class="section-num">7</span>보안 설정</h2>
-        <p class="section-summary">스트림키와 OBS Studio에 붙일 채팅창 URL은 민감 정보라 보안 설정 페이지로 분리합니다. 표시, 복사, 재발급은 재확인 Dialog를 거치게 설계하고, OBS 후원 Alert URL은 MVP 선택사항으로 남깁니다.</p>
-        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/security</strong></div><div class="meta-box"><span>role</span><p>송출 연결에 필요한 스트림키와 OBS 채팅창 URL, 선택사항인 OBS 후원 Alert URL을 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근하고, 민감 정보 표시는 재확인이 필요합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>스트림키 보기, 재발급, OBS 채팅 URL 복사, 미리보기, 토큰 재발급, OBS 후원 Alert URL 복사.</p></div></div>
+        <p class="section-summary">스트림키와 OBS Studio에 붙일 채팅창·후원 Alert URL은 민감 정보라 보안 설정 페이지로 분리합니다. 표시, 복사, 재발급은 재확인 Dialog를 거치게 설계하고, 후원 수신 조건과 Alert 동작 설정은 <code>/channel/donation</code>에서 관리합니다.</p>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/security</strong></div><div class="meta-box"><span>role</span><p>송출 연결에 필요한 스트림키, OBS 채팅창 URL, OBS 후원 Alert URL을 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근하고, 민감 정보 표시는 재확인이 필요합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>스트림키 보기, 재발급, OBS 채팅·후원 Alert URL 복사, 미리보기, 토큰 재발급.</p></div></div>
         <div class="preview-pair">
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/channel/security</span></div>
@@ -833,12 +834,12 @@
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
-                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem active"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem active"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="settings-main channel-settings-main security-main">
                   <div class="settings-header-row"><div><h2>보안 설정</h2><p>OBS Studio 연결에 필요한 민감 정보를 관리합니다.</p></div><span class="status-chip safe">보안 상태 정상</span></div>
                   <section class="settings-form-card security-card"><h3>스트림키</h3><p class="card-desc">본인 확인 후 1분 동안만 표시하고, 확인 Dialog 안에서만 복사합니다.</p><div class="secure-field"><span>Stream Key</span><code>pp_live_••••••••••••</code><a href="#channel-dialog-stream-key-view">본인 확인 후 보기</a></div><div class="secure-actions"><a class="mini-button danger preview-action-link" href="#channel-alert-stream-key-reissue">재발급</a></div></section>
                   <section class="settings-form-card security-card"><h3>OBS 채팅창 URL</h3><p class="card-desc">OBS Browser Source에 붙여 넣는 채팅 오버레이 주소입니다.</p><div class="secure-field"><span>Chat URL</span><code>https://pixelplay.studio/live/jiho/chat?overlay=obs</code><a href="#channel-popover-obs-chat-url">복사</a></div><div class="secure-actions"><a class="mini-button ghost preview-action-link" href="#channel-popover-obs-chat-url">미리보기</a><a class="mini-button danger preview-action-link" href="#channel-alert-obs-chat-url-reissue">새 토큰 발급</a></div></section>
-                  <section class="settings-form-card security-card optional-card"><h3>OBS 후원 Alert URL <span class="optional-badge">선택사항</span></h3><p class="card-desc">후원이 들어오면 방송 화면 위에 오버레이를 띄우는 별도 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><span>복사 예정</span></div></section>
+                  <section class="settings-form-card security-card"><h3>OBS 후원 Alert URL</h3><p class="card-desc">후원이 들어오면 방송 화면 위에 고정 템플릿 오버레이를 띄우는 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><a href="#channel-popover-obs-donation-alert-url">복사</a></div><div class="secure-actions"><a class="mini-button ghost preview-action-link" href="#channel-popover-obs-donation-alert-url">미리보기</a><a class="mini-button danger preview-action-link" href="#channel-alert-obs-donation-alert-url-reissue">새 토큰 발급</a></div></section>
                   <aside class="settings-side"><div class="side-tip"><h4>보안 원칙</h4><p>스트림키와 OBS URL은 화면 진입만으로 노출하지 않습니다. 표시와 재발급은 반드시 재확인 Dialog를 거칩니다.</p></div></aside>
                 </main>
               </div>
@@ -850,13 +851,54 @@
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
-                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem active"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem active"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="settings-main channel-settings-main security-main">
                   <div class="settings-header-row"><div><h2>보안 설정</h2><p>OBS Studio 연결에 필요한 민감 정보를 관리합니다.</p></div><span class="status-chip safe">보안 상태 정상</span></div>
                   <section class="settings-form-card security-card"><h3>스트림키</h3><p class="card-desc">본인 확인 후 1분 동안만 표시하고, 확인 Dialog 안에서만 복사합니다.</p><div class="secure-field"><span>Stream Key</span><code>pp_live_••••••••••••</code><a href="#channel-dialog-stream-key-view">본인 확인 후 보기</a></div><div class="secure-actions"><a class="mini-button danger preview-action-link" href="#channel-alert-stream-key-reissue">재발급</a></div></section>
                   <section class="settings-form-card security-card"><h3>OBS 채팅창 URL</h3><p class="card-desc">OBS Browser Source에 붙여 넣는 채팅 오버레이 주소입니다.</p><div class="secure-field"><span>Chat URL</span><code>https://pixelplay.studio/live/jiho/chat?overlay=obs</code><a href="#channel-popover-obs-chat-url">복사</a></div><div class="secure-actions"><a class="mini-button ghost preview-action-link" href="#channel-popover-obs-chat-url">미리보기</a><a class="mini-button danger preview-action-link" href="#channel-alert-obs-chat-url-reissue">새 토큰 발급</a></div></section>
-                  <section class="settings-form-card security-card optional-card"><h3>OBS 후원 Alert URL <span class="optional-badge">선택사항</span></h3><p class="card-desc">후원이 들어오면 방송 화면 위에 오버레이를 띄우는 별도 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><span>복사 예정</span></div></section>
+                  <section class="settings-form-card security-card"><h3>OBS 후원 Alert URL</h3><p class="card-desc">후원이 들어오면 방송 화면 위에 고정 템플릿 오버레이를 띄우는 Browser Source 주소입니다.</p><div class="secure-field"><span>Alert URL</span><code>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</code><a href="#channel-popover-obs-donation-alert-url">복사</a></div><div class="secure-actions"><a class="mini-button ghost preview-action-link" href="#channel-popover-obs-donation-alert-url">미리보기</a><a class="mini-button danger preview-action-link" href="#channel-alert-obs-donation-alert-url-reissue">새 토큰 발급</a></div></section>
                   <aside class="settings-side"><div class="side-tip"><h4>보안 원칙</h4><p>스트림키와 OBS URL은 화면 진입만으로 노출하지 않습니다. 표시와 재발급은 반드시 재확인 Dialog를 거칩니다.</p></div></aside>
+                </main>
+              </div>
+            </div>
+          </div></div>
+      </section>
+
+
+<!-- ============================ 크리에이터 후원 설정 ============================ -->
+      <section id="preview-channel-donation" class="preview-section">
+        <h2><span class="section-num">8</span>후원 설정</h2>
+        <p class="section-summary">크리에이터가 채팅 후원 수신 조건, 후원 수익 요약, 고정 후원 Alert 동작을 한 화면에서 관리합니다. OBS Alert URL 자체는 토큰성 민감 정보라 <code>/channel/security</code>에서 복사·재발급하고, 이 페이지는 후원이 어떻게 표시되고 읽히는지를 다룹니다.</p>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/donation</strong></div><div class="meta-box"><span>role</span><p>채팅 후원 수신 조건, 후원 수익, 정산 상태, Alert·TTS 설정을 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>후원 사용, 최소 금액, 금액 표시, Alert 테스트, TTS 사용, 요약·상세 내역 탭.</p></div></div>
+        <div class="preview-pair">
+          <div class="preview-frame light">
+            <div class="frame-label"><span>Light Mode</span><span>/channel/donation</span></div>
+            <div class="design-screen channel-screen">
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="settings-shell">
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem active"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <main class="donation-studio-main">
+                  <div class="settings-header-row"><div><h2>후원 설정</h2><p>채팅 후원 수신 조건과 방송 화면 Alert를 관리합니다.</p></div><span class="status-chip safe">채팅 후원 사용 중</span></div>
+                  <div class="creator-donation-summary"><div class="analytics-card coral"><span>이번 달 후원 수익</span><strong>68,500P</strong><p>수수료 반영 전</p></div><div class="analytics-card"><span>최근 후원</span><strong>14건</strong><p>오늘 기준</p></div><div class="analytics-card"><span>정산 상태</span><strong>가능</strong><p>정산 정보 등록 완료</p></div></div>
+                  <section class="settings-form-card donation-settings-card"><h3>채팅 후원 설정</h3><p class="card-desc">시청자가 라이브 채팅에서 보낼 수 있는 후원의 기본 조건입니다.</p><div class="field-row"><label>사용 여부<span class="sub">후원 받기</span></label><div class="toggle-switch"><span class="toggle-text">사용 중</span><span class="switch"></span></div></div><div class="field-row"><label>최소 후원 가능 금액<span class="sub">1,000P 이상</span></label><div class="amount-inline-preview"><strong>1,000</strong><span>P</span><button type="button">저장</button></div></div><div class="field-row"><label>후원 금액 표시<span class="sub">채팅과 Alert</span></label><div class="toggle-switch"><span class="toggle-text">금액 표시</span><span class="switch"></span></div></div></section>
+                  <section class="settings-form-card donation-settings-card"><h3>후원 Alert 설정</h3><p class="card-desc">OBS 후원 Alert URL에 표시되는 고정 템플릿과 브라우저 기본 TTS를 확인합니다.</p><div class="alert-setting-grid"><div class="alert-preview-box"><span>Alert Preview</span><strong>하린님이 5,000P 후원</strong><p>방송 화이팅!! 잘 보고 있어요.</p></div><div class="alert-control-stack"><div class="field-row compact"><label>Alert 사용</label><div class="toggle-switch"><span class="toggle-text">ON</span><span class="switch"></span></div></div><div class="field-row compact"><label>알림 소리</label><div class="toggle-switch"><span class="toggle-text">기본음</span><span class="switch"></span></div></div><div class="slider-preview"><span>알림 볼륨</span><em style="--value:40%"></em><strong>40%</strong></div><div class="field-row compact"><label>TTS</label><div class="toggle-switch"><span class="toggle-text">Web Speech API</span><span class="switch"></span></div></div><div class="tts-speed-row"><span>속도</span><b>보통</b><b class="active">빠름</b><b>매우 빠름</b></div><button class="mini-button primary" type="button">테스트 알림 보내기</button></div></div></section>
+                  <section class="settings-form-card donation-revenue-card"><div class="donation-tabs-v2"><span class="active">요약내역</span><span>상세내역</span></div><div class="donation-revenue-grid"><div class="revenue-table-preview"><h3>후원 수익</h3><div class="revenue-table-row head"><span>월</span><span>후원 횟수</span><span>총 후원 금액</span><span>지급 상태</span></div><div class="revenue-table-row"><span>5월</span><span>14건</span><span>68,500P</span><span>정산 예정</span></div></div><div class="settlement-mini-card"><h3>정산 정보</h3><p>실제 계좌 인증은 후속 연동으로 두고, MVP에서는 등록 상태와 정산 가능 여부를 표시합니다.</p><div class="metric-mini-row"><span class="label">총 정산 예정액</span><strong>61,650P</strong></div><div class="metric-mini-row"><span class="label">채팅 후원</span><strong>68,500P</strong></div><div class="metric-mini-row"><span class="label">수수료</span><strong>-6,850P</strong></div><button class="mini-button ghost" type="button">정산 정보 수정</button></div></div></section>
+                </main>
+              </div>
+            </div>
+          </div>
+          <div class="preview-frame dark">
+            <div class="frame-label"><span>Dark Mode</span><span>/channel/donation</span></div>
+            <div class="design-screen channel-screen">
+              <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
+              <div class="settings-shell">
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem active"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <main class="donation-studio-main">
+                  <div class="settings-header-row"><div><h2>후원 설정</h2><p>채팅 후원 수신 조건과 방송 화면 Alert를 관리합니다.</p></div><span class="status-chip safe">채팅 후원 사용 중</span></div>
+                  <div class="creator-donation-summary"><div class="analytics-card coral"><span>이번 달 후원 수익</span><strong>68,500P</strong><p>수수료 반영 전</p></div><div class="analytics-card"><span>최근 후원</span><strong>14건</strong><p>오늘 기준</p></div><div class="analytics-card"><span>정산 상태</span><strong>가능</strong><p>정산 정보 등록 완료</p></div></div>
+                  <section class="settings-form-card donation-settings-card"><h3>채팅 후원 설정</h3><p class="card-desc">시청자가 라이브 채팅에서 보낼 수 있는 후원의 기본 조건입니다.</p><div class="field-row"><label>사용 여부<span class="sub">후원 받기</span></label><div class="toggle-switch"><span class="toggle-text">사용 중</span><span class="switch"></span></div></div><div class="field-row"><label>최소 후원 가능 금액<span class="sub">1,000P 이상</span></label><div class="amount-inline-preview"><strong>1,000</strong><span>P</span><button type="button">저장</button></div></div><div class="field-row"><label>후원 금액 표시<span class="sub">채팅과 Alert</span></label><div class="toggle-switch"><span class="toggle-text">금액 표시</span><span class="switch"></span></div></div></section>
+                  <section class="settings-form-card donation-settings-card"><h3>후원 Alert 설정</h3><p class="card-desc">OBS 후원 Alert URL에 표시되는 고정 템플릿과 브라우저 기본 TTS를 확인합니다.</p><div class="alert-setting-grid"><div class="alert-preview-box"><span>Alert Preview</span><strong>하린님이 5,000P 후원</strong><p>방송 화이팅!! 잘 보고 있어요.</p></div><div class="alert-control-stack"><div class="field-row compact"><label>Alert 사용</label><div class="toggle-switch"><span class="toggle-text">ON</span><span class="switch"></span></div></div><div class="field-row compact"><label>알림 소리</label><div class="toggle-switch"><span class="toggle-text">기본음</span><span class="switch"></span></div></div><div class="slider-preview"><span>알림 볼륨</span><em style="--value:40%"></em><strong>40%</strong></div><div class="field-row compact"><label>TTS</label><div class="toggle-switch"><span class="toggle-text">Web Speech API</span><span class="switch"></span></div></div><div class="tts-speed-row"><span>속도</span><b>보통</b><b class="active">빠름</b><b>매우 빠름</b></div><button class="mini-button primary" type="button">테스트 알림 보내기</button></div></div></section>
+                  <section class="settings-form-card donation-revenue-card"><div class="donation-tabs-v2"><span class="active">요약내역</span><span>상세내역</span></div><div class="donation-revenue-grid"><div class="revenue-table-preview"><h3>후원 수익</h3><div class="revenue-table-row head"><span>닉네임</span><span>후원일</span><span>후원 금액</span><span>후원 상태</span></div><div class="revenue-table-row"><span>하린</span><span>05.27</span><span>5,000P</span><span>완료</span></div></div><div class="settlement-mini-card"><h3>정산 내역</h3><p>총 정산 예정액은 채팅 후원에서 수수료를 제외한 금액으로 표시합니다.</p><div class="metric-mini-row"><span class="label">총 정산 예정액</span><strong>61,650P</strong></div><div class="metric-mini-row"><span class="label">채팅 후원</span><strong>68,500P</strong></div><div class="metric-mini-row"><span class="label">지급 상태</span><strong>정산 예정</strong></div><button class="mini-button ghost" type="button">상세 내역 보기</button></div></div></section>
                 </main>
               </div>
             </div>
@@ -866,7 +908,7 @@
 
 <!-- ============================ 실시간 통계 ============================ -->
       <section id="preview-channel-analytics" class="preview-section">
-        <h2><span class="section-num">8</span>실시간 통계</h2>
+        <h2><span class="section-num">9</span>실시간 통계</h2>
         <p class="section-summary">통계도 MVP에 포함해 별도 페이지로 둡니다. 단, 종료 리포트나 복잡한 분석은 후속으로 미루고 방송 중 확인할 핵심 지표만 보여줍니다.</p>
         <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/analytics</strong></div><div class="meta-box"><span>role</span><p>시청자 수, 채팅량, 후원, 팔로우 변화를 실시간으로 확인합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>실시간 KPI, 시청자 추이, 상호작용 로그, 조회 범위 표시.</p></div></div>
         <div class="preview-pair">
@@ -876,7 +918,7 @@
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
-                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem active"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem active"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="analytics-main">
                   <div class="settings-header-row"><div><h2>실시간 통계</h2><p>방송 중 의사결정에 필요한 지표만 빠르게 확인합니다.</p></div><span class="status-chip">최근 30분</span></div>
                   <div class="analytics-grid"><div class="analytics-card coral"><span>현재 시청자</span><strong>1,240</strong><p>최고 1,684명</p></div><div class="analytics-card"><span>분당 채팅</span><strong>142</strong><p>최근 10분 +18%</p></div><div class="analytics-card"><span>후원 누적</span><strong>68,500P</strong><p>오늘 14건</p></div><div class="analytics-card"><span>팔로우 증가</span><strong>+86</strong><p>최근 30분 기준</p></div></div>
@@ -892,7 +934,7 @@
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="settings-shell">
                 
-                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem active"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
+                <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem active"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="analytics-main">
                   <div class="settings-header-row"><div><h2>실시간 통계</h2><p>방송 중 의사결정에 필요한 지표만 빠르게 확인합니다.</p></div><span class="status-chip">최근 30분</span></div>
                   <div class="analytics-grid"><div class="analytics-card coral"><span>현재 시청자</span><strong>1,240</strong><p>최고 1,684명</p></div><div class="analytics-card"><span>분당 채팅</span><strong>142</strong><p>최근 10분 +18%</p></div><div class="analytics-card"><span>후원 누적</span><strong>68,500P</strong><p>오늘 14건</p></div><div class="analytics-card"><span>팔로우 증가</span><strong>+86</strong><p>최근 30분 기준</p></div></div>
@@ -908,7 +950,7 @@
 
 <!-- ============================ 팔로우 ============================ -->
       <section id="preview-user-follows" class="preview-section">
-        <h2><span class="section-num">9</span>팔로우</h2>
+        <h2><span class="section-num">10</span>팔로우</h2>
         <p class="section-summary">팔로우는 MVP에 포함합니다. 팔로우 대상은 크리에이터이며, 라이브 중인 크리에이터를 빠르게 다시 찾는 용도로 둡니다.</p>
         <div class="preview-meta detail-meta">
           <div class="meta-box"><span>route</span><strong>/user/follows</strong></div>
@@ -941,7 +983,7 @@
 
 <!-- ============================ 후원 홈 ============================ -->
       <section id="preview-user-donations" class="preview-section">
-        <h2><span class="section-num">10</span>후원</h2>
+        <h2><span class="section-num">11</span>후원</h2>
         <p class="section-summary">후원은 MVP에 포함합니다. 별도 충전 라우터 없이 <code>/user/donations</code> 한 화면에서 잔액, 충전 Dialog, 충전·사용·보낸 후원 내역을 관리합니다.</p>
         <div class="preview-meta detail-meta">
           <div class="meta-box"><span>route</span><strong>/user/donations</strong></div>
@@ -991,13 +1033,15 @@
 <!-- ============================ 치지직 기준 채널 사이드바 플로우 ============================ -->
       <section id="preview-studio-flow" class="preview-section studio-flow-section">
         <h2><span class="section-num">참고</span>치지직 기준 채널 사이드바 플로우</h2>
-        <p class="section-summary">MVP 기준 채널 관리는 치지직 스튜디오의 방송 관리 흐름만 가져오되, 방송 운영은 <code>/channel/live</code>, 채팅 설정은 <code>/channel/chat</code>, 보안 설정은 <code>/channel/security</code>, 통계는 <code>/channel/analytics</code>로 분리합니다. 방송 채팅 분리는 <code>/live/[creatorId]/chat</code> 팝아웃으로 처리하고, 후원은 <code>/user/donations</code>에서 관리합니다.</p>
+        <p class="section-summary">MVP 기준 채널 관리는 치지직 스튜디오의 방송 관리 흐름만 가져오되, 방송 운영은 <code>/channel/live</code>, 채팅 설정은 <code>/channel/chat</code>, 보안 설정은 <code>/channel/security</code>, 후원 설정은 <code>/channel/donation</code>, 통계는 <code>/channel/analytics</code>로 분리합니다. 방송 채팅 분리는 <code>/live/[creatorId]/chat</code> 팝아웃으로 처리하고, 후원 Alert는 <code>/live/[creatorId]/alerts/donation</code> overlay로 둡니다.</p>
         <div class="route-flow-grid studio-route-grid">
           <article class="flow-card live"><span>방송 운영</span><strong>/channel/live</strong><p>방송 준비, 시작, 종료, 방송 태그, 투표 생성·종료, 채팅 일시정지를 처리합니다.</p></article>
           <article class="flow-card"><span>채팅 설정</span><strong>/channel/chat</strong><p>채팅 속도, 링크 차단, 금칙어를 관리합니다.</p></article>
-          <article class="flow-card"><span>보안 설정</span><strong>/channel/security</strong><p>스트림키, OBS 채팅창 URL, 선택사항인 OBS 후원 Alert URL을 관리합니다.</p></article>
+          <article class="flow-card"><span>보안 설정</span><strong>/channel/security</strong><p>스트림키, OBS 채팅창 URL, OBS 후원 Alert URL의 복사와 토큰 재발급을 관리합니다.</p></article>
+          <article class="flow-card"><span>후원 설정</span><strong>/channel/donation</strong><p>채팅 후원 수신 조건, 후원 수익 요약, Alert·TTS 동작을 관리합니다.</p></article>
           <article class="flow-card"><span>실시간 통계</span><strong>/channel/analytics</strong><p>방송 중 시청자, 채팅, 후원, 팔로우 지표를 확인합니다.</p></article>
           <article class="flow-card"><span>채팅 팝아웃</span><strong>/live/[creatorId]/chat</strong><p>방송 채팅만 별도 창으로 띄우는 공개 보조 라우터입니다.</p></article>
+          <article class="flow-card"><span>후원 Alert</span><strong>/live/[creatorId]/alerts/donation</strong><p>후원 수신 시 OBS Browser Source에 고정 템플릿 Alert를 표시합니다.</p></article>
           <article class="flow-card"><span>후원</span><strong>/user/donations</strong><p>잔액, 충전 Dialog, 후원 내역 탭을 한 화면에서 관리합니다.</p></article>
         </div>
         <div class="popup-route-card">
@@ -1315,6 +1359,36 @@
             </div>
           </article>
 
+          <article id="channel-popover-obs-donation-alert-url" class="interaction-target component-preview-card">
+            <div class="component-card-head"><span>Popover</span><strong>OBS 후원 Alert URL</strong></div>
+            <div class="popover-preview live">
+              <div class="popover-head"><strong>Donation Alert Source URL</strong><span>후원 발생 시 고정 템플릿 Alert를 표시하는 OBS URL입니다.</span></div>
+              <div class="menu-separator"></div>
+              <div class="dialog-field"><span>URL</span><em>https://pixelplay.studio/live/jiho/alerts/donation?overlay=obs</em></div>
+              <div class="obs-url-preview">
+                <span>권장 크기</span><strong>520 × 240</strong>
+                <span>동작</span><strong>고정 템플릿 + TTS</strong>
+              </div>
+              <div class="obs-url-action-grid"><span>URL 복사</span><span>미리보기</span><span>테스트 알림</span></div>
+            </div>
+            <p>URL 발급과 재발급은 보안 설정에서 처리하고, Alert 사용 여부와 TTS 속도는 후원 설정에서 관리합니다.</p>
+          </article>
+
+          <article id="channel-alert-obs-donation-alert-url-reissue" class="interaction-target component-preview-card danger-target">
+            <div class="component-card-head"><span>AlertDialog</span><strong>후원 Alert URL 토큰 재발급</strong></div>
+            <div class="alert-dialog-preview danger">
+              <div class="dialog-preview-header">
+                <span class="dialog-icon">!</span>
+                <div><h3>후원 Alert URL을 재발급할까요?</h3><p>기존 URL은 즉시 사용할 수 없고 OBS Browser Source를 다시 설정해야 합니다.</p></div>
+              </div>
+              <div class="dialog-warning-list">
+                <span>기존 후원 Alert Browser Source에는 더 이상 알림이 표시되지 않습니다.</span>
+                <span>새 URL을 복사해 OBS 소스 속성에 다시 붙여 넣어야 합니다.</span>
+              </div>
+              <div class="dialog-actions"><button class="ghost">취소</button><button class="danger">재발급</button></div>
+            </div>
+          </article>
+
           <article id="channel-alert-unsaved-leave" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>AlertDialog</span><strong>설정 저장 전 이동</strong></div>
             <div class="alert-dialog-preview chat">
@@ -1370,6 +1444,12 @@
             <p>실시간 통계의 시청자 추이, 분당 채팅량, 후원 추이를 차트로 시각화할 때 검토합니다. MVP에서는 간단한 막대 프리뷰로 시작하고, 운영 화면이 안정된 뒤 붙입니다.</p>
             <div class="library-meta-row"><span>적용 화면</span><code>/channel/analytics</code></div>
             <div class="library-badge-row"><span>chart</span><span>responsive</span><span>tooltip</span></div>
+          </article>
+          <article class="library-recommend-card mint">
+            <div class="library-card-head"><span>MVP 브라우저 API 후보</span><strong>Web Speech API</strong></div>
+            <p>후원 Alert overlay에서 후원 메시지를 무료 브라우저 TTS로 읽는 후보입니다. 외부 유료 TTS는 후속 품질 개선으로 두고, MVP에서는 사용 여부와 속도만 검증합니다.</p>
+            <div class="library-meta-row"><span>적용 화면</span><code>/live/[creatorId]/alerts/donation</code><code>/channel/donation</code></div>
+            <div class="library-badge-row"><span>speechSynthesis</span><span>TTS</span><span>OBS test</span></div>
           </article>
         </div>
       </section>

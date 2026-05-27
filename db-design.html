@@ -436,7 +436,7 @@ type CreatorDonationDashboard = {
       <tr><td><code>started_at</code></td><td><code>string</code></td><td>방송 시작 시각입니다.</td><td>방송 시간 표시와 정렬</td></tr>
       <tr><td><code>ended_at</code></td><td><code>string | null</code></td><td>방송 종료 시각입니다.</td><td>현재 방송 여부, 방송 종료 처리</td></tr>
       <tr><td><code>current_viewer_count</code></td><td><code>number</code></td><td>현재 시청자 수 캐시입니다.</td><td>라이브 카드와 운영 통계</td></tr>
-      <tr><td><code>peak_viewer_count</code></td><td><code>number</code></td><td>최고 동시 시청자 수입니다.</td><td><code>/channel/analytics</code></td></tr>
+      <tr><td><code>peak_viewer_count</code></td><td><code>number</code></td><td>최고 동시 시청자 수입니다.</td><td><code>/channel/analytics</code>, trigger 자동 보정</td></tr>
       <tr><td><code>chat_message_count</code></td><td><code>number</code></td><td>방송 중 채팅 수입니다.</td><td>운영 통계, trigger 자동 증가</td></tr>
       <tr><td><code>donation_count</code></td><td><code>number</code></td><td>방송 중 후원 횟수입니다.</td><td>후원 수익 요약, trigger 자동 증가</td></tr>
       <tr><td><code>donation_amount_total</code></td><td><code>number</code></td><td>방송 중 후원 총액입니다.</td><td>후원 수익 요약, 방송별 리포트</td></tr>
@@ -546,6 +546,7 @@ type CreatorDonationDashboard = {
       <tr><td>현재 라이브 목록</td><td><code>live_broadcast(current_viewer_count desc, started_at desc) where ended_at is null</code></td><td>랜딩 대표 라이브와 <code>/live</code> Hero/list를 시청자 수 우선으로 가져옵니다.</td></tr>
       <tr><td>크리에이터 방송 기록</td><td><code>live_broadcast(creator_id, started_at desc)</code></td><td><code>/live/[creatorId]</code> 현재 방송 조회와 방송별 리포트에 사용합니다.</td></tr>
       <tr><td>동시 방송 제한</td><td><code>unique(creator_id) where ended_at is null</code></td><td>한 크리에이터가 동시에 두 개의 방송을 켜는 상태를 막습니다.</td></tr>
+      <tr><td>최고 시청자 보정</td><td><code>sync_live_broadcast_peak_viewer_count</code> trigger</td><td><code>current_viewer_count</code>가 올라갈 때 <code>peak_viewer_count</code>를 자동으로 맞춰 실시간 통계 정합성을 지킵니다.</td></tr>
       <tr><td>태그 검색</td><td><code>gin(live_broadcast.tags)</code></td><td>태그 기반 검색 보조에 사용합니다.</td></tr>
       <tr><td>라이브 채팅</td><td><code>live_message(broadcast_id, created_at desc)</code></td><td>방송별 최근 메시지 조회와 pagination에 필요합니다.</td></tr>
       <tr><td>팔로우 목록</td><td><code>viewer_creator_relation(viewer_id, followed_at desc) where followed_at is not null</code></td><td><code>/user/follows</code>에서 내가 팔로우한 크리에이터를 정렬합니다.</td></tr>
@@ -577,6 +578,7 @@ type CreatorDonationDashboard = {
       <tr><td>7</td><td><code>merge_live_mvp_select_policies</code></td><td>기존 select policy를 역할 단위로 병합</td><td>Supabase advisor 경고와 중복 policy 비용 확인</td></tr>
       <tr><td>8</td><td><code>add_live_broadcast_active_viewer_index</code></td><td>현재 방송 목록의 시청자 수 우선 정렬 인덱스</td><td><code>/live</code> Hero와 랜딩 대표 라이브 정렬 기준 확인</td></tr>
       <tr><td>9</td><td><code>add_live_hero_rpc</code></td><td><code>get_live_hero()</code> 추가</td><td>Hero가 목록 RPC 첫 row에 암묵적으로 의존하지 않도록 분리</td></tr>
+      <tr><td>10</td><td><code>add_live_broadcast_peak_viewer_trigger</code></td><td>최고 동시 시청자 자동 보정 trigger</td><td>실시간 시청자 수 업데이트와 분석 화면의 최고 시청자 수 정합성 확인</td></tr>
     </tbody></table></section>
   </main>
 

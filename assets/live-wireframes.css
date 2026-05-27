@@ -189,6 +189,64 @@
   color: #c6322b;
 }
 
+.donor-user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.donor-chat-badge,
+.cleanbot-mark {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.donor-chat-badge {
+  background: linear-gradient(135deg, #7c5cff, #ff6057);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.18);
+}
+
+.cleanbot-filtered {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 9px;
+  border: 1px solid rgba(255, 96, 87, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 96, 87, 0.08);
+}
+
+.cleanbot-mark {
+  background: rgba(255, 96, 87, 0.18);
+  color: #c6322b;
+}
+
+.cleanbot-filtered em {
+  min-width: 0;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.light-watch .cleanbot-filtered {
+  background: rgba(255, 96, 87, 0.06);
+}
+
+.light-watch .cleanbot-filtered em {
+  color: rgba(100, 116, 139, 0.78);
+}
+
 .quick-action.vote {
   border-color: rgba(70, 198, 169, 0.32);
   background: rgba(70, 198, 169, 0.14);

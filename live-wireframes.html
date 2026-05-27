@@ -461,11 +461,11 @@
 <!-- ============================ 라이브 시청 ============================ -->
       <section id="preview-live-watch" class="preview-section">
         <h2><span class="section-num">4</span>라이브 시청</h2>
-        <p class="section-summary">플레이어 중심 화면입니다. 16:9 비율 플레이어 + 우측 채팅 + 방송 제목·크리에이터 액션만 남기고, 후원은 채팅 피드 안의 특별 메시지로 표시합니다. MVP에서는 공개 시청, 채팅 읽기, 로그인 후 채팅 입력, 팔로우, 후원 보내기까지 포함합니다.</p>
+        <p class="section-summary">플레이어 중심 화면입니다. 16:9 비율 플레이어 + 우측 채팅 + 방송 제목·크리에이터 액션만 남기고, 후원은 채팅 피드 안의 특별 메시지로 표시합니다. MVP에서는 공개 시청, 채팅 읽기, 로그인 후 채팅 입력, 팔로우, 후원 보내기, 입장 안내 컴포넌트, 개인별 채팅 참여 안내를 포함합니다.</p>
         <div class="preview-meta detail-meta">
           <div class="meta-box"><span>route</span><strong>/live/[creatorId]</strong></div>
           <div class="meta-box"><span>role</span><p>크리에이터의 현재 방송을 시청합니다. 채팅과 후원이 한 화면에 모이고, 비로그인은 시청과 채팅 읽기만 가능합니다.</p></div>
-          <div class="meta-box"><span>access</span><p>공개 시청. 채팅 입력, 팔로우, 후원은 로그인 필요.</p></div>
+          <div class="meta-box"><span>access</span><p>공개 시청. 채팅 입력, 팔로우, 후원은 로그인 필요이며, 크리에이터 설정에 따라 팔로워만 채팅할 수 있습니다. 입장 안내와 참여 제한 안내는 DB 채팅 메시지가 아니라 현재 사용자에게만 보이는 UI 컴포넌트로 표시합니다.</p></div>
           <div class="meta-box"><span>buttons and controls</span><p>재생·일시정지, 음량, 화질, 전체화면, 팔로우, 공유, 채팅 전송, 채팅 하단의 후원·투표 CTA.</p></div>
         </div>
         <div class="preview-pair">
@@ -529,7 +529,7 @@
                     <a class="icon-button preview-action-link" href="#live-chat-menu">⋯</a>
                   </div>
                   <div class="live-chat-feed">
-                    <div class="live-msg system live-system-pill"><span>32분 전에 방송이 시작됐어요.</span></div>
+                    <div class="chat-entry-notice"><span>쾌적한 시청 환경을 위해 일부 메시지는 필터링 됩니다. 클린 라이브 채팅 문화 만들기에 동참해 주세요.</span></div>
                     <p class="live-msg donor-user"><span class="donor-chat-badge" data-tooltip="후원으로 응원한 팬" aria-label="후원으로 응원한 팬">♥</span><span class="author mint">하린</span>오 화면 잘 보여요</p>
                     <p class="live-msg"><span class="author amber">민수</span>저지연 진짜 빠르네요 ㄷㄷ</p>
                     <div class="live-msg donation donation-chat-message"><div><b>하린</b><span>5,000P</span></div><p>방송 화이팅!! 잘 보고 있어요</p></div>
@@ -539,6 +539,7 @@
                     <p class="live-msg"><span class="author mint">지윤</span>ㅇㅈ</p>
                     <p class="live-msg"><span class="author amber">도윤</span>다음 주제는 뭐예요?</p>
                   </div>
+                  <div class="chat-participation-notice"><strong>팔로우하고 채팅에 참여하세요</strong><span>이 방송은 팔로우 후 1주일이 지나야 채팅할 수 있습니다.</span></div>
                   <div class="live-chat-input">
                     <a class="input-wrap preview-action-link" href="#live-dialog-login-required">
                       <em>메시지를 입력하세요.</em>
@@ -615,7 +616,7 @@
                     <a class="icon-button preview-action-link" href="#live-chat-menu">⋯</a>
                   </div>
                   <div class="live-chat-feed">
-                    <div class="live-msg system live-system-pill"><span>32분 전에 방송이 시작됐어요.</span></div>
+                    <div class="chat-entry-notice"><span>쾌적한 시청 환경을 위해 일부 메시지는 필터링 됩니다. 클린 라이브 채팅 문화 만들기에 동참해 주세요.</span></div>
                     <p class="live-msg donor-user"><span class="donor-chat-badge" data-tooltip="후원으로 응원한 팬" aria-label="후원으로 응원한 팬">♥</span><span class="author mint">하린</span>오 화면 잘 보여요</p>
                     <p class="live-msg"><span class="author amber">민수</span>저지연 진짜 빠르네요 ㄷㄷ</p>
                     <div class="live-msg donation donation-chat-message"><div><b>하린</b><span>5,000P</span></div><p>방송 화이팅!! 잘 보고 있어요</p></div>
@@ -625,6 +626,7 @@
                     <p class="live-msg"><span class="author mint">지윤</span>ㅇㅈ</p>
                     <p class="live-msg"><span class="author amber">도윤</span>다음 주제는 뭐예요?</p>
                   </div>
+                  <div class="chat-participation-notice"><strong>팔로우하고 채팅에 참여하세요</strong><span>이 방송은 팔로우 후 1주일이 지나야 채팅할 수 있습니다.</span></div>
                   <div class="live-chat-input">
                     <a class="input-wrap preview-action-link" href="#live-dialog-login-required">
                       <em>메시지를 입력하세요.</em>
@@ -782,8 +784,8 @@
 <!-- ============================ 채팅 설정 ============================ -->
       <section id="preview-channel-chat" class="preview-section">
         <h2><span class="section-num">6</span>채팅 설정</h2>
-        <p class="section-summary">채팅 설정은 방송 운영과 분리된 관리 화면으로 둡니다. MVP에서는 채팅 속도, 링크 차단, 시청자에게 보여줄 채팅 규칙 안내문, 금칙어 inline 입력만 다룹니다.</p>
-        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/chat</strong></div><div class="meta-box"><span>role</span><p>방송 채팅의 기본 정책, 안내문, 금칙어를 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>채팅 속도, 링크 차단, 규칙 안내문, 금칙어 추가·삭제, 저장.</p></div></div>
+        <p class="section-summary">채팅 설정은 방송 운영과 분리된 관리 화면으로 둡니다. MVP에서는 채팅 참여 범위, 채팅 속도, 링크 차단, 첫 채팅 전 규칙 동의, 시청자에게 보여줄 채팅 규칙 안내문, 금칙어 inline 입력만 다룹니다.</p>
+        <div class="preview-meta detail-meta"><div class="meta-box"><span>route</span><strong>/channel/chat</strong></div><div class="meta-box"><span>role</span><p>방송 채팅의 기본 정책, 참여 범위, 안내문, 금칙어를 관리합니다.</p></div><div class="meta-box"><span>access</span><p>로그인 필요. 해당 크리에이터 본인만 접근합니다.</p></div><div class="meta-box"><span>buttons and controls</span><p>참여 범위, 채팅 속도, 링크 차단, 규칙 동의, 규칙 안내문, 금칙어 추가·삭제, 저장.</p></div></div>
         <div class="preview-pair">
           <div class="preview-frame light">
             <div class="frame-label"><span>Light Mode</span><span>/channel/chat</span></div>
@@ -794,10 +796,10 @@
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>방송 운영</span><code>/channel/live</code></a><div class="nav-subitem active"><span>채팅 설정</span><code>/channel/chat</code></div><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>보안 설정</span><code>/channel/security</code></a><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>실시간 통계</span><code>/channel/analytics</code></a></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="settings-main channel-settings-main">
                   <div class="settings-header-row"><div><h2>채팅 설정</h2><p>방송 채팅의 기본 정책과 금칙어를 관리합니다.</p></div><span class="mini-button primary">저장</span></div>
-                  <section class="settings-form-card"><h3>채팅 기본값</h3><p class="card-desc">방송 시작 시 적용할 채팅 참여 규칙입니다.</p><div class="field-row"><label>채팅 속도<span class="sub">도배 방지</span></label><div class="select-cluster"><span class="select-pill">제한 없음</span><span class="select-pill active">5초</span><span class="select-pill">10초</span></div></div><div class="field-row"><label>링크 허용<span class="sub">외부 URL</span></label><div class="toggle-switch off"><span class="toggle-text">링크 차단</span><span class="switch"></span></div></div></section>
-                  <section class="settings-form-card chat-rule-card"><h3>채팅 규칙 안내문</h3><p class="card-desc">시청자가 채팅 메뉴에서 여는 규칙 Dialog에 그대로 표시됩니다.</p><label class="rule-textarea-preview"><span>안내문</span><em>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</em><small>65 / 300</small></label></section>
+                  <section class="settings-form-card"><h3>채팅 기본값</h3><p class="card-desc">방송 시작 시 적용할 채팅 참여 규칙입니다.</p><div class="field-row"><label>참여 범위<span class="sub">입력 권한</span></label><div class="select-cluster"><span class="select-pill">전체 가능</span><span class="select-pill">로그인 유저</span><span class="select-pill active">팔로워만</span></div></div><div class="field-row"><label>채팅 속도<span class="sub">도배 방지</span></label><div class="select-cluster"><span class="select-pill">제한 없음</span><span class="select-pill active">5초</span><span class="select-pill">10초</span></div></div><div class="field-row"><label>링크 허용<span class="sub">외부 URL</span></label><div class="toggle-switch off"><span class="toggle-text">링크 차단</span><span class="switch"></span></div></div></section>
+                  <section class="settings-form-card chat-rule-card"><h3>채팅 규칙 안내문</h3><p class="card-desc">시청자가 처음 채팅하려 할 때 입력창 위 안내 컴포넌트에 표시됩니다.</p><label class="rule-textarea-preview"><span>안내문</span><em>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</em><small>65 / 300</small></label><div class="field-row compact"><label>첫 채팅 전 확인<span class="sub">개인별 저장</span></label><div class="toggle-switch"><span class="toggle-text">동의 필요</span><span class="switch"></span></div></div></section>
                   <section class="settings-form-card settings-chat-card"><h3>금칙어</h3><p class="card-desc">한 단어씩 입력하고 추가 버튼으로 바로 등록합니다.</p><div class="banned-word-control"><div class="banned-word-inline-input"><em>금칙어를 입력해주세요.</em><span>0 / 100</span><button type="button">추가</button></div><div class="tag-input-box"><span class="word-tag">스팸 <b class="x">×</b></span><span class="word-tag">홍보 <b class="x">×</b></span><span class="word-tag">욕설 <b class="x">×</b></span></div></div><p class="inline-input-help">등록된 단어가 포함된 메시지는 방송 채팅에서 자동으로 가려집니다.</p></section>
-                  <aside class="settings-side"><div class="side-tip"><h4>저장 전 이동</h4><p>채팅 속도나 링크 정책을 바꾼 뒤 다른 설정 화면으로 이동하면 저장 확인 AlertDialog를 표시합니다.</p></div></aside>
+                  <aside class="settings-side"><div class="side-tip"><h4>메시지와 컴포넌트 분리</h4><p>클린봇이 가린 채팅은 메시지 타입으로 남기고, 입장 안내·로그인·팔로우·규칙 동의 안내는 DB 설정을 읽어 현재 사용자에게만 보여주는 UI 컴포넌트로 표시합니다.</p></div></aside>
                 </main>
               </div>
             </div>
@@ -811,10 +813,10 @@
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>방송 운영</span><code>/channel/live</code></a><div class="nav-subitem active"><span>채팅 설정</span><code>/channel/chat</code></div><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>보안 설정</span><code>/channel/security</code></a><a class="nav-subitem preview-action-link" href="#channel-alert-unsaved-leave"><span>실시간 통계</span><code>/channel/analytics</code></a></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="settings-main channel-settings-main">
                   <div class="settings-header-row"><div><h2>채팅 설정</h2><p>방송 채팅의 기본 정책과 금칙어를 관리합니다.</p></div><span class="mini-button primary">저장</span></div>
-                  <section class="settings-form-card"><h3>채팅 기본값</h3><p class="card-desc">방송 시작 시 적용할 채팅 참여 규칙입니다.</p><div class="field-row"><label>채팅 속도<span class="sub">도배 방지</span></label><div class="select-cluster"><span class="select-pill">제한 없음</span><span class="select-pill active">5초</span><span class="select-pill">10초</span></div></div><div class="field-row"><label>링크 허용<span class="sub">외부 URL</span></label><div class="toggle-switch off"><span class="toggle-text">링크 차단</span><span class="switch"></span></div></div></section>
-                  <section class="settings-form-card chat-rule-card"><h3>채팅 규칙 안내문</h3><p class="card-desc">시청자가 채팅 메뉴에서 여는 규칙 Dialog에 그대로 표시됩니다.</p><label class="rule-textarea-preview"><span>안내문</span><em>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</em><small>65 / 300</small></label></section>
+                  <section class="settings-form-card"><h3>채팅 기본값</h3><p class="card-desc">방송 시작 시 적용할 채팅 참여 규칙입니다.</p><div class="field-row"><label>참여 범위<span class="sub">입력 권한</span></label><div class="select-cluster"><span class="select-pill">전체 가능</span><span class="select-pill">로그인 유저</span><span class="select-pill active">팔로워만</span></div></div><div class="field-row"><label>채팅 속도<span class="sub">도배 방지</span></label><div class="select-cluster"><span class="select-pill">제한 없음</span><span class="select-pill active">5초</span><span class="select-pill">10초</span></div></div><div class="field-row"><label>링크 허용<span class="sub">외부 URL</span></label><div class="toggle-switch off"><span class="toggle-text">링크 차단</span><span class="switch"></span></div></div></section>
+                  <section class="settings-form-card chat-rule-card"><h3>채팅 규칙 안내문</h3><p class="card-desc">시청자가 처음 채팅하려 할 때 입력창 위 안내 컴포넌트에 표시됩니다.</p><label class="rule-textarea-preview"><span>안내문</span><em>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</em><small>65 / 300</small></label><div class="field-row compact"><label>첫 채팅 전 확인<span class="sub">개인별 저장</span></label><div class="toggle-switch"><span class="toggle-text">동의 필요</span><span class="switch"></span></div></div></section>
                   <section class="settings-form-card settings-chat-card"><h3>금칙어</h3><p class="card-desc">한 단어씩 입력하고 추가 버튼으로 바로 등록합니다.</p><div class="banned-word-control"><div class="banned-word-inline-input"><em>금칙어를 입력해주세요.</em><span>0 / 100</span><button type="button">추가</button></div><div class="tag-input-box"><span class="word-tag">스팸 <b class="x">×</b></span><span class="word-tag">홍보 <b class="x">×</b></span><span class="word-tag">욕설 <b class="x">×</b></span></div></div><p class="inline-input-help">등록된 단어가 포함된 메시지는 방송 채팅에서 자동으로 가려집니다.</p></section>
-                  <aside class="settings-side"><div class="side-tip"><h4>저장 전 이동</h4><p>채팅 속도나 링크 정책을 바꾼 뒤 다른 설정 화면으로 이동하면 저장 확인 AlertDialog를 표시합니다.</p></div></aside>
+                  <aside class="settings-side"><div class="side-tip"><h4>메시지와 컴포넌트 분리</h4><p>클린봇이 가린 채팅은 메시지 타입으로 남기고, 입장 안내·로그인·팔로우·규칙 동의 안내는 DB 설정을 읽어 현재 사용자에게만 보여주는 UI 컴포넌트로 표시합니다.</p></div></aside>
                 </main>
               </div>
             </div>
@@ -1067,18 +1069,10 @@
         <div class="component-preview-grid">
           <article id="live-dialog-login-required" class="interaction-target component-preview-card">
             <div class="component-card-head"><span>Dialog</span><strong>비로그인 라이브 액션</strong></div>
-            <div class="dialog-preview live">
-              <div class="dialog-preview-header">
-                <span class="dialog-icon">▶</span>
-                <div><h3>로그인이 필요해요</h3><p>채팅 입력, 팔로우, 후원은 로그인 후 사용할 수 있습니다.</p></div>
-              </div>
-              <div class="dialog-checklist">
-                <div><span>채팅 입력</span><strong>로그인 후 가능</strong></div>
-                <div><span>팔로우</span><strong>관심 크리에이터 저장</strong></div>
-                <div><span>후원</span><strong>후원금 잔액 필요</strong></div>
-              </div>
-              <div class="dialog-note-line">로그인하면 보던 방송으로 돌아와 채팅과 후원을 이어갈 수 있습니다.</div>
-              <div class="dialog-actions"><button class="ghost">나중에</button><button class="coral">로그인하기</button></div>
+            <div class="dialog-preview live compact-login-dialog">
+              <h3>PixelPlay</h3>
+              <p>로그인이 필요한 서비스입니다.<br>로그인 하시겠습니까?</p>
+              <div class="dialog-actions"><button class="ghost">취소</button><button class="coral">확인</button></div>
             </div>
           </article>
 
@@ -1120,16 +1114,13 @@
           </article>
 
           <article id="live-alert-chat-rules" class="interaction-target component-preview-card">
-            <div class="component-card-head"><span>AlertDialog</span><strong>채팅 규칙</strong></div>
+            <div class="component-card-head"><span>Input Gate</span><strong>첫 채팅 규칙 동의</strong></div>
             <div class="alert-dialog-preview live-rule-alert">
-              <div class="dialog-preview-header">
-                <span class="dialog-icon">!</span>
-                <div><h3>지호님의 채팅 규칙 안내</h3><p>크리에이터가 채팅 설정에서 작성한 안내문을 보여줍니다.</p></div>
-              </div>
+              <div class="rule-gate-head"><span class="avatar-dot online"></span><div><h3>지호님의 채팅 규칙 안내</h3><p>처음 채팅하려는 개인에게만 입력창 위에 표시됩니다.</p></div></div>
               <div class="viewer-rule-body">
                 <p>서로를 존중하며 대화해주세요. 반복 도배, 비방, 홍보성 메시지는 제한될 수 있습니다.</p>
               </div>
-              <div class="dialog-actions"><button class="coral">확인</button></div>
+              <div class="dialog-actions"><button class="coral">규칙에 동의하고 채팅하기</button></div>
             </div>
           </article>
 

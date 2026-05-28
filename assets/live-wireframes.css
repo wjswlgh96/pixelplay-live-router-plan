@@ -702,6 +702,12 @@
   scrollbar-color: rgba(70, 198, 169, 0.58) rgba(148, 163, 184, 0.14);
 }
 
+.broadcast-scroll-stage > .preview-stage {
+  width: 100%;
+  min-height: 214px;
+  flex: 0 0 auto;
+}
+
 .broadcast-scroll-stage::-webkit-scrollbar {
   width: 6px;
 }

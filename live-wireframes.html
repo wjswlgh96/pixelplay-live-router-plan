@@ -716,13 +716,13 @@
         <div class="state-section-title"><span>방송 중</span><strong>운영에 필요한 액션과 지표만 남깁니다.</strong></div>
         <div class="preview-pair channel-live-state-pair">
           <div class="preview-frame light">
-            <div class="frame-label"><span>Light Mode</span><span>/channel/live · on air</span></div>
+            <div class="frame-label"><span>Light Mode</span><span>/channel/live · on air · 투표 없음</span></div>
             <div class="design-screen channel-screen">
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="broadcast-shell">
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="broadcast-main live-control-layout">
-                  <div class="broadcast-stage">
+                  <div class="broadcast-stage broadcast-scroll-stage" aria-label="방송 운영 ScrollArea">
                     <div class="live-status-strip"><span class="live-pulse">방송 중</span><span class="uptime">00:32:18</span><span class="quality-pill">안정</span></div>
                     <div class="preview-stage"><span class="live-on-overlay">LIVE</span><span class="viewer-chip">1,240명</span><div class="preview-corner">송출 미리보기</div></div>
                     <div class="broadcast-controls">
@@ -733,7 +733,6 @@
                     </div>
                     <div class="broadcast-dashboard-row">
                       <div class="dash-card"><h3>방송 상태</h3><div class="metric-mini-row"><span class="label">현재 시청자</span><strong>1,240</strong></div><div class="metric-mini-row"><span class="label">최고 시청자</span><strong>1,486</strong></div><div class="metric-mini-row"><span class="label">분당 채팅</span><strong>142</strong></div><div class="metric-mini-row"><span class="label">후원 누적</span><strong>68,500P</strong></div></div>
-                      <div class="dash-card poll-active-card"><div class="poll-card-head"><div><span>진행 중 투표</span><strong>다음 게임은 어떤 챔피언으로 갈까요?</strong></div><a class="mini-pill danger preview-action-link" href="#channel-alert-poll-end">투표 종료</a></div><div class="poll-meta-row"><span>참여 184명</span><span>직접 종료 대기</span></div><div class="poll-choice-result"><div><strong>아리</strong><span>108표 · 58%</span></div><em style="--value:58%"></em></div><div class="poll-choice-result"><div><strong>요네</strong><span>76표 · 42%</span></div><em style="--value:42%"></em></div><p class="poll-card-help">진행 중에는 새 투표를 만들 수 없습니다.</p></div>
                     </div>
                   </div>
                   <div class="broadcast-side broadcast-chat-column">
@@ -747,13 +746,13 @@
             </div>
           </div>
           <div class="preview-frame dark">
-            <div class="frame-label"><span>Dark Mode</span><span>/channel/live · on air</span></div>
+            <div class="frame-label"><span>Dark Mode</span><span>/channel/live · on air · 투표 진행 중</span></div>
             <div class="design-screen channel-screen">
               <div class="mini-top"><div class="mini-logo"><strong>PixelPlay</strong></div><nav class="mini-top-nav"><a>라이브</a><a>채팅</a></nav><div class="mini-top-actions header-actions"><span class="mini-button ghost">테마</span><a class="mini-button coral preview-action-link" href="#preview-channel-live">방송하기</a><span class="avatar-chip"><span class="avatar-dot online"></span>지호</span></div></div>
               <div class="broadcast-shell">
                 <aside class="channel-sidebar"><div class="channel-profile"><span class="avatar-dot live"></span><div><div class="channel-name">내 채널 관리</div><span class="channel-status">PixelPlay Studio</span></div></div><div class="nav-group studio-menu"><div class="nav-subitem active"><span>방송 운영</span><code>/channel/live</code></div><div class="nav-subitem"><span>후원 설정</span><code>/channel/donation</code></div><div class="nav-subitem"><span>채팅 설정</span><code>/channel/chat</code></div><div class="nav-subitem"><span>보안 설정</span><code>/channel/security</code></div><div class="nav-subitem"><span>실시간 통계</span><code>/channel/analytics</code></div></div><div class="sidebar-footer-menu"><div class="nav-separator"></div><div class="nav-subitem"><span>프로필 설정</span><code>/user/profile</code></div><div class="nav-subitem danger"><span>로그아웃</span><code>Action</code></div></div></aside>
                 <main class="broadcast-main live-control-layout">
-                  <div class="broadcast-stage">
+                  <div class="broadcast-stage broadcast-scroll-stage" aria-label="방송 운영 ScrollArea">
                     <div class="live-status-strip"><span class="live-pulse">방송 중</span><span class="uptime">00:32:18</span><span class="quality-pill">안정</span></div>
                     <div class="preview-stage"><span class="live-on-overlay">LIVE</span><span class="viewer-chip">1,240명</span><div class="preview-corner">송출 미리보기</div></div>
                     <div class="broadcast-controls">
@@ -763,8 +762,8 @@
                       <a class="bc-button danger preview-action-link" href="#channel-alert-broadcast-end"><span class="icon-bullet">종료</span>방송 종료<span class="sub">확인 Dialog 후 종료</span></a>
                     </div>
                     <div class="broadcast-dashboard-row">
-                      <div class="dash-card"><h3>방송 상태</h3><div class="metric-mini-row"><span class="label">현재 시청자</span><strong>1,240</strong></div><div class="metric-mini-row"><span class="label">최고 시청자</span><strong>1,486</strong></div><div class="metric-mini-row"><span class="label">분당 채팅</span><strong>142</strong></div><div class="metric-mini-row"><span class="label">후원 누적</span><strong>68,500P</strong></div></div>
                       <div class="dash-card poll-active-card"><div class="poll-card-head"><div><span>진행 중 투표</span><strong>다음 게임은 어떤 챔피언으로 갈까요?</strong></div><a class="mini-pill danger preview-action-link" href="#channel-alert-poll-end">투표 종료</a></div><div class="poll-meta-row"><span>참여 184명</span><span>직접 종료 대기</span></div><div class="poll-choice-result"><div><strong>아리</strong><span>108표 · 58%</span></div><em style="--value:58%"></em></div><div class="poll-choice-result"><div><strong>요네</strong><span>76표 · 42%</span></div><em style="--value:42%"></em></div><p class="poll-card-help">진행 중에는 새 투표를 만들 수 없습니다.</p></div>
+                      <div class="dash-card"><h3>방송 상태</h3><div class="metric-mini-row"><span class="label">현재 시청자</span><strong>1,240</strong></div><div class="metric-mini-row"><span class="label">최고 시청자</span><strong>1,486</strong></div><div class="metric-mini-row"><span class="label">분당 채팅</span><strong>142</strong></div><div class="metric-mini-row"><span class="label">후원 누적</span><strong>68,500P</strong></div></div>
                     </div>
                   </div>
                   <div class="broadcast-side broadcast-chat-column">

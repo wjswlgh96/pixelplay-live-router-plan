@@ -693,6 +693,29 @@
   min-width: 0;
 }
 
+.broadcast-scroll-stage {
+  max-height: 598px;
+  overflow-y: auto;
+  padding-right: 6px;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(70, 198, 169, 0.58) rgba(148, 163, 184, 0.14);
+}
+
+.broadcast-scroll-stage::-webkit-scrollbar {
+  width: 6px;
+}
+
+.broadcast-scroll-stage::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.14);
+}
+
+.broadcast-scroll-stage::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(70, 198, 169, 0.58);
+}
+
 .broadcast-chat-column .broadcast-chat-card {
   min-height: 100%;
 }

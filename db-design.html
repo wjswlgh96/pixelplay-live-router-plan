@@ -87,7 +87,7 @@
       <tr><td><code>check constraints</code></td><td><code>DB constraint</code></td><td>태그 수, 시간 옵션, 금칙어 수, 금액, 볼륨, TTS 범위를 제한합니다.</td><td>프론트 Select 옵션과 DB 값 불일치 방지</td></tr>
       <tr><td><code>token versions</code></td><td><code>number</code></td><td>URL 원문과 토큰은 DB에 저장하지 않고 버전만 저장합니다.</td><td>Server Action에서 signed URL 생성</td></tr>
 
-      <tr><td rowspan="14"><code>live_broadcast</code></td><td><code>id</code></td><td><code>string</code></td><td>방송 1회차 ID입니다.</td><td>채팅, 후원, 투표, 통계 연결 기준</td></tr>
+      <tr><td rowspan="14"><code>live_broadcast</code> <span class="realtime-label">(Realtime)</span></td><td><code>id</code></td><td><code>string</code></td><td>방송 1회차 ID입니다.</td><td>채팅, 후원, 투표, 통계 연결 기준</td></tr>
       <tr><td><code>creator_id</code></td><td><code>string</code></td><td>방송을 켠 크리에이터입니다.</td><td><code>/live/[creatorId]</code>, <code>/channel/live</code></td></tr>
       <tr><td><code>title</code></td><td><code>string</code></td><td>방송 제목입니다.</td><td>라이브 목록, 시청 화면, 검색</td></tr>
       <tr><td><code>tags</code></td><td><code>string[]</code></td><td>검색 보조 태그입니다.</td><td><code>/live/search</code>, 랜딩 카드</td></tr>
@@ -102,7 +102,7 @@
       <tr><td><code>created_at</code></td><td><code>string</code></td><td>row 생성 시각입니다.</td><td>감사와 정렬</td></tr>
       <tr><td><code>modified_at</code></td><td><code>string</code></td><td>방송 상태 변경 시각입니다.</td><td>운영 상태 확인</td></tr>
 
-      <tr><td rowspan="8"><code>live_message</code></td><td><code>id</code></td><td><code>string</code></td><td>라이브 메시지 ID입니다.</td><td>실시간 수신과 pagination</td></tr>
+      <tr><td rowspan="8"><code>live_message</code> <span class="realtime-label">(Realtime)</span></td><td><code>id</code></td><td><code>string</code></td><td>라이브 메시지 ID입니다.</td><td>실시간 수신과 pagination</td></tr>
       <tr><td><code>broadcast_id</code></td><td><code>string</code></td><td>메시지가 속한 방송 회차입니다.</td><td>방송별 채팅 로그</td></tr>
       <tr><td><code>sender_id</code></td><td><code>string | null</code></td><td>작성자입니다. 일반 채팅은 필수이고 익명 후원 이벤트는 null입니다.</td><td>채팅 작성자 표시</td></tr>
       <tr><td><code>message_type</code></td><td><code>LiveMessageType</code></td><td>일반 채팅, 클린봇 결과, 후원 이벤트입니다.</td><td>채팅 리스트 렌더링 분기</td></tr>
@@ -137,7 +137,7 @@
       <tr><td><code>created_at</code></td><td><code>string</code></td><td>거래 생성 시각입니다.</td><td>내역 정렬</td></tr>
       <tr><td><code>modified_at</code></td><td><code>string</code></td><td>거래 상태 변경 시각입니다.</td><td>내역 정렬</td></tr>
 
-      <tr><td rowspan="9"><code>donation</code></td><td><code>id</code></td><td><code>string</code></td><td>후원 이벤트 ID입니다.</td><td>Alert, 채팅 강조, 상세 내역</td></tr>
+      <tr><td rowspan="9"><code>donation</code> <span class="realtime-label">(Realtime)</span></td><td><code>id</code></td><td><code>string</code></td><td>후원 이벤트 ID입니다.</td><td>Alert, 채팅 강조, 상세 내역</td></tr>
       <tr><td><code>broadcast_id</code></td><td><code>string</code></td><td>후원한 방송 회차입니다.</td><td>후원 상세의 후원한 방송, 방송별 리포트</td></tr>
       <tr><td><code>creator_id</code></td><td><code>string</code></td><td>후원을 받은 크리에이터입니다.</td><td><code>/channel/donation</code> 수익 조회</td></tr>
       <tr><td><code>donor_id</code></td><td><code>string</code></td><td>후원한 시청자입니다.</td><td><code>/user/donations</code> 보낸 후원</td></tr>
@@ -147,7 +147,7 @@
       <tr><td><code>is_anonymous</code></td><td><code>boolean</code></td><td>익명 후원 표시 여부입니다.</td><td>닉네임 표시 분기</td></tr>
       <tr><td><code>created_at</code></td><td><code>string</code></td><td>후원 시각입니다.</td><td>후원 상세 내역 정렬</td></tr>
 
-      <tr><td rowspan="8"><code>live_poll</code></td><td><code>id</code></td><td><code>string</code></td><td>투표 ID입니다.</td><td>투표 생성, 종료, 참여</td></tr>
+      <tr><td rowspan="8"><code>live_poll</code> <span class="realtime-label">(Realtime)</span></td><td><code>id</code></td><td><code>string</code></td><td>투표 ID입니다.</td><td>투표 생성, 종료, 참여</td></tr>
       <tr><td><code>broadcast_id</code></td><td><code>string</code></td><td>투표가 속한 방송 회차입니다.</td><td>현재 방송 투표 조회</td></tr>
       <tr><td><code>title</code></td><td><code>string</code></td><td>투표 질문입니다.</td><td>시청자 Popover, 운영 Dialog</td></tr>
       <tr><td><code>options</code></td><td><code>PollOption[]</code></td><td>선택지 배열입니다.</td><td>2개에서 5개 선택지 표시</td></tr>
@@ -156,7 +156,7 @@
       <tr><td><code>created_at</code></td><td><code>string</code></td><td>투표 생성 시각입니다.</td><td>정렬과 감사</td></tr>
       <tr><td><code>modified_at</code></td><td><code>string</code></td><td>투표 변경 시각입니다.</td><td>정렬과 감사</td></tr>
 
-      <tr><td rowspan="4"><code>live_poll_vote</code></td><td><code>poll_id</code></td><td><code>string</code></td><td>참여한 투표입니다.</td><td>투표별 집계</td></tr>
+      <tr><td rowspan="4"><code>live_poll_vote</code> <span class="realtime-label">(Realtime)</span></td><td><code>poll_id</code></td><td><code>string</code></td><td>참여한 투표입니다.</td><td>투표별 집계</td></tr>
       <tr><td><code>voter_id</code></td><td><code>string</code></td><td>참여한 시청자입니다.</td><td>중복 참여 방지</td></tr>
       <tr><td><code>option_id</code></td><td><code>string</code></td><td>선택한 옵션 ID입니다.</td><td>jsonb options와 매칭</td></tr>
       <tr><td><code>created_at</code></td><td><code>string</code></td><td>투표 참여 시각입니다.</td><td>집계와 감사</td></tr>

@@ -13,7 +13,7 @@
     </div>
   </header>
   <main class="doc-shell">
-    <section class="hero"><div class="page-kicker">Database Draft</div><h1>라이브 MVP와 후원 플로우를 위한 Supabase DB 확정 초안입니다.</h1><p>현재 public 스키마의 user, chat_room, chat_room_member, message는 유지하고, 라이브 방송·후원·투표·팔로우·규칙 동의는 별도 도메인 테이블과 RPC 경계로 분리합니다.</p></section>
+    <section class="hero"><div class="page-kicker">Database Draft · Supabase checked 2026-06-04</div><h1>라이브 MVP와 후원 플로우를 위한 Supabase DB 확정 초안입니다.</h1><p>현재 public 스키마의 user, chat_room, chat_room_member, message는 유지하고, 라이브 방송·후원·투표·팔로우·규칙 동의는 별도 도메인 테이블과 RPC 경계로 분리합니다. 이 문서는 GitHub dev 브랜치 최신 fetch와 Supabase MCP로 확인한 원격 DB 기준을 우선 반영합니다.</p></section>
 
     <section class="hero-grid">
       <article class="card"><div class="summary-card-head"><span class="summary-card-label">현재 DB</span><strong>채팅 앱 도메인은 유지</strong></div><p>일반 채팅방은 기존 구조를 유지합니다. 라이브 채팅은 공개 읽기, 비로그인 시청, 방송 회차 통계가 필요하므로 별도 테이블로 분리합니다.</p><div class="badge-row"><span class="badge mint">user</span><span class="badge">chat_room · Realtime</span><span class="badge">chat_room_member · Realtime</span><span class="badge">message · Realtime</span></div></article>
@@ -26,17 +26,19 @@
       <tr><td><code>public.chat_room</code> <span class="realtime-label">(Realtime)</span></td><td>기존 일반 채팅방 목록과 방 메타데이터입니다.</td><td>랜딩 통계에서는 일반 채팅방 수를 보여줄 수 있지만 라이브 채팅 저장소로 쓰지 않습니다.</td><td>유지합니다.</td></tr>
       <tr><td><code>public.chat_room_member</code> <span class="realtime-label">(Realtime)</span></td><td>일반 채팅방 멤버십과 강퇴 상태입니다.</td><td>라이브는 비로그인 시청과 공개 읽기 플로우가 있어 일반 채팅방 멤버십과 분리합니다.</td><td>유지합니다.</td></tr>
       <tr><td><code>public.message</code> <span class="realtime-label">(Realtime)</span></td><td>일반 채팅 메시지입니다.</td><td>라이브 채팅은 방송 회차, 클린봇 결과, 후원 이벤트와 연결되므로 별도 <code>live_message</code>를 사용합니다.</td><td>유지합니다.</td></tr>
+      <tr><td><code>public.community_post</code>, <code>public.community_comment</code>, <code>public.community_post_like</code></td><td>Supabase 원격 DB에 이미 적용된 채널 커뮤니티 게시글, 댓글, 좋아요 테이블입니다.</td><td>라이브 MVP 핵심 범위는 아니지만 공개 채널 홈 후보와 연결됩니다.</td><td>후속 라우터 후보로 유지하되 DB 존재 상태는 문서에 남깁니다.</td></tr>
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>설계 원칙</h2><p>planning MVP와 실제 project RPC convention을 같이 맞춘 기준입니다.</p></div></div><ul class="decision-list">
       <li><strong>별도 <code>creator_channel</code> 테이블은 만들지 않습니다.</strong> MVP는 1유저 1라이브 채널이므로 <code>/live/[creatorId]</code>의 <code>creatorId</code>는 <code>public.user.id</code>를 그대로 사용합니다.</li>
       <li><strong>설정과 방송 회차는 분리합니다.</strong> <code>creator_studio_setting</code>은 크리에이터당 1개 row를 계속 update하고, <code>live_broadcast</code>는 방송을 켤 때마다 새 row를 생성합니다.</li>
       <li><strong>현재 방송 여부는 상태 enum이 아니라 <code>ended_at is null</code>로 판단합니다.</strong> 공개/비공개 방송 기능은 MVP에서 제거했으므로 <code>live_visibility</code>도 만들지 않습니다.</li>
+      <li><strong>라이브 목록은 JSON snapshot RPC 계약으로 관리합니다.</strong> <code>get_live_list</code>는 필터, 정렬, 검색어, Hero 제외 ID를 받아 <code>items</code>, <code>totalCount</code>, <code>hasMore</code>를 반환하고 팔로잉 판정은 <code>auth.uid()</code> 기준으로 계산합니다.</li>
       <li><strong>일반 채팅과 라이브 채팅은 분리합니다.</strong> 일반 메시지는 <code>message</code>, 라이브 채팅과 클린봇 결과는 <code>live_message</code>에 저장합니다.</li>
       <li><strong>팔로우와 채팅 규칙 동의는 같은 관계 테이블에 둡니다.</strong> <code>viewer_creator_relation</code>은 팔로우 여부, 팔로우 시각, 채팅 규칙 동의 버전을 같이 관리합니다.</li>
       <li><strong>후원은 지갑 원장과 방송 후원 이벤트를 나눕니다.</strong> 금액 정합성은 <code>wallet_transaction</code>이 담당하고, 방송 화면과 크리에이터 수익 내역은 <code>donation</code>이 담당합니다.</li>
-      <li><strong>OBS Alert 템플릿은 DB에 저장하지 않습니다.</strong> MVP는 고정 템플릿이므로 DB에는 Alert 사용 여부, 볼륨, TTS 시도 여부, URL 버전만 저장합니다.</li>
-      <li><strong>실제 정산 인증은 MVP DB 범위에서 제외합니다.</strong> 디자인 프리뷰와 테스트 계정 표시용 <code>settlement_demo</code>만 저장하고, 실명조회와 계좌 인증은 후속 확장으로 둡니다.</li>
+      <li><strong>OBS Alert 템플릿은 DB에 저장하지 않습니다.</strong> MVP는 고정 템플릿이므로 DB에는 표시 시간, 사운드 프리셋 키, 볼륨, TTS 설정, 채팅 후원 메시지 표시 여부, URL 버전만 저장합니다.</li>
+      <li><strong>실제 정산 인증은 MVP DB 범위에서 제외합니다.</strong> 정산 화면용 후원 내역 RPC는 존재하지만, 실명조회와 계좌 인증은 후속 확장으로 둡니다.</li>
     </ul></section>
 
     <section class="panel"><div class="section-title"><div><h2>Enum</h2><p>현재 MVP에서 실제로 필요한 enum만 둡니다.</p></div></div><table class="route-table"><thead><tr><th>enum</th><th>값</th><th>사용 위치</th><th>필요한 이유</th></tr></thead><tbody>
@@ -46,20 +48,21 @@
       <tr><td><code>wallet_transaction_status</code></td><td><code>pending</code>, <code>succeeded</code>, <code>failed</code>, <code>canceled</code></td><td><code>wallet_transaction.transaction_status</code></td><td>결제 승인, 실패, 취소, 재시도 처리를 안전하게 추적합니다.</td></tr>
     </tbody></table></section>
 
-    <section class="panel"><div class="section-title"><div><h2>확정 Table</h2><p>MVP 라우터와 디자인 프리뷰를 기준으로 나눈 최소 테이블입니다. <span class="realtime-label">(Realtime)</span> 표기는 현재 Supabase Realtime publication에 등록된 테이블입니다.</p></div></div><table class="route-table"><thead><tr><th>테이블</th><th>Type</th><th>관계</th><th>담당 라우터와 UX</th><th>핵심 판단</th></tr></thead><tbody>
-      <tr><td><code>creator_studio_setting</code></td><td><code>CreatorStudioSettingRow</code></td><td><code>user</code> 1:1</td><td><code>/channel/live</code>, <code>/channel/chat</code>, <code>/channel/security</code>, <code>/channel/donation</code></td><td>방송 기본값, 채팅 정책, 후원 설정, 보안 URL 버전, 정산 데모 데이터를 한 row로 update합니다.</td></tr>
+    <section class="panel"><div class="section-title"><div><h2>확정 Table</h2><p>MVP 라우터와 실제 dev/Supabase 상태를 기준으로 나눈 테이블입니다. <span class="realtime-label">(Realtime)</span> 표기는 현재 Supabase Realtime publication에 등록된 테이블입니다.</p></div></div><table class="route-table"><thead><tr><th>테이블</th><th>Type</th><th>관계</th><th>담당 라우터와 UX</th><th>핵심 판단</th></tr></thead><tbody>
+      <tr><td><code>creator_studio_setting</code></td><td><code>CreatorStudioSettingRow</code></td><td><code>user</code> 1:1</td><td><code>/channel/live</code>, <code>/channel/chat</code>, <code>/channel/security</code>, <code>/channel/donation</code></td><td>방송 기본값, 채팅 정책, 후원 설정, Alert 표시·사운드·TTS 설정, 보안 URL 버전, 정산 데모 데이터를 한 row로 update합니다.</td></tr>
       <tr><td><code>live_broadcast</code> <span class="realtime-label">(Realtime)</span></td><td><code>LiveBroadcastRow</code></td><td><code>user</code> 1:N</td><td><code>/live</code>, <code>/live/search</code>, <code>/live/[creatorId]</code>, <code>/channel/live</code>, <code>/channel/analytics</code></td><td>방송을 켤 때마다 생성되는 회차 기록입니다. 통계, 후원, 채팅, 투표가 이 row에 연결됩니다.</td></tr>
-      <tr><td><code>live_message</code> <span class="realtime-label">(Realtime)</span></td><td><code>LiveMessageRow</code></td><td><code>live_broadcast</code> 1:N</td><td><code>/live/[creatorId]</code>, <code>/channel/live</code></td><td>라이브 채팅, 클린봇 결과, 후원 피드 이벤트를 저장합니다. 일반 채팅 앱의 <code>message</code>와 분리합니다.</td></tr>
-      <tr><td><code>viewer_creator_relation</code></td><td><code>ViewerCreatorRelationRow</code></td><td><code>user</code> N:M</td><td><code>/user/follows</code>, <code>/live/[creatorId]</code>, <code>/channel/chat</code></td><td>팔로우와 채팅 규칙 동의 버전을 같이 저장합니다.</td></tr>
+      <tr><td><code>live_message</code> <span class="realtime-label">(Realtime)</span></td><td><code>LiveMessageRow</code></td><td><code>live_broadcast</code> 1:N</td><td><code>/live/[creatorId]</code>, <code>/channel/live</code>, <code>/live/[creatorId]/chat/[overlayKey]</code>, <code>/live/[creatorId]/alerts/donation/[overlayKey]</code></td><td>라이브 채팅, 클린봇 결과, 후원 피드 이벤트를 저장합니다. 일반 채팅 앱의 <code>message</code>와 분리하고 OBS 오버레이 snapshot의 원천으로 사용합니다.</td></tr>
+      <tr><td><code>viewer_creator_relation</code></td><td><code>ViewerCreatorRelationRow</code></td><td><code>user</code> N:M</td><td><code>/user/following</code>, <code>/live/[creatorId]</code>, <code>/channel/chat</code></td><td>팔로우와 채팅 규칙 동의 버전을 같이 저장합니다.</td></tr>
       <tr><td><code>wallet_account</code></td><td><code>WalletAccountRow</code></td><td><code>user</code> 1:1</td><td><code>/user/donations</code></td><td>후원 가능한 보유 금액을 저장합니다. 실제 금액 변경은 RPC에서만 수행합니다.</td></tr>
       <tr><td><code>wallet_transaction</code></td><td><code>WalletTransactionRow</code></td><td><code>wallet_account</code> 1:N</td><td><code>/user/donations</code></td><td>충전, 사용, 환불의 원장입니다. idempotency key로 중복 결제와 중복 후원을 방지합니다.</td></tr>
-      <tr><td><code>donation</code> <span class="realtime-label">(Realtime)</span></td><td><code>DonationRow</code></td><td><code>live_broadcast</code> 1:N</td><td><code>/live/[creatorId]</code>, <code>/channel/donation</code>, <code>/channel/analytics</code>, <code>/user/donations</code></td><td>방송 중 발생한 후원 이벤트입니다. 방송 외 후원은 MVP에 없으므로 <code>broadcast_id</code>는 필수입니다.</td></tr>
+      <tr><td><code>donation</code> <span class="realtime-label">(Realtime)</span></td><td><code>DonationRow</code></td><td><code>live_broadcast</code> 1:N</td><td><code>/live/[creatorId]</code>, <code>/channel/donation</code>, <code>/channel/analytics</code>, <code>/user/donations</code>, <code>/live/[creatorId]/alerts/donation/[overlayKey]</code></td><td>방송 중 발생한 후원 이벤트입니다. 방송 외 후원은 MVP에 없으므로 <code>broadcast_id</code>는 필수입니다.</td></tr>
       <tr><td><code>live_poll</code> <span class="realtime-label">(Realtime)</span></td><td><code>LivePollRow</code></td><td><code>live_broadcast</code> 1:N</td><td><code>/channel/live</code>, <code>/live/[creatorId]</code></td><td>투표 질문과 선택지를 저장합니다. 선택지는 2개에서 5개까지의 <code>jsonb</code> 배열로 둡니다.</td></tr>
       <tr><td><code>live_poll_vote</code> <span class="realtime-label">(Realtime)</span></td><td><code>LivePollVoteRow</code></td><td><code>live_poll</code> 1:N</td><td><code>/live/[creatorId]</code></td><td>시청자 투표 참여 기록입니다. <code>poll_id</code>와 <code>voter_id</code> 복합 PK로 1회 참여를 보장합니다.</td></tr>
+      <tr><td><code>community_post</code>, <code>community_comment</code>, <code>community_post_like</code></td><td>Community rows</td><td><code>user</code> 1:N</td><td><code>/channel/[creatorId]</code> 후속 후보</td><td>원격 DB에는 적용되어 있으나 MVP 라우터에서는 공개 채널 커뮤니티를 후속 범위로 유지합니다.</td></tr>
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>컬럼 사용처</h2><p>각 컬럼이 어떤 타입으로 저장되고 어떤 UX와 RPC에 필요한지 기준을 남깁니다.</p></div></div><table class="route-table"><thead><tr><th>테이블</th><th>컬럼</th><th>Type</th><th>용도</th><th>주요 UX와 RPC</th></tr></thead><tbody>
-      <tr><td rowspan="27"><code>creator_studio_setting</code></td><td><code>creator_id</code></td><td><code>string</code></td><td>크리에이터 설정 row의 PK이며 <code>public.user.id</code>를 참조합니다.</td><td>모든 <code>/channel/*</code> 설정 RPC의 기준입니다.</td></tr>
+      <tr><td rowspan="31"><code>creator_studio_setting</code></td><td><code>creator_id</code></td><td><code>string</code></td><td>크리에이터 설정 row의 PK이며 <code>public.user.id</code>를 참조합니다.</td><td>모든 <code>/channel/*</code> 설정 RPC의 기준입니다.</td></tr>
       <tr><td><code>default_title</code></td><td><code>string</code></td><td>방송 시작 시 기본 제목입니다.</td><td><code>/channel/live</code>, <code>start_live_broadcast</code></td></tr>
       <tr><td><code>default_tags</code></td><td><code>string[]</code></td><td>방송 태그 기본값입니다.</td><td>라이브 목록 검색 보조, <code>start_live_broadcast</code></td></tr>
       <tr><td><code>chat_scope</code></td><td><code>LiveChatScope</code></td><td>채팅 입력 가능 범위입니다.</td><td><code>/channel/chat</code>, 빠른 설정, <code>send_live_message</code></td></tr>
@@ -70,22 +73,26 @@
       <tr><td><code>forbidden_words</code></td><td><code>string[]</code></td><td>금칙어 목록입니다.</td><td>채팅 설정, 클린봇 처리, <code>send_live_message</code></td></tr>
       <tr><td><code>chat_rule_text</code></td><td><code>string</code></td><td>첫 채팅 전 보여줄 규칙 안내문입니다.</td><td>개인 규칙 게이트, <code>accept_live_chat_rule</code></td></tr>
       <tr><td><code>chat_rule_version</code></td><td><code>number</code></td><td>규칙 변경 시 재동의를 받기 위한 버전입니다.</td><td><code>upsert_creator_studio_setting</code>, <code>send_live_message</code></td></tr>
+      <tr><td><code>chat_donation_message_enabled</code></td><td><code>boolean</code></td><td>후원 이벤트를 OBS 채팅 overlay 메시지 목록에도 표시할지 결정합니다.</td><td><code>/channel/donation</code>, <code>get_live_chat_overlay_snapshot</code></td></tr>
       <tr><td><code>donation_enabled</code></td><td><code>boolean</code></td><td>채팅 후원 ON/OFF입니다.</td><td><code>/channel/donation</code>, 빠른 설정, <code>send_live_donation</code></td></tr>
       <tr><td><code>donation_min_amount</code></td><td><code>number</code></td><td>최소 후원 가능 금액입니다.</td><td>후원 설정, <code>send_live_donation</code></td></tr>
-      <tr><td><code>donation_amount_visible</code></td><td><code>boolean</code></td><td>채팅방에서 후원 금액 표시 여부입니다.</td><td>후원 설정, 후원 메시지 렌더링</td></tr>
-      <tr><td><code>donation_alert_enabled</code></td><td><code>boolean</code></td><td>OBS 후원 Alert 사용 여부입니다.</td><td><code>/channel/donation</code>, Alert overlay</td></tr>
+      <tr><td><code>donation_amount_visible</code></td><td><code>boolean</code></td><td>채팅방과 OBS overlay에서 후원 금액 표시 여부입니다.</td><td>후원 설정, 후원 메시지와 Alert 렌더링</td></tr>
+      <tr><td><code>donation_alert_duration_seconds</code></td><td><code>number</code></td><td>OBS 후원 Alert가 화면에 표시되는 시간입니다. 현재 DB 제약은 3초 이상 30초 이하입니다.</td><td><code>/channel/donation</code>, <code>get_live_donation_alert_overlay_snapshot</code></td></tr>
       <tr><td><code>alert_sound_enabled</code></td><td><code>boolean</code></td><td>고정 Alert 사운드 사용 여부입니다.</td><td>후원 Alert 설정</td></tr>
+      <tr><td><code>alert_sound_key</code></td><td><code>string</code></td><td>OBS 후원 Alert에서 사용할 사운드 프리셋 키입니다.</td><td>후원 Alert 설정, <code>get_live_donation_alert_overlay_snapshot</code></td></tr>
       <tr><td><code>alert_volume</code></td><td><code>number</code></td><td>Alert 사운드 볼륨입니다.</td><td>후원 Alert 설정, 테스트 알림</td></tr>
       <tr><td><code>tts_enabled</code></td><td><code>boolean</code></td><td>Web Speech API 기반 TTS 시도 여부입니다.</td><td>후원 Alert 설정</td></tr>
       <tr><td><code>tts_rate</code></td><td><code>number</code></td><td>TTS 재생 속도입니다.</td><td>후원 Alert 설정</td></tr>
+      <tr><td><code>tts_volume</code></td><td><code>number</code></td><td>TTS 음량입니다. 현재 DB 제약은 0 이상 100 이하입니다.</td><td>후원 Alert 설정, <code>get_live_donation_alert_overlay_snapshot</code></td></tr>
+      <tr><td><code>tts_voice_uri</code></td><td><code>string</code></td><td>브라우저 TTS에서 우선 사용할 voice URI입니다.</td><td>후원 Alert 설정, <code>get_live_donation_alert_overlay_snapshot</code></td></tr>
       <tr><td><code>settlement_demo</code></td><td><code>SettlementDemo</code></td><td>테스트 계정용 정산 데모 데이터입니다.</td><td><code>/channel/donation</code>의 정산 카드</td></tr>
       <tr><td><code>stream_key_version</code></td><td><code>number</code></td><td>스트림키 재발급 버전입니다.</td><td><code>/channel/security</code>, <code>rotate_live_security_token_version</code></td></tr>
       <tr><td><code>chat_overlay_version</code></td><td><code>number</code></td><td>채팅창 URL 재발급 버전입니다.</td><td><code>/channel/security</code></td></tr>
-      <tr><td><code>donation_alert_version</code></td><td><code>number</code></td><td>후원 Alert URL 재발급 버전입니다.</td><td><code>/channel/security</code>, <code>/live/[creatorId]/alerts/donation</code></td></tr>
+      <tr><td><code>donation_alert_version</code></td><td><code>number</code></td><td>후원 Alert URL 재발급 버전입니다.</td><td><code>/channel/security</code>, <code>/live/[creatorId]/alerts/donation/[overlayKey]</code></td></tr>
       <tr><td><code>created_at</code></td><td><code>string</code></td><td>설정 생성 시각입니다.</td><td>감사와 디버깅</td></tr>
       <tr><td><code>modified_at</code></td><td><code>string</code></td><td>설정 변경 시각입니다.</td><td>설정 저장 피드백</td></tr>
-      <tr><td><code>check constraints</code></td><td><code>DB constraint</code></td><td>태그 수, 시간 옵션, 금칙어 수, 금액, 볼륨, TTS 범위를 제한합니다.</td><td>프론트 Select 옵션과 DB 값 불일치 방지</td></tr>
-      <tr><td><code>token versions</code></td><td><code>number</code></td><td>URL 원문과 토큰은 DB에 저장하지 않고 버전만 저장합니다.</td><td>Server Action에서 signed URL 생성</td></tr>
+      <tr><td><code>check constraints</code></td><td><code>DB constraint</code></td><td>태그 수, 시간 옵션, 금칙어 수, 금액, Alert 표시 시간, 볼륨, TTS 범위를 제한합니다.</td><td>프론트 Select 옵션과 DB 값 불일치 방지</td></tr>
+      <tr><td><code>token versions</code></td><td><code>number</code></td><td>URL 원문과 토큰은 DB에 저장하지 않고 버전만 저장합니다.</td><td>Server Action에서 HMAC 기반 overlay key 생성</td></tr>
 
       <tr><td rowspan="14"><code>live_broadcast</code> <span class="realtime-label">(Realtime)</span></td><td><code>id</code></td><td><code>string</code></td><td>방송 1회차 ID입니다.</td><td>채팅, 후원, 투표, 통계 연결 기준</td></tr>
       <tr><td><code>creator_id</code></td><td><code>string</code></td><td>방송을 켠 크리에이터입니다.</td><td><code>/live/[creatorId]</code>, <code>/channel/live</code></td></tr>
@@ -113,7 +120,7 @@
 
       <tr><td rowspan="7"><code>viewer_creator_relation</code></td><td><code>viewer_id</code></td><td><code>string</code></td><td>시청자 ID입니다.</td><td>팔로우와 규칙 동의 주체</td></tr>
       <tr><td><code>creator_id</code></td><td><code>string</code></td><td>크리에이터 ID입니다.</td><td>팔로우 대상, 규칙 동의 대상</td></tr>
-      <tr><td><code>followed_at</code></td><td><code>string | null</code></td><td>팔로우 시각입니다. null이면 현재 팔로우가 아닙니다.</td><td><code>/user/follows</code>, 팔로워 전용 채팅 검증</td></tr>
+      <tr><td><code>followed_at</code></td><td><code>string | null</code></td><td>팔로우 시각입니다. null이면 현재 팔로우가 아닙니다.</td><td><code>/user/following</code>, 팔로워 전용 채팅 검증</td></tr>
       <tr><td><code>chat_rule_accepted_version</code></td><td><code>number | null</code></td><td>동의한 채팅 규칙 버전입니다.</td><td>첫 채팅 게이트와 규칙 변경 재동의</td></tr>
       <tr><td><code>chat_rule_accepted_at</code></td><td><code>string | null</code></td><td>채팅 규칙 동의 시각입니다.</td><td>동의 이력 확인</td></tr>
       <tr><td><code>created_at</code></td><td><code>string</code></td><td>관계 row 생성 시각입니다.</td><td>감사</td></tr>
@@ -165,24 +172,36 @@
     <section class="panel"><div class="section-title"><div><h2>RPC 설계</h2><p>클라이언트 직접 table write를 줄이고 Server Action에서 service role RPC를 호출하는 구조입니다.</p></div></div><table class="route-table"><thead><tr><th>RPC</th><th>권한</th><th>사용 라우터</th><th>담당 작업</th></tr></thead><tbody>
       <tr><td><code>get_landing_snapshot()</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td>랜딩</td><td>활성 라이브 수, 전체 시청자 수, 일반 채팅방 수, 대표 라이브, 최근 후원을 반환합니다. 대표 라이브는 현재 방송 중인 row를 시청자 수 내림차순, 시작 시각 내림차순으로 선택합니다.</td></tr>
       <tr><td><code>get_live_hero()</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live</code></td><td>현재 진행 중인 방송 중 시청자 수가 가장 많고, 동률이면 더 최근에 시작한 방송 1건을 Hero용 JSON으로 반환합니다.</td></tr>
-      <tr><td><code>get_live_list(p_query, p_limit, p_offset)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live</code>, <code>/live/search</code></td><td>현재 진행 중인 방송을 제목, 닉네임, 태그로 검색하고 시청자 수 내림차순, 시작 시각 내림차순으로 정렬합니다.</td></tr>
+      <tr><td><code>get_live_list(p_filter, p_sort, p_viewer_id, p_query, p_limit, p_offset, p_excluded_live_id)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live</code></td><td>현재 방송 목록을 <code>ALL</code>, <code>FOLLOWING</code>, <code>RECENT</code>, <code>ACTIVE_CHAT</code> 필터와 정렬 옵션으로 반환합니다. 개인화는 신뢰 불가한 <code>p_viewer_id</code>가 아니라 <code>auth.uid()</code>로 계산하고 Hero 방송은 제외할 수 있습니다.</td></tr>
+      <tr><td><code>search_live_results(p_query, p_limit, p_section, p_offset)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live/search</code></td><td>라이브 방송 결과와 크리에이터 결과를 <code>broadcast</code>, <code>creator</code> 섹션으로 나누어 반환합니다. 크리에이터 팔로워 수, 현재 사용자 팔로우 여부, 섹션별 <code>has_more</code>를 포함합니다.</td></tr>
+      <tr><td><code>get_live_popular_keywords(p_limit)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live</code> sidebar</td><td>현재 방송 태그를 방송별로 정규화·중복 제거한 뒤 인기 키워드와 시청자 합계를 반환합니다.</td></tr>
+      <tr><td><code>get_following_channel_list(p_limit, p_offset)</code></td><td><code>authenticated</code>, <code>service_role</code></td><td><code>/live</code> sidebar</td><td>로그인 사용자의 팔로잉 채널을 라이브 중 채널 우선으로 반환합니다.</td></tr>
+      <tr><td><code>get_following_channel_page(p_filter, p_limit, p_offset)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/user/following</code></td><td>팔로잉 전체 화면의 목록, 전체 수, 라이브 수, 최근 방송 수, 필터링 수를 반환합니다. 실제 개인화 기준은 <code>auth.uid()</code>입니다.</td></tr>
       <tr><td><code>get_live_watch(p_creator_id, p_viewer_id)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>크리에이터, 현재 방송, 채팅 정책, 후원 가능 여부, 시청자 관계, 채팅 가능 상태와 남은 대기 시간을 반환합니다.</td></tr>
-      <tr><td><code>get_creator_studio_snapshot(p_actor_user_id)</code></td><td><code>service_role</code></td><td><code>/channel/*</code></td><td>크리에이터 설정, 현재 방송, 이번 달 후원 요약, 최근 후원을 반환합니다.</td></tr>
+      <tr><td><code>get_live_watch_count(p_creator_id)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>크리에이터의 팔로워 수와 누적 방송 회차 수를 공개 표시용 JSON으로 반환합니다.</td></tr>
+      <tr><td><code>get_live_donation_ranking(p_creator_id, p_limit)</code></td><td><code>anon</code>, <code>authenticated</code>, <code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>서울 시간 기준 이번 주 후원 합산 랭킹을 반환합니다. 익명 후원자는 별칭으로 표시합니다.</td></tr>
+      <tr><td><code>get_creator_studio_snapshot(p_actor_user_id)</code></td><td><code>service_role</code></td><td><code>/channel/*</code></td><td>크리에이터 설정, 후원 Alert 표시·사운드·TTS 설정, 채팅 후원 메시지 설정, 보안 URL 버전, 현재 방송, 이번 달 후원 요약, 최근 후원을 반환합니다.</td></tr>
       <tr><td><code>get_creator_donation_dashboard(...)</code></td><td><code>service_role</code></td><td><code>/channel/donation</code></td><td>후원 요약내역, 월별 요약, 상세내역, 정산 Demo 데이터를 반환합니다.</td></tr>
-      <tr><td><code>upsert_creator_studio_setting(...)</code></td><td><code>service_role</code></td><td><code>/channel/live</code>, <code>/channel/chat</code>, <code>/channel/donation</code></td><td>방송 기본값, 채팅 정책, 후원 설정, 정산 데모 데이터를 부분 update합니다.</td></tr>
-      <tr><td><code>rotate_live_security_token_version(p_actor_user_id, p_token_kind)</code></td><td><code>service_role</code></td><td><code>/channel/security</code></td><td>스트림키, 채팅창 URL, 후원 Alert URL의 버전만 증가시킵니다.</td></tr>
+      <tr><td><code>get_creator_settlement_yearly_summary(p_actor_user_id)</code></td><td><code>service_role</code></td><td><code>/channel/donation</code></td><td>크리에이터의 연도별 후원 합계와 후원 건수를 서울 시간 기준으로 반환합니다.</td></tr>
+      <tr><td><code>get_creator_settlement_donations(p_actor_user_id, p_year, p_status, p_sort, p_limit, p_offset)</code></td><td><code>service_role</code></td><td><code>/channel/donation</code></td><td>정산 화면용 후원 상세 목록을 반환합니다. 이번 달은 정산 예정, 이전 달은 정산 완료로 계산합니다.</td></tr>
+      <tr><td><code>upsert_creator_studio_setting(...)</code></td><td><code>service_role</code></td><td><code>/channel/live</code>, <code>/channel/chat</code>, <code>/channel/donation</code></td><td>방송 기본값, 채팅 정책, 후원 설정, Alert 표시·사운드·TTS 설정, 채팅 후원 메시지 설정, 정산 데모 데이터를 부분 update하고 최신 snapshot을 반환합니다.</td></tr>
+      <tr><td><code>rotate_live_security_token_version(p_actor_user_id, p_token_kind)</code></td><td><code>service_role</code></td><td><code>/channel/security</code></td><td>스트림키, 채팅창 URL, 후원 Alert URL의 버전을 증가시키고 <code>tokenKind</code>, <code>version</code>, 최신 스튜디오 <code>snapshot</code>을 반환합니다.</td></tr>
+      <tr><td><code>get_live_chat_overlay_snapshot(p_creator_id, p_limit)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]/chat/[overlayKey]</code></td><td>OBS 채팅창 URL에서 사용할 현재 방송, 후원 메시지 표시 여부, 금액 표시 여부, 최근 채팅·후원 메시지를 반환합니다. overlay key 검증은 앱 서버에서 토큰 버전과 HMAC으로 처리합니다.</td></tr>
+      <tr><td><code>get_live_donation_alert_overlay_snapshot(p_creator_id)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]/alerts/donation/[overlayKey]</code></td><td>OBS 후원 Alert URL에서 사용할 현재 방송, 크리에이터명, 최신 후원, <code>alertVisibleMs</code>, 사운드 키와 볼륨, TTS 사용·속도·볼륨·voice URI, 금액 표시 여부를 반환합니다.</td></tr>
       <tr><td><code>start_live_broadcast(p_actor_user_id, p_title, p_tags, p_thumbnail_url)</code></td><td><code>service_role</code></td><td><code>/channel/live</code></td><td>현재 방송이 없을 때 새 <code>live_broadcast</code>를 생성합니다.</td></tr>
       <tr><td><code>end_live_broadcast(p_actor_user_id, p_broadcast_id)</code></td><td><code>service_role</code></td><td><code>/channel/live</code></td><td>진행 중인 방송의 <code>ended_at</code>을 기록합니다.</td></tr>
-      <tr><td><code>follow_creator(p_actor_user_id, p_creator_id)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code>, <code>/user/follows</code></td><td>팔로우 관계를 생성하거나 복구합니다.</td></tr>
-      <tr><td><code>unfollow_creator(p_actor_user_id, p_creator_id)</code></td><td><code>service_role</code></td><td><code>/user/follows</code></td><td><code>followed_at</code>을 null로 바꿔 팔로우를 해제합니다.</td></tr>
+      <tr><td><code>follow_creator(p_actor_user_id, p_creator_id)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code>, <code>/user/following</code></td><td>팔로우 관계를 생성하거나 복구합니다.</td></tr>
+      <tr><td><code>unfollow_creator(p_actor_user_id, p_creator_id)</code></td><td><code>service_role</code></td><td><code>/user/following</code></td><td><code>followed_at</code>을 null로 바꿔 팔로우를 해제합니다.</td></tr>
       <tr><td><code>accept_live_chat_rule(p_actor_user_id, p_creator_id)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>현재 채팅 규칙 버전에 대한 개인 동의를 저장합니다.</td></tr>
-      <tr><td><code>send_live_message(p_actor_user_id, p_broadcast_id, p_content)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code>, <code>/channel/live</code></td><td>로그인, 팔로워 대기 시간, 규칙 동의, 저속 모드, 링크 차단, 금칙어를 검증한 뒤 메시지를 저장합니다.</td></tr>
+      <tr><td><code>send_live_message(p_actor_user_id, p_broadcast_id, p_content)</code>, <code>send_live_message_v2(...)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code>, <code>/channel/live</code></td><td>로그인, 팔로워 대기 시간, 규칙 동의, 저속 모드, 링크 차단, 금칙어를 검증합니다. <code>v2</code>는 금칙어 매칭 시 DB 행을 만들지 않고 <code>moderated</code> 플래그를 반환합니다.</td></tr>
       <tr><td><code>create_live_poll(...)</code></td><td><code>service_role</code></td><td><code>/channel/live</code></td><td>방송자만 현재 방송에 투표를 생성합니다.</td></tr>
       <tr><td><code>vote_live_poll(p_actor_user_id, p_poll_id, p_option_id)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>로그인 시청자의 1회 투표를 저장합니다.</td></tr>
       <tr><td><code>end_live_poll(p_actor_user_id, p_poll_id)</code></td><td><code>service_role</code></td><td><code>/channel/live</code></td><td>방송자만 투표를 종료합니다.</td></tr>
       <tr><td><code>confirm_wallet_charge(...)</code></td><td><code>service_role</code></td><td><code>/api/payments/toss/confirm</code>, <code>/user/donations</code></td><td>Toss 승인 결과의 <code>paymentKey</code>, <code>orderId</code>, <code>amount</code> 검증 후 후원금 충전을 원장에 반영하고 잔액을 증가시킵니다.</td></tr>
       <tr><td><code>send_live_donation(...)</code></td><td><code>service_role</code></td><td><code>/live/[creatorId]</code></td><td>잔액 차감, 후원 이벤트 생성, 후원 메시지 생성을 하나의 트랜잭션으로 처리합니다. 방송 후원 통계는 <code>donation</code> insert trigger가 증가시킵니다.</td></tr>
       <tr><td><code>get_user_donation_snapshot(p_actor_user_id)</code></td><td><code>service_role</code></td><td><code>/user/donations</code></td><td>내 후원금 잔액, 보낸 후원, 지갑 거래 내역을 반환합니다.</td></tr>
+      <tr><td><code>get_channel_profile(...)</code>, <code>get_channel_community_posts(...)</code>, <code>get_community_post(...)</code>, <code>get_community_comments(...)</code></td><td><code>service_role</code></td><td><code>/channel/[creatorId]</code> 후속 후보</td><td>원격 DB에 적용된 커뮤니티 읽기 RPC입니다. 공개 채널 라우터는 MVP 후속 범위로 유지합니다.</td></tr>
+      <tr><td><code>create/update/delete_community_post</code>, <code>create/update/delete_community_comment</code>, <code>toggle_community_post_like</code></td><td><code>service_role</code></td><td><code>/channel/[creatorId]</code> 후속 후보</td><td>커뮤니티 게시글, 댓글, 좋아요 mutation RPC입니다. 테이블 직접 write 대신 service role RPC로 검증합니다.</td></tr>
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>Toss 결제 API 설계</h2><p>Toss Payments는 MVP 결제사로 확정하고, 클라이언트 결제창과 서버 원장 반영을 분리합니다.</p></div></div><table class="route-table"><thead><tr><th>라우터</th><th>입력</th><th>서버 책임</th><th>DB 반영</th></tr></thead><tbody>
@@ -191,43 +210,57 @@
       <tr><td><code>/api/payments/toss/webhook</code></td><td>Toss 이벤트 payload</td><td>서명 검증 후 결제 실패, 취소, 승인 지연을 idempotency 기준으로 보정합니다.</td><td>이미 성공 처리된 충전은 중복 반영하지 않고, 실패·취소는 <code>wallet_transaction_status</code>만 보정합니다.</td></tr>
     </tbody></table></section>
 
+    <section class="panel"><div class="section-title"><div><h2>Storage 설계</h2><p>Supabase MCP로 확인한 Storage bucket 상태입니다.</p></div></div><table class="route-table"><thead><tr><th>Bucket</th><th>공개 여부</th><th>제한</th><th>사용 위치</th></tr></thead><tbody>
+      <tr><td><code>live-thumbnails</code></td><td>public</td><td>최대 5MB, <code>image/jpeg</code>, <code>image/png</code>, <code>image/webp</code></td><td><code>/channel/live</code> 방송 썸네일 업로드와 <code>live_broadcast.thumbnail_url</code> 표시입니다. public listing policy는 제거된 상태로 봅니다.</td></tr>
+    </tbody></table></section>
+
     <section class="panel"><div class="section-title"><div><h2>RLS와 권한</h2><p>금액과 운영 설정은 클라이언트 직접 변경을 막고, 공개 읽기만 좁은 RPC로 열어둡니다.</p></div></div><table class="route-table"><thead><tr><th>대상</th><th>RLS</th><th>읽기</th><th>쓰기</th></tr></thead><tbody>
-      <tr><td><code>creator_studio_setting</code></td><td>enabled</td><td>본인 스튜디오 화면은 service role RPC로 조회합니다. 시청 화면에는 필요한 일부 설정만 <code>get_live_watch</code>로 노출합니다.</td><td><code>upsert_creator_studio_setting</code>과 토큰 버전 회전 RPC만 사용합니다.</td></tr>
-      <tr><td><code>live_broadcast</code></td><td>enabled</td><td>현재 진행 중인 방송은 <code>get_live_hero</code>, <code>get_live_list</code>, <code>get_live_watch</code>, <code>get_landing_snapshot</code>으로 공개 조회합니다.</td><td>방송 시작과 종료 RPC만 사용합니다.</td></tr>
-      <tr><td><code>live_message</code></td><td>enabled</td><td>진행 중인 방송의 메시지는 <code>anon</code>과 <code>authenticated</code>가 읽을 수 있습니다. 비로그인 시청 렌더링은 <code>metadata</code>의 표시 스냅샷을 사용합니다.</td><td><code>send_live_message</code>와 <code>send_live_donation</code>만 insert합니다.</td></tr>
-      <tr><td><code>viewer_creator_relation</code></td><td>enabled</td><td>본인 관계 상태는 RPC 응답으로만 노출합니다.</td><td>팔로우, 언팔로우, 규칙 동의 RPC만 사용합니다.</td></tr>
+      <tr><td><code>creator_studio_setting</code></td><td>enabled</td><td>본인 스튜디오 화면은 service role RPC로 조회합니다. 시청 화면에는 필요한 일부 설정만 <code>get_live_watch</code>와 overlay snapshot RPC로 노출하고, OBS URL 원문은 앱 서버에서 생성합니다.</td><td><code>upsert_creator_studio_setting</code>과 토큰 버전 회전 RPC만 사용합니다.</td></tr>
+      <tr><td><code>live_broadcast</code></td><td>enabled</td><td>현재 진행 중인 방송은 <code>get_live_hero</code>, <code>get_live_list</code>, <code>get_live_popular_keywords</code>, <code>search_live_results</code>, <code>get_live_watch</code>, <code>get_landing_snapshot</code>으로 공개 조회합니다.</td><td>방송 시작과 종료 RPC만 사용합니다.</td></tr>
+      <tr><td><code>live_message</code></td><td>enabled</td><td>진행 중인 방송의 메시지는 <code>anon</code>과 <code>authenticated</code>가 읽을 수 있습니다. OBS 오버레이는 service role snapshot RPC로 필요한 메시지만 조회합니다.</td><td><code>send_live_message</code>와 <code>send_live_donation</code>만 insert합니다.</td></tr>
+      <tr><td><code>viewer_creator_relation</code></td><td>enabled</td><td>본인 관계 상태는 RPC 응답으로만 노출합니다. 팔로잉 사이드바와 <code>/user/following</code>은 <code>auth.uid()</code> 기준 RPC를 사용합니다.</td><td>팔로우, 언팔로우, 규칙 동의 RPC만 사용합니다.</td></tr>
       <tr><td><code>wallet_account</code>, <code>wallet_transaction</code></td><td>enabled</td><td>본인 지갑 화면은 <code>get_user_donation_snapshot</code>으로만 조회합니다.</td><td>충전 확정과 후원 전송 RPC만 사용합니다.</td></tr>
       <tr><td><code>donation</code></td><td>enabled</td><td>후원자 본인과 수신 크리에이터만 직접 읽습니다. 공개 채팅 피드에는 <code>live_message.metadata</code>로 축약된 표시 데이터만 노출합니다.</td><td><code>send_live_donation</code>만 insert합니다.</td></tr>
       <tr><td><code>live_poll</code>, <code>live_poll_vote</code></td><td>enabled</td><td>방송 화면과 운영 화면에서 현재 투표와 결과를 조회합니다.</td><td>투표 생성, 참여, 종료 RPC만 사용합니다.</td></tr>
+      <tr><td><code>community_post</code>, <code>community_comment</code>, <code>community_post_like</code></td><td>enabled</td><td>원격 DB policy는 public select를 허용합니다.</td><td>작성, 수정, 삭제, 좋아요 변경은 service role 커뮤니티 RPC로 제한합니다.</td></tr>
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>인덱스와 제약</h2><p>라이브 목록, 채팅, 후원 내역, 팔로우 목록의 실제 조회 경로 기준입니다.</p></div></div><table class="route-table"><thead><tr><th>대상</th><th>인덱스 또는 제약</th><th>사용 이유</th></tr></thead><tbody>
       <tr><td>현재 라이브 목록</td><td><code>live_broadcast(current_viewer_count desc, started_at desc) where ended_at is null</code></td><td>랜딩 대표 라이브와 <code>/live</code> Hero/list를 시청자 수 우선으로 가져옵니다.</td></tr>
+      <tr><td>라이브 검색 최신순 보조</td><td><code>live_broadcast(started_at desc) where ended_at is null</code></td><td><code>search_live_results</code>와 라이브 목록의 최신 방송 보조 정렬에 사용합니다.</td></tr>
       <tr><td>크리에이터 방송 기록</td><td><code>live_broadcast(creator_id, started_at desc)</code></td><td><code>/live/[creatorId]</code> 현재 방송 조회와 방송별 리포트에 사용합니다.</td></tr>
       <tr><td>동시 방송 제한</td><td><code>unique(creator_id) where ended_at is null</code></td><td>한 크리에이터가 동시에 두 개의 방송을 켜는 상태를 막습니다.</td></tr>
       <tr><td>최고 시청자 보정</td><td><code>sync_live_broadcast_peak_viewer_count</code> trigger</td><td><code>current_viewer_count</code>가 올라갈 때 <code>peak_viewer_count</code>를 자동으로 맞춰 실시간 통계 정합성을 지킵니다.</td></tr>
       <tr><td>태그 검색</td><td><code>gin(live_broadcast.tags)</code></td><td>태그 기반 검색 보조에 사용합니다.</td></tr>
-      <tr><td>라이브 채팅</td><td><code>live_message(broadcast_id, created_at desc)</code></td><td>방송별 최근 메시지 조회와 pagination에 필요합니다.</td></tr>
-      <tr><td>팔로우 목록</td><td><code>viewer_creator_relation(viewer_id, followed_at desc) where followed_at is not null</code></td><td><code>/user/follows</code>에서 내가 팔로우한 크리에이터를 정렬합니다.</td></tr>
+      <tr><td>라이브 채팅</td><td><code>live_message(broadcast_id, created_at desc)</code></td><td>방송별 최근 메시지 조회, pagination, OBS 채팅창 snapshot에 필요합니다.</td></tr>
+      <tr><td>최근 채팅 기반 목록 정렬</td><td><code>live_message(broadcast_id, created_at desc) where message_type = 'chat'</code></td><td><code>/live</code>의 <code>ACTIVE_CHAT</code> 필터와 <code>RECENT_CHAT_DESC</code> 정렬에 사용합니다.</td></tr>
+      <tr><td>라이브 채팅 저속 모드</td><td><code>live_message(sender_id, created_at desc) where sender_id is not null</code></td><td>유저별 최근 전송 시각 확인과 저속 모드 검증에 사용합니다.</td></tr>
+      <tr><td>후원 Alert 표시 시간</td><td><code>donation_alert_duration_seconds between 3 and 30</code></td><td>OBS 후원 Alert가 너무 짧거나 길게 표시되지 않도록 DB에서 제한합니다.</td></tr>
+      <tr><td>팔로우 목록</td><td><code>viewer_creator_relation(viewer_id, followed_at desc) where followed_at is not null</code></td><td><code>/user/following</code>과 라이브 사이드바에서 내가 팔로우한 크리에이터를 정렬합니다.</td></tr>
       <tr><td>팔로워 수</td><td><code>viewer_creator_relation(creator_id, followed_at desc) where followed_at is not null</code></td><td>팔로워 수와 팔로워 전용 채팅 검증에 사용합니다.</td></tr>
       <tr><td>지갑 원장</td><td><code>wallet_transaction(user_id, created_at desc)</code></td><td><code>/user/donations</code> 거래 내역 정렬에 필요합니다.</td></tr>
       <tr><td>결제와 후원 중복 방지</td><td><code>unique(idempotency_key) where idempotency_key is not null</code></td><td>재시도 요청이 같은 금액을 두 번 반영하지 않게 합니다.</td></tr>
+      <tr><td>Toss 결제 식별자 중복 방지</td><td><code>unique(payment_key) where payment_key is not null</code>, <code>unique(order_id) where order_id is not null</code></td><td>Toss 승인 응답과 주문 ID가 중복 원장 row로 들어가지 않게 합니다.</td></tr>
       <tr><td>후원 수익</td><td><code>donation(creator_id, created_at desc)</code></td><td><code>/channel/donation</code> 상세내역과 월별 수익 요약에 사용합니다.</td></tr>
       <tr><td>내 후원 내역</td><td><code>donation(donor_id, created_at desc)</code></td><td><code>/user/donations</code>에서 내가 보낸 후원을 조회합니다.</td></tr>
       <tr><td>방송별 후원</td><td><code>donation(broadcast_id, created_at desc)</code></td><td>후원 Alert, 방송별 후원 리포트, 후원한 방송 표시 기준입니다.</td></tr>
       <tr><td>투표 중복 방지</td><td><code>primary key(poll_id, voter_id)</code></td><td>한 유저가 한 투표에 한 번만 참여하게 합니다.</td></tr>
+      <tr><td>진행 중 투표 조회</td><td><code>live_poll(broadcast_id, created_at desc) where ended_at is null</code></td><td>방송 화면과 운영 화면에서 현재 진행 중인 투표를 빠르게 찾습니다.</td></tr>
+      <tr><td>커뮤니티 게시글</td><td><code>community_post(creator_id, created_at desc)</code></td><td>공개 채널 홈 후속 후보에서 크리에이터별 게시글을 최신순으로 조회합니다.</td></tr>
+      <tr><td>커뮤니티 댓글</td><td><code>community_comment(post_id, created_at desc)</code></td><td>게시글 상세의 댓글 pagination에 사용합니다.</td></tr>
+      <tr><td>커뮤니티 좋아요 중복 방지</td><td><code>primary key(post_id, user_id)</code></td><td>한 유저가 같은 게시글에 좋아요를 중복 생성하지 않게 합니다.</td></tr>
     </tbody></table></section>
 
     <section class="panel"><div class="section-title"><div><h2>MVP 제외와 보류</h2><p>현재 설계에서 의도적으로 빼거나 축소한 항목입니다.</p></div></div><table class="route-table"><thead><tr><th>항목</th><th>결정</th><th>이유</th></tr></thead><tbody>
-      <tr><td><code>creator_channel</code></td><td>제외</td><td>1유저 1라이브 채널이면 <code>user.id</code>로 충분합니다. 공개 채널 홈과 게시판은 MVP 밖입니다.</td></tr>
+      <tr><td><code>creator_channel</code></td><td>제외</td><td>1유저 1라이브 채널이면 <code>user.id</code>로 충분합니다. 공개 채널 홈과 게시판은 별도 <code>community_*</code> 테이블로 원격 DB에 적용되어 있으나 MVP 라우터에서는 후속 범위입니다.</td></tr>
       <tr><td><code>live_viewer_presence</code></td><td>보류</td><td>실시간 접속자 정확도는 구현 단계에서 Realtime presence 또는 캐시로 판단합니다. 현재 DB 초안은 방송 회차 카운터만 둡니다.</td></tr>
       <tr><td><code>live_metric_snapshot</code></td><td>보류</td><td>MVP 통계는 <code>live_broadcast</code> 누적 카운터와 후원 집계로 먼저 처리합니다. 시계열 리포트가 필요해지면 추가합니다.</td></tr>
       <tr><td><code>payment_order</code></td><td>별도 테이블 보류</td><td>Toss Payments 자체는 MVP에 포함하지만, 결제 주문 row는 우선 <code>wallet_transaction</code>의 <code>pending</code>/<code>succeeded</code> 상태와 <code>payment_key</code>, <code>order_id</code>, <code>idempotency_key</code>로 추적합니다. 결제 수단이 늘어나면 별도 테이블로 분리합니다.</td></tr>
       <tr><td>Alert 커스텀 템플릿</td><td>제외</td><td>고정 템플릿이 MVP 기준입니다. 이미지 업로드, 효과음 업로드, 애니메이션 선택, 금액별 커스텀은 넣지 않습니다.</td></tr>
-      <tr><td>실제 정산 인증</td><td>보류</td><td>실명조회, 계좌 인증, 세무 정보 입력은 구현하지 않고 Demo 데이터로 프리뷰만 구성합니다.</td></tr>
+      <tr><td>실제 정산 인증</td><td>보류</td><td>정산 화면용 후원 목록과 연도별 요약 RPC는 존재하지만, 실명조회, 계좌 인증, 세무 정보 입력은 아직 DB 범위에 넣지 않습니다.</td></tr>
     </tbody></table></section>
 
-    <section class="panel"><div class="section-title"><div><h2>작업 단위</h2><p>실제 project migration은 팀원이 검토하기 쉽게 기능 단위로 분리합니다.</p></div></div><table class="route-table"><thead><tr><th>단위</th><th>산출물</th><th>포함 내용</th><th>검토 포인트</th></tr></thead><tbody>
+    <section class="panel"><div class="section-title"><div><h2>작업 단위</h2><p>GitHub dev 최신 fetch는 21번까지 확인했고, 22번 이후는 Supabase MCP의 원격 migration 적용 상태로 확인했습니다.</p></div></div><table class="route-table"><thead><tr><th>단위</th><th>산출물</th><th>포함 내용</th><th>검토 포인트</th></tr></thead><tbody>
       <tr><td>1</td><td><code>create_live_mvp_schema</code></td><td>Enum, 9개 테이블, RLS enable, trigger, 인덱스, 기본 제약</td><td>테이블 이름, 컬럼 범위, 기존 chat 도메인과의 분리 여부</td></tr>
       <tr><td>2</td><td><code>add_live_mvp_read_rpcs</code></td><td>랜딩, 라이브 목록, 시청 화면, 스튜디오 스냅샷, 후원 대시보드 조회 RPC</td><td>공개 조회 범위와 민감 정보 노출 여부</td></tr>
       <tr><td>3</td><td><code>add_live_mvp_studio_rpcs</code></td><td>스튜디오 설정 저장, 보안 URL 버전 회전, 방송 시작과 종료 RPC</td><td>크리에이터 권한 검증과 동시 방송 제한</td></tr>
@@ -238,6 +271,36 @@
       <tr><td>8</td><td><code>add_live_broadcast_active_viewer_index</code></td><td>현재 방송 목록의 시청자 수 우선 정렬 인덱스</td><td><code>/live</code> Hero와 랜딩 대표 라이브 정렬 기준 확인</td></tr>
       <tr><td>9</td><td><code>add_live_hero_rpc</code></td><td><code>get_live_hero()</code> 추가</td><td>Hero가 목록 RPC 첫 row에 암묵적으로 의존하지 않도록 분리</td></tr>
       <tr><td>10</td><td><code>add_live_broadcast_peak_viewer_trigger</code></td><td>최고 동시 시청자 자동 보정 trigger</td><td>실시간 시청자 수 업데이트와 분석 화면의 최고 시청자 수 정합성 확인</td></tr>
+      <tr><td>11</td><td><code>add_live_search_results_rpc</code></td><td><code>search_live_results()</code> 추가</td><td>라이브 방송 결과와 크리에이터 결과를 섹션 단위로 나누고 <code>has_more</code>를 섹션별 offset 기준으로 계산합니다.</td></tr>
+      <tr><td>12</td><td><code>add_live_search_follow_state</code></td><td>라이브 검색 결과에 팔로워 수와 현재 사용자 팔로우 여부 추가</td><td>비로그인과 로그인 검색 응답이 같은 컬럼 구조를 유지하는지 확인합니다.</td></tr>
+      <tr><td>13</td><td><code>add_live_overlay_snapshot_rpcs</code></td><td><code>get_live_chat_overlay_snapshot()</code>, <code>get_live_donation_alert_overlay_snapshot()</code> 추가</td><td>OBS overlay URL은 앱 서버의 HMAC key 검증 뒤 service role RPC로 snapshot을 조회합니다.</td></tr>
+      <tr><td>14</td><td><code>add_donation_alert_duration_setting</code></td><td><code>creator_studio_setting.donation_alert_duration_seconds</code>와 관련 RPC 응답 추가</td><td>후원 Alert 표시 시간을 3초에서 30초 사이로 제한하고 overlay 응답에는 <code>alertVisibleMs</code>로 반환합니다.</td></tr>
+      <tr><td>15</td><td><code>fix_live_search_has_more_offset</code></td><td><code>search_live_results()</code>의 섹션별 offset 기반 <code>has_more</code> 보정</td><td>방송 결과와 크리에이터 결과의 더보기 상태가 서로의 offset에 영향을 받지 않게 합니다.</td></tr>
+      <tr><td>16</td><td><code>return_snapshot_from_rotate_live_security_token</code></td><td><code>rotate_live_security_token_version()</code>이 최신 스튜디오 snapshot을 같이 반환</td><td>보안 URL 재발급 뒤 클라이언트가 별도 재조회 없이 새 URL 표시값을 갱신합니다.</td></tr>
+      <tr><td>17</td><td><code>update_live_list_snapshot_rpc</code></td><td><code>get_live_list()</code>를 JSON snapshot 계약으로 확장</td><td>필터, 정렬, 검색, 최근 채팅 수, 팔로잉 여부, <code>totalCount</code>, <code>hasMore</code>를 한 번에 반환합니다.</td></tr>
+      <tr><td>18</td><td><code>add_live_sidebar_rpcs</code></td><td><code>get_live_popular_keywords()</code>, <code>get_following_channel_list()</code> 추가</td><td>라이브 사이드바의 인기 키워드와 팔로잉 채널을 DB snapshot으로 분리합니다.</td></tr>
+      <tr><td>19</td><td><code>exclude_live_list_hero</code></td><td><code>get_live_list()</code>에 <code>p_excluded_live_id</code> 추가</td><td>Hero에 노출된 방송이 목록에 중복 표시되지 않게 합니다.</td></tr>
+      <tr><td>20</td><td><code>secure_get_live_list_with_auth_uid</code></td><td>팔로잉 개인화 기준을 <code>auth.uid()</code>로 변경</td><td>클라이언트가 넘긴 <code>p_viewer_id</code>를 신뢰하지 않아 IDOR를 차단합니다.</td></tr>
+      <tr><td>21</td><td><code>dedupe_live_popular_keywords_per_broadcast</code></td><td>인기 키워드를 방송별 정규화 키워드 기준으로 중복 제거</td><td>한 방송의 중복 태그 때문에 <code>liveCount</code>와 <code>viewerCount</code>가 부풀지 않게 합니다.</td></tr>
+      <tr><td>22</td><td><code>add_get_following_channel_page</code></td><td><code>/user/following</code> 전체 화면용 snapshot RPC 추가</td><td>전체 수, 라이브 수, 최근 방송 수, 필터링 수를 같이 반환합니다.</td></tr>
+      <tr><td>23</td><td><code>update_get_following_channel_page_filter_pagination</code></td><td>팔로잉 페이지 필터와 pagination 보정</td><td><code>ALL</code>, <code>LIVE</code> 필터 결과와 count가 일치하는지 확인합니다.</td></tr>
+      <tr><td>24</td><td><code>create_live_thumbnails_bucket</code></td><td><code>live-thumbnails</code> Storage bucket 추가</td><td>공개 썸네일 표시, 5MB 제한, JPEG/PNG/WebP 허용을 확인합니다.</td></tr>
+      <tr><td>25</td><td><code>remove_live_thumbnails_public_listing_policy</code></td><td>썸네일 bucket 공개 listing policy 제거</td><td>파일 URL 공개와 bucket listing 허용을 분리합니다.</td></tr>
+      <tr><td>26</td><td><code>add_creator_settlement_donations_rpc</code></td><td>정산 화면용 후원 상세 RPC 추가</td><td>연도, 상태, 정렬, pagination 기준을 확인합니다.</td></tr>
+      <tr><td>27</td><td><code>redesign_creator_settlement_rpcs</code></td><td>정산 요약과 상세 RPC 재정리</td><td>서울 시간 기준 월 경계와 정산 예정/완료 상태를 확인합니다.</td></tr>
+      <tr><td>28</td><td><code>add_donation_sound_tts_chat_settings</code></td><td>후원 Alert 사운드, TTS, 채팅 후원 메시지 설정 추가</td><td><code>creator_studio_setting</code> 컬럼과 snapshot 응답 계약을 같이 확인합니다.</td></tr>
+      <tr><td>29</td><td><code>restrict_upsert_creator_studio_setting_execute</code></td><td>스튜디오 설정 저장 RPC execute 권한 제한</td><td>설정 write는 service role 경계 안에서만 처리합니다.</td></tr>
+      <tr><td>30</td><td><code>wire_overlay_display_settings</code></td><td>overlay snapshot에 표시 설정 연결</td><td>채팅 overlay와 후원 Alert overlay가 같은 설정 row를 기준으로 동작합니다.</td></tr>
+      <tr><td>31</td><td><code>add_donation_amount_visible_to_chat_overlay_snapshot</code></td><td>채팅 overlay 후원 메시지 금액 표시 설정 추가</td><td><code>donation_amount_visible</code>이 채팅 overlay에도 적용됩니다.</td></tr>
+      <tr><td>32</td><td><code>remove_donation_alert_enabled</code></td><td><code>donation_alert_enabled</code> 제거</td><td>후원 Alert 사용 여부 대신 URL 버전과 overlay 표시 설정 중심으로 관리합니다.</td></tr>
+      <tr><td>33</td><td><code>add_alert_audio_settings_to_donation_overlay</code></td><td>후원 Alert overlay에 사운드 키, 볼륨, TTS 세부 설정 반환</td><td>OBS 클라이언트가 DB 설정만으로 사운드와 TTS를 렌더링할 수 있게 합니다.</td></tr>
+      <tr><td>34</td><td><code>lock_settlement_rpcs_to_service_role</code></td><td>정산 RPC execute 권한을 service role로 제한</td><td>정산 데이터 직접 노출을 막습니다.</td></tr>
+      <tr><td>35</td><td><code>fix_monthly_donation_kst_boundary</code></td><td>월별 후원 집계의 KST 경계 보정</td><td>월 시작 기준이 UTC로 밀리지 않도록 확인합니다.</td></tr>
+      <tr><td>36</td><td><code>hide_amount_in_donation_overlay_when_not_visible</code></td><td>후원 금액 비공개 설정을 Alert overlay에도 적용</td><td>채팅과 Alert가 같은 금액 표시 정책을 사용합니다.</td></tr>
+      <tr><td>37</td><td><code>create_community_board_schema</code></td><td>커뮤니티 게시글, 댓글, 좋아요 테이블과 인덱스 추가</td><td>원격 DB에는 적용됐지만 MVP 라우터에서는 후속 후보로 둡니다.</td></tr>
+      <tr><td>38</td><td><code>add_community_board_rpcs</code></td><td>커뮤니티 게시글과 댓글 조회·생성·좋아요 RPC 추가</td><td>커뮤니티 write는 service role RPC 경계로 제한합니다.</td></tr>
+      <tr><td>39</td><td><code>add_community_edit_support</code></td><td>커뮤니티 게시글과 댓글 수정·삭제 RPC 추가</td><td>작성자 권한 검증과 count trigger 정합성을 확인합니다.</td></tr>
+      <tr><td>40</td><td><code>add_get_channel_profile_rpc</code></td><td>채널 프로필 snapshot RPC 추가</td><td>크리에이터 닉네임, 사진, 팔로워 수, 현재 사용자 팔로잉 상태를 반환합니다.</td></tr>
     </tbody></table></section>
   </main>
 

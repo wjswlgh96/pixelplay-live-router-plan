@@ -1,43 +1,49 @@
 <!doctype html>
 <html lang="ko">
-<head><meta charset="utf-8"><title>PixelPlay MVP 선택 기능</title><link rel="stylesheet" href="assets/styles.css"></head>
+<head><meta charset="utf-8"><title>PixelPlay 기능 현황</title><link rel="stylesheet" href="assets/styles.css"></head>
 <body>
 <header class="site-header">
   <div class="header-inner">
     <a class="brand-lockup" href="index.html"><span class="brand-mark"></span><span class="brand-title"><strong>PixelPlay</strong><span>Live Router Plan</span></span></a>
-    <nav class="top-tabs" aria-label="문서 탭"><a href="routes.html">최종 라우터</a><a href="live-wireframes.html">라이브 프리뷰</a><a href="chat-wireframes.html">채팅 프리뷰</a><a href="landing-page.html">랜딩 페이지</a><a class="active" href="roadmap.html">MVP·선택 기능</a><a href="chat-room-enhancement.html">채팅방 고도화</a><a href="db-design.html">DB 설계</a></nav>
+    <nav class="top-tabs" aria-label="문서 탭"><a href="routes.html">최종 라우터</a><a href="live-wireframes.html">라이브 프리뷰</a><a class="active" href="roadmap.html">MVP·선택 기능</a><a href="db-design.html">DB 설계</a><a href="landing-page.html">랜딩(아카이브)</a><a href="chat-wireframes.html">채팅(아카이브)</a><a href="chat-room-enhancement.html">채팅방 고도화(아카이브)</a></nav>
   </div>
 </header>
 <main class="doc-shell">
-  <section class="hero"><div class="page-kicker">MVP Scope</div><h1>한 달 안에 보일 기능과 나중에 붙일 기능을 분리합니다.</h1><p>라이브 요구사항은 시청, 검색, 방송 운영, 라이브 전용 채팅, 투표, 채팅창 분리, 시청자 수, 후원, 팔로우, 실시간 통계가 핵심입니다.</p></section>
-  <section class="route-summary-grid"><article class="route-card"><code>필수</code><h3>라이브 기본 흐름</h3><p>방송 입장, 검색, 시청자 화면, 라이브 전용 채팅, 채팅창 분리를 우선합니다.</p></article><article class="route-card"><code>필수</code><h3>크리에이터 운영</h3><p>방송 운영, 투표 생성, 채팅 설정, 보안 설정, 후원 설정, 실시간 통계를 분리합니다.</p></article><article class="route-card"><code>필수</code><h3>팔로우와 후원</h3><p>크리에이터 팔로우, Toss Payments 기반 충전, 후원 보내기, Alert 표시, 내역 확인을 MVP에 포함합니다.</p></article><article class="route-card"><code>선택</code><h3>채널 확장</h3><p>공개 채널, VOD, 매니저 기능은 발표 범위에 맞춰 후속으로 둡니다.</p></article></section>
-  <section class="panel"><div class="section-title"><div><h2>MVP 필수 기능</h2><p>라이브 기능이라고 말하기 위해 반드시 보여야 하는 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>연결 라우터</th><th>접근</th><th>비고</th></tr></thead><tbody>
-    <tr><td>라이브 목록</td><td><code>/live</code></td><td><span class="access-public">공개</span></td><td>Anon User도 현재 방송 중인 목록을 볼 수 있습니다. 필터·정렬, Hero 제외 목록, 인기 키워드 sidebar snapshot을 포함합니다.</td></tr>
-    <tr><td>라이브 검색</td><td><code>/live/search</code></td><td><span class="access-public">공개</span></td><td>검색어 요약, 라이브 결과, 크리에이터 결과를 분리합니다.</td></tr>
-    <tr><td>라이브 시청</td><td><code>/live/[creatorId]</code></td><td><span class="access-public">공개 읽기</span></td><td>채팅 읽기와 방송 시청은 공개, 입력과 참여는 로그인 필요입니다. 입장 안내와 참여 제한 안내는 채팅 로그가 아니라 현재 사용자용 UI 컴포넌트로 표시합니다.</td></tr>
-    <tr><td>채팅창 분리</td><td><code>/live/[creatorId]/chat</code>, <code>/live/[creatorId]/chat/[overlayKey]</code></td><td><span class="access-public">공개 읽기</span></td><td>방송 운영 중 별도 창으로 띄우는 팝아웃과 OBS용 token overlay URL을 분리합니다.</td></tr>
-    <tr><td>라이브 전용 채팅</td><td><code>/live/[creatorId]</code></td><td><span class="access-login">입력은 로그인 필요</span></td><td>일반 채팅방과 별도 모델로 새로 설계합니다.</td></tr>
-    <tr><td>라이브 투표</td><td><code>/channel/live</code>, <code>/live/[creatorId]</code></td><td><span class="access-login">참여는 로그인 필요</span></td><td>크리에이터는 방송 중 투표를 생성·종료하고, 시청자는 라이브 화면에서 참여하며 결과를 실시간으로 확인합니다.</td></tr>
-    <tr><td>방송 운영</td><td><code>/channel/live</code></td><td><span class="access-owner">본인만</span></td><td>방송 제목, 태그, 시작과 종료, 방송 중 빠른 설정을 처리합니다. 공개/비공개 설정은 MVP에서 제외합니다.</td></tr>
-    <tr><td>채팅 설정</td><td><code>/channel/chat</code></td><td><span class="access-owner">본인만</span></td><td>채팅 입력은 로그인 유저만 가능하며, 참여 범위는 모든 로그인 유저 또는 팔로워로 제한합니다. 팔로우 후 대기 시간, 첫 채팅 전 규칙 확인 안내문, 저속 모드, 링크 차단, 금칙어를 관리합니다.</td></tr>
-    <tr><td>방송 보안</td><td><code>/channel/security</code></td><td><span class="access-owner">본인만</span></td><td>스트림키, OBS 채팅창 URL, OBS 후원 Alert URL을 재확인 Dialog 기반으로 관리합니다.</td></tr>
-    <tr><td>크리에이터 후원 설정</td><td><code>/channel/donation</code></td><td><span class="access-owner">본인만</span></td><td>채팅 후원 수신 조건, 후원 수익 요약, 데모용 정산 정보 저장, Alert·TTS 동작을 관리합니다.</td></tr>
-    <tr><td>실시간 통계</td><td><code>/channel/analytics</code></td><td><span class="access-owner">본인만</span></td><td>방송 중 시청자, 채팅, 후원, 팔로우 증가를 확인합니다.</td></tr>
-    <tr><td>팔로우</td><td><code>/user/following</code>, <code>/live/[creatorId]</code></td><td><span class="access-login">로그인 필요</span></td><td>대상은 크리에이터이며 공개 채널 게시판 기능과 분리합니다. 팔로잉 전체 화면은 <code>get_following_channel_page()</code>를 사용합니다.</td></tr>
-    <tr><td>후원</td><td><code>/live/[creatorId]</code>, <code>/user/donations</code>, <code>/live/[creatorId]/alerts/donation/[overlayKey]</code>, <code>/api/payments/toss/*</code></td><td><span class="access-login">로그인 필요</span></td><td>Toss 충전 준비·승인·웹훅, 보내기, 채팅 강조 표시, OBS Alert overlay까지 MVP에 포함합니다.</td></tr>
-    <tr><td>채팅방 검색</td><td><code>/chat/search</code></td><td><span class="access-login">로그인 필요</span></td><td>기존 채팅 도메인의 검색 화면입니다.</td></tr>
+  <section class="hero"><div class="page-kicker">Feature Status · 2026-06-10 production 배포 기준</div><h1>MVP 전 범위 구현 완료 — 선택 기능도 대부분 출시했습니다.</h1><p>기획 시점에 "선택 기능"으로 분류했던 공개 채널·커뮤니티·알림·정산·통계 분석까지 구현되어 <a href="https://pixel-play.studio">pixel-play.studio</a>에 배포되었습니다. 독립 채팅 도메인은 라이브 전용 개편(#105)으로 제거되었습니다.</p></section>
+  <section class="route-summary-grid"><article class="route-card"><code>완료</code><h3>라이브 기본 흐름</h3><p>목록(인덱스)·검색·시청·라이브 채팅·투표·후원 랭킹·OBS 오버레이가 동작합니다.</p></article><article class="route-card"><code>완료</code><h3>크리에이터 스튜디오</h3><p>방송 운영, 채팅 설정, 방송 연결(OBS 가이드), 후원, 정산, 통계 분석을 제공합니다.</p></article><article class="route-card"><code>완료</code><h3>채널·소셜</h3><p>공개 채널 홈·배너, 커뮤니티(게시판), 팔로잉, 인앱 알림 수신함을 제공합니다.</p></article><article class="route-card"><code>선택</code><h3>남은 후속</h3><p>VOD, 클립, 구독, 카테고리, 매니저 권한은 후속 후보로 유지합니다.</p></article></section>
+  <section class="panel"><div class="section-title"><div><h2>구현 완료 기능</h2><p>production에 배포되어 동작 중인 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>연결 라우터</th><th>상태</th><th>비고</th></tr></thead><tbody>
+    <tr><td>라이브 목록(인덱스)</td><td><code>/</code></td><td><span class="access-public">완료</span></td><td>필터·정렬, Hero, 팔로잉·트렌딩·인기 키워드 사이드바.</td></tr>
+    <tr><td>라이브 검색</td><td><code>/live/search</code></td><td><span class="access-public">완료</span></td><td>태그 정확 일치(GIN) + 제목·닉네임 분리, 전체 결과 수.</td></tr>
+    <tr><td>라이브 시청</td><td><code>/live/[creatorId]</code></td><td><span class="access-public">완료</span></td><td>HLS 재생(MediaMTX), 시청자 수 presence, 후원 랭킹(익명 동물 닉네임), 후원자 채팅 배지.</td></tr>
+    <tr><td>라이브 채팅</td><td><code>/live/[creatorId]</code></td><td><span class="access-login">완료</span></td><td>금칙어 무저장 차단(작성자에게만 안내), 슬로우 모드, 참여 범위.</td></tr>
+    <tr><td>라이브 투표</td><td><code>/channel/live</code>, <code>/live/[creatorId]</code></td><td><span class="access-login">완료</span></td><td>생성·종료·참여, 같은 항목 재선택 시 무효표.</td></tr>
+    <tr><td>방송 운영</td><td><code>/channel/live</code></td><td><span class="access-owner">완료</span></td><td>방송 시작·종료, 태그, MediaMTX 송출 상태 표시.</td></tr>
+    <tr><td>채팅 설정</td><td><code>/channel/chat</code></td><td><span class="access-owner">완료</span></td><td>참여 범위, 팔로워 대기, 슬로우 모드, 링크 차단, 금칙어, 채팅 규칙.</td></tr>
+    <tr><td>방송 연결 + OBS 가이드</td><td><code>/channel/security</code></td><td><span class="access-owner">완료</span></td><td>스트림 키·오버레이 URL 발급·재발급, 캡처 이미지 기반 단계별 OBS 연결 가이드 Dialog.</td></tr>
+    <tr><td>후원 설정·대시보드</td><td><code>/channel/donation</code></td><td><span class="access-owner">완료</span></td><td>최소 금액, 알림음·볼륨, TTS 음성·속도, 채팅창 후원 메시지 노출.</td></tr>
+    <tr><td>정산</td><td><code>/channel/settlement</code></td><td><span class="access-owner">완료</span></td><td>연도·상태·정렬 상세 + 연도별 총 정산액.</td></tr>
+    <tr><td>통계 분석</td><td><code>/channel/analytics/{live,report}</code></td><td><span class="access-owner">완료</span></td><td>실시간 통계(팔로우 이벤트 Realtime)와 지난 방송 분석.</td></tr>
+    <tr><td>OBS 오버레이</td><td><code>/live/[creatorId]/chat/[overlayKey]</code>, <code>/alerts/donation/[overlayKey]</code></td><td><span class="access-public">완료</span></td><td>HMAC 토큰 URL, Realtime 채팅·후원 알림, TTS.</td></tr>
+    <tr><td>팔로우</td><td><code>/user/following</code>, 시청·채널 화면</td><td><span class="access-login">완료</span></td><td>필터·페이지네이션 목록, 사이드바 팔로잉 채널.</td></tr>
+    <tr><td>Toss 포인트 충전</td><td><code>/user/donations</code>, <code>/api/payments/toss/*</code></td><td><span class="access-login">완료</span></td><td>prepare → 결제창 → confirm → <code>confirm_wallet_charge</code> 멱등 반영.</td></tr>
+    <tr><td>후원 보내기</td><td><code>/live/[creatorId]</code></td><td><span class="access-login">완료</span></td><td>지갑 차감·기록·후원 메시지를 단일 트랜잭션 멱등 처리.</td></tr>
+    <tr><td>공개 채널 홈</td><td><code>/channel/[creatorId]</code></td><td><span class="access-public">완료</span></td><td>기획 시점 "선택 기능" → 구현. 라이브 Hero·배너·커뮤니티 미리보기.</td></tr>
+    <tr><td>커뮤니티(게시판)</td><td><code>/channel/[creatorId]/community</code></td><td><span class="access-public">완료</span></td><td>기획 시점 "선택 기능" → 구현. 글·이미지·댓글·대댓글·좋아요·베스트·정렬.</td></tr>
+    <tr><td>채널 관리</td><td><code>/channel/[creatorId]/setting</code></td><td><span class="access-owner">완료</span></td><td>채널 소개, 홈 배너(최대 5개, 순서 변경·삭제).</td></tr>
+    <tr><td>인앱 알림(수신함)</td><td>헤더 수신함</td><td><span class="access-login">완료</span></td><td>기획 시점 "선택 기능" → 구현. 라이브 시작·커뮤니티 글 fan-out, Realtime 배지, 방문 기준 읽음.</td></tr>
   </tbody></table></section>
-  <section class="panel"><div class="section-title"><div><h2>선택 기능</h2><p>MVP 이후 기능은 라우터 예약과 데이터 구조만 고려합니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>라우터 후보</th><th>접근</th><th>비고</th></tr></thead><tbody>
-    <tr><td>공개 채널 홈</td><td><code>/channel/[creatorId]</code></td><td><span class="access-future">선택 기능</span></td><td>SOOP 방송국 같은 팬카페형 페이지로 확장할 때 사용합니다.</td></tr>
-    <tr><td>공개 게시판</td><td><code>/channel/[creatorId]/board</code></td><td><span class="access-future">선택 기능</span></td><td>채널 기능 자체가 확정된 뒤 추가합니다.</td></tr>
-    <tr><td>다시보기</td><td><code>/channel/[creatorId]/vod</code></td><td><span class="access-future">선택 기능</span></td><td>방송 종료 후 자동 저장 옵션과 연결합니다.</td></tr>
-    <tr><td>클립</td><td><code>/channel/[creatorId]/clips</code></td><td><span class="access-future">선택 기능</span></td><td>방송 일부를 짧게 저장하고 공유하는 후속 콘텐츠 기능입니다.</td></tr>
-    <tr><td>구독</td><td>후속 정책 확정 후 결정</td><td><span class="access-future">선택 기능</span></td><td>크리에이터 후원형 멤버십 후보이며 결제, 혜택, 환불 정책을 먼저 정해야 합니다.</td></tr>
-    <tr><td>카테고리</td><td>후속 정책 확정 후 결정</td><td><span class="access-future">선택 기능</span></td><td>라이브 탐색 분류 기능입니다. 현재 MVP는 방송 태그 기반 검색을 우선합니다.</td></tr>
-    <tr><td>알림</td><td>후속 정책 확정 후 결정</td><td><span class="access-future">선택 기능</span></td><td>팔로우한 크리에이터의 방송 시작, 후원, 시스템 이벤트를 알려주는 후보입니다.</td></tr>
-    <tr><td>매니저</td><td><code>/channel/permissions</code></td><td><span class="access-future">선택 기능</span></td><td>MVP에서는 크리에이터 본인만 방송 운영합니다.</td></tr>
+  <section class="panel"><div class="section-title"><div><h2>제거된 기획</h2><p>라이브 전용 개편(#105)으로 범위에서 제외한 기능입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>기획 라우터</th><th>판단</th><th>이유</th></tr></thead><tbody>
+    <tr><td>공개 랜딩</td><td><code>/</code></td><td><span class="access-future">제거</span></td><td>인덱스를 라이브 목록으로 전환. 기획 이력은 랜딩(아카이브) 문서 참고.</td></tr>
+    <tr><td>독립 채팅방</td><td><code>/chat</code>, <code>/chat/search</code>, <code>/chat/room/[roomId]</code></td><td><span class="access-future">제거</span></td><td>라이브 채팅과 채널 채팅 설정만 유지. 기획 이력은 채팅(아카이브) 문서 참고.</td></tr>
+  </tbody></table></section>
+  <section class="panel"><div class="section-title"><div><h2>남은 선택 기능</h2><p>후속 후보로 유지하는 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>라우터 후보</th><th>접근</th><th>비고</th></tr></thead><tbody>
+    <tr><td>다시보기(VOD)</td><td><code>/channel/[creatorId]/vod</code></td><td><span class="access-future">선택 기능</span></td><td>방송 종료 후 자동 저장 옵션과 연결합니다.</td></tr>
+    <tr><td>클립</td><td><code>/channel/[creatorId]/clips</code></td><td><span class="access-future">선택 기능</span></td><td>방송 일부를 짧게 저장·공유하는 후속 콘텐츠 기능입니다.</td></tr>
+    <tr><td>구독(멤버십)</td><td>정책 확정 후 결정</td><td><span class="access-future">선택 기능</span></td><td>결제·혜택·환불 정책이 먼저 필요합니다.</td></tr>
+    <tr><td>카테고리 탐색</td><td>정책 확정 후 결정</td><td><span class="access-future">선택 기능</span></td><td>현재는 방송 태그 기반 검색을 우선합니다.</td></tr>
+    <tr><td>매니저 권한</td><td><code>/channel/permissions</code></td><td><span class="access-future">선택 기능</span></td><td>현재 방송 운영은 크리에이터 본인만 수행합니다.</td></tr>
     <tr><td>시청자 제재 관리</td><td><code>/channel/viewers</code></td><td><span class="access-future">선택 기능</span></td><td>강퇴·제한 이력은 후속 관리 화면으로 분리합니다.</td></tr>
-    <tr><td>라이브 채팅 사용자 액션</td><td>후속 정책 확정 후 결정</td><td><span class="access-future">선택 기능</span></td><td>닉네임 Popover, 메시지 신고, 사용자 차단, 구독권 선물은 MVP 이후 안전 정책과 결제 정책을 정한 뒤 검토합니다.</td></tr>
+    <tr><td>라이브 채팅 사용자 액션</td><td>정책 확정 후 결정</td><td><span class="access-future">선택 기능</span></td><td>메시지 신고, 사용자 차단 등은 안전 정책 확정 후 검토합니다.</td></tr>
   </tbody></table></section>
 </main>
 </body>

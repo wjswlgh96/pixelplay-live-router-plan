@@ -10,7 +10,7 @@
 </header>
 <main class="doc-shell">
   <section class="hero"><div class="page-kicker">Feature Status · 2026-06-12 기준</div><h1>MVP 전 범위 구현 완료 — 선택 기능도 대부분 출시했습니다.</h1><p>기획 시점에 "선택 기능"으로 분류했던 공개 채널·커뮤니티·알림·정산·통계 분석까지 구현되어 <a href="https://pixel-play.studio">pixel-play.studio</a>에 배포되었습니다. 독립 채팅 도메인은 라이브 전용 개편(#105)으로 제거되었습니다.</p></section>
-  <section class="route-summary-grid"><article class="route-card"><code>완료</code><h3>라이브 기본 흐름</h3><p>목록(인덱스)·검색·시청·라이브 채팅·투표·후원 랭킹·OBS 오버레이가 동작합니다.</p></article><article class="route-card"><code>완료</code><h3>크리에이터 스튜디오</h3><p>방송 운영, 채팅 설정, 방송 연결(OBS 가이드), 후원, 정산, 통계 분석을 제공합니다.</p></article><article class="route-card"><code>완료</code><h3>채널·소셜</h3><p>공개 채널 홈·배너, 커뮤니티(게시판), 팔로잉, 인앱 알림 수신함을 제공합니다.</p></article><article class="route-card"><code>선택</code><h3>남은 후속</h3><p>VOD·클립·구독·매니저 권한·화질 선택(다중 해상도)을 후속 후보로 유지합니다. MediaMTX 동기화·플레이어 라이브 엣지·방송 외 채팅 개방·클린봇 LLM은 구현 완료되었습니다.</p></article></section>
+  <section class="route-summary-grid"><article class="route-card"><code>완료</code><h3>라이브 기본 흐름</h3><p>목록(인덱스)·검색·시청·라이브 채팅·투표·후원 랭킹·OBS 오버레이가 동작합니다.</p></article><article class="route-card"><code>완료</code><h3>크리에이터 스튜디오</h3><p>방송 운영, 채팅 설정, 방송 연결(OBS 가이드), 후원, 정산, 통계 분석을 제공합니다.</p></article><article class="route-card"><code>완료</code><h3>채널·소셜</h3><p>공개 채널 홈·배너, 커뮤니티(게시판), 팔로잉, 인앱 알림 수신함을 제공합니다.</p></article><article class="route-card"><code>선택</code><h3>남은 후속</h3><p>VOD·구독·매니저 권한·화질 선택(다중 해상도)·클립 좋아요/댓글을 후속 후보로 유지합니다. MediaMTX 동기화·플레이어 라이브 엣지·방송 외 채팅 개방·클린봇 LLM·라이브 클립은 구현 완료되었습니다.</p></article></section>
   <section class="panel"><div class="section-title"><div><h2>구현 완료 기능</h2><p>production에 배포되어 동작 중인 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>연결 라우터</th><th>상태</th><th>비고</th></tr></thead><tbody>
     <tr><td>라이브 목록(인덱스)</td><td><code>/</code></td><td><span class="access-public">완료</span></td><td>필터·정렬, Hero, 팔로잉·트렌딩·인기 키워드 사이드바.</td></tr>
     <tr><td>라이브 검색</td><td><code>/live/search</code></td><td><span class="access-public">완료</span></td><td>태그 정확 일치(GIN) + 제목·닉네임 분리, 전체 결과 수.</td></tr>
@@ -37,6 +37,7 @@
     <tr><td>방송 외 시간 채팅 개방</td><td><code>/live/[creatorId]</code>, <code>/channel/live</code></td><td><span class="access-login">완료</span></td><td>기획 시점 "선택 기능" → 구현. 채팅을 채널 단위로 확장해 방송 전후에도 채팅·후원 가능(구버전 RPC 호환 유지).</td></tr>
     <tr><td>채팅 로딩 기준 정립</td><td><code>/live/[creatorId]</code>, <code>/channel/live</code></td><td><span class="access-public">완료</span></td><td>기획 시점 "선택 기능" → 구현. 진입 시 최근 50건 + 위로 무한 스크롤(상한 300건), 진입 시점 필터링 안내 고정.</td></tr>
     <tr><td>클린봇 LLM 하이브리드 + 채팅 품질</td><td><code>/live/[creatorId]</code>, Supabase cron</td><td><span class="access-login">완료</span></td><td>명백한 욕설은 클라가 0초에 가리고(공백·특수문자·숫자 우회 정규화), 우회·맥락형은 Gemini(pg_cron 10초·Edge Function)가 10초 내 2차 판정해 Realtime로 전 시청자 가림(fail-open). 후원자 뱃지 즉시 반영, 송출 없을 때 오프라인 표시, 닉네임 색 16색 확장 포함.</td></tr>
+    <tr><td>라이브 클립</td><td><code>/clip/[clipId]</code>, <code>/channel/[creatorId]/clip</code>, <code>/live/[creatorId]</code></td><td><span class="access-login">완료</span></td><td>기획 시점 "선택 기능" → 구현(#124). 직전 15~30초를 세로형(9:16)으로 추출 — 녹화 없이 MediaMTX 60초 RAM 버퍼에서 EC2 워커가 ffmpeg 추출, 서명 업로드 URL push. 생성 Dialog(스냅샷 크롭 드래그), 쇼츠형 디테일(위/아래 캐러셀), 시청 페이지 섹션, 채널 클립 탭(기간·정렬). 분당 1개·채널당 30개 제한. 열람은 비로그인 가능.</td></tr>
   </tbody></table></section>
   <section class="panel"><div class="section-title"><div><h2>제거된 기획</h2><p>라이브 전용 개편(#105)으로 범위에서 제외한 기능입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>기획 라우터</th><th>판단</th><th>이유</th></tr></thead><tbody>
     <tr><td>공개 랜딩</td><td><code>/</code></td><td><span class="access-future">제거</span></td><td>인덱스를 라이브 목록으로 전환. 기획 이력은 랜딩(아카이브) 문서 참고.</td></tr>
@@ -44,7 +45,7 @@
   </tbody></table></section>
   <section class="panel"><div class="section-title"><div><h2>남은 선택 기능</h2><p>후속 후보로 유지하는 범위입니다.</p></div></div><table class="route-table"><thead><tr><th>기능</th><th>라우터 후보</th><th>접근</th><th>비고</th></tr></thead><tbody>
     <tr><td>다시보기(VOD)</td><td><code>/channel/[creatorId]/vod</code></td><td><span class="access-future">선택 기능</span></td><td>방송 종료 후 자동 저장 옵션과 연결합니다.</td></tr>
-    <tr><td>클립</td><td><code>/channel/[creatorId]/clips</code></td><td><span class="access-future">선택 기능</span></td><td>방송 일부를 짧게 저장·공유하는 후속 콘텐츠 기능입니다.</td></tr>
+    <tr><td>클립 좋아요·댓글</td><td><code>/clip/[clipId]</code></td><td><span class="access-future">선택 기능</span></td><td>클립 생성·공유·조회수는 구현 완료(#124). 좋아요·댓글 상호작용은 후속 확장입니다.</td></tr>
     <tr><td>구독(멤버십)</td><td>정책 확정 후 결정</td><td><span class="access-future">선택 기능</span></td><td>결제·혜택·환불 정책이 먼저 필요합니다.</td></tr>
     <tr><td>매니저 권한</td><td><code>/channel/permissions</code></td><td><span class="access-future">선택 기능</span></td><td>현재 방송 운영은 크리에이터 본인만 수행합니다.</td></tr>
     <tr><td>시청자 제재 관리</td><td><code>/channel/viewers</code></td><td><span class="access-future">선택 기능</span></td><td>강퇴·제한 이력은 후속 관리 화면으로 분리합니다.</td></tr>
